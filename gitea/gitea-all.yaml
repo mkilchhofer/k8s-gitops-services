@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: git-service
+  name: git
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: git-service
+  namespace: git
+  labels:
+    app: git-service
+spec:
+  type: LoadBalancer
+  ports:
+  - name: ssh
+    port: 3001
+    protocol: TCP
+    targetPort: 22
+  selector:
+    app: git-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: git-service-ingress
+  namespace: git
+spec:
+  selector:
+    app: git-service
+  ports:
+  - name: web
+    port: 80
+    targetPort: 3000
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: git-service
+  namespace: git
+spec:
+  rules:
+  - host: git.k8s.kilchhofer.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: git-service-ingress
+          servicePort: web
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: git-service-pv-claim
+  namespace: git
+  labels:
+    app: git-service
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-service
+  namespace: git
+spec:
+  selector:
+    matchLabels:
+      app: git-service
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: git-service
+    spec:
+      containers:
+      - name: git-service
+        image: gitea/gitea:1.9.0
+        ports:
+        - containerPort: 3000
+        - containerPort: 22
+        volumeMounts:
+        - name: git-service-persistent-storage
+          mountPath: /data
+      volumes:
+      - name: git-service-persistent-storage
+        persistentVolumeClaim:
+          claimName: git-service-pv-claim
