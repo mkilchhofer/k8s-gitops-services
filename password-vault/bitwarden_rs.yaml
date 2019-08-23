@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: bitwarden
+  name: password-vault
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bitwarden-ingress
+  namespace: password-vault
+spec:
+  selector:
+    app: bitwarden
+  ports:
+  - name: web
+    port: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: bitwarden
+  namespace: password-vault
+spec:
+  rules:
+  - host: bw.k8s.kilchhofer.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: bitwarden-ingress
+          servicePort: web
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bitwarden
+  namespace: password-vault
+spec:
+  serviceName: bitwarden
+  selector:
+    matchLabels:
+      app: bitwarden
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: bitwarden
+    spec:
+      securityContext:
+        fsGroup: 33
+        runAsUser: 33
+      containers:
+      - name: bitwarden
+        image: bitwardenrs/server:1.9.1
+        env:
+        - name: ROCKET_PORT
+          value: "8080"
+        - name: SIGNUPS_ALLOWED
+          value: "false"
+        - name: ADMIN_TOKEN
+          value: <admin_password>
+        - name: SMTP_HOST
+          value: smtp.gmail.com
+        - name: SMTP_FROM
+          value: noreply.kilchhofer@gmail.com
+        - name: SMTP_PORT
+          value: "587"
+        - name: SMTP_SSL
+          value: "true"
+        - name: SMTP_USERNAME
+          value: noreply.kilchhofer@gmail.com
+        - name: SMTP_PASSWORD
+          value: <gmail_password>
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: bitwarden-persistent-storage
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: bitwarden-persistent-storage
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: "1Gi"
+      storageClassName: nfs-data
