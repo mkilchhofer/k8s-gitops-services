@@ -50,32 +50,19 @@ spec:
           serviceName: git-service-ingress
           servicePort: web
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: git-service-pv-claim
-  namespace: git
-  labels:
-    app: git-service
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: git-service
   namespace: git
 spec:
+  serviceName: git-service
   selector:
     matchLabels:
       app: git-service
-  replicas: 1
-  strategy:
-    type: Recreate
+  replicas: 0
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -88,9 +75,15 @@ spec:
         - containerPort: 3000
         - containerPort: 22
         volumeMounts:
-        - name: git-service-persistent-storage
+        - name: gitea-pv
           mountPath: /data
-      volumes:
-      - name: git-service-persistent-storage
-        persistentVolumeClaim:
-          claimName: git-service-pv-claim
+  volumeClaimTemplates:
+  - metadata:
+      name: gitea-pv
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: "1Gi"
+      storageClassName: nfs-data
