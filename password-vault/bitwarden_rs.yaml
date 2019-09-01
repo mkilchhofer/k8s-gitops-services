@@ -22,6 +22,10 @@ kind: Ingress
 metadata:
   name: bitwarden
   namespace: password-vault
+  annotations:
+    kubernetes.io/ingress.class: traefik
+#    traefik.ingress.kubernetes.io/frontend-entry-points: https
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
 spec:
   rules:
   - host: bw.k8s.kilchhofer.info
