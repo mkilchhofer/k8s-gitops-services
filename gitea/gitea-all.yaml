@@ -31,8 +31,8 @@ spec:
   selector:
     app: git-service
   ports:
-  - name: web
-    port: 80
+  - name: webui
+    port: 3000
     targetPort: 3000
 ---
 apiVersion: extensions/v1beta1
@@ -52,7 +52,7 @@ spec:
       - path: /
         backend:
           serviceName: git-service-ingress
-          servicePort: web
+          servicePort: webui
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -64,7 +64,7 @@ spec:
   selector:
     matchLabels:
       app: git-service
-  replicas: 0
+  replicas: 1
   updateStrategy:
     type: RollingUpdate
   template:
