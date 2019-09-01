@@ -14,7 +14,7 @@ spec:
   selector:
     app: bitwarden
   ports:
-  - name: web
+  - name: bitwarden-api
     port: 8080
 ---
 apiVersion: extensions/v1beta1
@@ -34,7 +34,7 @@ spec:
       - path: /
         backend:
           serviceName: bitwarden-ingress
-          servicePort: web
+          servicePort: bitwarden-api
 ---
 apiVersion: apps/v1
 kind: StatefulSet
