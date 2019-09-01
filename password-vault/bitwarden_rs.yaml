@@ -59,7 +59,7 @@ spec:
         runAsUser: 33
       containers:
       - name: bitwarden
-        image: bitwardenrs/server:1.9.1
+        image: bitwardenrs/server:1.10.0
         env:
         - name: ROCKET_PORT
           value: "8080"
