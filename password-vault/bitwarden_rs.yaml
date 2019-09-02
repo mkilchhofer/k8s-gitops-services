@@ -23,7 +23,7 @@ metadata:
   name: bitwarden
   namespace: password-vault
   annotations:
-    kubernetes.io/ingress.class: traefik
+    kubernetes.io/ingress.class: traefik-internal
 #    traefik.ingress.kubernetes.io/frontend-entry-points: https
     traefik.ingress.kubernetes.io/redirect-entry-point: https
 spec:
