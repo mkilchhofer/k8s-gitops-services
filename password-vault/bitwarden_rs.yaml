@@ -36,6 +36,22 @@ spec:
           serviceName: bitwarden-ingress
           servicePort: bitwarden-api
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bitwarden-config
+  namespace: password-vault
+data:
+  ROCKET_PORT: "8080"
+  SIGNUPS_ALLOWED: "false"
+  ADMIN_TOKEN: <admin_password>
+  SMTP_HOST: smtp.gmail.com
+  SMTP_FROM: noreply.kilchhofer@gmail.com
+  SMTP_PORT: "587"
+  SMTP_SSL: "true"
+  SMTP_USERNAME: noreply.kilchhofer@gmail.com
+  SMTP_PASSWORD: <gmail_password>
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -60,25 +76,9 @@ spec:
       containers:
       - name: bitwarden
         image: bitwardenrs/server:1.10.0
-        env:
-        - name: ROCKET_PORT
-          value: "8080"
-        - name: SIGNUPS_ALLOWED
-          value: "false"
-        - name: ADMIN_TOKEN
-          value: <admin_password>
-        - name: SMTP_HOST
-          value: smtp.gmail.com
-        - name: SMTP_FROM
-          value: noreply.kilchhofer@gmail.com
-        - name: SMTP_PORT
-          value: "587"
-        - name: SMTP_SSL
-          value: "true"
-        - name: SMTP_USERNAME
-          value: noreply.kilchhofer@gmail.com
-        - name: SMTP_PASSWORD
-          value: <gmail_password>
+        envFrom:
+        - configMapRef:
+            name: bitwarden-config
         ports:
         - containerPort: 8080
         volumeMounts:
