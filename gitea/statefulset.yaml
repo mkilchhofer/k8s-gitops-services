@@ -11,13 +11,24 @@ spec:
     spec:
       containers:
       - name: git-service
-        image: gitea/gitea:1.9.0
+        image: gitea/gitea:1.9.2
+        command: ["gitea"]
+        args: ["web", "--config", "/etc/gitea/app.ini"]
         ports:
         - containerPort: 3000
         - containerPort: 22
         volumeMounts:
         - name: gitea-pv
           mountPath: /data
+        - name: config-volume
+          mountPath: /etc/gitea
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      volumes:
+        - name: config-volume
+          configMap:
+            name: app-ini
   volumeClaimTemplates:
   - metadata:
       name: gitea-pv

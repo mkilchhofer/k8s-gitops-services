@@ -9,3 +9,7 @@ resources:
   - service-clusterip.yaml
   - service-loadbalancer.yaml
   - statefulset.yaml
+configMapGenerator:
+- name: app-ini
+  files:
+  - config-files/app.ini
