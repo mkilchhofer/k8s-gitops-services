@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: git
+commonLabels:
+  app: git-service
+resources:
+  - ingress.yaml
+  - namespace.yaml
+  - service-clusterip.yaml
+  - service-loadbalancer.yaml
+  - statefulset.yaml

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: git-service
+spec:
+  serviceName: git-service
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    spec:
+      containers:
+      - name: git-service
+        image: gitea/gitea:1.9.0
+        ports:
+        - containerPort: 3000
+        - containerPort: 22
+        volumeMounts:
+        - name: gitea-pv
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: gitea-pv
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: "1Gi"
+      storageClassName: nfs-data

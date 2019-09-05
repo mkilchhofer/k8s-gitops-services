@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: git-service
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
+#    traefik.ingress.kubernetes.io/frontend-entry-points: https
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+spec:
+  rules:
+  - host: git.k8s.kilchhofer.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: git-service-ingress
+          servicePort: webui
