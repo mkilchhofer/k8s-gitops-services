@@ -15,8 +15,10 @@ spec:
         command: ["gitea"]
         args: ["web", "--config", "/etc/gitea/app.ini"]
         ports:
-        - containerPort: 3000
-        - containerPort: 22
+        - name: http-gui
+          containerPort: 3000
+        - name: ssh-git
+          containerPort: 3001
         volumeMounts:
         - name: gitea-pv
           mountPath: /data
@@ -25,6 +27,18 @@ spec:
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http-gui
+            scheme: HTTP
+          initialDelaySeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http-gui
+            scheme: HTTP
+          initialDelaySeconds: 15
       volumes:
         - name: config-volume
           configMap:
