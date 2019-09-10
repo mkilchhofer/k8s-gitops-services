@@ -80,7 +80,16 @@ spec:
         - configMapRef:
             name: bitwarden-config
         ports:
-        - containerPort: 8080
+        - name: http
+          containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
         volumeMounts:
         - name: bitwarden-persistent-storage
           mountPath: /data
