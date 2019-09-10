@@ -9,6 +9,9 @@ spec:
     type: RollingUpdate
   template:
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
       - name: git-service
         image: gitea/gitea:1.9.2
@@ -24,9 +27,6 @@ spec:
           mountPath: /data
         - name: config-volume
           mountPath: /etc/gitea
-        securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
         livenessProbe:
           httpGet:
             path: /
