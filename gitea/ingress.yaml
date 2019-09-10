@@ -14,4 +14,4 @@ spec:
       - path: /
         backend:
           serviceName: git-service-ingress
-          servicePort: webui
+          servicePort: http-gui

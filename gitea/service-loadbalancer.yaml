@@ -5,7 +5,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - name: ssh
+  - name: ssh-git
     port: 3001
     protocol: TCP
     targetPort: 3001

@@ -5,6 +5,6 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - name: webui
+  - name: http-gui
     port: 3000
     targetPort: 3000
