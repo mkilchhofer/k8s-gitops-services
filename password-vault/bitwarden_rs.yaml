@@ -44,13 +44,12 @@ metadata:
 data:
   ROCKET_PORT: "8080"
   SIGNUPS_ALLOWED: "false"
-  ADMIN_TOKEN: <admin_password>
   SMTP_HOST: smtp.gmail.com
   SMTP_FROM: noreply.kilchhofer@gmail.com
+  SMTP_FROM_NAME: Vault Kilchhofer
   SMTP_PORT: "587"
   SMTP_SSL: "true"
-  SMTP_USERNAME: noreply.kilchhofer@gmail.com
-  SMTP_PASSWORD: <gmail_password>
+  DOMAIN: 'https://bw.k8s.kilchhofer.info'
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -79,6 +78,22 @@ spec:
         envFrom:
         - configMapRef:
             name: bitwarden-config
+        env:
+        - name: ADMIN_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: bitwarden-secret
+              key: adminToken
+        - name: SMTP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: bitwarden-secret
+              key: emailUser
+        - name: SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: bitwarden-secret
+              key: emailPassword
         ports:
         - name: http
           containerPort: 8080
