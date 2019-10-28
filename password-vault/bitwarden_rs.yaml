@@ -16,6 +16,8 @@ spec:
   ports:
   - name: bitwarden-api
     port: 8080
+  - name: notifications
+    port: 3012
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -35,6 +37,14 @@ spec:
         backend:
           serviceName: bitwarden-ingress
           servicePort: bitwarden-api
+      - path: /notifications/hub/negotiate
+        backend:
+          serviceName: bitwarden-ingress
+          servicePort: bitwarden-api
+      - path: /notifications/hub
+        backend:
+          serviceName: bitwarden-ingress
+          servicePort: notifications
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -50,6 +60,7 @@ data:
   SMTP_PORT: "587"
   SMTP_SSL: "true"
   DOMAIN: 'https://bw.k8s.kilchhofer.info'
+  WEBSOCKET_ENABLED: "true"
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -97,6 +108,8 @@ spec:
         ports:
         - name: http
           containerPort: 8080
+        - name: notifications
+          containerPort: 3012
         livenessProbe:
           httpGet:
             path: /
