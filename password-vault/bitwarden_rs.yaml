@@ -112,11 +112,11 @@ spec:
           containerPort: 3012
         livenessProbe:
           httpGet:
-            path: /
+            path: /alive
             port: http
         readinessProbe:
           httpGet:
-            path: /
+            path: /alive
             port: http
         volumeMounts:
         - name: bitwarden-persistent-storage
