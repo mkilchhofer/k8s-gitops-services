@@ -14,7 +14,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: git-service
-        image: gitea/gitea:1.9.2
+        image: gitea/gitea:1.9.5
         command:
         - gitea
         args:
