@@ -15,8 +15,12 @@ spec:
       containers:
       - name: git-service
         image: gitea/gitea:1.9.2
-        command: ["gitea"]
-        args: ["web", "--config", "/etc/gitea/app.ini"]
+        command:
+        - gitea
+        args:
+        - web
+        - "--config"
+        - /etc/gitea/app.ini
         ports:
         - name: http-gui
           containerPort: 3000
