@@ -19,17 +19,21 @@ spec:
       tag: "5.12.22"
     controllerService:
       type: LoadBalancer
+      externalTrafficPolicy: Local
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
     guiService:
       type: LoadBalancer
+      externalTrafficPolicy: Local
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
     discoveryService:
       type: LoadBalancer
+      externalTrafficPolicy: Local
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
     stunService:
       type: LoadBalancer
+      externalTrafficPolicy: Local
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
