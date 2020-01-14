@@ -7,6 +7,7 @@ metadata:
 spec:
   chart: stable/unifi
   version: "0.5.1"
+  helmVersion: "v2"
   valuesContent: |-
     ingress:
       enabled: true
@@ -16,7 +17,7 @@ spec:
       hosts:
         - unifi.k8s.kilchhofer.info
     image:
-      tag: "5.12.22"
+      tag: "5.12.35"
     controllerService:
       type: LoadBalancer
       externalTrafficPolicy: Local
