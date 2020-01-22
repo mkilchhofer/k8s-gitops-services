@@ -9,7 +9,7 @@ spec:
   chart:
     repository: https://kubernetes-charts.storage.googleapis.com/
     name: unifi
-    version: "0.5.1"
+    version: "0.6.0"
   values:
     ingress:
       enabled: true
@@ -20,6 +20,54 @@ spec:
         - unifi.k8s.kilchhofer.info
     image:
       tag: "5.12.35"
+    extraJvmOpts:
+      - -Dlog4j.configurationFile=file:/configmap/log4j2.xml
+    extraConfigFiles:
+      log4j2.xml: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <Configuration>
+          <Appenders>
+            <InMemoryAppender name="InMemoryAppender" activatedLogging="false">
+              <PatternLayout pattern="[%d{ISO8601}] &lt;%t&gt; %-5p %-6c{1} - %m%n" />
+            </InMemoryAppender>
+            <RollingFile name="server_log" fileName="logs/server.log" filePattern="logs/server.log.%i">
+              <PatternLayout pattern="[%d{ISO8601}] &lt;%t&gt; %-5p %-6c{1} - %m%n" />
+              <SizeBasedTriggeringPolicy size="10 MB"/>
+              <DefaultRolloverStrategy max="3" fileIndex="min" />
+            </RollingFile>
+            <Console name="STDOUT" target="SYSTEM_OUT">
+              <PatternLayout pattern="&lt;%t&gt; %-5p %-6c{1} - %m%n"/>
+            </Console>
+          </Appenders>
+          <Loggers>
+            <Root level="INFO">
+              <AppenderRef ref="InMemoryAppender" />
+              <AppenderRef ref="server_log" />
+              <AppenderRef ref="STDOUT" />
+            </Root>
+            <Logger name="org.apache.log4j.xml" level="info" />
+            <Logger name="java" level="ERROR" />
+            <Logger name="javax" level="ERROR" />
+            <Logger name="javax.jmdns" level="OFF" />
+            <Logger name="sun" level="ERROR" />
+            <Logger name="org.apache" level="WARN" />
+            <Logger name="httpclient.wire" level="WARN" />
+            <Logger name="net.schmizz" level="ERROR" />
+            <Logger name="com.codahale" level="ERROR" />
+            <Logger name="org.apache.tomcat" level="ERROR" />
+            <Logger name="org.apache.commons" level="WARN" />
+            <Logger name="org.apache.catalina" level="ERROR" />
+            <Logger name="com.mongodb" level="ERROR" />
+            <Logger name="org.mongodb" level="ERROR" />
+            <Logger name="org.springframework" level="WARN" />
+            <Logger name="de.javawi.jstun" level="WARN" />
+            <Logger name="com.ubnt" level="INFO" />
+            <Logger name="com.ubiquiti" level="INFO" />
+            <Logger name="com.netflix.servo" level="INFO" />
+            <Logger name="com.amazonaws.internal" level="WARN" />
+            <Logger name="springfox" level="WARN" />
+          </Loggers>
+        </Configuration>
     controllerService:
       type: LoadBalancer
       externalTrafficPolicy: Local
