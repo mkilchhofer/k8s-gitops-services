@@ -1,14 +1,16 @@
 ---
-apiVersion: helm.cattle.io/v1
-kind: HelmChart
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
 metadata:
   name: unifi
   namespace: unifi
 spec:
-  chart: stable/unifi
-  version: "0.5.1"
-  helmVersion: "v2"
-  valuesContent: |-
+  releaseName: unifi
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    name: unifi
+    version: "0.5.1"
+  values:
     ingress:
       enabled: true
       annotations:
