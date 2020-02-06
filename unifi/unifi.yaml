@@ -17,7 +17,7 @@ spec:
         kubernetes.io/ingress.class: traefik-internal
         traefik.ingress.kubernetes.io/redirect-entry-point: https
       hosts:
-        - unifi.k8s.kilchhofer.info
+        - unifi.tools.kilchhofer.info
     image:
       tag: "5.12.35"
     extraJvmOpts:

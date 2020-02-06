@@ -8,7 +8,7 @@ metadata:
     traefik.ingress.kubernetes.io/redirect-entry-point: https
 spec:
   rules:
-  - host: git.k8s.kilchhofer.info
+  - host: git.tools.kilchhofer.info
     http:
       paths:
       - path: /

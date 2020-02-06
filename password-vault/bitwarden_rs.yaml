@@ -30,7 +30,7 @@ metadata:
     traefik.ingress.kubernetes.io/redirect-entry-point: https
 spec:
   rules:
-  - host: bw.k8s.kilchhofer.info
+  - host: bw.tools.kilchhofer.info
     http:
       paths:
       - path: /
@@ -59,7 +59,7 @@ data:
   SMTP_FROM_NAME: Kilchhofer Password safe
   SMTP_PORT: "587"
   SMTP_SSL: "true"
-  DOMAIN: 'https://bw.k8s.kilchhofer.info'
+  DOMAIN: 'https://bw.tools.kilchhofer.info'
   WEBSOCKET_ENABLED: "true"
 ---
 apiVersion: apps/v1
