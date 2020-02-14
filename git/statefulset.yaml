@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: git-service
+  name: gitea
 spec:
-  serviceName: git-service
+  serviceName: gitea
   replicas: 1
   updateStrategy:
     type: RollingUpdate
@@ -13,7 +13,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-      - name: git-service
+      - name: gitea
         image: gitea/gitea:1.10.0
         command:
         - gitea

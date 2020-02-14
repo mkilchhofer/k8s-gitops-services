@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: git-service
+  name: gitea
   annotations:
     kubernetes.io/ingress.class: traefik-internal
 #    traefik.ingress.kubernetes.io/frontend-entry-points: https
@@ -13,5 +13,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: git-service-ingress
+          serviceName: gitea-ingress
           servicePort: http-gui
