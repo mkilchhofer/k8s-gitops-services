@@ -85,7 +85,7 @@ spec:
         runAsUser: 33
       containers:
       - name: bitwarden
-        image: bitwardenrs/server:1.10.0
+        image: bitwardenrs/server:1.13.1
         envFrom:
         - configMapRef:
             name: bitwarden-config
