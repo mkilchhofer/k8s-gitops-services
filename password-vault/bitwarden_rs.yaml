@@ -61,6 +61,8 @@ data:
   SMTP_SSL: "true"
   DOMAIN: 'https://bw.tools.kilchhofer.info'
   WEBSOCKET_ENABLED: "true"
+  LOG_LEVEL: "warn"
+  EXTENDED_LOGGING: "true"
 ---
 apiVersion: apps/v1
 kind: StatefulSet
