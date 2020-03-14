@@ -46,7 +46,7 @@ spec:
             path: /alive
             port: http
           periodSeconds: 30
-          timeoutSeconds: 15
+          timeoutSeconds: 30
           initialDelaySeconds: 5
         volumeMounts:
         - name: bitwarden-persistent-storage
