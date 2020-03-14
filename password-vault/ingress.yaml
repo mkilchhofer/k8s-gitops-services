@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: bitwarden
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
+#    traefik.ingress.kubernetes.io/frontend-entry-points: https
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+spec:
+  rules:
+  - host: bw.tools.kilchhofer.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: bitwarden
+          servicePort: bitwarden-api
+      - path: /notifications/hub/negotiate
+        backend:
+          serviceName: bitwarden
+          servicePort: bitwarden-api
+      - path: /notifications/hub
+        backend:
+          serviceName: bitwarden
+          servicePort: notifications
