@@ -40,14 +40,14 @@ spec:
             port: http
           periodSeconds: 60
           timeoutSeconds: 30
-          initialDelaySeconds: 15
+          initialDelaySeconds: 5
         readinessProbe:
           httpGet:
             path: /alive
             port: http
           periodSeconds: 30
           timeoutSeconds: 15
-          initialDelaySeconds: 7
+          initialDelaySeconds: 5
         volumeMounts:
         - name: bitwarden-persistent-storage
           mountPath: /data
