@@ -12,6 +12,22 @@ spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
+      initContainers:
+      - name: config-gen
+        image: gitea/gitea:1.11.3
+        command:
+        - /bin/sh
+        args:
+        - "-c"
+        - "envsubst < /configmap/app.ini > /etc/gitea/app.ini"
+        volumeMounts:
+        - name: config-template
+          mountPath: /configmap
+        - name: config-volume
+          mountPath: /etc/gitea
+        envFrom:
+        - secretRef:
+            name: gitea
       containers:
       - name: gitea
         image: gitea/gitea:1.11.3
@@ -45,6 +61,8 @@ spec:
           initialDelaySeconds: 5
       volumes:
         - name: config-volume
+          emptyDir: {}
+        - name: config-template
           configMap:
             name: app-ini
   volumeClaimTemplates:
