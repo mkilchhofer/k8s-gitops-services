@@ -24,11 +24,6 @@ spec:
             secretKeyRef:
               name: bitwarden-secret
               key: adminToken
-        - name: SMTP_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: bitwarden-secret
-              key: emailUser
         - name: SMTP_PASSWORD
           valueFrom:
             secretKeyRef:
