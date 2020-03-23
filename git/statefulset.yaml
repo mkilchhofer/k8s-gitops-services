@@ -12,31 +12,17 @@ spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
-      initContainers:
-      - name: config-gen
+      containers:
+      - name: gitea
         image: gitea/gitea:1.11.3
         command:
         - /bin/sh
         args:
         - "-c"
-        - "envsubst < /configmap/app.ini > /etc/gitea/app.ini"
-        volumeMounts:
-        - name: config-template
-          mountPath: /configmap
-        - name: config-volume
-          mountPath: /etc/gitea
-        envFrom:
-        - secretRef:
-            name: gitea
-      containers:
-      - name: gitea
-        image: gitea/gitea:1.11.3
-        command:
-        - gitea
-        args:
-        - web
-        - "--config"
-        - /etc/gitea/app.ini
+        - >
+          envsubst < /configmap/app.ini > /etc/gitea/app.ini;
+          echo "Config generation done, now starting gitea";
+          exec gitea web --config /etc/gitea/app.ini
         ports:
         - name: http-gui
           containerPort: 3000
@@ -45,8 +31,13 @@ spec:
         volumeMounts:
         - name: gitea-pv
           mountPath: /data
+        - name: config-template
+          mountPath: /configmap
         - name: config-volume
           mountPath: /etc/gitea
+        envFrom:
+        - secretRef:
+            name: gitea
         livenessProbe:
           httpGet:
             path: /
