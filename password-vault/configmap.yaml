@@ -5,9 +5,9 @@ metadata:
 data:
   ROCKET_PORT: "8080"
   SIGNUPS_ALLOWED: "false"
-  SMTP_HOST: smtp.gmail.com
-  SMTP_FROM: noreply.kilchhofer@gmail.com
-  SMTP_USERNAME: noreply.kilchhofer@gmail.com
+  SMTP_HOST: mail.infomaniak.com
+  SMTP_FROM: noreply@kilchhofer.info
+  SMTP_USERNAME: infra@kilchhofer.info
   SMTP_FROM_NAME: Kilchhofer Password safe
   SMTP_PORT: "587"
   SMTP_SSL: "true"
