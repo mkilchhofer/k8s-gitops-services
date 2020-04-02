@@ -13,5 +13,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: gitea-ingress
+          serviceName: gitea
           servicePort: http-gui
