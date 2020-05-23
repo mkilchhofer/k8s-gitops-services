@@ -29,7 +29,7 @@ spec:
         - name: ssh-git
           containerPort: 3001
         volumeMounts:
-        - name: gitea-pv
+        - name: data
           mountPath: /data
         - name: config-template
           mountPath: /configmap
@@ -58,7 +58,7 @@ spec:
             name: app-ini
   volumeClaimTemplates:
   - metadata:
-      name: gitea-pv
+      name: data
     spec:
       accessModes:
         - "ReadWriteOnce"
