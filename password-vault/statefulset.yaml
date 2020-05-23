@@ -49,7 +49,7 @@ spec:
           timeoutSeconds: 30
           initialDelaySeconds: 5
         volumeMounts:
-        - name: bitwarden-persistent-storage
+        - name: data
           mountPath: /data
         resources:
           limits:
@@ -60,7 +60,7 @@ spec:
             memory: 256Mi
   volumeClaimTemplates:
   - metadata:
-      name: bitwarden-persistent-storage
+      name: data
     spec:
       accessModes:
         - "ReadWriteOnce"
