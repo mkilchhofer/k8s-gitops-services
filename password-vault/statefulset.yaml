@@ -58,6 +58,7 @@ spec:
           requests:
             cpu: 50m
             memory: 256Mi
+      terminationGracePeriodSeconds: 10
   volumeClaimTemplates:
   - metadata:
       name: data
