@@ -58,6 +58,11 @@ spec:
           requests:
             cpu: 50m
             memory: 256Mi
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
       terminationGracePeriodSeconds: 10
   volumeClaimTemplates:
   - metadata:
