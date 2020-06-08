@@ -14,7 +14,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: gitea
-        image: gitea/gitea:1.11.3
+        image: gitea/gitea:1.11.6
         command:
         - /bin/sh
         args:
