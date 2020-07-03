@@ -38,6 +38,13 @@ spec:
         envFrom:
         - secretRef:
             name: gitea
+        resources:
+          limits:
+            cpu: 1
+            memory: 1.5Gi
+          requests:
+            cpu: 100m
+            memory: 512Mi
         livenessProbe:
           httpGet:
             path: /
