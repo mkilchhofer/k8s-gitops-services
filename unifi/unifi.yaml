@@ -19,7 +19,7 @@ spec:
       hosts:
         - unifi.tools.kilchhofer.info
     image:
-      tag: "5.12.66"
+      tag: "5.13.29"
     extraJvmOpts:
       - -Dlog4j.configurationFile=file:/configmap/log4j2.xml
     extraConfigFiles:
