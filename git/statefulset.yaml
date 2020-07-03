@@ -15,6 +15,12 @@ spec:
       containers:
       - name: gitea
         image: gitea/gitea:1.12.1
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
         command:
         - /bin/sh
         args:
