@@ -6,6 +6,7 @@ metadata:
     kubernetes.io/ingress.class: traefik-internal
 #    traefik.ingress.kubernetes.io/frontend-entry-points: https
     traefik.ingress.kubernetes.io/redirect-entry-point: https
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
   - host: bw.tools.kilchhofer.info
@@ -23,3 +24,7 @@ spec:
         backend:
           serviceName: bitwarden
           servicePort: notifications
+  tls:
+  - hosts:
+    - bw.tools.kilchhofer.info
+    secretName: bitwarden-cert
