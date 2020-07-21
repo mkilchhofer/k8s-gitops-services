@@ -8,7 +8,7 @@ In order to store everything in Git (Infrastructure as code), I use the 'Sealed 
 
 To encrypt a k8s secret, use the utility `kubeseal` on the client side:
 ```bash
-$ kubeseal --cert https://sealed-secrets.k8s.kilchhofer.info/v1/cert.pem -o yaml <mysecret.json >mysealedsecret.yaml
+$ kubeseal --cert https://sealed-secrets.tools.kilchhofer.info/v1/cert.pem -o yaml <mysecret.json >mysealedsecret.yaml
 ```
 
 > Problem: "I can manage all my K8s config in git, except Secrets."
