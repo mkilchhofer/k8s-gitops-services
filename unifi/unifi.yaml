@@ -9,15 +9,20 @@ spec:
   chart:
     repository: https://kubernetes-charts.storage.googleapis.com/
     name: unifi
-    version: "0.6.0"
+    version: "0.10.0"
   values:
     ingress:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: traefik-internal
         traefik.ingress.kubernetes.io/redirect-entry-point: https
+        cert-manager.io/cluster-issuer: letsencrypt
       hosts:
         - unifi.tools.kilchhofer.info
+      tls:
+        - hosts:
+          - unifi.tools.kilchhofer.info
+          secretName: unifi-cert
     image:
       tag: "5.13.29"
     extraJvmOpts:
