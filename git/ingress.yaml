@@ -6,6 +6,7 @@ metadata:
     kubernetes.io/ingress.class: traefik-internal
 #    traefik.ingress.kubernetes.io/frontend-entry-points: https
     traefik.ingress.kubernetes.io/redirect-entry-point: https
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
   - host: git.tools.kilchhofer.info
@@ -15,3 +16,7 @@ spec:
         backend:
           serviceName: gitea
           servicePort: http-gui
+  tls:
+  - hosts:
+    - git.tools.kilchhofer.info
+    secretName: git-cert
