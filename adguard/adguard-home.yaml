@@ -7,10 +7,25 @@ metadata:
 spec:
   releaseName: adguard-home
   chart:
-    repository: https://billimek.com/billimek-charts/
-    name: adguard-home
-    version: "1.0.0"
+    git: https://github.com/mkilchhofer/billimek-charts.git
+    ref: feature/adguard-home_non-root
+    path: charts/adguard-home
   values:
+    strategyType: Recreate
+
+    podSecurityContext:
+      fsGroup: 2001
+
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+        add:
+        - NET_BIND_SERVICE
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 2000
+
     ingress:
       enabled: true
       annotations:
@@ -40,3 +55,43 @@ spec:
       loadBalancerIP: "192.168.93.84"
       annotations:
         metallb.universe.tf/allow-shared-ip: adguard
+
+    resources:
+      limits:
+       cpu: 500m
+       memory: 128Mi
+      requests:
+       cpu: 10m
+       memory: 64Mi
+
+    persistence:
+      config:
+        enabled: false
+
+    configAsCode:
+      enabled: true
+      config:
+        users: []
+        dns:
+          port: 5353
+          upstream_dns:
+          - 192.168.92.1
+          bootstrap_dns:
+          - 192.168.92.1
+        filters:
+        - enabled: true
+          url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
+          name: AdGuard DNS filter
+          id: 1
+        - enabled: false
+          url: https://adaway.org/hosts.txt
+          name: AdAway
+          id: 2
+        - enabled: false
+          url: https://www.malwaredomainlist.com/hostslist/hosts.txt
+          name: MalwareDomainList.com Hosts List
+          id: 4
+        - enabled: true
+          url: https://easylist.to/easylist/easylist.txt
+          name: EasyList
+          id: 10
