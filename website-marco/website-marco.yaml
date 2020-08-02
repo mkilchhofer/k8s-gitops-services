@@ -30,6 +30,7 @@ metadata:
     ingress.kubernetes.io/hsts-include-subdomains: "true"
     ingress.kubernetes.io/hsts-preload: "false"
     ingress.kubernetes.io/content-security-policy: "default-src 'self'; script-src 'self'"
+    ingress.kubernetes.io/custom-response-headers: "Expect-CT: max-age=86400, enforce"
     traefik.ingress.kubernetes.io/redirect-regex: ^http((://(www\\.)?)|(s://))kilchhofer\\.info/(.*)$
     traefik.ingress.kubernetes.io/redirect-replacement: https://www.kilchhofer.info/$5
   labels:
