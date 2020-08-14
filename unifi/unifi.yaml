@@ -14,14 +14,14 @@ spec:
     ingress:
       enabled: true
       annotations:
-        kubernetes.io/ingress.class: traefik-internal
-        traefik.ingress.kubernetes.io/redirect-entry-point: https
+        kubernetes.io/ingress.class: contour
+        ingress.kubernetes.io/force-ssl-redirect: true
         cert-manager.io/cluster-issuer: letsencrypt
       hosts:
-        - unifi.tools.kilchhofer.info
+        - unifi.tools-test.kilchhofer.info
       tls:
         - hosts:
-          - unifi.tools.kilchhofer.info
+          - unifi.tools-test.kilchhofer.info
           secretName: unifi-cert
     image:
       tag: "5.13.29"
@@ -85,6 +85,7 @@ spec:
       loadBalancerIP: "192.168.93.87"
       annotations:
         metallb.universe.tf/allow-shared-ip: unifi
+        projectcontour.io/upstream-protocol.tls: "8443"
     discoveryService:
       type: LoadBalancer
       externalTrafficPolicy: Local
