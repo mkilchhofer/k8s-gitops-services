@@ -7,12 +7,10 @@ metadata:
 spec:
   releaseName: adguard-home
   chart:
-    git: https://github.com/mkilchhofer/billimek-charts.git
-    ref: feature/adguard-home_non-root
-    path: charts/adguard-home
+    repository: https://billimek.com/billimek-charts/
+    name: adguard-home
+    version: "1.2.0"
   values:
-    strategyType: Recreate
-
     podSecurityContext:
       fsGroup: 2001
 
