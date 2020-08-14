@@ -15,7 +15,7 @@ spec:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: contour
-        ingress.kubernetes.io/force-ssl-redirect: true
+        ingress.kubernetes.io/force-ssl-redirect: "true"
         cert-manager.io/cluster-issuer: letsencrypt
       hosts:
         - unifi.tools-test.kilchhofer.info
