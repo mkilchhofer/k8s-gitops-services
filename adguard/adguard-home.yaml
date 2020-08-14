@@ -11,6 +11,10 @@ spec:
     name: adguard-home
     version: "1.2.0"
   values:
+    image:
+      repository: kicm/adguardhome
+      tag: v0.103.3
+
     podSecurityContext:
       fsGroup: 2001
 
@@ -18,8 +22,6 @@ spec:
       capabilities:
         drop:
         - ALL
-        add:
-        - NET_BIND_SERVICE
       readOnlyRootFilesystem: true
       runAsNonRoot: true
       runAsUser: 2000
