@@ -85,11 +85,11 @@ spec:
           url: https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt
           name: AdGuard DNS filter
           id: 1
-        - enabled: false
+        - enabled: true
           url: https://adaway.org/hosts.txt
           name: AdAway
           id: 2
-        - enabled: false
+        - enabled: true
           url: https://www.malwaredomainlist.com/hostslist/hosts.txt
           name: MalwareDomainList.com Hosts List
           id: 4
