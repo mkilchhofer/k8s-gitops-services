@@ -18,10 +18,10 @@ spec:
         ingress.kubernetes.io/force-ssl-redirect: "true"
         cert-manager.io/cluster-issuer: letsencrypt
       hosts:
-        - unifi.tools-test.kilchhofer.info
+        - unifi.tools.kilchhofer.info
       tls:
         - hosts:
-          - unifi.tools-test.kilchhofer.info
+          - unifi.tools.kilchhofer.info
           secretName: unifi-cert
     image:
       tag: "5.13.29"
