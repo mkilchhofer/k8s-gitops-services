@@ -73,6 +73,13 @@ spec:
             <Logger name="springfox" level="WARN" />
           </Loggers>
         </Configuration>
+    resources:
+      limits:
+       cpu: 1000m
+       memory: 1.25Gi
+      requests:
+       cpu: 100m
+       memory: 640Mi
     controllerService:
       type: LoadBalancer
       externalTrafficPolicy: Local
