@@ -6,6 +6,7 @@ metadata:
   namespace: adguard
 spec:
   releaseName: adguard-home
+  maxHistory: 3
   chart:
     repository: https://billimek.com/billimek-charts/
     name: adguard-home
