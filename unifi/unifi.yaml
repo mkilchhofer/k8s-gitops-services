@@ -6,6 +6,7 @@ metadata:
   namespace: unifi
 spec:
   releaseName: unifi
+  maxHistory: 3
   chart:
     repository: https://kubernetes-charts.storage.googleapis.com/
     name: unifi
