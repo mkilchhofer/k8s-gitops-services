@@ -33,8 +33,7 @@ metadata:
     ingress.kubernetes.io/custom-response-headers: "Expect-CT: max-age=86400, enforce"
     traefik.ingress.kubernetes.io/redirect-regex: ^http((://(www\\.)?)|(s://))kilchhofer\\.info/(.*)$
     traefik.ingress.kubernetes.io/redirect-replacement: https://www.kilchhofer.info/$5
-  labels:
-    traffic-type: external
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
   - host: www.kilchhofer.info
@@ -51,6 +50,11 @@ spec:
         backend:
           serviceName: website-marco
           servicePort: website-http
+  tls:
+  - hosts:
+    - www.kilchhofer.info
+    - kilchhofer.info
+    secretName: website-marco-cert
 ---
 apiVersion: apps/v1
 kind: StatefulSet
