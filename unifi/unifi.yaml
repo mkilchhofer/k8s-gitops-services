@@ -10,7 +10,7 @@ spec:
   chart:
     repository: https://k8s-at-home.com/charts/
     name: unifi
-    version: "1.0.0"
+    version: "1.2.0"
   values:
     ingress:
       enabled: true
@@ -24,8 +24,8 @@ spec:
         - hosts:
           - unifi.tools.kilchhofer.info
           secretName: unifi-cert
-    image:
-      tag: "5.13.29"
+    livenessProbe:
+      enabled: false
     extraJvmOpts:
       - -Dlog4j.configurationFile=file:/configmap/log4j2.xml
     extraConfigFiles:
