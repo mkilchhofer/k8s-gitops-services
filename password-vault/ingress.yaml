@@ -6,6 +6,7 @@ metadata:
     kubernetes.io/ingress.class: contour
     ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt
+    projectcontour.io/response-timeout: 120s
 spec:
   rules:
   - host: bw.tools.kilchhofer.info
