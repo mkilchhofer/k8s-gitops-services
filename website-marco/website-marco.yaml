@@ -76,7 +76,7 @@ spec:
     spec:
       containers:
       - name: website
-        image: nginx:1.17.4
+        image: nginx:1.19.4-alpine
         env:
         - name: "NGINX_PORT"
           value: "8080"
