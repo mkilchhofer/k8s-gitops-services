@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: bitwarden
 spec:
-  selector:
-    app: bitwarden
   ports:
   - name: bitwarden-api
     port: 8080
