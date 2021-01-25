@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gitea
@@ -12,9 +12,12 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: gitea
-          servicePort: http-gui
+          service:
+            name: gitea
+            port:
+              name: http-gui
   tls:
   - hosts:
     - git.tools.kilchhofer.info
