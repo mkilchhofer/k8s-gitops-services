@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: bitwarden
@@ -14,17 +14,26 @@ spec:
     http:
       paths:
       - path: /
+        pathType: ImplementationSpecific
         backend:
-          serviceName: bitwarden
-          servicePort: bitwarden-api
+          service:
+            name: bitwarden
+            port:
+              name: bitwarden-api
       - path: /notifications/hub/negotiate
+        pathType: ImplementationSpecific
         backend:
-          serviceName: bitwarden
-          servicePort: bitwarden-api
+          service:
+            name: bitwarden
+            port:
+              name: bitwarden-api
       - path: /notifications/hub
+        pathType: ImplementationSpecific
         backend:
-          serviceName: bitwarden
-          servicePort: notifications
+          service:
+            name: bitwarden
+            port:
+              name: notifications
   tls:
   - hosts:
     - bw.tools.kilchhofer.info
