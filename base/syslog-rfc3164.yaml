@@ -1,0 +1,60 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: syslog-rfc3164
+  namespace: base
+spec:
+  releaseName: syslog-rfc3164
+  interval: 5m
+  chart:
+    spec:
+      chart: fluent-bit
+      version: "0.7.1"
+      sourceRef:
+        kind: HelmRepository
+        name: fluent
+        namespace: flux-system
+      interval: 1m
+  values:
+    serviceAccount:
+      create: false
+    rbac:
+      create: false
+
+    kind: Deployment
+
+    image:
+      repository: grafana/fluent-bit-plugin-loki
+      tag: 1.6.1-amd64
+
+    extraPorts:
+      - name: syslog
+        containerPort: 5140
+        protocol: TCP
+        port: 5140
+
+    config:
+      inputs: |
+        [INPUT]
+            Name syslog
+            Parser syslog-rfc3164
+            Mode tcp
+            Port 5140
+
+      outputs: |
+        [OUTPUT]
+            Name  loki
+            Match *
+            Url http://loki-stack.logging.svc.cluster.local:3100/loki/api/v1/push
+            TenantID syslog-rfc3164
+            LogLevel warn
+            LineFormat json
+            Labels {job="fluent-bit-syslog-rfc3164"}
+            LabelKeys pri,host,ident
+            RemoveKeys time,pid
+    
+      filters: ""
+    
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 192.168.93.85
