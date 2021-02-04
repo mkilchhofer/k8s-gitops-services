@@ -1,16 +1,22 @@
 ---
-apiVersion: helm.fluxcd.io/v1
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: adguard-home
-  namespace: adguard
+  name: adguard
+  namespace: home-network
 spec:
-  releaseName: adguard-home
+  releaseName: adguard
   maxHistory: 3
+  interval: 5m
   chart:
-    repository: https://billimek.com/billimek-charts/
-    name: adguard-home
-    version: "1.2.0"
+    spec:
+      chart: adguard-home
+      version: "2.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 1m
   values:
     image:
       repository: kicm/adguardhome
