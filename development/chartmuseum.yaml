@@ -49,5 +49,19 @@ spec:
       size: 8Gi
       storageClass: nfs-data
 
+    resources:
+      limits:
+        cpu: 300m
+        memory: 256Gi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+
+    containerSecurityContext:
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+
     securityContext:
       runAsNonRoot: true
