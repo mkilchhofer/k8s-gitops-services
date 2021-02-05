@@ -5,7 +5,6 @@ commonLabels:
   app: git-service
 resources:
   - ingress.yaml
-  - namespace.yaml
   - service-clusterip.yaml
   - service-loadbalancer.yaml
   - statefulset.yaml
