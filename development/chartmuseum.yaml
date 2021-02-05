@@ -48,3 +48,6 @@ spec:
       enabled: true
       size: 8Gi
       storageClass: nfs-data
+
+    securityContext:
+      runAsNonRoot: true
