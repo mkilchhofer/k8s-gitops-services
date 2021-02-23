@@ -14,7 +14,7 @@ spec:
         runAsUser: 33
       containers:
       - name: bitwarden
-        image: bitwardenrs/server@sha256:c95337f55cf7bf28ae2e3db1f030504bc2adc4c0de3bee674dd0828548e9e6ec
+        image: bitwardenrs/server:1.19.0-alpine
         envFrom:
         - configMapRef:
             name: bitwarden-config
