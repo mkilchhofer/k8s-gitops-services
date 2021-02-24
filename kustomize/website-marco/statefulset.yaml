@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: website-marco
+spec:
+  serviceName: website-marco
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    spec:
+      containers:
+      - name: website
+        image: nginx:1.19.4-alpine
+        env:
+        - name: "NGINX_PORT"
+          value: "8080"
+        ports:
+        - name: http
+          containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          periodSeconds: 60
+          timeoutSeconds: 30
+          initialDelaySeconds: 15
+        volumeMounts:
+        - name: website-marco-storage
+          mountPath: /usr/share/nginx/html
+        resources:
+          limits:
+            cpu: 300m
+            memory: 1Gi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+  volumeClaimTemplates:
+  - metadata:
+      name: website-marco-storage
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: "100Mi"
+      storageClassName: nfs-data

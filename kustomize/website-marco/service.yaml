@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: website-marco
+spec:
+  ports:
+  - name: website-http
+    port: 8080
+    targetPort: http

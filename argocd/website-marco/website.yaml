@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: website-marco
+  namespace: argocd
+spec:
+  destination:
+    namespace: website-marco
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: kustomize/website-marco
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main
