@@ -1,67 +1,57 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: chartmuseum
-  namespace: development
+  namespace: argocd
 spec:
-  interval: 10m
-  url: https://chartmuseum.github.io/charts
-  timeout: 3m
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: chartmuseum
-  namespace: development
-spec:
-  releaseName: chartmuseum
-  maxHistory: 3
-  interval: 5m
-  chart:
-    spec:
-      chart: chartmuseum
-      version: "2.15.0"
-      sourceRef:
-        kind: HelmRepository
-        name: chartmuseum
-      interval: 1m
-  values:
-    fullnameOverride: chartmuseum
-    env:
-      open:
-        DISABLE_API: false
-        STORAGE: local
-    ingress:
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-        ingress.kubernetes.io/force-ssl-redirect: "true"
-        kubernetes.io/ingress.class: contour
-      enabled: true
-      hosts:
-      - name: chartmuseum.tools.kilchhofer.info
-        path: /
-        tls: true
-        tlsSecret: chartmuseum-ingress-cert
-    persistence:
-      accessMode: ReadWriteOnce
-      enabled: true
-      size: 8Gi
-      storageClass: nfs-data
+  destination:
+    namespace: development
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy: {}
+  source:
+    chart: chartmuseum
+    repoURL: https://chartmuseum.github.io/charts
+    targetRevision: "2.15.0"
+    helm:
+      releaseName: chartmuseum
+      values: |-
+        fullnameOverride: chartmuseum
+        env:
+          open:
+            DISABLE_API: false
+            STORAGE: local
+        ingress:
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+            ingress.kubernetes.io/force-ssl-redirect: "true"
+            kubernetes.io/ingress.class: contour
+          enabled: true
+          hosts:
+          - name: chartmuseum.tools.kilchhofer.info
+            path: /
+            tls: true
+            tlsSecret: chartmuseum-ingress-cert
+        persistence:
+          accessMode: ReadWriteOnce
+          enabled: true
+          size: 8Gi
+          storageClass: nfs-data
 
-    resources:
-      limits:
-        cpu: 300m
-        memory: 256Gi
-      requests:
-        cpu: 10m
-        memory: 16Mi
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256Gi
+          requests:
+            cpu: 10m
+            memory: 16Mi
 
-    containerSecurityContext:
-      capabilities:
-        drop:
-        - ALL
-      readOnlyRootFilesystem: true
+        containerSecurityContext:
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
 
-    securityContext:
-      runAsNonRoot: true
+        securityContext:
+          runAsNonRoot: true
