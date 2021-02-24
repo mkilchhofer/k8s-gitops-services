@@ -1,124 +1,122 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: plex
-  namespace: plex
+  namespace: argocd
 spec:
-  releaseName: plex
-  maxHistory: 3
-  interval: 5m
-  chart:
-    spec:
-      chart: plex
-      version: "2.3.0"
-      sourceRef:
-        kind: HelmRepository
-        name: k8s-at-home-charts
-        namespace: flux-system
-      interval: 1m
-  values:
-    persistence:
-      transcode:
-        enabled: false
-    
-      data:
-        enabled: false
-    
-      extraMounts:
-        - name: syno1-movies1
-          mountPath: mnt/syno1-movies1
-          volume: 
-            nfs:
-              server: nas.ma.kilchhofer.info
-              path: /volume1/media1/Movies
-              readOnly: true
-        - name: syno1-movies2
-          mountPath: mnt/syno1-movies2
-          volume: 
-            nfs:
-              server: nas.ma.kilchhofer.info
-              path: /volume1/media1/Movies2
-              readOnly: true
-        - name: syno1-music1
-          mountPath: mnt/syno1-music1
-          volume: 
-            nfs:
-              server: nas.ma.kilchhofer.info
-              path: /volume1/media1/Music
-              readOnly: true
-        - name: syno1-tv-recordings1
-          mountPath: mnt/syno1-tv-recordings1
-          volume: 
-            nfs:
-              server: nas.ma.kilchhofer.info
-              path: /volume1/media1/TV Recordings
-              # path: /volume1/media1/TV\040Recordings
-              readOnly: true
-        - name: syno1-tv-shows1
-          mountPath: mnt/syno1-tv-shows1
-          volume: 
-            nfs:
-              server: nas.ma.kilchhofer.info
-              path: /volume1/media1/TV Shows
-              # path: /volume1/media1/TV\040Shows
-              readOnly: true
-        - name: syno1-tv-shows2
-          mountPath: mnt/syno1-tv-shows2
-          volume: 
-            nfs:
-              server: nas.ma.kilchhofer.info
-              path: /volume1/media1/TV Shows2
-              # path: /volume1/media1/TV\040Shows2
-              readOnly: true
-        - name: syno1-home-movies1
-          mountPath: mnt/syno1-home_movies1
-          volume: 
-            nfs:
-              server: nas.ma.kilchhofer.info
-              path: /volume1/media1/Home Movies 
-              # path: /volume1/media1/Home\040Movies 
-              readOnly: true
-        - name: syno1-photos1
-          mountPath: mnt/syno1-photos1
-          volume: 
-            nfs:
-              server: nas.ma.kilchhofer.info
-              path: /volume2/photo1/Photos
-              readOnly: true
-    
-      config:
-        storageClass: "iscsi-manual"
-        size: 20Gi
-        accessMode: ReadWriteOnce
-    
-    
-    serviceTCP:
-      type: LoadBalancer
-      port: 32400
-      annotations:
-        metallb.universe.tf/allow-shared-ip: plex-svc
-      loadBalancerIP: 192.168.93.82
-    
-    serviceUDP:
-      type: LoadBalancer
-      annotations:
-        metallb.universe.tf/allow-shared-ip: plex-svc
-      loadBalancerIP: 192.168.93.82
-    
-    
-    advertiseIp: "https://192.168.93.82:32400"
-    
-    probes:
-      liveness:
-        httpGet:
-          scheme: HTTPS
-      readiness:
-        httpGet:
-          scheme: HTTPS
-      startup:
-        httpGet:
-          scheme: HTTPS
-    
-    image:
-      tag: 1.21.1.3876-3c3adfcb4
+  destination:
+    namespace: plex
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy: {}
+  source:
+    chart: plex
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: "2.3.0"
+    helm:
+      releaseName: plex
+      values: |-
+        persistence:
+          transcode:
+            enabled: false
 
+          data:
+            enabled: false
+
+          extraMounts:
+            - name: syno1-movies1
+              mountPath: mnt/syno1-movies1
+              volume:
+                nfs:
+                  server: nas.ma.kilchhofer.info
+                  path: /volume1/media1/Movies
+                  readOnly: true
+            - name: syno1-movies2
+              mountPath: mnt/syno1-movies2
+              volume:
+                nfs:
+                  server: nas.ma.kilchhofer.info
+                  path: /volume1/media1/Movies2
+                  readOnly: true
+            - name: syno1-music1
+              mountPath: mnt/syno1-music1
+              volume:
+                nfs:
+                  server: nas.ma.kilchhofer.info
+                  path: /volume1/media1/Music
+                  readOnly: true
+            - name: syno1-tv-recordings1
+              mountPath: mnt/syno1-tv-recordings1
+              volume:
+                nfs:
+                  server: nas.ma.kilchhofer.info
+                  path: /volume1/media1/TV Recordings
+                  # path: /volume1/media1/TV\040Recordings
+                  readOnly: true
+            - name: syno1-tv-shows1
+              mountPath: mnt/syno1-tv-shows1
+              volume:
+                nfs:
+                  server: nas.ma.kilchhofer.info
+                  path: /volume1/media1/TV Shows
+                  # path: /volume1/media1/TV\040Shows
+                  readOnly: true
+            - name: syno1-tv-shows2
+              mountPath: mnt/syno1-tv-shows2
+              volume:
+                nfs:
+                  server: nas.ma.kilchhofer.info
+                  path: /volume1/media1/TV Shows2
+                  # path: /volume1/media1/TV\040Shows2
+                  readOnly: true
+            - name: syno1-home-movies1
+              mountPath: mnt/syno1-home_movies1
+              volume:
+                nfs:
+                  server: nas.ma.kilchhofer.info
+                  path: /volume1/media1/Home Movies
+                  # path: /volume1/media1/Home\040Movies
+                  readOnly: true
+            - name: syno1-photos1
+              mountPath: mnt/syno1-photos1
+              volume:
+                nfs:
+                  server: nas.ma.kilchhofer.info
+                  path: /volume2/photo1/Photos
+                  readOnly: true
+
+          config:
+            storageClass: "iscsi-manual"
+            size: 20Gi
+            accessMode: ReadWriteOnce
+
+
+        serviceTCP:
+          type: LoadBalancer
+          port: 32400
+          annotations:
+            metallb.universe.tf/allow-shared-ip: plex-svc
+          loadBalancerIP: 192.168.93.82
+
+        serviceUDP:
+          type: LoadBalancer
+          annotations:
+            metallb.universe.tf/allow-shared-ip: plex-svc
+          loadBalancerIP: 192.168.93.82
+
+
+        advertiseIp: "https://192.168.93.82:32400"
+
+        probes:
+          liveness:
+            httpGet:
+              scheme: HTTPS
+          readiness:
+            httpGet:
+              scheme: HTTPS
+          startup:
+            httpGet:
+              scheme: HTTPS
+
+        image:
+          tag: 1.21.1.3876-3c3adfcb4
