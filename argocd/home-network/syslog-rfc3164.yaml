@@ -12,7 +12,7 @@ spec:
   source:
     chart: fluent-bit
     repoURL: https://fluent.github.io/helm-charts
-    targetRevision: "0.7.1"
+    targetRevision: "0.7.13"
     helm:
       releaseName: syslog-rfc3164
       values: |-
