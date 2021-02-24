@@ -1,128 +1,126 @@
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: unifi
-  namespace: home-network
+  namespace: argocd
 spec:
-  releaseName: unifi
-  maxHistory: 3
-  interval: 5m
-  chart:
-    spec:
-      chart: unifi
-      version: "1.3.1"
-      sourceRef:
-        kind: HelmRepository
-        name: chartmuseum-local-charts
-        namespace: flux-system
-      interval: 1m
-  values:
-    ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: contour
-        ingress.kubernetes.io/force-ssl-redirect: "true"
-        cert-manager.io/cluster-issuer: letsencrypt
-      hosts:
-        - unifi.tools.kilchhofer.info
-      tls:
-        - hosts:
-          - unifi.tools.kilchhofer.info
-          secretName: unifi-cert
-    image:
-      tag: "6.0.36"
-    livenessProbe:
-      enabled: false
-    extraJvmOpts:
-      - -Dlog4j.configurationFile=file:/configmap/log4j2.xml
-    extraConfigFiles:
-      log4j2.xml: |-
-        <?xml version="1.0" encoding="UTF-8"?>
-        <Configuration>
-          <Appenders>
-            <InMemoryAppender name="InMemoryAppender" activatedLogging="false">
-              <PatternLayout pattern="[%d{ISO8601}] &lt;%t&gt; %-5p %-6c{1} - %m%n" />
-            </InMemoryAppender>
-            <RollingFile name="server_log" fileName="logs/server.log" filePattern="logs/server.log.%i">
-              <PatternLayout pattern="[%d{ISO8601}] &lt;%t&gt; %-5p %-6c{1} - %m%n" />
-              <SizeBasedTriggeringPolicy size="10 MB"/>
-              <DefaultRolloverStrategy max="3" fileIndex="min" />
-            </RollingFile>
-            <Console name="STDOUT" target="SYSTEM_OUT">
-              <PatternLayout pattern="&lt;%t&gt; %-5p %-6c{1} - %m%n"/>
-            </Console>
-          </Appenders>
-          <Loggers>
-            <Root level="INFO">
-              <AppenderRef ref="InMemoryAppender" />
-              <AppenderRef ref="server_log" />
-              <AppenderRef ref="STDOUT" />
-            </Root>
-            <Logger name="org.apache.log4j.xml" level="info" />
-            <Logger name="java" level="ERROR" />
-            <Logger name="javax" level="ERROR" />
-            <Logger name="javax.jmdns" level="OFF" />
-            <Logger name="sun" level="ERROR" />
-            <Logger name="org.apache" level="WARN" />
-            <Logger name="httpclient.wire" level="WARN" />
-            <Logger name="net.schmizz" level="ERROR" />
-            <Logger name="com.codahale" level="ERROR" />
-            <Logger name="org.apache.tomcat" level="ERROR" />
-            <Logger name="org.apache.commons" level="WARN" />
-            <Logger name="org.apache.catalina" level="ERROR" />
-            <Logger name="com.mongodb" level="ERROR" />
-            <Logger name="org.mongodb" level="ERROR" />
-            <Logger name="org.springframework" level="WARN" />
-            <Logger name="de.javawi.jstun" level="WARN" />
-            <Logger name="com.ubnt" level="INFO" />
-            <Logger name="com.ubiquiti" level="INFO" />
-            <Logger name="com.netflix.servo" level="INFO" />
-            <Logger name="com.amazonaws.internal" level="WARN" />
-            <Logger name="springfox" level="WARN" />
-          </Loggers>
-        </Configuration>
-    resources:
-      limits:
-       cpu: 1000m
-       memory: 1.25Gi
-      requests:
-       cpu: 100m
-       memory: 640Mi
-    controllerService:
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-      loadBalancerIP: "192.168.93.87"
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    guiService:
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-      loadBalancerIP: "192.168.93.87"
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-        projectcontour.io/upstream-protocol.tls: "8443"
-    discoveryService:
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-      loadBalancerIP: "192.168.93.87"
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    stunService:
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-      loadBalancerIP: "192.168.93.87"
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    speedtestService:
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-      loadBalancerIP: "192.168.93.87"
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    syslogService:
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-      loadBalancerIP: "192.168.93.87"
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
+  destination:
+    namespace: home-network
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy: {}
+  source:
+    chart: unifi
+    repoURL: https://chartmuseum.tools.kilchhofer.info/
+    targetRevision: "1.3.1"
+    helm:
+      releaseName: unifi
+      values: |-
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: contour
+            ingress.kubernetes.io/force-ssl-redirect: "true"
+            cert-manager.io/cluster-issuer: letsencrypt
+          hosts:
+            - unifi.tools.kilchhofer.info
+          tls:
+            - hosts:
+              - unifi.tools.kilchhofer.info
+              secretName: unifi-cert
+        image:
+          tag: "6.0.36"
+        livenessProbe:
+          enabled: false
+        extraJvmOpts:
+          - -Dlog4j.configurationFile=file:/configmap/log4j2.xml
+        extraConfigFiles:
+          log4j2.xml: |-
+            <?xml version="1.0" encoding="UTF-8"?>
+            <Configuration>
+              <Appenders>
+                <InMemoryAppender name="InMemoryAppender" activatedLogging="false">
+                  <PatternLayout pattern="[%d{ISO8601}] &lt;%t&gt; %-5p %-6c{1} - %m%n" />
+                </InMemoryAppender>
+                <RollingFile name="server_log" fileName="logs/server.log" filePattern="logs/server.log.%i">
+                  <PatternLayout pattern="[%d{ISO8601}] &lt;%t&gt; %-5p %-6c{1} - %m%n" />
+                  <SizeBasedTriggeringPolicy size="10 MB"/>
+                  <DefaultRolloverStrategy max="3" fileIndex="min" />
+                </RollingFile>
+                <Console name="STDOUT" target="SYSTEM_OUT">
+                  <PatternLayout pattern="&lt;%t&gt; %-5p %-6c{1} - %m%n"/>
+                </Console>
+              </Appenders>
+              <Loggers>
+                <Root level="INFO">
+                  <AppenderRef ref="InMemoryAppender" />
+                  <AppenderRef ref="server_log" />
+                  <AppenderRef ref="STDOUT" />
+                </Root>
+                <Logger name="org.apache.log4j.xml" level="info" />
+                <Logger name="java" level="ERROR" />
+                <Logger name="javax" level="ERROR" />
+                <Logger name="javax.jmdns" level="OFF" />
+                <Logger name="sun" level="ERROR" />
+                <Logger name="org.apache" level="WARN" />
+                <Logger name="httpclient.wire" level="WARN" />
+                <Logger name="net.schmizz" level="ERROR" />
+                <Logger name="com.codahale" level="ERROR" />
+                <Logger name="org.apache.tomcat" level="ERROR" />
+                <Logger name="org.apache.commons" level="WARN" />
+                <Logger name="org.apache.catalina" level="ERROR" />
+                <Logger name="com.mongodb" level="ERROR" />
+                <Logger name="org.mongodb" level="ERROR" />
+                <Logger name="org.springframework" level="WARN" />
+                <Logger name="de.javawi.jstun" level="WARN" />
+                <Logger name="com.ubnt" level="INFO" />
+                <Logger name="com.ubiquiti" level="INFO" />
+                <Logger name="com.netflix.servo" level="INFO" />
+                <Logger name="com.amazonaws.internal" level="WARN" />
+                <Logger name="springfox" level="WARN" />
+              </Loggers>
+            </Configuration>
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1.25Gi
+          requests:
+            cpu: 100m
+            memory: 640Mi
+        controllerService:
+          type: LoadBalancer
+          externalTrafficPolicy: Local
+          loadBalancerIP: "192.168.93.87"
+          annotations:
+            metallb.universe.tf/allow-shared-ip: unifi
+        guiService:
+          type: LoadBalancer
+          externalTrafficPolicy: Local
+          loadBalancerIP: "192.168.93.87"
+          annotations:
+            metallb.universe.tf/allow-shared-ip: unifi
+            projectcontour.io/upstream-protocol.tls: "8443"
+        discoveryService:
+          type: LoadBalancer
+          externalTrafficPolicy: Local
+          loadBalancerIP: "192.168.93.87"
+          annotations:
+            metallb.universe.tf/allow-shared-ip: unifi
+        stunService:
+          type: LoadBalancer
+          externalTrafficPolicy: Local
+          loadBalancerIP: "192.168.93.87"
+          annotations:
+            metallb.universe.tf/allow-shared-ip: unifi
+        speedtestService:
+          type: LoadBalancer
+          externalTrafficPolicy: Local
+          loadBalancerIP: "192.168.93.87"
+          annotations:
+            metallb.universe.tf/allow-shared-ip: unifi
+        syslogService:
+          type: LoadBalancer
+          externalTrafficPolicy: Local
+          loadBalancerIP: "192.168.93.87"
+          annotations:
+            metallb.universe.tf/allow-shared-ip: unifi
