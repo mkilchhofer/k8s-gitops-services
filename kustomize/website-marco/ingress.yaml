@@ -3,15 +3,13 @@ kind: Ingress
 metadata:
   name: website-marco
   annotations:
-    kubernetes.io/ingress.class: traefik-external
+    kubernetes.io/ingress.class: nginx-external
     ingress.kubernetes.io/force-hsts: "true"
     ingress.kubernetes.io/hsts-max-age: "86400"
     ingress.kubernetes.io/hsts-include-subdomains: "true"
     ingress.kubernetes.io/hsts-preload: "false"
     ingress.kubernetes.io/content-security-policy: "default-src 'self'; script-src 'self'"
     ingress.kubernetes.io/custom-response-headers: "Expect-CT: max-age=86400, enforce"
-    traefik.ingress.kubernetes.io/redirect-regex: ^http((://(www\\.)?)|(s://))kilchhofer\\.info/(.*)$
-    traefik.ingress.kubernetes.io/redirect-replacement: https://www.kilchhofer.info/$5
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
