@@ -1,0 +1,38 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nebraska
+  namespace: argocd
+spec:
+  destination:
+    namespace: base-infra
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy: {}
+  source:
+    chart: nebraska
+    repoURL: https://chartmuseum.tools.kilchhofer.info/
+    targetRevision: "0.1.0-1.local"
+    helm:
+      releaseName: nebraska
+      values: |-
+        ingress:
+          enabled: false
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+            ingress.kubernetes.io/force-ssl-redirect: "true"
+            kubernetes.io/ingress.class: contour
+          hosts:
+            - flatcar.tools.kilchhofer.info
+          tls:
+            - secretName: nebraska-cert
+              hosts:
+                - flatcar.tools.kilchhofer.info
+        postgresql:
+          persistence:
+            enabled: true
+            storageClass: iscsi-manual
+            accessModes:
+              - ReadWriteOnce
+            size: 1Gi
