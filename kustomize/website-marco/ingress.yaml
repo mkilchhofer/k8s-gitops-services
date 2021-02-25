@@ -4,26 +4,15 @@ metadata:
   name: website-marco
   annotations:
     kubernetes.io/ingress.class: nginx-external
-    ingress.kubernetes.io/force-hsts: "true"
-    ingress.kubernetes.io/hsts-max-age: "86400"
-    ingress.kubernetes.io/hsts-include-subdomains: "true"
-    ingress.kubernetes.io/hsts-preload: "false"
-    ingress.kubernetes.io/content-security-policy: "default-src 'self'; script-src 'self'"
-    ingress.kubernetes.io/custom-response-headers: "Expect-CT: max-age=86400, enforce"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "Strict-Transport-Security: max-age=86400; includeSubDomains"
+      more_set_headers "Content-Security-Policy: default-src 'self'; script-src 'self'"
+      more_set_headers "Expect-CT: max-age=86400, enforce";
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
   - host: www.kilchhofer.info
-    http:
-      paths:
-      - path: /
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: website-marco
-            port:
-              name: website-http
-  - host: kilchhofer.info
     http:
       paths:
       - path: /
