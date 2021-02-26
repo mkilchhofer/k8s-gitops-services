@@ -18,6 +18,15 @@ spec:
       releaseName: nebraska
       version: v3
       values: |-
+        config:
+          syncer:
+            interval: 12h
+          hostFlatcarPackages:
+            enabled: true
+            persistence:
+              enabled: true
+              storageClass: nfs-data
+
         ingress:
           enabled: true
           annotations:
