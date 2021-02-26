@@ -16,6 +16,7 @@ spec:
     targetRevision: "0.1.0-1.local"
     helm:
       releaseName: nebraska
+      version: v3
       values: |-
         ingress:
           enabled: true

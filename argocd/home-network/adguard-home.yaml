@@ -16,6 +16,7 @@ spec:
     targetRevision: "2.0.0"
     helm:
       releaseName: adguard
+      version: v3
       values: |-
         image:
           repository: kicm/adguardhome

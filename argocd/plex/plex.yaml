@@ -15,6 +15,7 @@ spec:
     targetRevision: "2.3.0"
     helm:
       releaseName: plex
+      version: v3
       values: |-
         persistence:
           transcode:

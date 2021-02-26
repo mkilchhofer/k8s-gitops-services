@@ -15,6 +15,7 @@ spec:
     targetRevision: "0.7.13"
     helm:
       releaseName: syslog-rfc3164
+      version: v3
       values: |-
         serviceAccount:
           create: false

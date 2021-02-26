@@ -16,6 +16,7 @@ spec:
     targetRevision: "2.15.0"
     helm:
       releaseName: chartmuseum
+      version: v3
       values: |-
         fullnameOverride: chartmuseum
         env:
