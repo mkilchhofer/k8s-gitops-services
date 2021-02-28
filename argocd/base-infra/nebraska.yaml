@@ -13,7 +13,7 @@ spec:
   source:
     chart: nebraska
     repoURL: https://chartmuseum.tools.kilchhofer.info/
-    targetRevision: "0.1.0-6.local"
+    targetRevision: "0.1.0-7.local"
     helm:
       releaseName: nebraska
       version: v3
