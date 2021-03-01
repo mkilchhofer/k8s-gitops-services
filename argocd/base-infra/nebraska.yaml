@@ -12,8 +12,8 @@ spec:
   syncPolicy: {}
   source:
     chart: nebraska
-    repoURL: https://chartmuseum.tools.kilchhofer.info/
-    targetRevision: "0.1.0-7.local"
+    repoURL: https://mkilchhofer.github.io/nebraska/
+    targetRevision: "0.1.3"
     helm:
       releaseName: nebraska
       version: v3
