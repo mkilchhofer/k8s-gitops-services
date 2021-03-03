@@ -10,8 +10,8 @@ spec:
   template:
     spec:
       securityContext:
-        fsGroup: 33
-        runAsUser: 33
+        fsGroup: 65534
+        runAsUser: 65534
       containers:
       - name: bitwarden
         image: bitwardenrs/server:1.19.0-alpine
