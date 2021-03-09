@@ -27,6 +27,10 @@ spec:
               enabled: true
               storageClass: nfs-data
 
+        podSecurityContext:
+          runAsUser: 65534
+          runAsGroup: 65534
+
         ingress:
           enabled: true
           annotations:
