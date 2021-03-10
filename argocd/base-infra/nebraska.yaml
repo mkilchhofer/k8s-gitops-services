@@ -13,7 +13,7 @@ spec:
   source:
     chart: nebraska
     repoURL: https://mkilchhofer.github.io/nebraska/
-    targetRevision: "0.1.3"
+    targetRevision: "0.1.0"
     helm:
       releaseName: nebraska
       version: v3
@@ -26,10 +26,6 @@ spec:
             persistence:
               enabled: true
               storageClass: nfs-data
-
-        podSecurityContext:
-          runAsUser: 65534
-          runAsGroup: 65534
 
         ingress:
           enabled: true
