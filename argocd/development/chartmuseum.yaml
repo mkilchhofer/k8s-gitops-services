@@ -13,7 +13,7 @@ spec:
   source:
     chart: chartmuseum
     repoURL: https://mkilchhofer.github.io/chartmuseum-charts
-    targetRevision: "3.0.0"
+    targetRevision: "3.0.0-0"
     helm:
       releaseName: chartmuseum
       version: v3
