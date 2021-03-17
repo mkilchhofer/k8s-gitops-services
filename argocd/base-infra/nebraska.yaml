@@ -27,6 +27,9 @@ spec:
               enabled: true
               storageClass: nfs-data
 
+        image:
+          tag: 2.3.3
+
         ingress:
           enabled: true
           annotations:
