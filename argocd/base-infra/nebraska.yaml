@@ -12,8 +12,8 @@ spec:
   syncPolicy: {}
   source:
     chart: nebraska
-    repoURL: https://mkilchhofer.github.io/nebraska/
-    targetRevision: "0.1.0"
+    repoURL: https://kinvolk.github.io/nebraska/
+    targetRevision: "0.1.1"
     helm:
       releaseName: nebraska
       version: v3
