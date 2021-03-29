@@ -33,7 +33,6 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt
             ingress.kubernetes.io/force-ssl-redirect: "true"
             kubernetes.io/ingress.class: contour
-            projectcontour.io/response-timeout: 120s
           hosts:
             - flatcar.tools.kilchhofer.info
           tls:
