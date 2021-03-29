@@ -13,7 +13,7 @@ spec:
   source:
     chart: nebraska
     repoURL: https://kinvolk.github.io/nebraska/
-    targetRevision: "0.1.1"
+    targetRevision: "0.1.3"
     helm:
       releaseName: nebraska
       version: v3
@@ -26,9 +26,6 @@ spec:
             persistence:
               enabled: true
               storageClass: nfs-data
-
-        image:
-          tag: 2.3.3
 
         ingress:
           enabled: true
