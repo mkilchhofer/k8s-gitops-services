@@ -19,6 +19,8 @@ spec:
       version: v3
       values: |-
         config:
+          app:
+            title: Flatcar Updates
           syncer:
             interval: 12h
           hostFlatcarPackages:
