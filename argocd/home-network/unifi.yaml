@@ -30,7 +30,7 @@ spec:
               - unifi.tools.kilchhofer.info
               secretName: unifi-cert
         image:
-          tag: "6.0.36"
+          tag: "6.2.25"
         livenessProbe:
           enabled: false
         extraJvmOpts:
