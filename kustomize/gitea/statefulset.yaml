@@ -14,7 +14,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: gitea
-        image: gitea/gitea:1.15.2
+        image: gitea/gitea:1.15.4
         securityContext:
           capabilities:
             drop:
