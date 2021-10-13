@@ -13,9 +13,8 @@ spec:
   source:
     chart: nebraska
     repoURL: https://kinvolk.github.io/nebraska/
-    targetRevision: "0.1.4"
+    targetRevision: "0.1.8"
     helm:
-      releaseName: nebraska
       version: v3
       values: |-
         config:
