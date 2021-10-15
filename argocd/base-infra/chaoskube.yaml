@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: chaoskube
+  namespace: argocd
+spec:
+  destination:
+    namespace: base-infra
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy: {}
+  source:
+    chart: chaoskube
+    repoURL: https://linki.github.io/chaoskube/
+    targetRevision: 0.1.0
+    helm:
+      version: v3
+      values: |-
+        image:
+          tag: v0.21.0
+        chaoskube:
+          args:
+            annotations: ~
+            labels: ~
+            kinds: ~
+            no-dry-run: ~
