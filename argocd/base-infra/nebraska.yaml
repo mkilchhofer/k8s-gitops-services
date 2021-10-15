@@ -16,6 +16,8 @@ spec:
     targetRevision: "0.1.8"
     helm:
       version: v3
+      valueFiles:
+      - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?git+https://github.com/mkilchhofer/k8s-gitops-services@secrets/nebraska.yaml?ref=main
       values: |-
         config:
           app:
@@ -27,6 +29,16 @@ spec:
             persistence:
               enabled: true
               storageClass: nfs-data
+          auth:
+            mode: oidc
+            oidc:
+              clientID: nebraska
+              issuerURL: https://auth.tools.kilchhofer.info/dex
+              validRedirectURLs: https://flatcar.tools.kilchhofer.info/*
+              adminRoles: kilchhofer-home:admins
+              viewerRoles: kilchhofer-home:developers
+              rolesPath: groups
+              scopes: groups,openid,profile
 
         ingress:
           enabled: true
