@@ -1,0 +1,62 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: echo-server-oauth2-proxy
+  namespace: argocd
+spec:
+  destination:
+    namespace: base-infra
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy: {}
+  source:
+    chart: oauth2-proxy
+    repoURL: https://oauth2-proxy.github.io/manifests
+    targetRevision: "3.3.2"
+    helm:
+      version: v3
+      valueFiles:
+        - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?git+https://github.com/mkilchhofer/k8s-gitops-services@secrets/echo-server-oauth2-proxy.yaml?ref=main
+      values: |-
+        config:
+          clientID: "echo-server"
+          configFile: |-
+            reverse_proxy = true
+            real_client_ip_header = "X-Forwarded-For"
+            provider = "oidc"
+            provider_display_name = "GitHub / Dex"
+            redirect_url = "http://echo-server-oauth2-proxy.tools.kilchhofer.info/oauth2/callback"
+            oidc_issuer_url = "https://auth.tools.kilchhofer.info/dex"
+            email_domains = [ "*" ]
+            upstreams = [ "http://echo-server.base-infra.svc" ]
+            silence_ping_logging = true
+            cookie_secure = false
+            pass_access_token = true
+            pass_authorization_header = true
+            allowed_groups = [
+                "kilchhofer-home:admins"
+            ]
+            htpasswd_user_groups = [
+                "kilchhofer-home:admins",
+                "basic-auth"
+            ]
+            # display_htpasswd_form = false
+            footer = "-"
+            banner = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+
+        htpasswdFile:
+          enabled: true
+        ingress:
+          enabled: true
+          hosts:
+            - echo-server-oauth2-proxy.tools.kilchhofer.info
+
+          annotations:
+            kubernetes.io/ingress.class: contour
+            ingress.kubernetes.io/force-ssl-redirect: "true"
+            cert-manager.io/cluster-issuer: letsencrypt
+          tls:
+            - secretName: echo-server-cert
+              hosts:
+                - echo-server-oauth2-proxy.tools.kilchhofer.info

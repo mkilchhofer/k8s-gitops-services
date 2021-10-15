@@ -1,0 +1,40 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: echo-server
+  namespace: argocd
+spec:
+  destination:
+    namespace: base-infra
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy: {}
+  source:
+    chart: echo-server
+    repoURL: https://ealenn.github.io/charts
+    targetRevision: 0.3.0
+    helm:
+      version: v3
+      values: |-
+        application:
+          logs:
+            ignore:
+              ping: true
+
+        ingress:
+          enabled: true
+
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+            ingress.kubernetes.io/force-ssl-redirect: "true"
+            kubernetes.io/ingress.class: contour
+
+          hosts:
+            - host: echo-server.tools.kilchhofer.info
+              paths:
+                - "/"
+          tls:
+            - secretName: echo-server-cert
+              hosts:
+                - echo-server.tools.kilchhofer.info
