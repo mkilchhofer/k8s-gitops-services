@@ -1,0 +1,45 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dex
+  namespace: argocd
+spec:
+  destination:
+    namespace: base-infra
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy: {}
+  source:
+    chart: dex
+    repoURL: https://charts.dexidp.io
+    targetRevision: 0.3.3
+    helm:
+      version: v3
+      valueFiles:
+        - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?git+https://github.com/mkilchhofer/k8s-gitops-services@secrets/dex.yaml?ref=main
+      values: |-
+        config:
+          issuer: https://auth.tools.kilchhofer.info/dex
+          oauth2:
+            skipApprovalScreen: true
+          storage:
+            type: memory
+
+        ingress:
+          enabled: true
+
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+            ingress.kubernetes.io/force-ssl-redirect: "true"
+            kubernetes.io/ingress.class: contour
+
+          hosts:
+            - host: auth.tools.kilchhofer.info
+              paths:
+                - path: /
+                  pathType: ImplementationSpecific
+          tls:
+            - secretName: dex-cert
+              hosts:
+                - auth.tools.kilchhofer.info
