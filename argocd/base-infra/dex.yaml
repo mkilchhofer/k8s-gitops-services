@@ -22,7 +22,7 @@ spec:
         config:
           issuer: https://auth.tools.kilchhofer.info/dex
           oauth2:
-            skipApprovalScreen: true
+            skipApprovalScreen: false
           storage:
             type: memory
 
