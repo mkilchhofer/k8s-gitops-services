@@ -17,7 +17,7 @@ spec:
     helm:
       version: v3
       valueFiles:
-      - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?git+https://github.com/mkilchhofer/k8s-gitops-services@secrets/nebraska.yaml?ref=main
+      - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/nebraska.yaml
       values: |-
         config:
           app:
