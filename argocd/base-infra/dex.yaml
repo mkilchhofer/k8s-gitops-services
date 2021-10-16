@@ -24,7 +24,9 @@ spec:
           oauth2:
             skipApprovalScreen: false
           storage:
-            type: memory
+            type: kubernetes
+            config:
+              inCluster: true
 
         ingress:
           enabled: true
