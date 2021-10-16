@@ -17,7 +17,7 @@ spec:
     helm:
       version: v3
       valueFiles:
-        - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?git+https://github.com/mkilchhofer/k8s-gitops-services@secrets/dex.yaml?ref=main
+        - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/dex.yaml
       values: |-
         config:
           issuer: https://auth.tools.kilchhofer.info/dex
