@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: base-infra
     server: https://kubernetes.default.svc
-  project: default
+  project: apps-restricted
   syncPolicy: {}
   source:
     chart: oauth2-proxy

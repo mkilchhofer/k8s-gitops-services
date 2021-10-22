@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: plex
     server: https://kubernetes.default.svc
-  project: default
+  project: apps-restricted
   syncPolicy: {}
   source:
     chart: plex

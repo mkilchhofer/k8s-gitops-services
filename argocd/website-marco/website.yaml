@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: website-marco
     server: 'https://kubernetes.default.svc'
-  project: default
+  project: apps-restricted
   source:
     path: kustomize/website-marco
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

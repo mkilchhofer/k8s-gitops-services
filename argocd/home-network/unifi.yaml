@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: home-network
     server: https://kubernetes.default.svc
-  project: default
+  project: apps-restricted
   syncPolicy: {}
   source:
     chart: unifi

@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: development
     server: https://kubernetes.default.svc
-  project: default
+  project: apps-restricted
   syncPolicy: {}
   source:
     chart: chartmuseum

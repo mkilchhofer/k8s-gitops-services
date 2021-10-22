@@ -7,7 +7,7 @@ spec:
   destination:
     namespace: development
     server: 'https://kubernetes.default.svc'
-  project: default
+  project: apps-restricted
   source:
     path: kustomize/gitea
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
