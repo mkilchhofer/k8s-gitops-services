@@ -25,3 +25,12 @@ spec:
             labels: ~
             kinds: ~
             no-dry-run: ~
+        podSecurityContext:
+          allowPrivilegeEscalation: false
+        resources:
+          limits:
+            cpu: 200m
+            memory: 40Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
