@@ -22,7 +22,7 @@ spec:
         config:
           issuer: https://auth.tools.kilchhofer.info/dex
           oauth2:
-            skipApprovalScreen: false
+            skipApprovalScreen: true
           storage:
             type: kubernetes
             config:
