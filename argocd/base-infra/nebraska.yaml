@@ -40,6 +40,22 @@ spec:
               rolesPath: groups
               scopes: groups,openid,profile
 
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+
         ingress:
           enabled: true
           annotations:
@@ -52,7 +68,13 @@ spec:
             - secretName: nebraska-cert
               hosts:
                 - flatcar.tools.kilchhofer.info
+
         postgresql:
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+
           persistence:
             enabled: true
             storageClass: iscsi-manual
