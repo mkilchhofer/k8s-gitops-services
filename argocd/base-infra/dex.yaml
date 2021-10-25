@@ -44,6 +44,14 @@ spec:
           readOnlyRootFilesystem: true
           runAsNonRoot: true
 
+        volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+
+        volumes:
+          - emptyDir: {}
+            name: tmp
+
         ingress:
           enabled: true
 
