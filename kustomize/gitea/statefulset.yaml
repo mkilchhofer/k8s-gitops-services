@@ -16,6 +16,7 @@ spec:
       - name: gitea
         image: gitea/gitea:1.15.5
         securityContext:
+          allowPrivilegeEscalation: false
           capabilities:
             drop:
             - ALL
