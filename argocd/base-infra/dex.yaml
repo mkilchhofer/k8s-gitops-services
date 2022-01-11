@@ -58,8 +58,8 @@ spec:
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt
             ingress.kubernetes.io/force-ssl-redirect: "true"
-            kubernetes.io/ingress.class: contour
 
+          className: contour
           hosts:
             - host: auth.tools.kilchhofer.info
               paths:

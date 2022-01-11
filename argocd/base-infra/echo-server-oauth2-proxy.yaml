@@ -53,9 +53,9 @@ spec:
             - echo-server-oauth2-proxy.tools.kilchhofer.info
 
           annotations:
-            kubernetes.io/ingress.class: contour
             ingress.kubernetes.io/force-ssl-redirect: "true"
             cert-manager.io/cluster-issuer: letsencrypt
+          className: contour
           tls:
             - secretName: echo-server-cert
               hosts:

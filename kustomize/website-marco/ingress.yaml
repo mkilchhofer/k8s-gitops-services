@@ -11,6 +11,7 @@ metadata:
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
+  ingressClassName: nginx-external
   rules:
   - host: www.kilchhofer.info
     http:
