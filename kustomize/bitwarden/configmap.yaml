@@ -16,3 +16,4 @@ data:
   LOG_LEVEL: "warn"
   EXTENDED_LOGGING: "true"
   IP_HEADER: X-Forwarded-For
+  _ENABLE_YUBICO: "false"
