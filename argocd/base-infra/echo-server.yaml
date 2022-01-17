@@ -9,7 +9,10 @@ spec:
     namespace: base-infra
     server: https://kubernetes.default.svc
   project: apps-restricted
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
   source:
     chart: echo-server
     repoURL: https://ealenn.github.io/charts

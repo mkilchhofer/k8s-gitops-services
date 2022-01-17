@@ -8,7 +8,10 @@ spec:
     namespace: home-network
     server: https://kubernetes.default.svc
   project: apps-restricted
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
   source:
     chart: fluent-bit
     repoURL: https://fluent.github.io/helm-charts

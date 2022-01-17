@@ -9,7 +9,10 @@ spec:
     namespace: base-infra
     server: https://kubernetes.default.svc
   project: apps-with-clusterroles
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
   source:
     chart: chaoskube
     repoURL: https://linki.github.io/chaoskube/
