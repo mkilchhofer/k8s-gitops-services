@@ -12,8 +12,8 @@ spec:
   syncPolicy: {}
   source:
     chart: nebraska
-    repoURL: https://kinvolk.github.io/nebraska/
-    targetRevision: "0.1.8"
+    repoURL: https://chartmuseum.tools.kilchhofer.info/
+    targetRevision: "0.2.0-1"
     helm:
       version: v3
       valueFiles:
@@ -61,7 +61,7 @@ spec:
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt
             ingress.kubernetes.io/force-ssl-redirect: "true"
-            kubernetes.io/ingress.class: contour
+          ingressClassName: contour
           hosts:
             - flatcar.tools.kilchhofer.info
           tls:
