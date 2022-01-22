@@ -13,7 +13,7 @@ spec:
   source:
     chart: chartmuseum
     repoURL: https://chartmuseum.github.io/charts/
-    targetRevision: "3.0.0"
+    targetRevision: "3.3.0"
     helm:
       releaseName: chartmuseum
       version: v3
@@ -27,13 +27,13 @@ spec:
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt
             ingress.kubernetes.io/force-ssl-redirect: "true"
-            kubernetes.io/ingress.class: contour
           enabled: true
           hosts:
           - name: chartmuseum.tools.kilchhofer.info
             path: /
             tls: true
             tlsSecret: chartmuseum-ingress-cert
+          ingressClassName: contour
         persistence:
           accessMode: ReadWriteOnce
           enabled: true
