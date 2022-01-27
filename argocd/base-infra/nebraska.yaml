@@ -12,8 +12,8 @@ spec:
   syncPolicy: {}
   source:
     chart: nebraska
-    repoURL: https://chartmuseum.tools.kilchhofer.info/
-    targetRevision: "0.3.0-0"
+    repoURL: https://kinvolk.github.io/nebraska/
+    targetRevision: "0.2.0"
     helm:
       version: v3
       valueFiles:
@@ -70,6 +70,8 @@ spec:
                 - flatcar.tools.kilchhofer.info
 
         postgresql:
+          image:
+            tag: 12.9.0-debian-10-r72
           resources:
             limits:
               cpu: 250m
