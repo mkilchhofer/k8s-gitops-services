@@ -26,7 +26,7 @@ spec:
               ping: true
 
         ingress:
-          enabled: true
+          enabled: false
 
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt
