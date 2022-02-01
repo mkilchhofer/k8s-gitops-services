@@ -17,3 +17,5 @@ data:
   EXTENDED_LOGGING: "true"
   IP_HEADER: X-Forwarded-For
   _ENABLE_YUBICO: "false"
+  ICON_SERVICE: bitwarden
+  DISABLE_ICON_DOWNLOAD: "true"
