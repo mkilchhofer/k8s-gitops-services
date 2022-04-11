@@ -1,0 +1,45 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argocd
+spec:
+  destination:
+    namespace: base-infra
+    server: https://kubernetes.default.svc
+  project: apps-restricted
+  syncPolicy: {}
+  source:
+    chart: loki
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 2.3.0
+    helm:
+      version: v3
+      valueFiles:
+        - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/loki.yaml
+      values: |-
+        config:
+          schema_config:
+            configs:
+              - from: "2020-11-13"
+                store: boltdb-shipper
+                object_store: aws
+                schema: v11
+                index:
+                  prefix: index_
+                  period: 24h
+          storage_config:
+            aws:
+              # Note: use a fully qualified domain name, like localhost.
+              # full example: http://loki:supersecret@localhost.:9000
+              #s3: https://<access_key_id>:<secret_access_key>@s3.ma.kilchhofer.info./loki-logs
+              bucketnames: loki-logs
+              endpoint: s3.ma.kilchhofer.info
+              s3forcepathstyle: true
+            boltdb_shipper:
+              shared_store: s3
+        env: []
+        rbac:
+          create: false
+          pspEnabled: false
