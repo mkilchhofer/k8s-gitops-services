@@ -19,6 +19,9 @@ spec:
       values: |-
         ingress:
           enabled: true
+          annotations:
+            ingress.kubernetes.io/force-ssl-redirect: "true"
+            cert-manager.io/cluster-issuer: letsencrypt
           ingressClassName: contour
           hosts:
             - grafana.tools.kilchhofer.info
