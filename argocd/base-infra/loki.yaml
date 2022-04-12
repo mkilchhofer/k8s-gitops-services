@@ -13,13 +13,17 @@ spec:
   source:
     chart: loki
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 2.7.0
+    targetRevision: 2.9.2
     helm:
       version: v3
       valueFiles:
         - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/loki.yaml
       values: |-
         config:
+          ingester:
+            wal:
+              enabled: false
+              dir: /data/loki/wal
           schema_config:
             configs:
               - from: "2020-11-13"
