@@ -47,3 +47,5 @@ spec:
         rbac:
           create: false
           pspEnabled: false
+        serviceMonitor:
+          enabled: true
