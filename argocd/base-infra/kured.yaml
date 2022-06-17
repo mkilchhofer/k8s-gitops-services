@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kured
+  namespace: argocd
+spec:
+  destination:
+    namespace: base-infra
+    server: https://kubernetes.default.svc
+  project: apps-with-clusterroles
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  source:
+    chart: kured
+    repoURL: https://weaveworks.github.io/kured/
+    targetRevision: 2.15.0
+    helm:
+      version: v3
+      values: |-
+        configuration:
+          timeZone: "Europe/Zurich"
+        metrics:
+          create: true
+        resources:
+          limits:
+            cpu: 5m
+            memory: 48Mi
+          requests:
+            cpu: 1m
+            memory: 16Mi
