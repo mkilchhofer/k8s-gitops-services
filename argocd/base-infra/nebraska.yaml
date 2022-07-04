@@ -19,6 +19,8 @@ spec:
       valueFiles:
       - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/nebraska.yaml
       values: |-
+        image:
+          tag: 2.8.1
         config:
           app:
             title: Flatcar Updates
