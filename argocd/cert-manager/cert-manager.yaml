@@ -1,0 +1,74 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  destination:
+    namespace: cert-manager
+    server: https://kubernetes.default.svc
+  project: apps-unrestricted
+  syncPolicy: {}
+  source:
+    chart: cert-manager
+    repoURL: https://charts.jetstack.io/
+    targetRevision: v1.7.0
+    helm:
+      version: v3
+      values: |-
+        installCRDs: true
+        global:
+          leaderElection:
+            namespace: cert-manager
+        extraArgs:
+          - --dns01-recursive-nameservers-only
+          - --dns01-recursive-nameservers=1.1.1.1:53
+        prometheus:
+          servicemonitor:
+            enabled: true
+
+        containerSecurityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+
+        cainjector:
+          containerSecurityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+            requests:
+              cpu: 10m
+              memory: 32Mi
+
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
+
+        webhook:
+          containerSecurityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+            requests:
+              cpu: 10m
+              memory: 32Mi
