@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-system-extra
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  destination:
+    namespace: kube-system
+    server: 'https://kubernetes.default.svc'
+  project: apps-unrestricted
+  source:
+    path: kustomize/kube-system-extra
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main
