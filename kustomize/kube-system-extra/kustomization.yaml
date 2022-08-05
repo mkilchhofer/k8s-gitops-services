@@ -1,5 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - coredns-networkpolicy.yaml
+  - leases-view-clusterrole.yaml
+  - node-view-clusterrole.yaml
+  - kube-system-internal-networkpolicy.yaml
   - sealed-secrets-clusterrole.yaml
   - sealed-secrets-networkpolicy.yaml
