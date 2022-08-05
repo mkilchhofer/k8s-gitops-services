@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - pv-01.yaml
+  - pv-02.yaml
+  - pv-03.yaml
+  - pv-04.yaml
+  - pv-05.yaml

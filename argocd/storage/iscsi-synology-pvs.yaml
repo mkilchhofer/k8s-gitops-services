@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: iscsi-synology-pvs
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  destination:
+    namespace: storage
+    server: 'https://kubernetes.default.svc'
+  project: apps-unrestricted
+  source:
+    path: kustomize/iscsi-synology-pvs
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main
