@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+spec:
+  destination:
+    namespace: ingress
+    server: https://kubernetes.default.svc
+  project: apps-unrestricted
+  syncPolicy: {}
+  source:
+    chart: ingress-nginx
+    repoURL: https://kubernetes.github.io/ingress-nginx/
+    targetRevision: 4.0.18
+    helm:
+      version: v3
+      values: |-
+        controller:
+          ingressClass: nginx-external
+          ingressClassResource:
+            name: nginx-external
+          service:
+            loadBalancerIP: "192.168.93.90"
