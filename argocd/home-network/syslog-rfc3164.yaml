@@ -49,7 +49,7 @@ spec:
             [OUTPUT]
                 Name  loki
                 Match *
-                Url http://loki-stack.logging.svc.cluster.local:3100/loki/api/v1/push
+                Url http://loki.base-infra.svc.cluster.local:3100/loki/api/v1/push
                 TenantID syslog-rfc3164
                 LogLevel warn
                 LineFormat json
