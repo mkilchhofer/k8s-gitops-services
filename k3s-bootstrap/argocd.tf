@@ -52,4 +52,8 @@ resource "helm_release" "argocd" {
     name  = "configs.credentialTemplates.internal-mkilchhofer-ssh.sshPrivateKey"
     value = data.sops_file.argocd.data.sshPrivateKeyGit
   }
+
+  depends_on = [
+    helm_release.cilium
+  ]
 }
