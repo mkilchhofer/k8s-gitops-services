@@ -1,0 +1,305 @@
+installCRDs: false
+createAggregateRoles: true
+
+global:
+  networkPolicy:
+    create: true
+    defaultDenyIngress: true
+
+applicationSet:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+controller:
+  enableStatefulSet: true
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+  resources:
+    limits:
+      cpu: 1
+      memory: 1Gi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+
+dex:
+  enabled: false
+
+notifications:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  notifiers:
+    service.telegram: |
+      token: $telegram-token
+  templates:
+    template.app-deployed: |
+      email:
+        subject: New version of an application {{.app.metadata.name}} is up and running.
+      message: |
+        Application {{.app.metadata.name}} is now running new version of deployments manifests.
+    template.app-health-degraded: |
+      email:
+        subject: Application {{.app.metadata.name}} has degraded.
+      message: |
+        Application {{.app.metadata.name}} has degraded.
+        Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+    template.app-health-suspended: |
+      email:
+        subject: Application {{.app.metadata.name}} is 'Suspended'
+      message: |
+        Application {{.app.metadata.name}} is 'Suspended'.
+    template.app-sync-failed: |
+      email:
+        subject: Failed to sync application {{.app.metadata.name}}.
+      message: |
+        The sync operation of application {{.app.metadata.name}} has failed at {{.app.status.operationState.finishedAt}} with the following error: {{.app.status.operationState.message}}
+        Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+    template.app-sync-running: |
+      email:
+        subject: Start syncing application {{.app.metadata.name}}.
+      message: |
+        The sync operation of application {{.app.metadata.name}} has started at {{.app.status.operationState.startedAt}}.
+        Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+    template.app-sync-status-unknown: |
+      email:
+        subject: Application {{.app.metadata.name}} sync status is 'Unknown'
+      message: |
+        Application {{.app.metadata.name}} sync is 'Unknown'.
+        Application details: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}.
+        {{if ne .serviceType "slack"}}
+        {{range $c := .app.status.conditions}}
+            * {{$c.message}}
+        {{end}}
+        {{end}}
+    template.app-sync-succeeded: |
+      email:
+        subject: Application {{.app.metadata.name}} has been successfully synced.
+      message: |
+        Application {{.app.metadata.name}} has been successfully synced at {{.app.status.operationState.finishedAt}}.
+        Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
+  triggers:
+    trigger.on-deployed: |
+      - description: Application is synced and healthy. Triggered once per commit.
+        oncePer: app.status.sync.revision
+        send:
+        - app-deployed
+        when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+    trigger.on-health-degraded: |
+      - description: Application has degraded
+        send:
+        - app-health-degraded
+        when: app.status.health.status == 'Degraded'
+    trigger.on-health-suspended: |
+      - description: Application status is 'Suspended'
+        send:
+        - app-health-suspended
+        when: app.status.health.status == 'Suspended'
+    trigger.on-sync-failed: |
+      - description: Application syncing has failed
+        send:
+        - app-sync-failed
+        when: app.status.operationState.phase in ['Error', 'Failed']
+    trigger.on-sync-running: |
+      - description: Application is being synced
+        send:
+        - app-sync-running
+        when: app.status.operationState.phase in ['Running']
+    trigger.on-sync-status-unknown: |
+      - description: Application status is 'Unknown'
+        send:
+        - app-sync-status-unknown
+        when: app.status.sync.status == 'Unknown'
+    trigger.on-sync-succeeded: |
+      - description: Application syncing has succeeded
+        send:
+        - app-sync-succeeded
+        when: app.status.operationState.phase in ['Succeeded']
+    defaultTriggers: |
+      - on-sync-status-unknown
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+redis:
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+
+  metrics:
+    enabled: true
+    image:
+      tag: 1.34.1-debian-10-r13
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 5m
+        memory: 16Mi
+    serviceMonitor:
+      enabled: true
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+repoServer:
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+  image:
+    repository: ghcr.io/mkilchhofer/argocd-helm-secrets
+    tag: v2.4.8-helm-secrets.1
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+  serviceAccount:
+    create: true
+
+  rbac:
+  - apiGroups:
+    - ""
+    resources:
+    - secrets
+    verbs:
+    - get
+    - list
+    - watch
+
+  volumes:
+    - name: gpg-private-keys
+      secret:
+        secretName: gpg-private-keys
+        optional: true
+  volumeMounts:
+    - mountPath: /gpg-private-keys/
+      name: gpg-private-keys
+
+server:
+  extraArgs:
+    - --insecure
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+  ingress:
+    enabled: true
+    annotations:
+      ingress.kubernetes.io/force-ssl-redirect: "true"
+      cert-manager.io/cluster-issuer: letsencrypt
+      projectcontour.io/response-timeout: 120s
+    hosts: ["argocd.tools.kilchhofer.info"]
+    ingressClassName: contour
+    tls:
+      - secretName: argocd-cert
+        hosts: ["argocd.tools.kilchhofer.info"]
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+  config:
+    url: https://argocd.tools.kilchhofer.info
+
+    helm.valuesFileSchemes: http, https, secrets+gpg-import-kubernetes
+
+    admin.enabled: "false"
+    oidc.config: |
+      name: Dex
+      issuer: https://auth.tools.kilchhofer.info/dex
+      clientID: argocd
+      clientSecret: $oidc.dex.clientSecret
+      requestedScopes:
+      - openid
+      - email
+      - groups
+
+    # Enable exec and RBAC for pod logs
+    server.rbac.log.enforce.enable: "true"
+    exec.enabled: "true"
+
+  rbacConfig:
+    policy.csv: |
+      g, kilchhofer-home:admins, role:admin
+    policy.default: role:readonly
+
+  additionalApplications: []
+  additionalProjects: []
+
+configs:
+  credentialTemplates:
+    gh-mkilchhofer-ssh:
+      url: git@github.com:mkilchhofer
+    internal-mkilchhofer-ssh:
+      url: ssh://git@192.168.93.88:3001/mkilchhofer
+
+  knownHosts:
+    data:
+      ssh_known_hosts: |
+        bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
+        github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
+        github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+        github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+        gitlab.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=
+        gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf
+        gitlab.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9
+        ssh.dev.azure.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
+        vs-ssh.visualstudio.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
+        [192.168.93.88]:3001 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwfVmMvq4ZuLciMlkjVCyygOWkGCPPzcz72jsM/SK7KqFeGooSCQNazGkAXHC8tcYIy25ihuMB19kkfiVa1uFehOekuoBLAjnYXzIlDUG/WaUbyLXjQ51c6QwJ2l8KUjAv8ccyBsd7ufl5ckvJmMTFKVl3Wx8bz1MD4scGVMh1cJ2IRdcPWRmY56iZP2jQdzgYX0Wi/2nJ04JJ4xXXFRBJ+MObmrAB3AhNvbV0QDuCHghLo/z5N/ZmzJa+zEHZh8uOzXHFmo4PKblGX3bVuPR9oohS+l1QcdQi7bF+YMVcxOkP0z0TwTleoMqIOXxjckhPHJ48oM4N5OZldritypDP
