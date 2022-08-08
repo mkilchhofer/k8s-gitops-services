@@ -62,3 +62,13 @@ spec:
                   resources:
                     requests:
                       storage: 20Gi
+
+        prometheusOperator:
+          admissionWebhooks:
+            patch:
+              enabled: false
+            certManager:
+              enabled: true
+              issuerRef:
+                name: "ca-issuer"
+                kind: "ClusterIssuer"
