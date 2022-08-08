@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: storage
     server: https://kubernetes.default.svc
-  project: apps-with-clusterroles
+  project: apps-unrestricted
   syncPolicy: {}
   source:
     chart: nfs-subdir-external-provisioner
