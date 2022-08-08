@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: ingress
     server: https://kubernetes.default.svc
-  project: apps-unrestricted
+  project: core-services-unrestricted
   syncPolicy: {}
   source:
     chart: contour

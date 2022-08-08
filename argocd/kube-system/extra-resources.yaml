@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: kube-system
     server: 'https://kubernetes.default.svc'
-  project: apps-unrestricted
+  project: core-services-unrestricted
   source:
     path: kustomize/kube-system-extra
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
