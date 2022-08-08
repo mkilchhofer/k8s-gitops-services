@@ -13,7 +13,7 @@ spec:
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io/
-    targetRevision: v1.7.0
+    targetRevision: v1.8.2
     helm:
       version: v3
       values: |-
@@ -21,9 +21,9 @@ spec:
         global:
           leaderElection:
             namespace: cert-manager
-        extraArgs:
-          - --dns01-recursive-nameservers-only
-          - --dns01-recursive-nameservers=1.1.1.1:53
+        # extraArgs:
+        #   - --dns01-recursive-nameservers-only
+        #   - --dns01-recursive-nameservers=1.1.1.1:53
         prometheus:
           servicemonitor:
             enabled: true
