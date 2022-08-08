@@ -13,7 +13,7 @@ spec:
   source:
     chart: dex
     repoURL: https://charts.dexidp.io
-    targetRevision: 0.6.3
+    targetRevision: 0.9.0
     helm:
       version: v3
       valueFiles:
