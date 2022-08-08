@@ -10,7 +10,7 @@ applicationSet:
   metrics:
     enabled: true
     serviceMonitor:
-      enabled: true
+      enabled: false # deployed via argocd-extra
   resources:
     limits:
       cpu: 500m
@@ -31,7 +31,7 @@ controller:
   metrics:
     enabled: true
     serviceMonitor:
-      enabled: true
+      enabled: false # deployed via argocd-extra
 
   resources:
     limits:
@@ -48,7 +48,7 @@ notifications:
   metrics:
     enabled: true
     serviceMonitor:
-      enabled: true
+      enabled: false # deployed via argocd-extra
   notifiers:
     service.telegram: |
       token: $telegram-token
@@ -165,7 +165,7 @@ redis:
         cpu: 5m
         memory: 16Mi
     serviceMonitor:
-      enabled: true
+      enabled: false # deployed via argocd-extra
 
   resources:
     limits:
@@ -189,7 +189,7 @@ repoServer:
   metrics:
     enabled: true
     serviceMonitor:
-      enabled: true
+      enabled: false # deployed via argocd-extra
 
   resources:
     limits:
@@ -231,7 +231,7 @@ server:
     readOnlyRootFilesystem: true
     runAsNonRoot: true
   ingress:
-    enabled: true
+    enabled: false # deployed via argocd-extra
     annotations:
       ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: letsencrypt
@@ -245,7 +245,7 @@ server:
   metrics:
     enabled: true
     serviceMonitor:
-      enabled: true
+      enabled: false # deployed via argocd-extra
 
   resources:
     limits:

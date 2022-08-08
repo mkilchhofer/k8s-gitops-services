@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    projectcontour.io/response-timeout: 120s
+    projectcontour.io/websocket-routes: /terminal
+  labels:
+    app.kubernetes.io/part-of: argocd
+  name: argocd-server
+  namespace: argocd
+spec:
+  ingressClassName: contour
+  rules:
+  - host: argocd.tools.kilchhofer.info
+    http:
+      paths:
+      - backend:
+          service:
+            name: argocd-server
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - argocd.tools.kilchhofer.info
+    secretName: argocd-cert
