@@ -1,11 +1,11 @@
 resource "argocd_application" "app_of_apps" {
   metadata {
     name      = "k8s-gitops-services"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata.0.name
   }
 
   spec {
-    project                = "base"
+    project                = argocd_project.base.metadata[0].name
     revision_history_limit = 0
 
     source {

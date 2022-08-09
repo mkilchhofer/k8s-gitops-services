@@ -1,7 +1,7 @@
 resource "argocd_project" "base" {
   metadata {
     name      = "base"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata.0.name
   }
 
   spec {
@@ -27,7 +27,7 @@ resource "argocd_project" "base" {
 resource "argocd_project" "core_services_unrestricted" {
   metadata {
     name      = "core-services-unrestricted"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata.0.name
   }
 
   spec {
@@ -49,7 +49,7 @@ resource "argocd_project" "core_services_unrestricted" {
 resource "argocd_project" "apps_with_clusterroles" {
   metadata {
     name      = "apps-with-clusterroles"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata.0.name
   }
 
   spec {
@@ -88,7 +88,7 @@ resource "argocd_project" "apps_with_clusterroles" {
 resource "argocd_project" "apps_restricted" {
   metadata {
     name      = "apps-restricted"
-    namespace = "argocd"
+    namespace = kubernetes_namespace.argocd.metadata.0.name
   }
 
   spec {
