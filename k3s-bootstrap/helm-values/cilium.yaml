@@ -12,7 +12,7 @@ operator:
   prometheus:
     enabled: true
     serviceMonitor:
-      enabled: true
+      enabled: false # deployed via argocd-extra
 ipam:
   mode: kubernetes
 hubble:
@@ -66,7 +66,7 @@ hubble:
 prometheus:
   enabled: true
   serviceMonitor:
-    enabled: true
+    enabled: false # deployed via argocd-extra
 
 resources:
   limits:
