@@ -260,7 +260,7 @@ server:
 
     helm.valuesFileSchemes: http, https, secrets+gpg-import-kubernetes
 
-    admin.enabled: "false"
+    admin.enabled: "true" # Required to use argocd TF provider
     oidc.config: |
       name: Dex
       issuer: https://auth.tools.kilchhofer.info/dex

@@ -11,7 +11,7 @@ provider "argocd" {
   password    = data.sops_file.argocd.data.argocdAdminPassword
 
   port_forward                = true
-  port_forward_with_namespace = "argocd"
+  port_forward_with_namespace = kubernetes_namespace.argocd.metadata.0.name
 
   plain_text = true
   # grpc_web = true
