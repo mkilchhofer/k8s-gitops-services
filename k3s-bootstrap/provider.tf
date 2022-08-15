@@ -8,6 +8,7 @@ provider "kubernetes" {
 provider "argocd" {
   server_addr = "" # Dummy value required when using port_forward=true
   username    = "admin"
+  password    = data.sops_file.argocd.data.argocdAdminPassword
 
   port_forward                = true
   port_forward_with_namespace = "argocd"

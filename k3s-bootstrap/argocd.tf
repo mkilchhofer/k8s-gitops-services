@@ -17,6 +17,21 @@ data "sops_file" "argocd" {
   source_file = "../secrets/argocd.yaml"
 }
 
+resource "null_resource" "argocd_password" {
+  triggers = {
+    plain    = data.sops_file.argocd.data.argocdAdminPassword
+    hash     = bcrypt(data.sops_file.argocd.data.argocdAdminPassword)
+    modified = timestamp()
+  }
+
+  lifecycle {
+    ignore_changes = [
+      triggers["hash"],
+      triggers["modified"]
+    ]
+  }
+}
+
 resource "helm_release" "argocd" {
   name       = "argocd"
   repository = "https://argoproj.github.io/argo-helm"
@@ -28,9 +43,14 @@ resource "helm_release" "argocd" {
     file("${path.module}/helm-values/argocd.yaml")
   ]
 
+  set {
+    name  = "configs.secret.argocdServerAdminPasswordMtime"
+    value = null_resource.argocd_password.triggers.modified
+  }
+
   set_sensitive {
     name  = "configs.secret.argocdServerAdminPassword"
-    value = data.sops_file.argocd.data.argocdAdminPassword
+    value = null_resource.argocd_password.triggers.hash
   }
 
   set_sensitive {
