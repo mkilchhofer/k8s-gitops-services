@@ -6,7 +6,7 @@ provider "kubernetes" {
 }
 
 provider "argocd" {
-  server_addr = "port-forward"
+  server_addr = "" # Dummy value required when using port_forward=true
   username    = "admin"
 
   port_forward                = true
