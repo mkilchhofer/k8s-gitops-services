@@ -19,6 +19,9 @@ spec:
       valueFiles:
         - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/dex.yaml
       values: |-
+        image:
+          tag: v2.32.0-distroless
+
         config:
           issuer: https://auth.tools.kilchhofer.info/dex
           oauth2:
