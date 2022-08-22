@@ -13,7 +13,7 @@ spec:
   source:
     chart: ingress-nginx
     repoURL: https://kubernetes.github.io/ingress-nginx/
-    targetRevision: 4.0.18
+    targetRevision: 4.2.1
     helm:
       version: v3
       values: |-
