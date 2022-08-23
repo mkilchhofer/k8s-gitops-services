@@ -73,7 +73,7 @@ spec:
 
         postgresql:
           image:
-            tag: 13.5.0-debian-10-r72
+            tag: 13.8.0-debian-11-r6
           resources:
             limits:
               cpu: 250m
