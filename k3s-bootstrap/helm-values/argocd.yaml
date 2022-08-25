@@ -1,4 +1,3 @@
-installCRDs: false
 createAggregateRoles: true
 
 global:
