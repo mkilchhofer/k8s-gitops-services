@@ -29,28 +29,28 @@ spec:
               mountPath: mnt/syno1-movies1
               volume:
                 nfs:
-                  server: nas.ma.kilchhofer.info
+                  server: nfs-data.ma.kilchhofer.info
                   path: /volume1/media1/Movies
                   readOnly: true
             - name: syno1-movies2
               mountPath: mnt/syno1-movies2
               volume:
                 nfs:
-                  server: nas.ma.kilchhofer.info
+                  server: nfs-data.ma.kilchhofer.info
                   path: /volume1/media1/Movies2
                   readOnly: true
             - name: syno1-music1
               mountPath: mnt/syno1-music1
               volume:
                 nfs:
-                  server: nas.ma.kilchhofer.info
+                  server: nfs-data.ma.kilchhofer.info
                   path: /volume1/media1/Music
                   readOnly: true
             - name: syno1-tv-recordings1
               mountPath: mnt/syno1-tv-recordings1
               volume:
                 nfs:
-                  server: nas.ma.kilchhofer.info
+                  server: nfs-data.ma.kilchhofer.info
                   path: /volume1/media1/TV Recordings
                   # path: /volume1/media1/TV\040Recordings
                   readOnly: true
@@ -58,7 +58,7 @@ spec:
               mountPath: mnt/syno1-tv-shows1
               volume:
                 nfs:
-                  server: nas.ma.kilchhofer.info
+                  server: nfs-data.ma.kilchhofer.info
                   path: /volume1/media1/TV Shows
                   # path: /volume1/media1/TV\040Shows
                   readOnly: true
@@ -66,7 +66,7 @@ spec:
               mountPath: mnt/syno1-tv-shows2
               volume:
                 nfs:
-                  server: nas.ma.kilchhofer.info
+                  server: nfs-data.ma.kilchhofer.info
                   path: /volume1/media1/TV Shows2
                   # path: /volume1/media1/TV\040Shows2
                   readOnly: true
@@ -74,7 +74,7 @@ spec:
               mountPath: mnt/syno1-home_movies1
               volume:
                 nfs:
-                  server: nas.ma.kilchhofer.info
+                  server: nfs-data.ma.kilchhofer.info
                   path: /volume1/media1/Home Movies
                   # path: /volume1/media1/Home\040Movies
                   readOnly: true
@@ -82,7 +82,7 @@ spec:
               mountPath: mnt/syno1-photos1
               volume:
                 nfs:
-                  server: nas.ma.kilchhofer.info
+                  server: nfs-data.ma.kilchhofer.info
                   path: /volume2/photo1/Photos
                   readOnly: true
 
