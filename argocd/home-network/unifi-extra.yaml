@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: unifi-extra
+  namespace: argocd
+spec:
+  destination:
+    namespace: home-network
+    server: https://kubernetes.default.svc
+  project: apps-restricted
+  syncPolicy: {}
+  source:
+    path: kustomize/unifi-extra
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main

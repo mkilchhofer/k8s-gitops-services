@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: unifi
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: unifi
+      app.kubernetes.io/name: unifi
+  policyTypes:
+    - Ingress
+  egress:
+    - {}
+  ingress:
+    - {}
