@@ -1,3 +1,5 @@
+policyEnforcementMode: always
+
 rollOutCiliumPods: true
 operator:
   replicas: 1

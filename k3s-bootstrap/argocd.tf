@@ -76,6 +76,7 @@ resource "helm_release" "argocd" {
   }
 
   depends_on = [
-    helm_release.cilium
+    helm_release.cilium,
+    helm_release.cilium_global_policies
   ]
 }

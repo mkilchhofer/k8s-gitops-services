@@ -9,3 +9,11 @@ resource "helm_release" "cilium" {
     file("${path.module}/helm-values/cilium.yaml")
   ]
 }
+
+resource "helm_release" "cilium_global_policies" {
+  name       = "cilium-global-policies"
+  chart      = "${path.module}/cilium-global-policies"
+  namespace  = "kube-system"
+
+  depends_on = [helm_release.cilium]
+}
