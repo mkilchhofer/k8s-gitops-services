@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: promtail
+  namespace: argocd
+spec:
+  destination:
+    namespace: logging
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy: {}
+  source:
+    chart: promtail
+    repoURL: https://grafana.github.io/helm-charts/
+    targetRevision: 4.2.0
+    helm:
+      version: v3
+      values: |-
+        defaultVolumes:
+        - name: pods
+          hostPath:
+            path: /var/log/pods
+        extraVolumes:
+        - name: varlibpromtail
+          hostPath:
+            path: /var/lib/promtail
+
+        defaultVolumeMounts:
+        - name: pods
+          mountPath: /var/log/pods
+          readOnly: true
+        extraVolumeMounts:
+        - name: varlibpromtail
+          mountPath: /var/lib/promtail
+
+        config:
+          lokiAddress: http://loki.base-infra:3100/loki/api/v1/push
+          file: |
+            server:
+              log_level: {{ .Values.config.logLevel }}
+              http_listen_port: {{ .Values.config.serverPort }}
+
+            clients:
+              - url: {{ tpl .Values.config.lokiAddress . }}
+              {{- with .Values.config.snippets.extraClientConfigs }}
+              {{- toYaml . | nindent 2 }}
+              {{- end }}
+
+            positions:
+              filename: /var/lib/promtail/positions.yaml
+
+            scrape_configs:
+              {{- tpl .Values.config.snippets.scrapeConfigs . | nindent 2 }}
+              {{- tpl .Values.config.snippets.extraScrapeConfigs . | nindent 2 }}
+
+        serviceMonitor:
+          enabled: true
