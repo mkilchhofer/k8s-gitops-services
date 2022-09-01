@@ -1,14 +1,22 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: loki-to-s3
+  name: loki
 spec:
   podSelector:
     matchLabels:
       app: loki
   policyTypes:
     - Egress
+    - Ingress
   egress:
+      # To S3
     - ports:
       - port: 443
         protocol: TCP
+  ingress:
+      # From Promtail DaemonSet
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: logging
