@@ -15,8 +15,21 @@ spec:
       - port: 443
         protocol: TCP
   ingress:
-      # From Promtail DaemonSet
     - from:
+          # From Promtail DaemonSet
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: logging
+          # From Grafana in same namespace
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: grafana
+              app.kubernetes.io/name: grafana
+          # From Syslog server (fluent-bit) in namespace home-network
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: home-network
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: syslog-rfc3164
+              app.kubernetes.io/name: fluent-bit
