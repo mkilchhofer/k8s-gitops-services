@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nebraska-postgres
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: nebraska
+      app.kubernetes.io/name: postgresql
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app.kubernetes.io/instance: nebraska
+            app.kubernetes.io/name: nebraska
