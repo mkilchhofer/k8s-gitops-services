@@ -8,7 +8,7 @@ spec:
   endpointSelector:
     matchLabels:
       'k8s:io.kubernetes.pod.namespace': 'argocd'
-      component: repo-server
+      app.kubernetes.io/component: repo-server
   egress:
   - toEntities:
     - "all"
