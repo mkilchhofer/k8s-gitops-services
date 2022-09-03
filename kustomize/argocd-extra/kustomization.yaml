@@ -7,4 +7,5 @@ resources:
   - notifications-controller-servicemonitor.yaml
   - redis-servicemonitor.yaml
   - repo-server-servicemonitor.yaml
+  - server-networkpolicy.yaml
   - server-servicemonitor.yaml
