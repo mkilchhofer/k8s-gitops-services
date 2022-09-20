@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nebraska
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: nebraska
+      app.kubernetes.io/name: nebraska
+  policyTypes:
+    - Egress
+    - Ingress
+  egress:
+      # To postgres
+    - to:
+      - podSelector:
+          matchLabels:
+            app.kubernetes.io/instance: nebraska
+            app.kubernetes.io/name: postgresql
+      # To flatcar online service (https://public.update.flatcar-linux.net/v1/update/)
+    - ports:
+      - port: 443
+        protocol: TCP
+  ingress:
+    - {}
