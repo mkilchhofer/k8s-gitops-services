@@ -13,7 +13,7 @@ spec:
   source:
     chart: oauth2-proxy
     repoURL: https://oauth2-proxy.github.io/manifests
-    targetRevision: "5.0.6"
+    targetRevision: "5.1.0"
     helm:
       version: v3
       valueFiles:
@@ -60,3 +60,25 @@ spec:
             - secretName: echo-server-cert
               hosts:
                 - echo-server-oauth2-proxy.tools.kilchhofer.info
+        extraObjects:
+          - apiVersion: networking.k8s.io/v1
+            kind: NetworkPolicy
+            metadata:
+              name: echo-server-oauth2-proxy
+            spec:
+              podSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: echo-server-oauth2-proxy
+                  app.kubernetes.io/name: oauth2-proxy
+              policyTypes:
+                - Egress
+                - Ingress
+              egress:
+                  # To SSO (dex)
+                - ports:
+                  - port: 443
+                    protocol: TCP
+              ingress:
+                - ports:
+                    - port: http
+                      protocol: TCP
