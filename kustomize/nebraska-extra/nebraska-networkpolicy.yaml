@@ -11,20 +11,9 @@ spec:
     - Egress
     - Ingress
   egress:
-      # To postgres
-    - to:
-      - podSelector:
-          matchLabels:
-            app.kubernetes.io/instance: nebraska
-            app.kubernetes.io/name: postgresql
-      ports:
-      - port: tcp-postgresql
-        protocol: TCP
-      # To flatcar online service (https://public.update.flatcar-linux.net/v1/update/)
-    - to:
-      - ipBlock:
-          cidr: 0.0.0.0/0
-      ports:
+      # 1. flatcar online service (https://public.update.flatcar-linux.net/v1/update/)
+      # 2. SSO via dex/OIDC
+    - ports:
       - port: 443
         protocol: TCP
   ingress:
