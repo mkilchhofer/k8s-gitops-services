@@ -16,4 +16,11 @@ spec:
       - port: 443
   # Dex is exposed via Ingress resource, allow access from everywhere
   ingress:
-    - {}
+    - from:
+      - namespaceSelector: {}
+      ports:
+      - port: telemetry
+        protocol: TCP
+    - ports:
+      - port: http
+        protocol: TCP
