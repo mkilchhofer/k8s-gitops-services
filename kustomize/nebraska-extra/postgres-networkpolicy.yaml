@@ -15,3 +15,6 @@ spec:
           matchLabels:
             app.kubernetes.io/instance: nebraska
             app.kubernetes.io/name: nebraska
+      ports:
+      - port: tcp-postgresql
+        protocol: TCP

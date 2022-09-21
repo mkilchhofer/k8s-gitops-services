@@ -17,9 +17,17 @@ spec:
           matchLabels:
             app.kubernetes.io/instance: nebraska
             app.kubernetes.io/name: postgresql
+      ports:
+      - port: tcp-postgresql
+        protocol: TCP
       # To flatcar online service (https://public.update.flatcar-linux.net/v1/update/)
-    - ports:
+    - to:
+      - ipBlock:
+          cidr: 0.0.0.0/0
+      ports:
       - port: 443
         protocol: TCP
   ingress:
-    - {}
+    - ports:
+      - port: http
+        protocol: TCP
