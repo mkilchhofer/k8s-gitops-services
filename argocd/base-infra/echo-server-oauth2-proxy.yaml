@@ -82,3 +82,23 @@ spec:
                 - ports:
                     - port: http
                       protocol: TCP
+          - apiVersion: networking.k8s.io/v1
+            kind: NetworkPolicy
+            metadata:
+              name: echo-server
+            spec:
+              podSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: echo-server
+                  app.kubernetes.io/name: echo-server
+              policyTypes:
+                - Ingress
+              ingress:
+                - from:
+                    - podSelector:
+                        matchLabels:
+                          app.kubernetes.io/instance: echo-server-oauth2-proxy
+                          app.kubernetes.io/name: oauth2-proxy
+                  ports:
+                    - port: http
+                      protocol: TCP
