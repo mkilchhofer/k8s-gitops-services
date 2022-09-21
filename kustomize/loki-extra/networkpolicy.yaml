@@ -33,3 +33,6 @@ spec:
             matchLabels:
               app.kubernetes.io/instance: syslog-rfc3164
               app.kubernetes.io/name: fluent-bit
+      ports:
+        - port: 3100
+          protocol: TCP
