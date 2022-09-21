@@ -19,6 +19,28 @@ spec:
         # To remote site
         - ipBlock:
             cidr: 192.168.201.0/24
+      # Simple Service Discovery Protocol (SSDP)
+      # used for "Make application discoverable on L2 network" in the UniFi Network settings
+    - ports:
+        - port: 1900
+          protocol: UDP
+      to:
+        - ipBlock:
+            cidr: 239.255.255.250/32
+      # Multicast DNS (mDNS)
+    - ports:
+        - port: 5353
+          protocol: UDP
+      to:
+        - ipBlock:
+            cidr: 224.0.0.251/32
+    - ports:
+          # Ubiquiti online servers (check Firmware/Application Updates)
+        - port: 443
+          protocol: TCP
+          # Notification via E-Mail
+        - port: 587
+          protocol: TCP
   ingress:
     - ports:
         - port: https-gui
