@@ -11,14 +11,6 @@ spec:
     - Egress
     - Ingress
   egress:
-    - to:
-        # To local site
-        - ipBlock:
-            cidr: 192.168.91.0/24
-    - to:
-        # To remote site
-        - ipBlock:
-            cidr: 192.168.201.0/24
       # Simple Service Discovery Protocol (SSDP)
       # used for "Make application discoverable on L2 network" in the UniFi Network settings
     - ports:
