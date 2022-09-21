@@ -11,6 +11,25 @@ spec:
     - Egress
     - Ingress
   egress:
-    - {}
+    - to:
+        # To local site
+        - ipBlock:
+            cidr: 192.168.91.0/24
+    - to:
+        # To remote site
+        - ipBlock:
+            cidr: 192.168.201.0/24
   ingress:
-    - {}
+    - ports:
+        - port: https-gui
+          protocol: TCP
+        - port: controller
+          protocol: TCP
+        - port: discovery
+          protocol: UDP
+        - port: stun
+          protocol: UDP
+        - port: syslog
+          protocol: UDP
+        - port: speedtest
+          protocol: TCP
