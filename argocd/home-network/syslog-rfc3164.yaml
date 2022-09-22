@@ -15,7 +15,7 @@ spec:
   source:
     chart: fluent-bit
     repoURL: https://fluent.github.io/helm-charts
-    targetRevision: "0.7.13"
+    targetRevision: "0.20.8"
     helm:
       releaseName: syslog-rfc3164
       version: v3
@@ -26,10 +26,6 @@ spec:
           create: false
 
         kind: Deployment
-
-        image:
-          repository: grafana/fluent-bit-plugin-loki
-          tag: 1.6.1-amd64
 
         extraPorts:
           - name: syslog
@@ -47,18 +43,23 @@ spec:
 
           outputs: |
             [OUTPUT]
-                Name  loki
-                Match *
-                Url http://loki.base-infra.svc.cluster.local:3100/loki/api/v1/push
-                TenantID syslog-rfc3164
-                LogLevel warn
-                LineFormat json
-                Labels {job="fluent-bit-syslog-rfc3164"}
-                LabelKeys pri,host,ident
-                RemoveKeys time,pid
+                Name        loki
+                Match       *
+                Host        loki.base-infra.svc.cluster.local
+                Port        3100
+                Tenant_id   syslog-rfc3164
+                Line_format json
+                Labels      job=fluent-bit-syslog-rfc3164
+                Label_keys  $pri,$host,$ident
+                Remove_keys time,pid
 
           filters: ""
 
         service:
           type: LoadBalancer
           loadBalancerIP: 192.168.93.85
+
+        networkPolicy:
+          enabled: true
+          ingress:
+            from: []
