@@ -15,7 +15,7 @@ spec:
       selfHeal: true
   source:
     chart: kured
-    repoURL: https://weaveworks.github.io/kured/
+    repoURL: https://kubereboot.github.io/charts/
     targetRevision: 2.15.0
     helm:
       version: v3
