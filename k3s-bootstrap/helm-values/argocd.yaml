@@ -3,7 +3,6 @@ createAggregateRoles: true
 global:
   networkPolicy:
     create: true
-    defaultDenyIngress: true
 
 applicationSet:
   metrics:
