@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cert-manager-to-le
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: cert-manager
+  policyTypes:
+    - Egress
+  egress:
+      # To Let's Encrypt
+    - ports:
+      - port: 443
+        protocol: TCP

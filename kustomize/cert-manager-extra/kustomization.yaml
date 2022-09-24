@@ -5,3 +5,5 @@ resources:
   - ca-issuer.yaml
   - cluster-issuer-sealedsecret.yaml
   - cluster-issuer.yaml
+  - networkpolicy-egress.yaml
+  - networkpolicy-ingress.yaml

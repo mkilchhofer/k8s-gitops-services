@@ -2,4 +2,4 @@ apiVersion: v2
 name: cilium-global-policies
 description: A dedicated chart for Cilium default policies
 type: application
-version: "1.8.2"
+version: "1.8.3"
