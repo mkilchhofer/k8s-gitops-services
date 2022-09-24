@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nebraska
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: nebraska
+      app.kubernetes.io/name: nebraska
+  policyTypes:
+    - Egress
+  egress:
+      # 1. flatcar online service (https://public.update.flatcar-linux.net/v1/update/)
+      # 2. SSO via dex/OIDC
+    - ports:
+      - port: 443
+        protocol: TCP
