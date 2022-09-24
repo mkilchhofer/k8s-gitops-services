@@ -6,6 +6,5 @@ resources:
   - node-view-clusterrole.yaml
   - kube-system-internal-networkpolicy.yaml
   - sealed-secrets-clusterrole.yaml
-  - sealed-secrets-networkpolicy.yaml
   - cilium-agent-servicemonitor.yaml
   - cilium-operator-servicemonitor.yaml
