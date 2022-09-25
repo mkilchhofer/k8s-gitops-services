@@ -10,9 +10,12 @@ spec:
     - Egress
     - Ingress
   egress:
-      # Mirror GitHub repos
     - ports:
+        # Mirror GitHub repos
       - port: 443
+        protocol: TCP
+        # Notification via E-Mail
+      - port: 587
         protocol: TCP
   ingress:
     - ports:
