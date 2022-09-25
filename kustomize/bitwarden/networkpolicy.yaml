@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: bitwarden
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: bitwarden
+  policyTypes:
+    - Egress
+    - Ingress
+  egress:
+      # Notification via E-Mail
+    - ports:
+      - port: 587
+        protocol: TCP
+  ingress:
+    - ports:
+      - port: http
+        protocol: TCP
+      - port: notifications
+        protocol: TCP
