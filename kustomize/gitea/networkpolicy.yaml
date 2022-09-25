@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: gitea
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: gitea
+  policyTypes:
+    - Egress
+    - Ingress
+  egress:
+      # Mirror GitHub repos
+    - ports:
+      - port: 443
+        protocol: TCP
+  ingress:
+    - ports:
+      - port: http-gui
+        protocol: TCP
+      - port: ssh-git
+        protocol: TCP

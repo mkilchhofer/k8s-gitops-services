@@ -8,6 +8,7 @@ resources:
   - service-loadbalancer.yaml
   - statefulset.yaml
   - sealedsecret.yaml
+  - networkpolicy.yaml
 configMapGenerator:
 - name: app-ini
   files:
