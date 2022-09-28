@@ -64,6 +64,8 @@ spec:
                       storage: 20Gi
 
         prometheusOperator:
+          kubeletService:
+            namespace: monitoring
           admissionWebhooks:
             patch:
               enabled: false
