@@ -18,6 +18,8 @@ spec:
       version: v3
       values: |-
         controller:
+          image:
+            allowPrivilegeEscalation: false
           ingressClass: nginx-external
           ingressClassResource:
             name: nginx-external
