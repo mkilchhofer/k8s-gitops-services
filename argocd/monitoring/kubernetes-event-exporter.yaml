@@ -19,8 +19,8 @@ spec:
       values: |-
         image:
           registry: ghcr.io
-          repository: opsgenie/kubernetes-event-exporter
-          tag: v0.10
+          repository: resmoio/kubernetes-event-exporter
+          tag: v1.0
         replicaCount: 2
         resources:
           limits:
