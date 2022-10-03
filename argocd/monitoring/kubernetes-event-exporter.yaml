@@ -1,0 +1,53 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-event-exporter
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy: {}
+  source:
+    chart: kubernetes-event-exporter
+    repoURL: https://charts.bitnami.com/bitnami/
+    targetRevision: "1.5.2"
+    helm:
+      version: v3
+      values: |-
+        image:
+          registry: ghcr.io
+          repository: opsgenie/kubernetes-event-exporter
+          tag: v0.10
+        replicaCount: 2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 250Mi
+          requests:
+            cpu: 10m
+            memory: 25Mi
+        config:
+          logLevel: warn
+          logFormat: pretty
+          receivers:
+            - name: "dump"
+              stdout:
+                layout:
+                  message: "{{ .Message }}"
+                  reason: "{{ .Reason }}"
+                  type: "{{ .Type }}"
+                  count: "{{ .Count }}"
+                  kind: "{{ .InvolvedObject.Kind }}"
+                  name: "{{ .InvolvedObject.Name }}"
+                  namespace: "{{ .Namespace }}"
+                  component: "{{ .Source.Component }}"
+                  host: "{{ .Source.Host }}"
+          route:
+            routes:
+              - match:
+                  - receiver: "dump"
+                drop:
+                  - type: "Normal"
