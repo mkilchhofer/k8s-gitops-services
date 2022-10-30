@@ -183,7 +183,7 @@ repoServer:
     runAsNonRoot: true
   image:
     repository: ghcr.io/mkilchhofer/argocd-helm-secrets
-    tag: v2.4.8-helm-secrets.1
+    tag: v2.5.0-helm-secrets.1
 
   metrics:
     enabled: true
@@ -254,7 +254,8 @@ server:
       cpu: 50m
       memory: 64Mi
 
-  config:
+configs:
+  cm:
     url: https://argocd.tools.kilchhofer.info
 
     helm.valuesFileSchemes: http, https, secrets+gpg-import-kubernetes
@@ -274,15 +275,11 @@ server:
     server.rbac.log.enforce.enable: "true"
     exec.enabled: "true"
 
-  rbacConfig:
+  rbac:
     policy.csv: |
       g, kilchhofer-home:admins, role:admin
     policy.default: role:readonly
 
-  additionalApplications: []
-  additionalProjects: []
-
-configs:
   credentialTemplates:
     gh-mkilchhofer-ssh:
       url: git@github.com:mkilchhofer
