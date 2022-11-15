@@ -39,7 +39,7 @@ resource "helm_release" "argocd" {
   version    = "5.12.1"
   namespace  = kubernetes_namespace.argocd.metadata.0.name
 
-  max_history = 3
+  max_history = local.helm_max_history
 
   values = [
     file("${path.module}/helm-values/argocd.yaml")
