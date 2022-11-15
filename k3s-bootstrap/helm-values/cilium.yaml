@@ -1,3 +1,6 @@
+# # Initial Cilium version on cluster was "1.11.0"
+# Ref: https://github.com/mkilchhofer/k8s-gitops/commit/134030f42972f5220c78f08ed5fa5f63b2865b63
+upgradeCompatibility: "1.11"
 policyEnforcementMode: always
 
 rollOutCiliumPods: true
