@@ -16,5 +16,9 @@ spec:
     targetRevision: 2.6.1
     helm:
       values: |-
+        # Workaround errors like
+        # > CustomResourceDefinition.apiextensions.k8s.io "clusterpolicies.kyverno.io" is invalid:
+        # > metadata.annotations: Too long: must have at most 262144 bytes
+        installCRDs: false
         networkPolicy:
           enabled: true
