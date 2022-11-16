@@ -88,3 +88,9 @@ spec:
 
           networkPolicy:
             enabled: true
+            ingressRules:
+              primaryAccessOnlyFrom:
+                enabled: true
+                podSelector:
+                  app.kubernetes.io/instance: nebraska
+                  app.kubernetes.io/name: nebraska
