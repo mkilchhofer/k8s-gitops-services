@@ -9,10 +9,12 @@ spec:
     namespace: kyverno
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
-  syncPolicy: {}
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
   source:
     chart: kyverno-policies
     repoURL: https://kyverno.github.io/kyverno/
     targetRevision: 2.6.1
-    helm:
-      values: ""
+    # helm:
+    #   values: |-
