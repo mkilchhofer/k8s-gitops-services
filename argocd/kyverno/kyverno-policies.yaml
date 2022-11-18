@@ -16,5 +16,72 @@ spec:
     chart: kyverno-policies
     repoURL: https://kyverno.github.io/kyverno/
     targetRevision: 2.6.1
-    # helm:
-    #   values: |-
+    helm:
+      values: |-
+        policyExclude:
+          disallow-capabilities:
+            any:
+            - resources:
+                namespaces:
+                - kube-system
+            - resources:
+                kinds:
+                  - Pod
+                  - Deployment
+                  - DaemonSet
+                selector:
+                  matchLabels:
+                    app.kubernetes.io/instance: metallb
+          disallow-host-namespaces:
+            any:
+            - resources:
+                namespaces:
+                - kube-system
+            - resources:
+                kinds:
+                  - Pod
+                  - Deployment
+                  - DaemonSet
+                selector:
+                  matchLabels:
+                    app.kubernetes.io/instance: metallb
+          disallow-host-path:
+            any:
+            - resources:
+                namespaces:
+                - kube-system
+          disallow-host-ports:
+            any:
+            - resources:
+                namespaces:
+                - kube-system
+            - resources:
+                kinds:
+                  - Pod
+                  - Deployment
+                  - DaemonSet
+                selector:
+                  matchLabels:
+                    app.kubernetes.io/instance: metallb
+          disallow-privileged-containers:
+            any:
+            - resources:
+                namespaces:
+                - kube-system
+            - resources:
+                kinds:
+                  - Pod
+                  - DaemonSet
+                selector:
+                  matchLabels:
+                    app.kubernetes.io/name: kured
+          disallow-selinux:
+            any:
+            - resources:
+                namespaces:
+                - kube-system
+          restrict-apparmor-profiles:
+            any:
+            - resources:
+                namespaces:
+                - kube-system
