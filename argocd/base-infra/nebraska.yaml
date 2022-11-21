@@ -83,6 +83,8 @@ spec:
               cpu: 250m
               memory: 256Mi
           primary:
+            containerSecurityContext:
+              readOnlyRootFilesystem: false
             persistence:
               enabled: true
               storageClass: iscsi-manual
