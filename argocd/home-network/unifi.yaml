@@ -42,6 +42,14 @@ spec:
             cpu: 100m
             memory: 640Mi
 
+        extraVolumes:
+          - name: tmp-dir
+            emptyDir: {}
+
+        extraVolumeMounts:
+          - mountPath: /tmp
+            name: tmp-dir
+
         persistence:
           enabled: true
           storageClass: nfs-data
