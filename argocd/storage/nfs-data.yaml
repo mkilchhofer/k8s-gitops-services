@@ -13,7 +13,7 @@ spec:
   source:
     chart: nfs-subdir-external-provisioner
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
-    targetRevision: 4.0.6
+    targetRevision: 4.0.17
     helm:
       version: v3
       values: |-
@@ -33,6 +33,9 @@ spec:
           requests:
             cpu: 10m
             memory: 16Mi
+
+        securityContext:
+          runAsNonRoot: false
 
         storageClass:
           defaultClass: true
