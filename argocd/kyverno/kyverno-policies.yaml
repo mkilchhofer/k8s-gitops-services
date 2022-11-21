@@ -18,6 +18,15 @@ spec:
     targetRevision: 2.6.1
     helm:
       values: |-
+        podSecurityStandard: baseline
+
+        includeRestrictedPolicies:
+        - disallow-capabilities-strict
+        - disallow-privilege-escalation
+        - require-run-as-non-root-user
+        - require-run-as-nonroot
+        - restrict-volume-types
+
         policyExclude:
           disallow-capabilities:
             any:
