@@ -20,3 +20,6 @@ spec:
       values: |-
         networkPolicy:
           enabled: true
+
+        serviceMonitor:
+          enabled: true
