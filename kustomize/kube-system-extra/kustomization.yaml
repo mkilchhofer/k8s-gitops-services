@@ -8,3 +8,4 @@ resources:
   - sealed-secrets-clusterrole.yaml
   - cilium-agent-servicemonitor.yaml
   - cilium-operator-servicemonitor.yaml
+  - metrics-server-networkpolicy.yaml
