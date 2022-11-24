@@ -16,14 +16,23 @@ spec:
   source:
     chart: echo-server
     repoURL: https://ealenn.github.io/charts
-    targetRevision: 0.3.0
+    targetRevision: 0.5.0
     helm:
       version: v3
       values: |-
+        image:
+          tag: 0.7.0
+
         application:
           logs:
             ignore:
               ping: true
+
+        securityContext:
+          runAsUser: 1001
+
+        service:
+          port: 8080
 
         ingress:
           enabled: false
