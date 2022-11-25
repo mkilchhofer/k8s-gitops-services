@@ -51,7 +51,7 @@ spec:
             name: grafanacloud-creds
           prometheusSpec:
             remoteWrite:
-              - url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom
+              - url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
                 basicAuth:
                   username:
                     name: grafanacloud-creds
