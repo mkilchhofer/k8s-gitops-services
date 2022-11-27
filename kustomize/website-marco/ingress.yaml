@@ -10,6 +10,7 @@ metadata:
       more_set_headers "Expect-CT: max-age=86400, enforce";
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/revision-history-limit: "1"
 spec:
   ingressClassName: nginx-external
   rules:

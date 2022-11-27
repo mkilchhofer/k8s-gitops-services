@@ -23,6 +23,7 @@ spec:
             kubernetes.io/ingress.class: contour
             ingress.kubernetes.io/force-ssl-redirect: "true"
             cert-manager.io/cluster-issuer: letsencrypt
+            cert-manager.io/revision-history-limit: "1"
           hosts:
             - unifi.tools.kilchhofer.info
           tls:

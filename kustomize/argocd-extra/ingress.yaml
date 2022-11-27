@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/revision-history-limit: "1"
     ingress.kubernetes.io/force-ssl-redirect: "true"
     projectcontour.io/response-timeout: 120s
     projectcontour.io/websocket-routes: /terminal

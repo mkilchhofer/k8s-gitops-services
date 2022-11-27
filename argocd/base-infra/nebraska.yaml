@@ -64,6 +64,7 @@ spec:
           enabled: true
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt
+            cert-manager.io/revision-history-limit: "1"
             ingress.kubernetes.io/force-ssl-redirect: "true"
           ingressClassName: contour
           hosts:

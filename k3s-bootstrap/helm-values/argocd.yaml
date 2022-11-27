@@ -234,6 +234,7 @@ server:
     annotations:
       ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: letsencrypt
+      cert-manager.io/revision-history-limit: "1"
       projectcontour.io/response-timeout: 120s
     hosts: ["argocd.tools.kilchhofer.info"]
     ingressClassName: contour
