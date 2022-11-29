@@ -147,6 +147,10 @@ spec:
                       values:
                       - metallb
                       - promtail
+            - resources:
+               selector:
+                  matchLabels:
+                    app: nfs-data-provisioner
 
           restrict-volume-types:
             any:
@@ -157,3 +161,7 @@ spec:
                       operator: In
                       values:
                       - promtail
+            - resources:
+               selector:
+                  matchLabels:
+                    app: nfs-data-provisioner
