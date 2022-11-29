@@ -34,61 +34,64 @@ spec:
                 namespaces:
                 - kube-system
             - resources:
-                kinds:
-                  - Pod
-                  - Deployment
-                  - DaemonSet
                 selector:
-                  matchLabels:
-                    app.kubernetes.io/instance: metallb
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - metallb
+
           disallow-host-namespaces:
             any:
             - resources:
                 namespaces:
                 - kube-system
             - resources:
-                kinds:
-                  - Pod
-                  - Deployment
-                  - DaemonSet
                 selector:
-                  matchLabels:
-                    app.kubernetes.io/instance: metallb
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - metallb
+
           disallow-host-path:
             any:
             - resources:
                 namespaces:
                 - kube-system
+
           disallow-host-ports:
             any:
             - resources:
                 namespaces:
                 - kube-system
             - resources:
-                kinds:
-                  - Pod
-                  - Deployment
-                  - DaemonSet
                 selector:
-                  matchLabels:
-                    app.kubernetes.io/instance: metallb
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - metallb
+
           disallow-privileged-containers:
             any:
             - resources:
                 namespaces:
                 - kube-system
             - resources:
-                kinds:
-                  - Pod
-                  - DaemonSet
                 selector:
-                  matchLabels:
-                    app.kubernetes.io/name: kured
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - kured
+
           disallow-selinux:
             any:
             - resources:
                 namespaces:
                 - kube-system
+
           restrict-apparmor-profiles:
             any:
             - resources:
@@ -100,13 +103,29 @@ spec:
             - resources:
                 namespaces:
                 - cattle-system
+            - resources:
+                selector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - metallb
+
           disallow-privilege-escalation:
             any:
             - resources:
                 namespaces:
                 - cattle-system
+
           require-run-as-nonroot:
             any:
             - resources:
                 namespaces:
                 - cattle-system
+            - resources:
+                selector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - metallb
