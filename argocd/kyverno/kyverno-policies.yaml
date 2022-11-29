@@ -29,6 +29,9 @@ spec:
         - restrict-volume-types
 
         policyExclude:
+
+          ## Excludes for baseline Policies
+          ## --------------------------------
           disallow-capabilities:
             any:
             - resources:
@@ -106,6 +109,8 @@ spec:
                 namespaces:
                 - kube-system
 
+          ## Excludes for restricted Policies
+          ## --------------------------------
           disallow-capabilities-strict:
             any:
             - resources:
