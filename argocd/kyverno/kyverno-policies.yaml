@@ -18,6 +18,7 @@ spec:
     targetRevision: 2.6.1
     helm:
       values: |-
+        validationFailureAction: enforce
         podSecurityStandard: baseline
 
         includeRestrictedPolicies:
