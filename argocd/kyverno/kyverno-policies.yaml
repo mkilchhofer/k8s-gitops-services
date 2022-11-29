@@ -59,6 +59,13 @@ spec:
             - resources:
                 namespaces:
                 - kube-system
+            - resources:
+                selector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - promtail
 
           disallow-host-ports:
             any:
@@ -117,6 +124,16 @@ spec:
                 namespaces:
                 - cattle-system
 
+          require-run-as-non-root-user:
+            any:
+            - resources:
+                selector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - promtail
+
           require-run-as-nonroot:
             any:
             - resources:
@@ -129,3 +146,14 @@ spec:
                       operator: In
                       values:
                       - metallb
+                      - promtail
+
+          restrict-volume-types:
+            any:
+            - resources:
+                selector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - promtail
