@@ -18,6 +18,10 @@ spec:
     targetRevision: 2.6.1
     helm:
       values: |-
+        extraArgs:
+          - --loggingFormat=text
+          - --backgroundScan=false
+
         networkPolicy:
           enabled: true
 
