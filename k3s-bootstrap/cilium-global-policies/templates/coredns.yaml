@@ -15,3 +15,7 @@ spec:
         - ports:
            - port: "53"
              protocol: ANY
+          rules:
+            # Enable DNS proxy feature to allow use of toFQDN egress rules
+            dns:
+              - matchPattern: '*'
