@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno-extra
+  namespace: argocd
+spec:
+  destination:
+    namespace: kyverno
+    server: 'https://kubernetes.default.svc'
+  project: core-services-unrestricted
+  source:
+    path: kustomize/kyverno-extra
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main
