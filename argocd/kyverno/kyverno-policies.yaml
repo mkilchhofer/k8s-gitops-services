@@ -13,11 +13,12 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    chart: kyverno-policies
-    repoURL: https://kyverno.github.io/kyverno/
-    targetRevision: 2.6.1
+    repoURL: https://github.com/kyverno/kyverno.git
+    path: charts/kyverno-policies/
+    targetRevision: 5244730f7
     helm:
       values: |-
+        autogenControllers: none
         validationFailureAction: enforce
         podSecurityStandard: baseline
 
