@@ -57,6 +57,7 @@ spec:
                       operator: In
                       values:
                       - metallb
+                      - kured
 
           disallow-host-path:
             any:
@@ -83,6 +84,7 @@ spec:
                       operator: In
                       values:
                       - metallb
+                      - kured
 
           disallow-privileged-containers:
             any:
@@ -129,6 +131,13 @@ spec:
             - resources:
                 namespaces:
                 - cattle-system
+            - resources:
+                selector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                      - kured
 
           require-run-as-non-root-user:
             any:
@@ -139,6 +148,7 @@ spec:
                       operator: In
                       values:
                       - promtail
+                      - kured
 
           require-run-as-nonroot:
             any:
@@ -153,6 +163,7 @@ spec:
                       values:
                       - metallb
                       - promtail
+                      - kured
             - resources:
                selector:
                   matchLabels:
