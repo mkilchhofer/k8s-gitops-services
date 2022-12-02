@@ -13,9 +13,9 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    repoURL: https://github.com/kyverno/kyverno.git
-    path: charts/kyverno-policies/
-    targetRevision: 5244730f7
+    chart: kyverno-policies
+    repoURL: https://kyverno.github.io/kyverno/
+    targetRevision: 2.6.3-rc.2
     helm:
       values: |-
         autogenControllers: none
