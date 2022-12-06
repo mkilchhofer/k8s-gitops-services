@@ -119,6 +119,7 @@ spec:
             - resources:
                 namespaces:
                 - cattle-system
+                - kube-system
             - resources:
                 selector:
                   matchExpressions:
@@ -132,6 +133,7 @@ spec:
             - resources:
                 namespaces:
                 - cattle-system
+                - kube-system
             - resources:
                 selector:
                   matchExpressions:
@@ -157,6 +159,7 @@ spec:
             - resources:
                 namespaces:
                 - cattle-system
+                - kube-system
             - resources:
                 selector:
                   matchExpressions:
@@ -173,6 +176,9 @@ spec:
 
           restrict-volume-types:
             any:
+            - resources:
+                namespaces:
+                - kube-system
             - resources:
                 selector:
                   matchExpressions:
