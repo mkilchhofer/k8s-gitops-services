@@ -150,6 +150,7 @@ spec:
                       values:
                       - promtail
                       - kured
+                      - metallb
 
           require-run-as-nonroot:
             any:
