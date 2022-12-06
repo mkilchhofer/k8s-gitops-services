@@ -38,6 +38,9 @@ spec:
             - resources:
                 namespaces:
                 - kube-system
+                selector:
+                  matchLabels:
+                    k8s-app: cilium
             - resources:
                 selector:
                   matchExpressions:
@@ -51,6 +54,16 @@ spec:
             - resources:
                 namespaces:
                 - kube-system
+                selector:
+                  matchLabels:
+                    k8s-app: cilium
+            - resources:
+                namespaces:
+                - kube-system
+                selector:
+                  matchLabels:
+                    name: cilium-operator
+                    io.cilium/app: operator
             - resources:
                 selector:
                   matchExpressions:
@@ -65,6 +78,9 @@ spec:
             - resources:
                 namespaces:
                 - kube-system
+                selector:
+                  matchLabels:
+                    k8s-app: cilium
             - resources:
                 selector:
                   matchExpressions:
@@ -78,6 +94,16 @@ spec:
             - resources:
                 namespaces:
                 - kube-system
+                selector:
+                  matchLabels:
+                    k8s-app: cilium
+            - resources:
+                namespaces:
+                - kube-system
+                selector:
+                  matchLabels:
+                    name: cilium-operator
+                    io.cilium/app: operator
             - resources:
                 selector:
                   matchExpressions:
@@ -92,6 +118,9 @@ spec:
             - resources:
                 namespaces:
                 - kube-system
+                selector:
+                  matchLabels:
+                    k8s-app: cilium
             - resources:
                 selector:
                   matchExpressions:
@@ -105,12 +134,18 @@ spec:
             - resources:
                 namespaces:
                 - kube-system
+                selector:
+                  matchLabels:
+                    k8s-app: cilium
 
           restrict-apparmor-profiles:
             any:
             - resources:
                 namespaces:
                 - kube-system
+                selector:
+                  matchLabels:
+                    k8s-app: cilium
 
           ## Excludes for restricted Policies
           ## --------------------------------
@@ -119,7 +154,24 @@ spec:
             - resources:
                 namespaces:
                 - cattle-system
+            - resources:
+                namespaces:
                 - kube-system
+                selector:
+                  matchExpressions:
+                    - key: k8s-app
+                      operator: In
+                      values:
+                      - cilium
+                      - hubble-relay
+                      - hubble-ui
+            - resources:
+                namespaces:
+                - kube-system
+                selector:
+                  matchLabels:
+                    name: cilium-operator
+                    io.cilium/app: operator
             - resources:
                 selector:
                   matchExpressions:
@@ -127,13 +179,31 @@ spec:
                       operator: In
                       values:
                       - metallb
+                      - metrics-server
 
           disallow-privilege-escalation:
             any:
             - resources:
                 namespaces:
                 - cattle-system
+            - resources:
+                namespaces:
                 - kube-system
+                selector:
+                  matchExpressions:
+                    - key: k8s-app
+                      operator: In
+                      values:
+                      - cilium
+                      - hubble-relay
+                      - hubble-ui
+            - resources:
+                namespaces:
+                - kube-system
+                selector:
+                  matchLabels:
+                    name: cilium-operator
+                    io.cilium/app: operator
             - resources:
                 selector:
                   matchExpressions:
@@ -159,7 +229,25 @@ spec:
             - resources:
                 namespaces:
                 - cattle-system
+            - resources:
+                namespaces:
                 - kube-system
+                selector:
+                  matchExpressions:
+                    - key: k8s-app
+                      operator: In
+                      values:
+                      - cilium
+                      - hubble-relay
+                      - hubble-ui
+                      - kube-dns
+            - resources:
+                namespaces:
+                - kube-system
+                selector:
+                  matchLabels:
+                    name: cilium-operator
+                    io.cilium/app: operator
             - resources:
                 selector:
                   matchExpressions:
@@ -179,6 +267,9 @@ spec:
             - resources:
                 namespaces:
                 - kube-system
+                selector:
+                  matchLabels:
+                    k8s-app: cilium
             - resources:
                 selector:
                   matchExpressions:
@@ -187,6 +278,6 @@ spec:
                       values:
                       - promtail
             - resources:
-               selector:
+                selector:
                   matchLabels:
                     app: nfs-data-provisioner
