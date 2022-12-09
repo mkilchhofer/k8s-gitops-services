@@ -15,7 +15,7 @@ spec:
   source:
     chart: kyverno
     repoURL: https://kyverno.github.io/kyverno/
-    targetRevision: 2.6.3
+    targetRevision: 2.6.4
     helm:
       values: |-
         extraArgs:
