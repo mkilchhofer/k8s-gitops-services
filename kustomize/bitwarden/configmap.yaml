@@ -9,8 +9,8 @@ data:
   SMTP_FROM: noreply@kilchhofer.info
   SMTP_USERNAME: infra@kilchhofer.info
   SMTP_FROM_NAME: Kilchhofer Password safe
-  SMTP_PORT: "587"
-  SMTP_SSL: "true"
+  SMTP_PORT: "465"
+  SMTP_SECURITY: force_tls
   DOMAIN: 'https://bw.tools.kilchhofer.info'
   WEBSOCKET_ENABLED: "true"
   LOG_LEVEL: "warn"

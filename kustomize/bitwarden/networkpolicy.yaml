@@ -10,9 +10,12 @@ spec:
     - Egress
     - Ingress
   egress:
-      # Notification via E-Mail
     - ports:
-      - port: 587
+      # Notification via E-Mail
+      - port: 465
+        protocol: TCP
+      # Check for updates
+      - port: 443
         protocol: TCP
   ingress:
     - ports:
