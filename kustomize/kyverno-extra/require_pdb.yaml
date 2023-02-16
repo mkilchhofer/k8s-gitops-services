@@ -4,7 +4,7 @@ metadata:
   name: require-pdb
   annotations:
     policies.kyverno.io/title: Require PodDisruptionBudget
-    policies.kyverno.io/category: Sample, EKS Best Practices
+    policies.kyverno.io/category: Reliability
     policies.kyverno.io/minversion: 1.3.6
     kyverno.io/kyverno-version: 1.6.2
     kyverno.io/kubernetes-version: "1.23"

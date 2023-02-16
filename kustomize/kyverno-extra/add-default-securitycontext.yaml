@@ -4,6 +4,7 @@ metadata:
   name: add-default-securitycontext
   annotations:
     policies.kyverno.io/title: Add Default securityContext
+    policies.kyverno.io/category: Security
     policies.kyverno.io/subject: Pod
     pod-policies.kyverno.io/autogen-controllers: none
 spec:
