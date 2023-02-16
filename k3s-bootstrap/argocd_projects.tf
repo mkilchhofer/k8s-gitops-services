@@ -22,6 +22,8 @@ resource "argocd_project" "base" {
       kind  = "Application"
     }
   }
+
+  depends_on = [helm_release.argocd]
 }
 
 resource "argocd_project" "core_services_unrestricted" {
@@ -44,6 +46,8 @@ resource "argocd_project" "core_services_unrestricted" {
       kind  = "*"
     }
   }
+
+  depends_on = [helm_release.argocd]
 }
 
 resource "argocd_project" "apps_with_clusterroles" {
@@ -83,6 +87,8 @@ resource "argocd_project" "apps_with_clusterroles" {
       kind = "LimitRange"
     }
   }
+
+  depends_on = [helm_release.argocd]
 }
 
 resource "argocd_project" "apps_restricted" {
@@ -113,4 +119,6 @@ resource "argocd_project" "apps_restricted" {
       kind = "LimitRange"
     }
   }
+
+  depends_on = [helm_release.argocd]
 }

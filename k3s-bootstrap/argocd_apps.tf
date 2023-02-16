@@ -37,4 +37,6 @@ resource "argocd_application" "app_of_apps" {
 
   }
   cascade = false
+
+  depends_on = [helm_release.argocd]
 }
