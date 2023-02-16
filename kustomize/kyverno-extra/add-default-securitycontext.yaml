@@ -24,6 +24,12 @@ spec:
           - logging
           - kubescape-host-scanner
           - cattle-*
+      - resources:
+          namespaces:
+          - ingress
+          selector:
+            matchLabels:
+              app.kubernetes.io/name: metallb
     mutate:
       patchStrategicMerge:
         spec:

@@ -9,38 +9,22 @@ spec:
     namespace: ingress
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
-  syncPolicy: {}
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
   source:
     chart: metallb
-    repoURL: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami/
-    targetRevision: 2.5.11
+    repoURL: https://metallb.github.io/metallb/
+    targetRevision: 0.13.7
     helm:
       version: v3
       values: |-
-        global:
-          imageRegistry: quay.io
-        configInline:
-          address-pools:
-          - name: default
-            protocol: bgp
-            addresses:
-            - 192.168.93.10-192.168.93.90
-          peers:
-          - peer-address: 192.168.92.1
-            peer-asn: 64512
-            my-asn: 64513
         controller:
-          image:
-            repository: metallb/controller
-            tag: v0.11.0
           resources:
             limits:
               cpu: 100m
               memory: 100Mi
         speaker:
-          image:
-            repository: metallb/speaker
-            tag: v0.11.0
           resources:
             limits:
               cpu: 100m
