@@ -223,6 +223,7 @@ spec:
                       - promtail
                       - kured
                       - metallb
+                      - plex
 
           require-run-as-nonroot:
             any:
