@@ -258,6 +258,7 @@ spec:
                       - metallb
                       - promtail
                       - kured
+                      - plex
             - resources:
                selector:
                   matchLabels:
