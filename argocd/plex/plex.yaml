@@ -25,6 +25,14 @@ spec:
             enabled: false
 
           extraMounts:
+            - name: run-s6
+              mountPath: run/s6
+              volume:
+                emptyDir: {}
+            - name: tmp
+              mountPath: tmp
+              volume:
+                emptyDir: {}
             - name: syno1-movies1
               mountPath: mnt/syno1-movies1
               volume:
@@ -91,6 +99,18 @@ spec:
             size: 20Gi
             accessMode: ReadWriteOnce
 
+        podSecurityContext:
+          fsGroup: 0
+        securityContext:
+          capabilities:
+            add:
+              - SETGID
+              - SETUID
+              - CHOWN
+          readOnlyRootFilesystem: true
+          runAsGroup: 0
+          runAsNonRoot: false
+          runAsUser: 0
 
         serviceTCP:
           type: LoadBalancer
@@ -110,14 +130,18 @@ spec:
 
         probes:
           liveness:
+            enabled: false
             httpGet:
               scheme: HTTPS
           readiness:
+            enabled: false
             httpGet:
               scheme: HTTPS
           startup:
+            enabled: false
             httpGet:
               scheme: HTTPS
 
         image:
-          tag: 1.21.1.3876-3c3adfcb4
+          repository: kicm/pms-docker
+          tag: 1.29.2.6364-6d72b0cf6
