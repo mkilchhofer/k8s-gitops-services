@@ -99,6 +99,9 @@ spec:
             size: 20Gi
             accessMode: ReadWriteOnce
 
+        extraEnv:
+          S6_READ_ONLY_ROOT: "1" # required when securityContext.readOnlyRootFilesystem is set
+
         podSecurityContext:
           fsGroup: 0
         securityContext:
