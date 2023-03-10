@@ -72,6 +72,7 @@ spec:
                       values:
                       - metallb
                       - kured
+                      - prometheus-node-exporter
 
           disallow-host-path:
             any:
@@ -88,6 +89,7 @@ spec:
                       operator: In
                       values:
                       - promtail
+                      - prometheus-node-exporter
 
           disallow-host-ports:
             any:
@@ -112,6 +114,7 @@ spec:
                       values:
                       - metallb
                       - kured
+                      - prometheus-node-exporter
 
           disallow-privileged-containers:
             any:
@@ -279,6 +282,7 @@ spec:
                       operator: In
                       values:
                       - promtail
+                      - prometheus-node-exporter
             - resources:
                 selector:
                   matchLabels:
