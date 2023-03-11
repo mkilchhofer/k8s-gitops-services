@@ -183,6 +183,7 @@ spec:
                       values:
                       - metallb
                       - metrics-server
+                      - plex
 
           disallow-privilege-escalation:
             any:
@@ -281,6 +282,7 @@ spec:
                     - key: app.kubernetes.io/name
                       operator: In
                       values:
+                      - plex
                       - promtail
                       - prometheus-node-exporter
             - resources:
