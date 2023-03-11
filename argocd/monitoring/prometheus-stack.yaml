@@ -67,7 +67,7 @@ spec:
               limits:
                 cpu: 1
                 memory: 1Gi
-            retention: 12h
+            retention: 15d
             # retentionSize: 1GB
             storageSpec:
               volumeClaimTemplate:
