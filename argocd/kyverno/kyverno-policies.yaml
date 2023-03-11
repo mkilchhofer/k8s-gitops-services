@@ -15,7 +15,7 @@ spec:
   source:
     chart: kyverno-policies
     repoURL: https://kyverno.github.io/kyverno/
-    targetRevision: 2.6.3-rc.2
+    targetRevision: 2.7.1
     helm:
       values: |-
         autogenControllers: none
