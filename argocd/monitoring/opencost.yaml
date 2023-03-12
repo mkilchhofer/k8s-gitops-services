@@ -1,0 +1,49 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: opencost
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    chart: opencost
+    repoURL: https://opencost.github.io/opencost-helm-chart/
+    targetRevision: 1.1.0
+    helm:
+      values: |-
+        opencost:
+          prometheus:
+            internal:
+              serviceName: kube-prometheus-stack-prometheus
+              namespaceName: monitoring
+              port: 9090
+          exporter:
+            image:
+              tag: prod-1.100.2
+
+            resources:
+              requests:
+                cpu: 10m
+                memory: 55Mi
+              limits:
+                cpu: 1
+                memory: 1Gi
+            extraEnv:
+              KUBECOST_NAMESPACE: monitoring
+          ui:
+            image:
+              tag: prod-1.100.2
+            resources:
+              requests:
+                cpu: 10m
+                memory: 55Mi
+              limits:
+                cpu: 1
+                memory: 1Gi
