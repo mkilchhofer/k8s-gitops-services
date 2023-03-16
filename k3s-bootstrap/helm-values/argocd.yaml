@@ -287,6 +287,12 @@ configs:
           - ClusterBackgroundScanReport
         clusters:
           - '*'
+      - apiGroups:
+          - cilium.io
+        kinds:
+          - CiliumEndpoint
+        clusters:
+          - '*'
 
   rbac:
     policy.csv: |
