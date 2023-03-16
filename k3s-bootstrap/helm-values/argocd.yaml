@@ -276,6 +276,18 @@ configs:
     server.rbac.log.enforce.enable: "true"
     exec.enabled: "true"
 
+    # Tell Argo CD to ignore kyverno reports on the UI
+    resource.exclusions: |
+      - apiGroups:
+          - kyverno.io
+        kinds:
+          - AdmissionReport
+          - BackgroundScanReport
+          - ClusterAdmissionReport
+          - ClusterBackgroundScanReport
+        clusters:
+          - '*'
+
   rbac:
     policy.csv: |
       g, kilchhofer-home:admins, role:admin
