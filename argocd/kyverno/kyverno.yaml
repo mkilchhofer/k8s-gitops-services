@@ -18,6 +18,16 @@ spec:
     targetRevision: 2.7.1
     helm:
       values: |-
+        config:
+          webhooks:
+            - namespaceSelector:
+                matchExpressions:
+                  - key: kubernetes.io/metadata.name
+                    operator: NotIn
+                    values:
+                      - argocd
+                      - kube-system
+
         extraArgs:
           - --loggingFormat=text
           - --backgroundScan=true
