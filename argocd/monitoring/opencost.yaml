@@ -15,7 +15,7 @@ spec:
   source:
     chart: opencost
     repoURL: https://opencost.github.io/opencost-helm-chart/
-    targetRevision: 1.5.0
+    targetRevision: 1.7.0
     helm:
       values: |-
         opencost:
@@ -27,3 +27,19 @@ spec:
           exporter:
             extraEnv:
               KUBECOST_NAMESPACE: monitoring
+
+          ui:
+            extraVolumeMounts:
+              - mountPath: /tmp
+                name: ui-tmp-dir
+            securityContext:
+              capabilities:
+                drop:
+                - ALL
+              readOnlyRootFilesystem: true
+              runAsNonRoot: true
+              runAsUser: 65534
+
+        extraVolumes:
+          - name: ui-tmp-dir
+            emptyDir: {}
