@@ -19,6 +19,10 @@ spec:
     helm:
       values: |-
         opencost:
+          metrics:
+            serviceMonitor:
+              enabled: true
+
           prometheus:
             internal:
               serviceName: kube-prometheus-stack-prometheus
