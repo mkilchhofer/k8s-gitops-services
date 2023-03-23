@@ -144,14 +144,7 @@ notifications:
       memory: 64Mi
 
 redis:
-  containerSecurityContext:
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop: ["ALL"]
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-
-  metrics:
+  exporter:
     enabled: true
     image:
       repository: quay.io/oliver006/redis_exporter
@@ -163,6 +156,17 @@ redis:
       requests:
         cpu: 5m
         memory: 16Mi
+
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+
+  metrics:
+    enabled: true
+
     serviceMonitor:
       enabled: false # deployed via argocd-extra
 
