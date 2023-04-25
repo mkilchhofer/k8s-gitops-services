@@ -28,3 +28,7 @@ spec:
             requests:
               cpu: 500m
               memory: 512Mi
+          podSecurityContext:
+            runAsUser: 1000
+          securityContext:
+            fsGroup: 1000
