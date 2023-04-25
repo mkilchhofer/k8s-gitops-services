@@ -1,0 +1,30 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vmsingle
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy: {}
+  source:
+    chart: victoria-metrics-single
+    repoURL: https://victoriametrics.github.io/helm-charts/
+    targetRevision: "0.8.59"
+    helm:
+      version: v3
+      values: |-
+        server:
+          persistentVolume:
+            storageClass: "iscsi-manual"
+            size: 50Gi
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 500m
+              memory: 512Mi
