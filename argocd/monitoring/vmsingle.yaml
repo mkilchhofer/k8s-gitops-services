@@ -9,7 +9,9 @@ spec:
     namespace: monitoring
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
-  syncPolicy: {}
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
   source:
     chart: victoria-metrics-single
     repoURL: https://victoriametrics.github.io/helm-charts/
