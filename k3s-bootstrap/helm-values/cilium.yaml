@@ -4,6 +4,12 @@ upgradeCompatibility: "1.11"
 policyEnforcementMode: always
 
 rollOutCiliumPods: true
+
+# -- Configure Istio proxy options.
+proxy:
+  prometheus:
+    enabled: false
+
 operator:
   replicas: 1
   rollOutPods: true
