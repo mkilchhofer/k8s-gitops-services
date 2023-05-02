@@ -18,16 +18,15 @@ spec:
     targetRevision: 1.7.0
     helm:
       values: |-
+        podAnnotations:
+          prometheus.io/port: '9003'
+          prometheus.io/scrape: 'true'
         opencost:
-          metrics:
-            serviceMonitor:
-              enabled: true
-
           prometheus:
             internal:
-              serviceName: kube-prometheus-stack-prometheus
+              serviceName: vmsingle-victoria-metrics-single-server
               namespaceName: monitoring
-              port: 9090
+              port: 8428
           exporter:
             extraEnv:
               KUBECOST_NAMESPACE: monitoring
