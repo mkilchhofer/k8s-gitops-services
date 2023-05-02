@@ -47,5 +47,6 @@ spec:
         rbac:
           create: false
           pspEnabled: false
-        serviceMonitor:
-          enabled: true
+        podAnnotations:
+          prometheus.io/port: '3100'
+          prometheus.io/scrape: 'true'
