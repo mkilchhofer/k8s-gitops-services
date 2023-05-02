@@ -35,5 +35,6 @@ spec:
         networkPolicy:
           enabled: true
 
-        serviceMonitor:
-          enabled: true
+        podAnnotations:
+          prometheus.io/port: '8000'
+          prometheus.io/scrape: 'true'
