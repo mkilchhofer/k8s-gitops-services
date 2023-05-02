@@ -26,6 +26,10 @@ spec:
           containerPorts:
             http: 8080
             https: 8443
+          podAnnotations:
+            prometheus.io/path: /stats/prometheus
+            prometheus.io/port: '8002'
+            prometheus.io/scrape: 'true'
           service:
             loadBalancerIP: 192.168.93.83
           containerSecurityContext:
@@ -35,10 +39,9 @@ spec:
             registry: ghcr.io
             repository: projectcontour/contour
             tag: v1.19.0
-
-        prometheus:
-          serviceMonitor:
-            enabled: true
+          podAnnotations:
+            prometheus.io/port: '8000'
+            prometheus.io/scrape: 'true'
 
         defaultBackend:
           enabled: true
