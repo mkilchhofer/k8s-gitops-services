@@ -9,6 +9,10 @@ applicationSet:
     enabled: true
     serviceMonitor:
       enabled: false # deployed via argocd-extra
+  podAnnotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: '8080'
+    prometheus.io/scrape: 'true'
   resources:
     limits:
       cpu: 500m
@@ -30,6 +34,10 @@ controller:
     enabled: true
     serviceMonitor:
       enabled: false # deployed via argocd-extra
+  podAnnotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: '8082'
+    prometheus.io/scrape: 'true'
 
   resources:
     limits:
@@ -47,6 +55,10 @@ notifications:
     enabled: true
     serviceMonitor:
       enabled: false # deployed via argocd-extra
+  podAnnotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: '9001'
+    prometheus.io/scrape: 'true'
   notifiers:
     service.telegram: |
       token: $telegram-token
@@ -169,6 +181,10 @@ redis:
 
     serviceMonitor:
       enabled: false # deployed via argocd-extra
+  podAnnotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: '9121'
+    prometheus.io/scrape: 'true'
 
   resources:
     limits:
@@ -193,6 +209,10 @@ repoServer:
     enabled: true
     serviceMonitor:
       enabled: false # deployed via argocd-extra
+  podAnnotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: '8084'
+    prometheus.io/scrape: 'true'
 
   resources:
     limits:
@@ -250,6 +270,10 @@ server:
     enabled: true
     serviceMonitor:
       enabled: false # deployed via argocd-extra
+  podAnnotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: '8083'
+    prometheus.io/scrape: 'true'
 
   resources:
     limits:
