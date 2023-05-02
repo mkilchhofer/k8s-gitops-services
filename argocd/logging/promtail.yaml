@@ -54,8 +54,9 @@ spec:
               {{- tpl .Values.config.snippets.scrapeConfigs . | nindent 2 }}
               {{- tpl .Values.config.snippets.extraScrapeConfigs . | nindent 2 }}
 
-        serviceMonitor:
-          enabled: true
+        podAnnotations:
+          prometheus.io/port: '3101'
+          prometheus.io/scrape: 'true'
 
         extraObjects:
         - apiVersion: cilium.io/v2
