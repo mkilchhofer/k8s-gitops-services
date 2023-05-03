@@ -58,6 +58,14 @@ spec:
           prometheus.io/port: '3101'
           prometheus.io/scrape: 'true'
 
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 20m
+            memory: 64Mi
+
         extraObjects:
         - apiVersion: cilium.io/v2
           kind: CiliumNetworkPolicy
