@@ -1,0 +1,76 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vm-oauth2-proxy
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: apps-restricted
+  syncPolicy: {}
+  source:
+    chart: oauth2-proxy
+    repoURL: https://oauth2-proxy.github.io/manifests
+    targetRevision: "5.1.0"
+    helm:
+      version: v3
+      valueFiles:
+        - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/vm-oauth2-proxy.yaml
+      values: |-
+        config:
+          clientID: "fcff5e26af466b7115cb"
+          configFile: |-
+            reverse_proxy = true
+            real_client_ip_header = "X-Forwarded-For"
+            provider = "oidc"
+            provider_display_name = "Grafana Cloud"
+            redirect_url = "http://vm.cloud.kilchhofer.info/oauth2/callback"
+            oidc_issuer_url = "https://grafana.com/"
+            email_domains = [ "*" ]
+            upstreams = [ "http://vmsingle-victoria-metrics-single-server.monitoring.svc:8428" ]
+            silence_ping_logging = true
+            cookie_secure = false
+            pass_access_token = true
+            pass_authorization_header = true
+            allowed_groups = [
+                "mkilchhofer"
+            ]
+
+        ingress:
+          enabled: true
+          hosts:
+            - vm.cloud.kilchhofer.info
+          annotations:
+            ingress.kubernetes.io/force-ssl-redirect: "true"
+            cert-manager.io/cluster-issuer: letsencrypt
+          className: nginx-external
+          tls:
+            - secretName: vm-oauth2-proxy-cert
+              hosts:
+                - vm.cloud.kilchhofer.info
+
+        extraObjects:
+          - apiVersion: networking.k8s.io/v1
+            kind: NetworkPolicy
+            metadata:
+              name: vm-oauth2-proxy
+            spec:
+              podSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: vm-oauth2-proxy
+                  app.kubernetes.io/name: oauth2-proxy
+              policyTypes:
+                - Egress
+                - Ingress
+              egress:
+                  # To SSO (dex)
+                - ports:
+                  - port: 443
+                    protocol: TCP
+              ingress:
+                - ports:
+                    - port: http
+                      protocol: TCP
+
