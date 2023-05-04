@@ -292,7 +292,7 @@ configs:
     admin.enabled: "true" # Required to use argocd TF provider
     oidc.config: |
       name: Dex
-      issuer: https://auth.tools.kilchhofer.info/dex
+      issuer: https://auth.cloud.kilchhofer.info
       clientID: argocd
       clientSecret: $oidc.dex.clientSecret
       requestedScopes:

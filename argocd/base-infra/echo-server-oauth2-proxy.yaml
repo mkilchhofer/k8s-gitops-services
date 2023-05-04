@@ -27,7 +27,7 @@ spec:
             provider = "oidc"
             provider_display_name = "GitHub / Dex"
             redirect_url = "http://echo-server-oauth2-proxy.tools.kilchhofer.info/oauth2/callback"
-            oidc_issuer_url = "https://auth.tools.kilchhofer.info/dex"
+            oidc_issuer_url = "https://auth.cloud.kilchhofer.info"
             email_domains = [ "*" ]
             upstreams = [ "http://echo-server.base-infra.svc:8080" ]
             silence_ping_logging = true

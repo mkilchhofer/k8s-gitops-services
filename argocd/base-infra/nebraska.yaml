@@ -37,7 +37,7 @@ spec:
             mode: oidc
             oidc:
               clientID: nebraska
-              issuerURL: https://auth.tools.kilchhofer.info/dex
+              issuerURL: https://auth.cloud.kilchhofer.info
               validRedirectURLs: https://flatcar.tools.kilchhofer.info/*
               adminRoles: kilchhofer-home:admins
               viewerRoles: kilchhofer-home:developers

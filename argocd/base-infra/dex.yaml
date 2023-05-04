@@ -23,7 +23,7 @@ spec:
           tag: v2.36.0-distroless
 
         config:
-          issuer: https://auth.tools.kilchhofer.info/dex
+          issuer: https://auth.cloud.kilchhofer.info
           oauth2:
             skipApprovalScreen: true
           storage:
@@ -62,16 +62,16 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt
             ingress.kubernetes.io/force-ssl-redirect: "true"
 
-          className: contour
+          className: nginx-external
           hosts:
-            - host: auth.tools.kilchhofer.info
+            - host: auth.cloud.kilchhofer.info
               paths:
                 - path: /
-                  pathType: ImplementationSpecific
+                  pathType: Prefix
           tls:
             - secretName: dex-cert
               hosts:
-                - auth.tools.kilchhofer.info
+                - auth.cloud.kilchhofer.info
 
         networkPolicy:
           enabled: true
