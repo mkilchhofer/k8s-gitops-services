@@ -25,7 +25,7 @@ spec:
             reverse_proxy = true
             real_client_ip_header = "X-Forwarded-For"
             provider = "oidc"
-            provider_display_name = "Grafana Cloud"
+            provider_display_name = "GitHub / Dex"
             redirect_url = "https://vm.cloud.kilchhofer.info/oauth2/callback"
             oidc_issuer_url = "https://auth.cloud.kilchhofer.info"
             email_domains = [ "*" ]
