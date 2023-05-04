@@ -20,14 +20,14 @@ spec:
         - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/vm-oauth2-proxy.yaml
       values: |-
         config:
-          clientID: "fcff5e26af466b7115cb"
+          clientID: "victoria-metrics"
           configFile: |-
             reverse_proxy = true
             real_client_ip_header = "X-Forwarded-For"
             provider = "oidc"
             provider_display_name = "Grafana Cloud"
-            redirect_url = "http://vm.cloud.kilchhofer.info/oauth2/callback"
-            oidc_issuer_url = "https://grafana.com/"
+            redirect_url = "https://vm.cloud.kilchhofer.info/oauth2/callback"
+            oidc_issuer_url = "https://auth.cloud.kilchhofer.info"
             email_domains = [ "*" ]
             upstreams = [ "http://vmsingle-victoria-metrics-single-server.monitoring.svc:8428" ]
             silence_ping_logging = true
@@ -35,8 +35,16 @@ spec:
             pass_access_token = true
             pass_authorization_header = true
             allowed_groups = [
-                "mkilchhofer"
+                "kilchhofer-home:admins"
             ]
+            htpasswd_user_groups = [
+                "kilchhofer-home:admins",
+                "basic-auth"
+            ]
+
+        htpasswdFile:
+          enabled: true
+          # credentials are injected via helm-secrets
 
         ingress:
           enabled: true
