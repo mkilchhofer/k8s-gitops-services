@@ -36,3 +36,9 @@ spec:
           url: http://vmsingle-victoria-metrics-single-server.monitoring
           port: 8428
           path: ""
+        livenessProbe:
+          httpGet:
+            path: /livez
+        readinessProbe:
+          httpGet:
+            path: /readyz
