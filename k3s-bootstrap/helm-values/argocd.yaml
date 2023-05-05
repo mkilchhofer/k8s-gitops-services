@@ -346,3 +346,17 @@ configs:
         ssh.dev.azure.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
         vs-ssh.visualstudio.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
         [192.168.93.88]:3001 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwfVmMvq4ZuLciMlkjVCyygOWkGCPPzcz72jsM/SK7KqFeGooSCQNazGkAXHC8tcYIy25ihuMB19kkfiVa1uFehOekuoBLAjnYXzIlDUG/WaUbyLXjQ51c6QwJ2l8KUjAv8ccyBsd7ufl5ckvJmMTFKVl3Wx8bz1MD4scGVMh1cJ2IRdcPWRmY56iZP2jQdzgYX0Wi/2nJ04JJ4xXXFRBJ+MObmrAB3AhNvbV0QDuCHghLo/z5N/ZmzJa+zEHZh8uOzXHFmo4PKblGX3bVuPR9oohS+l1QcdQi7bF+YMVcxOkP0z0TwTleoMqIOXxjckhPHJ48oM4N5OZldritypDP
+
+extraObjects:
+  - apiVersion: cilium.io/v2
+    kind: CiliumNetworkPolicy
+    metadata:
+      name: "allow-argcd-egress"
+      namespace: "{{ .Release.Namespace }}"
+    spec:
+      endpointSelector:
+        matchLabels:
+          app.kubernetes.io/component: repo-server
+      egress:
+        - toEntities:
+            - "all"
