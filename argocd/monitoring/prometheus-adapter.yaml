@@ -1,0 +1,38 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-adapter
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    chart: prometheus-adapter
+    repoURL: https://prometheus-community.github.io/helm-charts/
+    targetRevision: "4.2.0"
+    helm:
+      version: v3
+      values: |-
+        certManager:
+          enabled: true
+          caCertDuration: 43800h0m0s
+          certDuration: 8760h0m0s
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        # Url to access prometheus
+        prometheus:
+          # Value is templated
+          url: http://vmsingle-victoria-metrics-single-server.monitoring
+          port: 8428
+          path: ""

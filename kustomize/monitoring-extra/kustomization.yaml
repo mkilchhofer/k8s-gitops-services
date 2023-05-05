@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - prometheus-networkpolicy.yaml
   - monitoring-internal-networkpolicy.yaml
+  - prometheus-adapter-networkpolicy.yaml
