@@ -23,7 +23,7 @@ spec:
           tag: v2.36.0-distroless
 
         config:
-          issuer: https://auth.cloud.kilchhofer.info
+          issuer: https://sso.cloud.kilchhofer.info
           oauth2:
             skipApprovalScreen: true
           storage:
@@ -64,14 +64,14 @@ spec:
 
           className: nginx-external
           hosts:
-            - host: auth.cloud.kilchhofer.info
+            - host: sso.cloud.kilchhofer.info
               paths:
                 - path: /
                   pathType: Prefix
           tls:
             - secretName: dex-cert
               hosts:
-                - auth.cloud.kilchhofer.info
+                - sso.cloud.kilchhofer.info
 
         networkPolicy:
           enabled: true
