@@ -17,6 +17,8 @@ spec:
     helm:
       version: v3
       values: |-
+        rbac:
+          namespaced: true # Don't deploy ClusterRoles / ClusterRoleBinding
         server:
           persistentVolume:
             storageClass: "iscsi-manual"
