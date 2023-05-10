@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: keda-admission-webhooks
+spec:
+  podSelector:
+    matchLabels:
+      app: keda-admission-webhooks
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+      - port: http
+        protocol: TCP

@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keda-extra
+  namespace: argocd
+spec:
+  destination:
+    namespace: keda
+    server: 'https://kubernetes.default.svc'
+  project: core-services-unrestricted
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    path: kustomize/keda-extra
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main

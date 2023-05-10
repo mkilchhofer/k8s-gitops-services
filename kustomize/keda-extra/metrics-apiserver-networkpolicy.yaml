@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: keda-operator-metrics-apiserver
+spec:
+  podSelector:
+    matchLabels:
+      app: keda-operator-metrics-apiserver
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+      - port: https
+        protocol: TCP
+      - port: http
+        protocol: TCP
