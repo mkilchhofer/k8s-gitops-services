@@ -18,4 +18,7 @@ spec:
     targetRevision: "2.10.2"
     helm:
       version: v3
-      # values: |-
+      values: |-
+        certificates:
+          certManager:
+            enabled: true
