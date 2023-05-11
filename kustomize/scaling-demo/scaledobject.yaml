@@ -1,0 +1,15 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: scaling-demo
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    name: scaling-demo
+    kind: Deployment
+  triggers:
+  - type: prometheus
+    metadata:
+      serverAddress: http://vmsingle-victoria-metrics-single-server.monitoring:8428
+      threshold: '3'
+      query: nginx_connections_active
