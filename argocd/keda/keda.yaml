@@ -22,3 +22,10 @@ spec:
         certificates:
           certManager:
             enabled: true
+        prometheus:
+          metricServer:
+            enabled: true
+          operator:
+            enabled: true
+          webhooks:
+            enabled: true
