@@ -27,8 +27,8 @@ spec:
           timeoutSeconds: 30
           initialDelaySeconds: 15
         volumeMounts:
-        - name: storage
-          mountPath: /usr/share/nginx/html
+        - name: config
+          mountPath: /etc/nginx/conf.d/
         - name: tmp-dir
           mountPath: /tmp
         resources:
@@ -38,9 +38,23 @@ spec:
           requests:
             cpu: 50m
             memory: 256Mi
+      - name: metrics
+        image: nginx/nginx-prometheus-exporter:0.11.0
+        args:
+        - -nginx.scrape-uri=http://localhost:8080/stub_status
+        ports:
+        - name: metrics
+          containerPort: 9113
+        resources:
+          limits:
+            cpu: 300m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 16Mi
       volumes:
       - name: tmp-dir
         emptyDir: {}
-      - name: storage
-        persistentVolumeClaim:
-          claimName: scaling-demo
+      - name: config
+        configMap:
+          name: scaling-demo
