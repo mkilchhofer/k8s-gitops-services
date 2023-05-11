@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: scaling-demo
+  namespace: argocd
+spec:
+  destination:
+    namespace: testing
+    server: 'https://kubernetes.default.svc'
+  project: apps-restricted
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    path: kustomize/scaling-demo
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main

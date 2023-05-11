@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: scaling-demo
+  labels:
+    app.kubernetes.io/name: scaling-demo
+spec:
+  storageClassName: nfs-data
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany

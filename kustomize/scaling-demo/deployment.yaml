@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scaling-demo
+  labels:
+    app.kubernetes.io/name: scaling-demo
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: scaling-demo
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: scaling-demo
+    spec:
+      containers:
+      - name: website
+        image: nginxinc/nginx-unprivileged:1.23-alpine-slim
+        ports:
+        - name: http
+          containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          periodSeconds: 60
+          timeoutSeconds: 30
+          initialDelaySeconds: 15
+        volumeMounts:
+        - name: storage
+          mountPath: /usr/share/nginx/html
+        - name: tmp-dir
+          mountPath: /tmp
+        resources:
+          limits:
+            cpu: 300m
+            memory: 1Gi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+      volumes:
+      - name: tmp-dir
+        emptyDir: {}
+      - name: storage
+        persistentVolumeClaim:
+          claimName: scaling-demo
