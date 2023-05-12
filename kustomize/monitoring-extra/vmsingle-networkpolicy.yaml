@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: vmsingle
+spec:
+  podSelector:
+    matchLabels:
+      app: server
+      app.kubernetes.io/instance: vmsingle
+      app.kubernetes.io/name: victoria-metrics-single
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: vmagent
+              app.kubernetes.io/name: victoria-metrics-agent
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: prometheus-adapter
+              app.kubernetes.io/name: prometheus-adapter
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: opencost
+              app.kubernetes.io/name: opencost
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: keda
+          podSelector:
+            matchLabels:
+              app: keda-operator
+      ports:
+        - port: http
+          protocol: TCP

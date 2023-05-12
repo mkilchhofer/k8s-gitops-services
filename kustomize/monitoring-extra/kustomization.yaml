@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - prometheus-networkpolicy.yaml
-  - monitoring-internal-networkpolicy.yaml
+  - kube-state-metrics-networkpolicy.yaml
+  - node-exporter-networkpolicy.yaml
   - prometheus-adapter-networkpolicy.yaml
+  - vmsingle-networkpolicy.yaml
