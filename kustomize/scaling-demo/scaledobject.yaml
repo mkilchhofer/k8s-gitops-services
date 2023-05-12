@@ -7,6 +7,7 @@ spec:
     apiVersion: apps/v1
     name: scaling-demo
     kind: Deployment
+  maxReplicaCount:  10
   triggers:
   - type: prometheus
     metadata:
