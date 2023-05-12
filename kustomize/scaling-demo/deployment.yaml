@@ -26,6 +26,15 @@ spec:
           periodSeconds: 60
           timeoutSeconds: 30
           initialDelaySeconds: 15
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - "ALL"
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - name: config
           mountPath: /etc/nginx/conf.d/
@@ -52,6 +61,15 @@ spec:
           requests:
             cpu: 50m
             memory: 16Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - "ALL"
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
       volumes:
       - name: tmp-dir
         emptyDir: {}
