@@ -24,6 +24,10 @@ spec:
             matchLabels:
               app.kubernetes.io/instance: opencost
               app.kubernetes.io/name: opencost
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: vm-oauth2-proxy
+              app.kubernetes.io/name: oauth2-proxy
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: keda
