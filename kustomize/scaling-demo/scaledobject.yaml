@@ -9,6 +9,7 @@ spec:
     kind: Deployment
   minReplicaCount: 2
   maxReplicaCount:  10
+  cooldownPeriod:   10
   triggers:
   - type: prometheus
     metricType: AverageValue
