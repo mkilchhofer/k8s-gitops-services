@@ -17,3 +17,7 @@ spec:
       serverAddress: https://vm.cloud.kilchhofer.info/
       threshold: '20'
       query: sum(rate(nginx_http_requests_total[1m]))
+      authModes: "basic"
+    authenticationRef:
+      kind: ClusterTriggerAuthentication
+      name: keda-prom-creds
