@@ -14,6 +14,6 @@ spec:
   - type: prometheus
     metricType: AverageValue
     metadata:
-      serverAddress: http://vmsingle-victoria-metrics-single-server.monitoring.svc.cluster.local:8428
+      serverAddress: https://vm.cloud.kilchhofer.info/
       threshold: '20'
       query: sum(rate(nginx_http_requests_total[1m]))
