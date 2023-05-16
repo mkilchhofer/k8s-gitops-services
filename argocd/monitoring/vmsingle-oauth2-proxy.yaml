@@ -46,6 +46,11 @@ spec:
           enabled: true
           # credentials are injected via helm-secrets
 
+        service:
+          annotations:
+            prometheus.io/port: '44180'
+            prometheus.io/scrape: 'true'
+
         ingress:
           enabled: true
           hosts:
