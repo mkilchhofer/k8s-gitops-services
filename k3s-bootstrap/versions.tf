@@ -15,9 +15,5 @@ terraform {
     null = {
       source = "hashicorp/null"
     }
-    sops = {
-      source  = "carlpett/sops"
-      version = "0.7.1"
-    }
   }
 }
