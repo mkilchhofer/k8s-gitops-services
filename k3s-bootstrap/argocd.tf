@@ -13,14 +13,10 @@ resource "kubernetes_namespace" "argocd" {
   }
 }
 
-data "sops_file" "argocd" {
-  source_file = "../secrets/argocd.yaml"
-}
-
 resource "null_resource" "argocd_password" {
   triggers = {
-    plain    = data.sops_file.argocd.data.argocdAdminPassword
-    hash     = bcrypt(data.sops_file.argocd.data.argocdAdminPassword)
+    plain    = var.argocd_admin_password
+    hash     = bcrypt(var.argocd_admin_password)
     modified = timestamp()
   }
 
@@ -57,22 +53,22 @@ resource "helm_release" "argocd" {
 
   set_sensitive {
     name  = "configs.secret.extra.oidc\\.dex\\.clientSecret"
-    value = data.sops_file.argocd.data.oidcGithubClientSecret
+    value = var.argocd_oidc_client_secret
   }
 
   set_sensitive {
     name  = "notifications.secret.items.telegram-token"
-    value = data.sops_file.argocd.data.telegramToken
+    value = var.telegram_token
   }
 
   set_sensitive {
     name  = "configs.credentialTemplates.gh-mkilchhofer-ssh.sshPrivateKey"
-    value = data.sops_file.argocd.data.sshPrivateKeyGit
+    value = var.argocd_github_deploy_key
   }
 
   set_sensitive {
     name  = "configs.credentialTemplates.internal-mkilchhofer-ssh.sshPrivateKey"
-    value = data.sops_file.argocd.data.sshPrivateKeyGit
+    value = var.argocd_github_deploy_key
   }
 
   depends_on = [
