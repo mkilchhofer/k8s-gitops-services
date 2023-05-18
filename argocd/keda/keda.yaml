@@ -14,14 +14,17 @@ spec:
       - ServerSideApply=true
   source:
     chart: keda
-    repoURL: https://kedacore.github.io/charts/
-    targetRevision: "2.10.2"
+    repoURL: https://chartmuseum.tools.kilchhofer.info/
+    targetRevision: "2.10.2-existingIssuer.1"
     helm:
       version: v3
       values: |-
         certificates:
           certManager:
             enabled: true
+            existingIssuer:
+              enabled: true
+              name: ca-issuer
         prometheus:
           metricServer:
             enabled: true
