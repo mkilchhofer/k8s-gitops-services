@@ -69,3 +69,21 @@ spec:
             scopes: openid profile email groups
             token_url: https://sso.cloud.kilchhofer.info/token
             email_attribute_path: email
+
+        extraObjects:
+        - apiVersion: cilium.io/v2
+          kind: CiliumNetworkPolicy
+          metadata:
+            name: grafana
+          spec:
+            endpointSelector:
+              matchLabels:
+                app.kubernetes.io/instance: grafana
+                app.kubernetes.io/name: grafana
+            egress:
+              - toFQDNs:
+                  - matchName: grafana.com
+                  - matchName: secure.gravatar.com
+                toPorts:
+                  - ports:
+                      - port: "443"
