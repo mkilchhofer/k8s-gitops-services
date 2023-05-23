@@ -47,6 +47,8 @@ spec:
           pspEnabled: false
           namespaced: true
 
+        initChownData:
+          enabled: false
         useStatefulSet: true
         persistence:
           enabled: true
