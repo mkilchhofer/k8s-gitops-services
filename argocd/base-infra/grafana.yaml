@@ -83,7 +83,10 @@ spec:
             egress:
               - toFQDNs:
                   - matchName: grafana.com
+                    # User avatars
                   - matchName: secure.gravatar.com
+                    # Version check
+                  - matchName: raw.githubusercontent.com
                 toPorts:
                   - ports:
                       - port: "443"
