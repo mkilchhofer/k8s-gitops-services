@@ -46,3 +46,10 @@ spec:
         rbac:
           pspEnabled: false
           namespaced: true
+
+        useStatefulSet: true
+        persistence:
+          enabled: true
+          type: statefulset
+          storageClassName: nfs-data
+          size: 5Gi
