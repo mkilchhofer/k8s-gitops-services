@@ -16,6 +16,8 @@ spec:
     targetRevision: 6.56.5
     helm:
       version: v3
+      valueFiles:
+      - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/grafana.yaml
       values: |-
         containerSecurityContext:
           allowPrivilegeEscalation: false
