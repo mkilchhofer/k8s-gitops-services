@@ -12,7 +12,7 @@ spec:
   syncPolicy: {}
   source:
     chart: nebraska
-    repoURL: https://kinvolk.github.io/nebraska/
+    repoURL: https://flatcar.github.io/nebraska/
     targetRevision: "1.0.0"
     helm:
       version: v3
