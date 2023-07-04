@@ -19,6 +19,8 @@ spec:
     helm:
       version: v3
       values: |-
+        extraArgs:
+          remoteWrite.label: cluster=k3s
         resources:
           limits:
             cpu: 500m
