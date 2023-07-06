@@ -34,3 +34,10 @@ spec:
             runAsUser: 1000
           securityContext:
             fsGroup: 1000
+          scrape:
+            enabled: true
+            config:
+              scrape_configs:
+                - job_name: victoriametrics
+                  static_configs:
+                    - targets: [ "localhost:8428" ]
