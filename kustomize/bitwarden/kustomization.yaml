@@ -7,5 +7,5 @@ resources:
   - ingress.yaml
   - service.yaml
   - statefulset.yaml
-  - sealedsecret.yaml
+  - externalsecret.yaml
   - networkpolicy.yaml
