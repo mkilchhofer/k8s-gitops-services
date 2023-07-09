@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ca-issuer.yaml
-  - cluster-issuer-sealedsecret.yaml
+  - cluster-issuer-externalsecret.yaml
   - cluster-issuer.yaml
   - networkpolicy-egress.yaml
   - networkpolicy-ingress.yaml
