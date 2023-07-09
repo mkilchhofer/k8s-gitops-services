@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    akeyless = {
+      source = "akeyless-community/akeyless"
+      version = "1.3.2"
+    }
     argocd = {
       source  = "oboukili/argocd"
       version = "3.2.0"
