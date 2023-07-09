@@ -12,3 +12,8 @@ spec:
       toPorts:
         - ports:
             - port: "443"
+    - toFQDNs:
+        - matchName: api.akeyless.io
+      toPorts:
+        - ports:
+            - port: "443"
