@@ -8,11 +8,6 @@ spec:
       app.kubernetes.io/name: external-secrets
   egress:
     - toFQDNs:
-        - matchName: api.doppler.com
-      toPorts:
-        - ports:
-            - port: "443"
-    - toFQDNs:
         - matchName: api.akeyless.io
       toPorts:
         - ports:

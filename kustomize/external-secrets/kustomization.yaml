@@ -4,4 +4,3 @@ resources:
   - admission-webhooks-networkpolicy.yaml
   - egress-networkpolicy.yaml
   - akeyless-clustersecretstore.yaml
-  - clustersecretstore.yaml

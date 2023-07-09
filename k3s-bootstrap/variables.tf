@@ -39,12 +39,6 @@ variable "kubernetes_client_key" {
   description = "PEM-encoded client certificate key for TLS authentication."
 }
 
-variable "doppler_service_token" {
-  type        = string
-  sensitive   = true
-  description = "Doppler Service Token for ClusterSecretStore"
-}
-
 variable "akeyless_access_id" {
   type        = string
   sensitive   = true
