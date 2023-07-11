@@ -16,8 +16,6 @@ spec:
     targetRevision: 6.56.5
     helm:
       version: v3
-      valueFiles:
-      - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/grafana.yaml
       values: |-
         containerSecurityContext:
           allowPrivilegeEscalation: false
@@ -70,6 +68,13 @@ spec:
             token_url: https://sso.cloud.kilchhofer.info/token
             email_attribute_path: email
 
+        envFromSecrets:
+        - name: grafana-oidc-secret
+          optional: false
+
+        admin:
+          existingSecret: grafana-admin-creds
+
         extraObjects:
         - apiVersion: cilium.io/v2
           kind: CiliumNetworkPolicy
@@ -92,3 +97,34 @@ spec:
                 toPorts:
                   - ports:
                       - port: "443"
+        - apiVersion: external-secrets.io/v1beta1
+          kind: ExternalSecret
+          metadata:
+            name: grafana-oidc-secret
+          spec:
+            secretStoreRef:
+              kind: ClusterSecretStore
+              name: akeyless-k3s-secrets
+
+            target:
+              name: grafana-oidc-secret
+
+            data:
+              - secretKey: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+                remoteRef:
+                  key: /k3s/grafana/oidc-clientSecret
+        - apiVersion: external-secrets.io/v1beta1
+          kind: ExternalSecret
+          metadata:
+            name: grafana-admin-creds
+          spec:
+            secretStoreRef:
+              kind: ClusterSecretStore
+              name: akeyless-k3s-secrets
+
+            target:
+              name: grafana-admin-creds
+
+            dataFrom:
+            - extract:
+                key: /k3s/grafana/admin-creds
