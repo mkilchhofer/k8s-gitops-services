@@ -16,11 +16,9 @@ spec:
     targetRevision: "5.1.0"
     helm:
       version: v3
-      valueFiles:
-        - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/vm-oauth2-proxy.yaml
       values: |-
         config:
-          clientID: "victoria-metrics"
+          existingSecret: vm-oauth2-proxy-custom
           configFile: |-
             reverse_proxy = true
             real_client_ip_header = "X-Forwarded-For"
@@ -44,6 +42,7 @@ spec:
 
         htpasswdFile:
           enabled: true
+          existingSecret: vm-oauth2-proxy-custom-htpasswd-file
           # credentials are injected via helm-secrets
 
         service:
@@ -87,3 +86,35 @@ spec:
                     - port: http
                       protocol: TCP
 
+          - apiVersion: external-secrets.io/v1beta1
+            kind: ExternalSecret
+            metadata:
+              name: vm-oauth2-proxy-custom
+            spec:
+              secretStoreRef:
+                kind: ClusterSecretStore
+                name: akeyless-k3s-secrets
+
+              target:
+                name: vm-oauth2-proxy-custom
+
+              dataFrom:
+              - extract:
+                  key: /k3s/victoria-metrics-vmsingle/oauth2-proxy
+
+          - apiVersion: external-secrets.io/v1beta1
+            kind: ExternalSecret
+            metadata:
+              name: vm-oauth2-proxy-custom-htpasswd-file
+            spec:
+              secretStoreRef:
+                kind: ClusterSecretStore
+                name: akeyless-k3s-secrets
+
+              target:
+                name: vm-oauth2-proxy-custom-htpasswd-file
+
+              data:
+                - secretKey: users.txt
+                  remoteRef:
+                    key: /k3s/victoria-metrics-vmsingle/oauth2-proxy-htpasswd
