@@ -16,8 +16,6 @@ spec:
     targetRevision: "1.0.0"
     helm:
       version: v3
-      valueFiles:
-      - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/nebraska.yaml
       values: |-
         image:
           tag: 2.8.5
@@ -36,7 +34,7 @@ spec:
           auth:
             mode: oidc
             oidc:
-              clientID: nebraska
+              existingSecret: nebraska-custom
               issuerURL: https://sso.cloud.kilchhofer.info
               validRedirectURLs: https://flatcar.tools.kilchhofer.info/*
               adminRoles: kilchhofer-home:admins
