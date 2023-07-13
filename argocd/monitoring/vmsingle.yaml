@@ -13,7 +13,7 @@ spec:
   source:
     chart: victoria-metrics-single
     repoURL: https://victoriametrics.github.io/helm-charts/
-    targetRevision: "0.8.59"
+    targetRevision: "0.9.0"
     helm:
       version: v3
       values: |-
@@ -41,3 +41,43 @@ spec:
                 - job_name: victoriametrics
                   static_configs:
                     - targets: [ "localhost:8428" ]
+        extraObjects:
+          - apiVersion: networking.k8s.io/v1
+            kind: NetworkPolicy
+            metadata:
+              name: vmsingle
+            spec:
+              podSelector:
+                matchLabels:
+                  app: server
+                  app.kubernetes.io/instance: vmsingle
+                  app.kubernetes.io/name: victoria-metrics-single
+              policyTypes:
+                - Ingress
+              ingress:
+                - from:
+                    - podSelector:
+                        matchLabels:
+                          app.kubernetes.io/instance: vmagent
+                          app.kubernetes.io/name: victoria-metrics-agent
+                    - podSelector:
+                        matchLabels:
+                          app.kubernetes.io/instance: prometheus-adapter
+                          app.kubernetes.io/name: prometheus-adapter
+                    - podSelector:
+                        matchLabels:
+                          app.kubernetes.io/instance: opencost
+                          app.kubernetes.io/name: opencost
+                    - podSelector:
+                        matchLabels:
+                          app.kubernetes.io/instance: vm-oauth2-proxy
+                          app.kubernetes.io/name: oauth2-proxy
+                    - namespaceSelector:
+                        matchLabels:
+                          kubernetes.io/metadata.name: keda
+                      podSelector:
+                        matchLabels:
+                          app: keda-operator
+                  ports:
+                    - port: http
+                      protocol: TCP
