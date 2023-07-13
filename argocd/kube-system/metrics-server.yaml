@@ -17,9 +17,12 @@ spec:
   source:
     chart: metrics-server
     repoURL: https://kubernetes-sigs.github.io/metrics-server/
-    targetRevision: 3.8.2
+    targetRevision: 3.10.0
     helm:
       values: |-
+        metrics:
+          enabled: true
+
         priorityClassName: system-cluster-critical
 
         resources:
@@ -30,3 +33,8 @@ spec:
             cpu: 10m
             memory: 30Mi
 
+        service:
+          annotations:
+            prometheus.io/port: '10250'
+            prometheus.io/scheme: 'https'
+            prometheus.io/scrape: 'true'
