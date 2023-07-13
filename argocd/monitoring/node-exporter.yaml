@@ -15,7 +15,7 @@ spec:
   source:
     chart: prometheus-node-exporter
     repoURL: https://prometheus-community.github.io/helm-charts/
-    targetRevision: "4.17.0"
+    targetRevision: "4.20.0"
     helm:
       version: v3
       values: |-
@@ -32,3 +32,24 @@ spec:
         service:
           annotations:
             prometheus.io/port: '9100'
+        extraManifests:
+          - apiVersion: networking.k8s.io/v1
+            kind: NetworkPolicy
+            metadata:
+              name: prometheus-node-exporter-vmagent
+            spec:
+              podSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: prometheus-node-exporter
+                  app.kubernetes.io/name: prometheus-node-exporter
+              policyTypes:
+                - Ingress
+              ingress:
+                - from:
+                    - podSelector:
+                        matchLabels:
+                          app.kubernetes.io/instance: vmagent
+                          app.kubernetes.io/name: victoria-metrics-agent
+                  ports:
+                    - port: 9100
+                      protocol: TCP
