@@ -16,8 +16,6 @@ spec:
     targetRevision: 0.11.1
     helm:
       version: v3
-      valueFiles:
-        - secrets+gpg-import-kubernetes://argocd/gpg-private-keys#app.asc?https://raw.githubusercontent.com/mkilchhofer/k8s-gitops-services/main/secrets/dex.yaml
       values: |-
         image:
           tag: v2.36.0-distroless
@@ -30,6 +28,80 @@ spec:
             type: kubernetes
             config:
               inCluster: true
+
+          connectors:
+            - type: github
+              id: github
+              name: GitHub
+              config:
+                clientID: '{{ .Env.GH_CLIENT_ID }}'
+                clientSecret: '{{ .Env.GH_CLIENT_SECRET }}'
+                orgs:
+                  - name: kilchhofer-home
+                redirectURI: https://sso.cloud.kilchhofer.info/callback
+                loadAllGroups: true
+
+          staticClients:
+            - id: argocd
+              secret: '{{ .Env.ARGOCD_CLIENT_SECRET }}'
+              name: ArgoCD
+              redirectURIs:
+                - https://argocd.tools.kilchhofer.info/auth/callback
+
+            - id: nebraska
+              secret: '{{ .Env.NEBRASKA_CLIENT_SECRET }}'
+              name: Nebraska
+              redirectURIs:
+                - https://flatcar.tools.kilchhofer.info/login/cb
+
+            - id: polaris
+              secret: '{{ .Env.POLARIS_CLIENT_SECRET }}'
+              name: Polaris
+              redirectURIs:
+                - https://polaris.tools.kilchhofer.info/oauth/callback
+
+            - id: kubeview
+              secret: '{{ .Env.KUBEVIEW_CLIENT_SECRET }}'
+              name: KubeView
+              redirectURIs:
+                - https://kubeview.tools.kilchhofer.info/oauth/callback
+
+            - id: echo-server
+              secret: '{{ .Env.ECHO_SERVER_CLIENT_SECRET }}'
+              name: EchoServer
+              redirectURIs:
+                - http://echo-server-gatekeeper.tools.kilchhofer.info/oauth/callback
+                - http://echo-server-oauth2-proxy.tools.kilchhofer.info/oauth2/callback
+
+            - id: proxmox
+              secret: '{{ .Env.PROXMOX_CLIENT_SECRET }}'
+              name: Proxmox
+              redirectURIs:
+                - https://proxmox.ma.kilchhofer.info:8006
+
+            - id: hubble
+              secret: '{{ .Env.HUBBLE_CLIENT_SECRET }}'
+              name: Hubble
+              redirectURIs:
+                - https://hubble.tools.kilchhofer.info/oauth/callback
+
+            - id: victoria-metrics
+              secret: '{{ .Env.VICTORIA_METRICS_CLIENT_SECRET }}'
+              name: VictoriaMetrics
+              redirectURIs:
+                - https://vm.cloud.kilchhofer.info/oauth2/callback
+
+            - id: grafana
+              secret: '{{ .Env.GRAFANA_CLIENT_SECRET }}'
+              name: Grafana
+              redirectURIs:
+                - https://grafana.tools.kilchhofer.info/login/generic_oauth
+
+        envFrom:
+          - secretRef:
+              name: dex-clients
+          - secretRef:
+              name: dex-github
 
         resources:
           limits:
