@@ -5,6 +5,7 @@ metadata:
 spec:
   serviceName: bitwarden
   replicas: 1
+  revisionHistoryLimit: 2
   updateStrategy:
     type: RollingUpdate
   template:
@@ -14,7 +15,7 @@ spec:
         runAsUser: 65534
       containers:
       - name: bitwarden
-        image: vaultwarden/server:1.28.1-alpine
+        image: vaultwarden/server:1.29.0-alpine
         envFrom:
         - configMapRef:
             name: bitwarden-config
