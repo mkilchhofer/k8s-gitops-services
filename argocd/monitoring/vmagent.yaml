@@ -15,7 +15,7 @@ spec:
   source:
     chart: victoria-metrics-agent
     repoURL: https://victoriametrics.github.io/helm-charts/
-    targetRevision: "0.8.37"
+    targetRevision: "0.9.0"
     helm:
       version: v3
       values: |-
