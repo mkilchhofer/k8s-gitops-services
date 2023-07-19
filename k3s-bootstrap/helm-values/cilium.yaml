@@ -37,35 +37,6 @@ hubble:
       requests:
         cpu: 100m
         memory: 64Mi
-  ui:
-    enabled: false
-    rollOutPods: true
-    backend:
-      resources:
-        limits:
-          cpu: 1000m
-          memory: 1024M
-        requests:
-          cpu: 100m
-          memory: 64Mi
-
-    frontend:
-      resources:
-        limits:
-          cpu: 1000m
-          memory: 1024M
-        requests:
-          cpu: 100m
-          memory: 64Mi
-
-    proxy:
-      resources:
-        limits:
-          cpu: 500m
-          memory: 256M
-        requests:
-          cpu: 100m
-          memory: 24Mi
 
   tls:
     auto:

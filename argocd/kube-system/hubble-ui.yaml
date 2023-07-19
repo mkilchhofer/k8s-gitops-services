@@ -1,0 +1,64 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hubble-ui
+  namespace: argocd
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy:
+    syncOptions:
+    - ServerSideApply=true
+  source:
+    chart: cilium
+    repoURL: https://helm.cilium.io/
+    targetRevision: 1.12.7
+    helm:
+      values: |-
+        agent: false
+        nodeinit:
+          enabled: false
+        operator:
+          enabled: false
+        preflight:
+          enabled: false
+
+        hubble:
+          ui:
+            enabled: true
+            standalone:
+              enabled: true
+
+            rollOutPods: true
+            backend:
+              resources:
+                limits:
+                  cpu: 1000m
+                  memory: 1024M
+                requests:
+                  cpu: 100m
+                  memory: 64Mi
+
+            frontend:
+              resources:
+                limits:
+                  cpu: 1000m
+                  memory: 1024M
+                requests:
+                  cpu: 100m
+                  memory: 64Mi
+
+            proxy:
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 256M
+                requests:
+                  cpu: 100m
+                  memory: 24Mi
+          tls:
+            enabled: true
+            auto:
+              enabled: false
