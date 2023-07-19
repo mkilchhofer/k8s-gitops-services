@@ -22,8 +22,7 @@ operator:
       memory: 128Mi
   prometheus:
     enabled: true
-    serviceMonitor:
-      enabled: false # deployed via argocd-extra
+
 ipam:
   mode: kubernetes
 hubble:
@@ -45,10 +44,9 @@ hubble:
         group: cert-manager.io
         kind: ClusterIssuer
         name: ca-issuer
+
 prometheus:
   enabled: true
-  serviceMonitor:
-    enabled: false # deployed via argocd-extra
 
 resources:
   limits:
