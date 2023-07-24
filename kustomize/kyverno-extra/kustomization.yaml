@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - add-default-securitycontext.yaml
   - require_pdb.yaml
+  - require-probes.yaml
