@@ -37,13 +37,15 @@ hubble:
         cpu: 100m
         memory: 64Mi
 
-  tls:
-    auto:
-      method: certmanager
-      certManagerIssuerRef:
-        group: cert-manager.io
-        kind: ClusterIssuer
-        name: ca-issuer
+  ## Because I'm picky: we cannot depend on cert-manager here.
+  ## Otherwise we have something like a circular dependency.
+  # tls:
+  #   auto:
+  #     method: certmanager
+  #     certManagerIssuerRef:
+  #       group: cert-manager.io
+  #       kind: ClusterIssuer
+  #       name: ca-issuer
 
 prometheus:
   enabled: true
