@@ -2,7 +2,7 @@ resource "helm_release" "cilium" {
   name       = "cilium"
   repository = "https://helm.cilium.io/"
   chart      = "cilium"
-  version    = "1.12.7"
+  version    = "1.12.11"
   namespace  = "kube-system"
 
   max_history = local.helm_max_history
