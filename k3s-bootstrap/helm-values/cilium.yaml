@@ -36,6 +36,9 @@ hubble:
       requests:
         cpu: 100m
         memory: 64Mi
+    tls:
+      server:
+        enabled: true
 
   tls:
     auto:
