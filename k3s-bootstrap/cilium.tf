@@ -9,7 +9,7 @@ resource "helm_release" "cilium" {
 
   # Ref: https://docs.cilium.io/en/stable/gettingstarted/hubble-configuration/#user-provided-certificates
   # --set hubble.tls.auto.enabled=false                          # disable automatic TLS certificate generation
-  # --set-file tls.ca.cert=ca.crt.b64                            # certificate of the CA that signs all certificates
+  # --set-file hubble.tls.ca.cert=ca.crt.b64                     # certificate of the CA that signs all certificates
   # --set-file hubble.tls.server.cert=server.crt.b64             # certificate for Hubble server
   # --set-file hubble.tls.server.key=server.key.b64              # private key for the Hubble server certificate
   # --set-file hubble.relay.tls.client.cert=relay-client.crt.b64 # client certificate for Hubble Relay to connect to Hubble instances
@@ -20,8 +20,13 @@ resource "helm_release" "cilium" {
   # --set-file hubble.ui.tls.client.key=ui-client.key.b64        # private key for Hubble UI client certificate
 
   # CA
+  # TODO: Remove "hubble.tls.ca.cert" on migration to 1.13
   set {
     name  = "tls.ca.cert"
+    value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
+  }
+  set {
+    name  = "hubble.tls.ca.cert"
     value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
   }
 
