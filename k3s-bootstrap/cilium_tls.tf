@@ -48,7 +48,7 @@ resource "tls_self_signed_cert" "cilium_ca" {
   allowed_uses = [
     "digital_signature",
     "key_encipherment",
-    # "cert_signing",
+    "cert_signing", # Also required, otherwise Hubble UI has issues to connect to relay
     "server_auth",
     "client_auth",
   ]
