@@ -69,12 +69,3 @@ spec:
                 requests:
                   cpu: 100m
                   memory: 64Mi
-
-            proxy:
-              resources:
-                limits:
-                  cpu: 500m
-                  memory: 256M
-                requests:
-                  cpu: 100m
-                  memory: 24Mi
