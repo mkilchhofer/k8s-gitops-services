@@ -165,3 +165,16 @@ resource "tls_locally_signed_cert" "hubble_ui" {
     "client_auth",
   ]
 }
+
+resource "kubernetes_secret_v1" "hubble_ui" {
+  metadata {
+    name      = "hubble-ui-custom"
+    namespace = "kube-system"
+  }
+
+  data = {
+    "ca.crt"  = tls_self_signed_cert.cilium_ca.cert_pem
+    "tls.crt" = tls_locally_signed_cert.hubble_ui.cert_pem
+    "tls.key" = tls_private_key.hubble_ui.private_key_pem
+  }
+}

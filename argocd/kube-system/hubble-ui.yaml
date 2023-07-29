@@ -27,10 +27,29 @@ spec:
 
         hubble:
           enabled: false # We use standalone mode
+          relay:
+            tls:
+              server:
+                enabled: true
+
           ui:
             enabled: true
             standalone:
               enabled: true
+              tls:
+                certsVolume:
+                  projected:
+                    defaultMode: 0400
+                    sources:
+                    - secret:
+                        name: hubble-ui-custom
+                        items:
+                        - key: tls.crt
+                          path: client.crt
+                        - key: tls.key
+                          path: client.key
+                        - key: ca.crt
+                          path: hubble-relay-ca.crt
 
             rollOutPods: true
             backend:
@@ -59,7 +78,3 @@ spec:
                 requests:
                   cpu: 100m
                   memory: 24Mi
-          tls:
-            enabled: true
-            auto:
-              enabled: false
