@@ -26,6 +26,7 @@ spec:
           enabled: false
 
         hubble:
+          enabled: false # We use standalone mode
           ui:
             enabled: true
             standalone:
