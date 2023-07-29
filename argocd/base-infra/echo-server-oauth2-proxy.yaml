@@ -56,7 +56,7 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt
           className: contour
           tls:
-            - secretName: echo-server-cert
+            - secretName: echo-server-ingress-cert
               hosts:
                 - echo-server-oauth2-proxy.tools.kilchhofer.info
         extraObjects:

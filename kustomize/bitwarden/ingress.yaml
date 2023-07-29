@@ -38,4 +38,4 @@ spec:
   tls:
   - hosts:
     - bw.tools.kilchhofer.info
-    secretName: bitwarden-cert
+    secretName: bitwarden-ingress-cert

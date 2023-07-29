@@ -28,4 +28,4 @@ spec:
   - hosts:
     - www.kilchhofer.info
     - kilchhofer.info
-    secretName: website-marco-cert
+    secretName: website-marco-ingress-cert

@@ -37,7 +37,7 @@ spec:
             - grafana.tools.kilchhofer.info
 
           tls:
-            - secretName: grafana-ingress
+            - secretName: grafana-ingress-cert
               hosts:
                 - grafana.tools.kilchhofer.info
 

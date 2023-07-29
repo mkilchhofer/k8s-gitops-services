@@ -29,7 +29,7 @@ spec:
           tls:
             - hosts:
               - unifi.tools.kilchhofer.info
-              secretName: unifi-cert
+              secretName: unifi-ingress-cert
         image:
           tag: "v7.2.92"
         livenessProbe:

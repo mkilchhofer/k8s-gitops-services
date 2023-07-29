@@ -48,6 +48,6 @@ spec:
               paths:
                 - "/"
           tls:
-            - secretName: echo-server-cert
+            - secretName: echo-server-ingress-cert
               hosts:
                 - echo-server.tools.kilchhofer.info

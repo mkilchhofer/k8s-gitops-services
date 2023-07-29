@@ -22,4 +22,4 @@ spec:
   tls:
   - hosts:
     - git.tools.kilchhofer.info
-    secretName: git-cert
+    secretName: git-ingress-cert

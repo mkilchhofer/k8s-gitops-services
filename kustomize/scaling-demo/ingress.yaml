@@ -24,4 +24,4 @@ spec:
   tls:
   - hosts:
     - scaling-demo.tools.kilchhofer.info
-    secretName: scaling-demo-cert
+    secretName: scaling-demo-ingress-cert

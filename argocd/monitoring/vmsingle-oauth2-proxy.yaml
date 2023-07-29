@@ -59,7 +59,7 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt
           className: nginx-external
           tls:
-            - secretName: vm-oauth2-proxy-cert
+            - secretName: vm-oauth2-proxy-ingress-cert
               hosts:
                 - vm.cloud.kilchhofer.info
 

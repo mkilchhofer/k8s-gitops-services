@@ -68,7 +68,7 @@ spec:
           hosts:
             - flatcar.tools.kilchhofer.info
           tls:
-            - secretName: nebraska-cert
+            - secretName: nebraska-ingress-cert
               hosts:
                 - flatcar.tools.kilchhofer.info
 
