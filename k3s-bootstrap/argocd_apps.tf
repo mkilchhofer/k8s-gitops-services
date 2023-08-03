@@ -23,7 +23,7 @@ resource "argocd_application" "app_of_apps" {
     }
 
     sync_policy {
-      automated = {
+      automated {
         prune       = false
         self_heal   = false
         allow_empty = false
