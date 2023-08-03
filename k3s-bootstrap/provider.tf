@@ -27,11 +27,9 @@ provider "kubernetes" {
 }
 
 provider "argocd" {
-  server_addr = "" # Dummy value required when using port_forward=true
   username    = "admin"
   password    = var.argocd_admin_password
 
-  port_forward                = true
   port_forward_with_namespace = kubernetes_namespace.argocd.metadata.0.name
 
   plain_text = true
