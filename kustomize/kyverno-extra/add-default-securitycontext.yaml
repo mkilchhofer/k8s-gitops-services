@@ -30,6 +30,16 @@ spec:
           selector:
             matchLabels:
               app.kubernetes.io/name: metallb
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
     mutate:
       patchStrategicMerge:
         spec:

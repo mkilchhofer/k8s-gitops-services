@@ -48,6 +48,16 @@ spec:
                       operator: In
                       values:
                       - metallb
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
 
           disallow-host-namespaces:
             any:
@@ -73,6 +83,16 @@ spec:
                       - metallb
                       - kured
                       - prometheus-node-exporter
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
 
           disallow-host-path:
             any:
@@ -90,6 +110,16 @@ spec:
                       values:
                       - promtail
                       - prometheus-node-exporter
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
 
           disallow-host-ports:
             any:
@@ -115,6 +145,16 @@ spec:
                       - metallb
                       - kured
                       - prometheus-node-exporter
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
 
           disallow-privileged-containers:
             any:
@@ -131,6 +171,16 @@ spec:
                       operator: In
                       values:
                       - kured
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
 
           disallow-selinux:
             any:
@@ -184,6 +234,16 @@ spec:
                       - metallb
                       - metrics-server
                       - plex
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
 
           disallow-privilege-escalation:
             any:
@@ -215,6 +275,16 @@ spec:
                       operator: In
                       values:
                       - kured
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
 
           require-run-as-non-root-user:
             any:
@@ -228,6 +298,16 @@ spec:
                       - kured
                       - metallb
                       - plex
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
 
           require-run-as-nonroot:
             any:
@@ -267,6 +347,16 @@ spec:
                selector:
                   matchLabels:
                     app: nfs-data-provisioner
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
 
           restrict-volume-types:
             any:
@@ -289,3 +379,13 @@ spec:
                 selector:
                   matchLabels:
                     app: nfs-data-provisioner
+            - resources:
+                namespaces:
+                - storage
+                selector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - csi-nfs-node
+                      - csi-nfs-controller
