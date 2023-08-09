@@ -2,7 +2,7 @@ resource "helm_release" "cilium" {
   name       = "cilium"
   repository = "https://helm.cilium.io/"
   chart      = "cilium"
-  version    = "1.12.11"
+  version    = "1.13.5"
   namespace  = "kube-system"
 
   max_history = local.helm_max_history
@@ -20,13 +20,8 @@ resource "helm_release" "cilium" {
   # --set-file hubble.ui.tls.client.key=ui-client.key.b64        # private key for Hubble UI client certificate
 
   # CA
-  # TODO: Remove "hubble.tls.ca.cert" on migration to 1.13
   set {
     name  = "tls.ca.cert"
-    value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
-  }
-  set {
-    name  = "hubble.tls.ca.cert"
     value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
   }
 
