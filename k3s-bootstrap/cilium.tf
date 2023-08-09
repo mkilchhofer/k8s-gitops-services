@@ -20,8 +20,14 @@ resource "helm_release" "cilium" {
   # --set-file hubble.ui.tls.client.key=ui-client.key.b64        # private key for Hubble UI client certificate
 
   # CA
+  # TODO: Remove "hubble.tls.ca.cert" on migration to 1.13
+  # (check again in next release, still seems required in 1.13.5)
   set {
     name  = "tls.ca.cert"
+    value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
+  }
+  set {
+    name  = "hubble.tls.ca.cert"
     value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
   }
 
