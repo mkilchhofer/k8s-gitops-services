@@ -27,6 +27,15 @@ operator:
 ipam:
   mode: kubernetes
 hubble:
+  metrics:
+    enabled:
+      - dns:query;ignoreAAAA
+      - drop
+      - tcp
+      - flow
+      - icmp
+      - http
+
   relay:
     enabled: true
     rollOutPods: true
