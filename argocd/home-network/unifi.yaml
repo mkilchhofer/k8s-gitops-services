@@ -31,7 +31,7 @@ spec:
               - unifi.tools.kilchhofer.info
               secretName: unifi-ingress-cert
         image:
-          tag: "v7.2.92"
+          tag: "v7.4.162"
         livenessProbe:
           enabled: false
 
