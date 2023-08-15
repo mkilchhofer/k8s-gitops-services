@@ -210,9 +210,6 @@ repoServer:
       drop: ["ALL"]
     readOnlyRootFilesystem: true
     runAsNonRoot: true
-  image:
-    repository: ghcr.io/mkilchhofer/argocd-helm-secrets
-    tag: v2.5.2-helm-secrets.1
 
   metrics:
     enabled: true
@@ -232,19 +229,6 @@ repoServer:
     requests:
       cpu: 50m
       memory: 64Mi
-
-  serviceAccount:
-    create: true
-
-  rbac:
-  - apiGroups:
-    - ""
-    resources:
-    - secrets
-    verbs:
-    - get
-    - list
-    - watch
 
   volumes:
     - name: gpg-private-keys
