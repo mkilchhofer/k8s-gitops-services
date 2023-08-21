@@ -21,14 +21,14 @@ spec:
           service:
             name: argocd-server
             port:
-              number: 80
+              number: 443
         path: /
         pathType: Prefix
       - backend:
           service:
             name: argocd-server
             port:
-              number: 80
+              number: 443
         path: /terminal
         pathType: Prefix
   tls:

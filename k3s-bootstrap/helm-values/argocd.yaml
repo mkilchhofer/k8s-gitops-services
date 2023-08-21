@@ -56,6 +56,8 @@ dex:
   enabled: false
 
 notifications:
+  extraArgs:
+    - --argocd-repo-server-strict-tls
   metrics:
     enabled: true
     service:
@@ -204,6 +206,8 @@ redis:
       memory: 64Mi
 
 repoServer:
+  certificateSecret:
+    enabled: true
   containerSecurityContext:
     allowPrivilegeEscalation: false
     capabilities:
@@ -242,6 +246,8 @@ repoServer:
 server:
   extraArgs:
     []
+  certificateSecret:
+    enabled: true
   containerSecurityContext:
     allowPrivilegeEscalation: false
     capabilities:
@@ -280,6 +286,10 @@ server:
     requests:
       cpu: 50m
       memory: 64Mi
+
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.tls: "443"
 
 configs:
   cm:
@@ -320,8 +330,8 @@ configs:
         clusters:
           - '*'
 
-  params:
-    server.insecure: "true"
+  # params:
+  #   server.insecure: "true"
 
   rbac:
     policy.csv: |

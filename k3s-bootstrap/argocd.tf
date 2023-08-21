@@ -71,6 +71,30 @@ resource "helm_release" "argocd" {
     value = var.argocd_github_deploy_key
   }
 
+  # TLS for server
+  set {
+    name = "server.certificateSecret.crt"
+    value = tls_locally_signed_cert.argocd_server.cert_pem
+  }
+  set {
+    name = "server.certificateSecret.key"
+    value = tls_private_key.argocd_server.private_key_pem
+  }
+
+  # TLS for repo-server
+  set {
+    name = "repoServer.certificateSecret.ca"
+    value = tls_self_signed_cert.cilium_ca.cert_pem
+  }
+  set {
+    name = "repoServer.certificateSecret.crt"
+    value = tls_locally_signed_cert.argocd_repo_server.cert_pem
+  }
+  set {
+    name = "repoServer.certificateSecret.key"
+    value = tls_private_key.argocd_repo_server.private_key_pem
+  }
+
   depends_on = [
     helm_release.cilium,
     helm_release.cilium_global_policies
