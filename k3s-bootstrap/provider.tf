@@ -32,8 +32,6 @@ provider "argocd" {
 
   port_forward_with_namespace = kubernetes_namespace.argocd.metadata.0.name
 
-  plain_text = false
-  insecure   = true # TODO: find way to inject CA of generated certs
   # grpc_web = true
 
   kubernetes {
