@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: trivy-server
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: trivy-server
+      app.kubernetes.io/name: trivy-server
+  policyTypes:
+    - Egress
+    - Ingress
+  egress:
+    - ports:
+      - port: 443
+        protocol: TCP
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app.kubernetes.io/instance: trivy-operator
+            app.kubernetes.io/name: trivy-operator
+      - podSelector:
+          matchLabels:
+            app.kubernetes.io/managed-by: trivy-operator
+      ports:
+      - port: 4954
+        protocol: TCP
