@@ -60,6 +60,9 @@ spec:
                       values:
                       - csi-nfs-node
                       - csi-nfs-controller
+            - resources:
+                namespaces:
+                - falco
 
           disallow-host-namespaces:
             any:
@@ -134,6 +137,9 @@ spec:
                 selector:
                   matchLabels:
                     app: node-collector
+            - resources:
+                namespaces:
+                - falco
 
           disallow-host-ports:
             any:
@@ -258,6 +264,9 @@ spec:
                       values:
                       - csi-nfs-node
                       - csi-nfs-controller
+            - resources:
+                namespaces:
+                - falco
 
           disallow-privilege-escalation:
             any:
@@ -299,6 +308,9 @@ spec:
                       values:
                       - csi-nfs-node
                       - csi-nfs-controller
+            - resources:
+                namespaces:
+                - falco
 
           require-run-as-non-root-user:
             any:
@@ -395,6 +407,9 @@ spec:
                 selector:
                   matchLabels:
                     app: node-collector
+            - resources:
+                namespaces:
+                - falco
 
           restrict-volume-types:
             any:
@@ -433,3 +448,6 @@ spec:
                 selector:
                   matchLabels:
                     app: node-collector
+            - resources:
+                namespaces:
+                - falco

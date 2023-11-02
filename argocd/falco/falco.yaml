@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: falco
+  namespace: argocd
+spec:
+  destination:
+    namespace: falco
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    path: umbrella-charts/falco
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
