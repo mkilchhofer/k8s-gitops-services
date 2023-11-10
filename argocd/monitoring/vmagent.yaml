@@ -109,6 +109,11 @@ spec:
               kubernetes_sd_configs:
                 - role: node
               relabel_configs:
+                  # Don't scrape CP nodes twice (k3s exposes same metrics twice)
+                - action: drop
+                  regex: true
+                  source_labels:
+                  - __meta_kubernetes_node_label_node_role_kubernetes_io_control_plane
                 - action: labelmap
                   regex: __meta_kubernetes_node_label_(.+)
                 - target_label: __address__
