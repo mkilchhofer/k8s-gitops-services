@@ -20,7 +20,7 @@ spec:
       version: v3
       values: |-
         image:
-          tag: 2.8.5
+          tag: 2.8.6
         config:
           app:
             title: Flatcar Updates
