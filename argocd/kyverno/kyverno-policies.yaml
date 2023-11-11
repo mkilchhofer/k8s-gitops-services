@@ -95,6 +95,12 @@ spec:
                       values:
                       - csi-nfs-node
                       - csi-nfs-controller
+            - resources:
+                namespaces:
+                  - trivy-system
+                selector:
+                  matchLabels:
+                    app: node-collector
 
           disallow-host-path:
             any:
@@ -122,6 +128,12 @@ spec:
                       values:
                       - csi-nfs-node
                       - csi-nfs-controller
+            - resources:
+                namespaces:
+                  - trivy-system
+                selector:
+                  matchLabels:
+                    app: node-collector
 
           disallow-host-ports:
             any:
@@ -310,6 +322,18 @@ spec:
                       values:
                       - csi-nfs-node
                       - csi-nfs-controller
+            - resources:
+                namespaces:
+                  - trivy-system
+                selector:
+                  matchLabels:
+                    app.kubernetes.io/managed-by: trivy-operator
+            - resources:
+                namespaces:
+                  - trivy-system
+                selector:
+                  matchLabels:
+                    app: node-collector
 
           require-run-as-nonroot:
             any:
@@ -359,6 +383,18 @@ spec:
                       values:
                       - csi-nfs-node
                       - csi-nfs-controller
+            - resources:
+                namespaces:
+                  - trivy-system
+                selector:
+                  matchLabels:
+                    app.kubernetes.io/managed-by: trivy-operator
+            - resources:
+                namespaces:
+                  - trivy-system
+                selector:
+                  matchLabels:
+                    app: node-collector
 
           restrict-volume-types:
             any:
@@ -391,3 +427,9 @@ spec:
                       values:
                       - csi-nfs-node
                       - csi-nfs-controller
+            - resources:
+                namespaces:
+                  - trivy-system
+                selector:
+                  matchLabels:
+                    app: node-collector
