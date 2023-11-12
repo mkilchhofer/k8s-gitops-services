@@ -4,3 +4,4 @@ resources:
   - admission-webhooks-networkpolicy.yaml
   - metrics-apiserver-networkpolicy.yaml
   - operator-networkpolicy.yaml
+  - trigger-auth.yaml

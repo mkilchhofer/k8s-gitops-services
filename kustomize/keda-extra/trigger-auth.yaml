@@ -1,0 +1,28 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: keda-prom-secret
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: akeyless-k3s-secrets
+
+  target:
+    name: keda-prom-secret
+
+  dataFrom:
+  - extract:
+      key: /k3s/keda/prometheus-secret
+---
+apiVersion: keda.sh/v1alpha1
+kind: ClusterTriggerAuthentication
+metadata:
+  name: keda-prom-creds
+spec:
+  secretTargetRef:
+    - parameter: username
+      name: keda-prom-secret
+      key: username
+    - parameter: password
+      name: keda-prom-secret
+      key: password
