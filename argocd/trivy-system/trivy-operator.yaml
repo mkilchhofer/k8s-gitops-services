@@ -15,25 +15,5 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    chart: trivy-operator
-    repoURL: https://aquasecurity.github.io/helm-charts/
-    targetRevision: "0.18.2"
-    helm:
-      version: v3
-      values: |-
-        service:
-          headless: true
-          annotations:
-            prometheus.io/port: '8080'
-            prometheus.io/scrape: 'true'
-        trivyOperator:
-          scanJobPodTemplateContainerSecurityContext:
-            runAsUser: 0
-            runAsNonRoot: false
-        operator:
-          builtInTrivyServer: true
-        trivy:
-          storageClassEnabled: true
-          storageClassName: nfs-data
-        nodeCollector:
-          excludeNodes: node-role.kubernetes.io/control-plane=true
+    path: umbrella-charts/trivy-operator
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
