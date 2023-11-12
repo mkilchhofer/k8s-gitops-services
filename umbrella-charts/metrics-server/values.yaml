@@ -1,0 +1,19 @@
+metrics-server:
+  metrics:
+    enabled: true
+
+  priorityClassName: system-cluster-critical
+
+  resources:
+    limits:
+      cpu: 200m
+      memory: 300Mi
+    requests:
+      cpu: 10m
+      memory: 30Mi
+
+  service:
+    annotations:
+      prometheus.io/port: '10250'
+      prometheus.io/scheme: 'https'
+      prometheus.io/scrape: 'true'

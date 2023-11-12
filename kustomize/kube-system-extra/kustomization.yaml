@@ -6,4 +6,3 @@ resources:
   - node-view-clusterrole.yaml
   - kube-system-internal-networkpolicy.yaml
   - sealed-secrets-clusterrole.yaml
-  - metrics-server-networkpolicy.yaml
