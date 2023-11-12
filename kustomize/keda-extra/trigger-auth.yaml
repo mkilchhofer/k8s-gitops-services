@@ -12,6 +12,8 @@ spec:
 
   dataFrom:
   - extract:
+      conversionStrategy: Default
+      decodingStrategy: None
       key: /k3s/keda/prometheus-secret
 ---
 apiVersion: keda.sh/v1alpha1
