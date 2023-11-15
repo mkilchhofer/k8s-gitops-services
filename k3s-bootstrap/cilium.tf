@@ -2,7 +2,7 @@ resource "helm_release" "cilium" {
   name       = "cilium"
   repository = "https://helm.cilium.io/"
   chart      = "cilium"
-  version    = "1.13.5"
+  version    = "1.13.9"
   namespace  = "kube-system"
 
   max_history = local.helm_max_history
@@ -21,7 +21,7 @@ resource "helm_release" "cilium" {
 
   # CA
   # TODO: Remove "hubble.tls.ca.cert" on migration to 1.13
-  # (check again in next release, still seems required in 1.13.5)
+  # (check again in next release, still seems required in 1.13.9)
   set {
     name  = "tls.ca.cert"
     value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
