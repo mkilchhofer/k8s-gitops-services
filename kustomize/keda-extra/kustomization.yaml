@@ -5,3 +5,4 @@ resources:
   - metrics-apiserver-networkpolicy.yaml
   - operator-networkpolicy.yaml
   - trigger-auth.yaml
+  - operator-prometheus-networkpolicy.yaml
