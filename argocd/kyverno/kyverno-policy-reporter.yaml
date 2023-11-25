@@ -17,14 +17,16 @@ spec:
   source:
     chart: policy-reporter
     repoURL: https://kyverno.github.io/policy-reporter/
-    targetRevision: 2.13.5
+    targetRevision: 2.21.2
     helm:
       releaseName: policy-reporter
       values: |-
+        revisionHistoryLimit: 1
         networkPolicy:
           enabled: true
         ui:
           enabled: true
+          revisionHistoryLimit: 1
         metrics:
           enabled: true
           mode: custom
