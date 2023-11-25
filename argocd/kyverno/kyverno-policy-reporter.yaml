@@ -1,0 +1,47 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: kyverno-policy-reporter
+  namespace: argocd
+spec:
+  destination:
+    namespace: kyverno
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    chart: policy-reporter
+    repoURL: https://kyverno.github.io/policy-reporter/
+    targetRevision: 2.13.5
+    helm:
+      releaseName: policy-reporter
+      values: |-
+        networkPolicy:
+          enabled: true
+        ui:
+          enabled: true
+        metrics:
+          enabled: true
+          mode: custom
+          customLabels:
+            - namespace
+            - category
+            - kind
+            - name
+            - policy
+            - source
+            - severity
+            - status
+          filter:
+            status:
+              exclude:
+                - pass
+        service:
+          annotations:
+            prometheus.io/port: '8080'
+            prometheus.io/scrape: 'true'
