@@ -20,10 +20,13 @@ spec:
       version: v3
       values: |-
         image:
-          tag: 2.8.6
+          registry: docker.io
+          repository: kicm/nebraska
+          tag: update-alpine3.18
         config:
           app:
             title: Flatcar Updates
+            logoPath: null
           database:
             username: postgres
           syncer:
