@@ -1,3 +1,5 @@
 csi-driver-nfs:
   externalSnapshotter:
     enabled: false
+  node:
+    priorityClassName: system-node-critical # default is system-cluster-critical
