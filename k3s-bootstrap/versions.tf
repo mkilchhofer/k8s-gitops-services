@@ -17,10 +17,12 @@ terraform {
       version = "2.12.1"
     }
     null = {
-      source = "hashicorp/null"
+      source  = "hashicorp/null"
+      version = "3.2.1"
     }
     tls = {
-      source = "hashicorp/tls"
+      source  = "hashicorp/tls"
+      version = "4.0.4"
     }
   }
   required_version = ">= 1.3"
