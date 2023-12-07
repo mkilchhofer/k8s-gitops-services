@@ -11,45 +11,7 @@ spec:
     namespace: base-infra
     server: https://kubernetes.default.svc
   project: apps-restricted
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  syncPolicy: {}
   source:
-    chart: echo-server
-    repoURL: https://ealenn.github.io/charts
-    targetRevision: 0.5.0
-    helm:
-      version: v3
-      values: |-
-        image:
-          tag: 0.7.0
-
-        application:
-          logs:
-            ignore:
-              ping: true
-
-        securityContext:
-          runAsUser: 1001
-
-        service:
-          port: 8080
-
-        ingress:
-          enabled: false
-
-          annotations:
-            cert-manager.io/cluster-issuer: letsencrypt
-            cert-manager.io/revision-history-limit: "1"
-            ingress.kubernetes.io/force-ssl-redirect: "true"
-            kubernetes.io/ingress.class: contour
-
-          hosts:
-            - host: echo-server.tools.kilchhofer.info
-              paths:
-                - "/"
-          tls:
-            - secretName: echo-server-ingress-cert
-              hosts:
-                - echo-server.tools.kilchhofer.info
+    path: umbrella-charts/echo-server
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

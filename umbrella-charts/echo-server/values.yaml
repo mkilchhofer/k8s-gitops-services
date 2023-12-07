@@ -1,0 +1,152 @@
+echo-server:
+  image:
+    tag: 0.7.0
+
+  application:
+    logs:
+      ignore:
+        ping: true
+
+  securityContext:
+    runAsUser: 1001
+
+  service:
+    port: 8080
+
+  ingress:
+    enabled: false
+
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      cert-manager.io/revision-history-limit: "1"
+      ingress.kubernetes.io/force-ssl-redirect: "true"
+      kubernetes.io/ingress.class: contour
+
+    hosts:
+      - host: echo-server.tools.kilchhofer.info
+        paths:
+          - "/"
+    tls:
+      - secretName: echo-server-ingress-cert
+        hosts:
+          - echo-server.tools.kilchhofer.info
+
+#######################################################
+oauth2-proxy:
+  config:
+    existingSecret: echo-server-oauth2-proxy-custom
+    configFile: |-
+      reverse_proxy = true
+      real_client_ip_header = "X-Forwarded-For"
+      provider = "oidc"
+      provider_display_name = "GitHub / Dex"
+      redirect_url = "http://echo-server-oauth2-proxy.tools.kilchhofer.info/oauth2/callback"
+      oidc_issuer_url = "https://sso.cloud.kilchhofer.info"
+      email_domains = [ "*" ]
+      upstreams = [ "http://echo-server.base-infra.svc:8080" ]
+      silence_ping_logging = true
+      cookie_secure = false
+      pass_access_token = true
+      pass_authorization_header = true
+      allowed_groups = [
+          "kilchhofer-home:admins"
+      ]
+      htpasswd_user_groups = [
+          "kilchhofer-home:admins",
+          "basic-auth"
+      ]
+      # display_htpasswd_form = false
+      footer = "-"
+      banner = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+
+  htpasswdFile:
+    enabled: true
+    existingSecret: echo-server-oauth2-proxy-htpasswd-file-custom
+  ingress:
+    enabled: true
+    hosts:
+      - echo-server-oauth2-proxy.tools.kilchhofer.info
+
+    annotations:
+      ingress.kubernetes.io/force-ssl-redirect: "true"
+      cert-manager.io/cluster-issuer: letsencrypt
+    className: contour
+    tls:
+      - secretName: echo-server-ingress-cert
+        hosts:
+          - echo-server-oauth2-proxy.tools.kilchhofer.info
+  extraObjects:
+    - apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: echo-server-oauth2-proxy
+      spec:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/instance: echo-server-oauth2-proxy
+            app.kubernetes.io/name: oauth2-proxy
+        policyTypes:
+          - Egress
+          - Ingress
+        egress:
+            # To SSO (dex)
+          - ports:
+            - port: 443
+              protocol: TCP
+        ingress:
+          - ports:
+              - port: http
+                protocol: TCP
+    - apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: echo-server
+      spec:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/instance: echo-server
+            app.kubernetes.io/name: echo-server
+        policyTypes:
+          - Ingress
+        ingress:
+          - from:
+              - podSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: echo-server-oauth2-proxy
+                    app.kubernetes.io/name: oauth2-proxy
+            ports:
+              - port: http
+                protocol: TCP
+
+    - apiVersion: external-secrets.io/v1beta1
+      kind: ExternalSecret
+      metadata:
+        name: echo-server-oauth2-proxy-custom
+      spec:
+        secretStoreRef:
+          kind: ClusterSecretStore
+          name: akeyless-k3s-secrets
+
+        target:
+          name: echo-server-oauth2-proxy-custom
+
+        dataFrom:
+        - extract:
+            key: /k3s/echo-server/oauth2-proxy
+
+    - apiVersion: external-secrets.io/v1beta1
+      kind: ExternalSecret
+      metadata:
+        name: echo-server-oauth2-proxy-htpasswd-file-custom
+      spec:
+        secretStoreRef:
+          kind: ClusterSecretStore
+          name: akeyless-k3s-secrets
+
+        target:
+          name: echo-server-oauth2-proxy-htpasswd-file-custom
+
+        data:
+          - secretKey: users.txt
+            remoteRef:
+              key: /k3s/echo-server/htpasswdFile-entries
