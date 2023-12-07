@@ -1,0 +1,116 @@
+grafana:
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+
+  ingress:
+    enabled: true
+    annotations:
+      ingress.kubernetes.io/force-ssl-redirect: "true"
+      cert-manager.io/cluster-issuer: letsencrypt
+    ingressClassName: contour
+    hosts:
+      - grafana.tools.kilchhofer.info
+
+    tls:
+      - secretName: grafana-ingress-cert
+        hosts:
+          - grafana.tools.kilchhofer.info
+
+  rbac:
+    pspEnabled: false
+    namespaced: true
+
+  initChownData:
+    enabled: false
+  useStatefulSet: true
+  persistence:
+    enabled: true
+    type: statefulset
+    storageClassName: nfs-data
+    size: 5Gi
+
+  grafana.ini:
+    server:
+      root_url: https://grafana.tools.kilchhofer.info
+    auth.generic_oauth:
+      allow_sign_up: false
+      api_url: https://sso.cloud.kilchhofer.info/userinfo
+      auth_url: https://sso.cloud.kilchhofer.info/auth
+      client_id: grafana
+      enabled: true
+      name: Dex
+      scopes: openid profile email groups
+      token_url: https://sso.cloud.kilchhofer.info/token
+      email_attribute_path: email
+
+  envFromSecrets:
+  - name: grafana-oidc-secret
+    optional: false
+
+  admin:
+    existingSecret: grafana-admin-creds
+
+  extraObjects:
+  - apiVersion: cilium.io/v2
+    kind: CiliumNetworkPolicy
+    metadata:
+      name: grafana
+    spec:
+      endpointSelector:
+        matchLabels:
+          app.kubernetes.io/instance: grafana
+          app.kubernetes.io/name: grafana
+      egress:
+        - toFQDNs:
+            - matchName: grafana.com
+              # User avatars
+            - matchName: secure.gravatar.com
+              # Version check
+            - matchName: raw.githubusercontent.com
+              # Loki logs at Grafana Cloud
+            - matchName: logs-prod-eu-west-0.grafana.net
+              # VictoriaMetrics endpoint
+            - matchName: vm.cloud.kilchhofer.info
+          toPorts:
+            - ports:
+                - port: "443"
+
+  - apiVersion: external-secrets.io/v1beta1
+    kind: ExternalSecret
+    metadata:
+      name: grafana-oidc-secret
+    spec:
+      secretStoreRef:
+        kind: ClusterSecretStore
+        name: akeyless-k3s-secrets
+
+      target:
+        name: grafana-oidc-secret
+
+      data:
+        - secretKey: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+          remoteRef:
+            key: /k3s/grafana/oidc-clientSecret
+
+  - apiVersion: external-secrets.io/v1beta1
+    kind: ExternalSecret
+    metadata:
+      name: grafana-admin-creds
+    spec:
+      secretStoreRef:
+        kind: ClusterSecretStore
+        name: akeyless-k3s-secrets
+
+      target:
+        name: grafana-admin-creds
+
+      dataFrom:
+      - extract:
+          key: /k3s/grafana/admin-creds
