@@ -1,0 +1,432 @@
+kyverno-policies:
+  autogenControllers: none
+  validationFailureAction: enforce
+  podSecurityStandard: baseline
+
+  includeRestrictedPolicies:
+  - disallow-capabilities-strict
+  - disallow-privilege-escalation
+  - require-run-as-non-root-user
+  - require-run-as-nonroot
+  - restrict-volume-types
+
+  policyExclude:
+
+    ## Excludes for baseline Policies
+    ## --------------------------------
+    disallow-capabilities:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              k8s-app: cilium
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - metallb
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+      - resources:
+          namespaces:
+          - falco
+
+    disallow-host-namespaces:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              k8s-app: cilium
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              name: cilium-operator
+              io.cilium/app: operator
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - metallb
+                - kured
+                - prometheus-node-exporter
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+      - resources:
+          namespaces:
+            - trivy-system
+          selector:
+            matchLabels:
+              app: node-collector
+
+    disallow-host-path:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              k8s-app: cilium
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - promtail
+                - prometheus-node-exporter
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+      - resources:
+          namespaces:
+            - trivy-system
+          selector:
+            matchLabels:
+              app: node-collector
+      - resources:
+          namespaces:
+          - falco
+
+    disallow-host-ports:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              k8s-app: cilium
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              name: cilium-operator
+              io.cilium/app: operator
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - metallb
+                - kured
+                - prometheus-node-exporter
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+
+    disallow-privileged-containers:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              k8s-app: cilium
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - kured
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+
+    disallow-selinux:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              k8s-app: cilium
+
+    restrict-apparmor-profiles:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              k8s-app: cilium
+
+    ## Excludes for restricted Policies
+    ## --------------------------------
+    disallow-capabilities-strict:
+      any:
+      - resources:
+          namespaces:
+          - cattle-system
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - hubble-relay
+                - hubble-ui
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              name: cilium-operator
+              io.cilium/app: operator
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - metallb
+                - metrics-server
+                - plex
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+      - resources:
+          namespaces:
+          - falco
+
+    disallow-privilege-escalation:
+      any:
+      - resources:
+          namespaces:
+          - cattle-system
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - hubble-relay
+                - hubble-ui
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              name: cilium-operator
+              io.cilium/app: operator
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - kured
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+      - resources:
+          namespaces:
+          - falco
+
+    require-run-as-non-root-user:
+      any:
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - promtail
+                - kured
+                - metallb
+                - plex
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+      - resources:
+          namespaces:
+            - trivy-system
+          selector:
+            matchLabels:
+              app.kubernetes.io/managed-by: trivy-operator
+      - resources:
+          namespaces:
+            - trivy-system
+          selector:
+            matchLabels:
+              app: node-collector
+
+    require-run-as-nonroot:
+      any:
+      - resources:
+          namespaces:
+          - cattle-system
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - hubble-relay
+                - hubble-ui
+                - kube-dns
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              name: cilium-operator
+              io.cilium/app: operator
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - metallb
+                - promtail
+                - kured
+                - plex
+      - resources:
+          selector:
+            matchLabels:
+              app: nfs-data-provisioner
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+      - resources:
+          namespaces:
+            - trivy-system
+          selector:
+            matchLabels:
+              app.kubernetes.io/managed-by: trivy-operator
+      - resources:
+          namespaces:
+            - trivy-system
+          selector:
+            matchLabels:
+              app: node-collector
+      - resources:
+          namespaces:
+          - falco
+
+    restrict-volume-types:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          selector:
+            matchLabels:
+              k8s-app: cilium
+      - resources:
+          selector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - plex
+                - promtail
+                - prometheus-node-exporter
+      - resources:
+          selector:
+            matchLabels:
+              app: nfs-data-provisioner
+      - resources:
+          namespaces:
+          - storage
+          selector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - csi-nfs-node
+                - csi-nfs-controller
+      - resources:
+          namespaces:
+            - trivy-system
+          selector:
+            matchLabels:
+              app: node-collector
+      - resources:
+          namespaces:
+          - falco
