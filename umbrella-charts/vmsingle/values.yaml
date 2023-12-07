@@ -1,0 +1,169 @@
+victoria-metrics-single:
+  rbac:
+    namespaced: true # Don't deploy ClusterRoles / ClusterRoleBinding
+  server:
+    persistentVolume:
+      storageClass: "iscsi-manual"
+      size: 50Gi
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 512Mi
+    podSecurityContext:
+      runAsUser: 1000
+    securityContext:
+      fsGroup: 1000
+    scrape:
+      enabled: true
+      config:
+        scrape_configs:
+          - job_name: victoriametrics
+            static_configs:
+              - targets: [ "localhost:8428" ]
+  extraObjects:
+    - apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: vmsingle
+      spec:
+        podSelector:
+          matchLabels:
+            app: server
+            app.kubernetes.io/instance: vmsingle
+            app.kubernetes.io/name: victoria-metrics-single
+        policyTypes:
+          - Ingress
+        ingress:
+          - from:
+              - podSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: vmagent
+                    app.kubernetes.io/name: victoria-metrics-agent
+              - podSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: prometheus-adapter
+                    app.kubernetes.io/name: prometheus-adapter
+              - podSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: opencost
+                    app.kubernetes.io/name: opencost
+              - podSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: vmsingle
+                    app.kubernetes.io/name: oauth2-proxy
+              - namespaceSelector:
+                  matchLabels:
+                    kubernetes.io/metadata.name: keda
+                podSelector:
+                  matchLabels:
+                    app: keda-operator
+            ports:
+              - port: http
+                protocol: TCP
+
+#######################################################
+oauth2-proxy:
+  config:
+    existingSecret: vm-oauth2-proxy-custom
+    configFile: |-
+      reverse_proxy = true
+      real_client_ip_header = "X-Forwarded-For"
+      provider = "oidc"
+      provider_display_name = "GitHub / Dex"
+      redirect_url = "https://vm.cloud.kilchhofer.info/oauth2/callback"
+      oidc_issuer_url = "https://sso.cloud.kilchhofer.info"
+      email_domains = [ "*" ]
+      upstreams = [ "http://vmsingle-victoria-metrics-single-server.monitoring.svc:8428" ]
+      silence_ping_logging = true
+      cookie_secure = false
+      pass_access_token = true
+      pass_authorization_header = true
+      allowed_groups = [
+          "kilchhofer-home:admins"
+      ]
+      htpasswd_user_groups = [
+          "kilchhofer-home:admins",
+          "basic-auth"
+      ]
+
+  htpasswdFile:
+    enabled: true
+    existingSecret: vm-oauth2-proxy-custom-htpasswd-file
+    # credentials are injected via helm-secrets
+
+  service:
+    annotations:
+      prometheus.io/port: '44180'
+      prometheus.io/scrape: 'true'
+
+  ingress:
+    enabled: true
+    hosts:
+      - vm.cloud.kilchhofer.info
+    annotations:
+      ingress.kubernetes.io/force-ssl-redirect: "true"
+      cert-manager.io/cluster-issuer: letsencrypt
+    className: nginx-external
+    tls:
+      - secretName: vm-oauth2-proxy-ingress-cert
+        hosts:
+          - vm.cloud.kilchhofer.info
+
+  extraObjects:
+    - apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: vmsingle-oauth2-proxy
+      spec:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/instance: vmsingle
+            app.kubernetes.io/name: oauth2-proxy
+        policyTypes:
+          - Egress
+          - Ingress
+        egress:
+            # To SSO (dex)
+          - ports:
+            - port: 443
+              protocol: TCP
+        ingress:
+          - ports:
+              - port: http
+                protocol: TCP
+
+    - apiVersion: external-secrets.io/v1beta1
+      kind: ExternalSecret
+      metadata:
+        name: vm-oauth2-proxy-custom
+      spec:
+        secretStoreRef:
+          kind: ClusterSecretStore
+          name: akeyless-k3s-secrets
+
+        target:
+          name: vm-oauth2-proxy-custom
+
+        dataFrom:
+        - extract:
+            key: /k3s/victoria-metrics-vmsingle/oauth2-proxy
+
+    - apiVersion: external-secrets.io/v1beta1
+      kind: ExternalSecret
+      metadata:
+        name: vm-oauth2-proxy-custom-htpasswd-file
+      spec:
+        secretStoreRef:
+          kind: ClusterSecretStore
+          name: akeyless-k3s-secrets
+
+        target:
+          name: vm-oauth2-proxy-custom-htpasswd-file
+
+        data:
+          - secretKey: users.txt
+            remoteRef:
+              key: /k3s/victoria-metrics-vmsingle/oauth2-proxy-htpasswd
