@@ -10,7 +10,6 @@ spec:
     namespace: plex
     server: https://kubernetes.default.svc
   project: apps-restricted
-  syncPolicy: {}
   source:
     chart: plex
     repoURL: https://k8s-at-home.com/charts/

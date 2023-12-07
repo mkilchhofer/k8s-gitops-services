@@ -10,7 +10,6 @@ spec:
     namespace: home-network
     server: https://kubernetes.default.svc
   project: apps-restricted
-  syncPolicy: {}
   source:
     path: umbrella-charts/unifi
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

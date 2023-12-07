@@ -11,7 +11,6 @@ spec:
     namespace: ingress
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
-  syncPolicy: {}
   source:
     chart: contour
     repoURL: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami/

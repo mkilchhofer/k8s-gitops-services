@@ -11,7 +11,6 @@ spec:
     namespace: storage
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
-  syncPolicy: {}
   source:
     chart: nfs-subdir-external-provisioner
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/

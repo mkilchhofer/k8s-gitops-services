@@ -11,7 +11,6 @@ spec:
     namespace: development
     server: https://kubernetes.default.svc
   project: apps-restricted
-  syncPolicy: {}
   source:
     chart: chartmuseum
     repoURL: https://chartmuseum.github.io/charts/

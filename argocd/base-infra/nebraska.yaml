@@ -11,7 +11,6 @@ spec:
     namespace: base-infra
     server: https://kubernetes.default.svc
   project: apps-restricted
-  syncPolicy: {}
   source:
     chart: nebraska
     repoURL: https://flatcar.github.io/nebraska/

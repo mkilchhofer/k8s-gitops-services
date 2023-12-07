@@ -10,7 +10,6 @@ spec:
     namespace: logging
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
-  syncPolicy: {}
   source:
     chart: promtail
     repoURL: https://grafana.github.io/helm-charts/

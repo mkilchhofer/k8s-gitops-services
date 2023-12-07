@@ -11,7 +11,6 @@ spec:
     namespace: ingress
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
-  syncPolicy: {}
   source:
     chart: ingress-nginx
     repoURL: https://kubernetes.github.io/ingress-nginx/

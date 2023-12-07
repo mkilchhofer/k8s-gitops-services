@@ -11,7 +11,6 @@ spec:
     namespace: cert-manager
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
-  syncPolicy: {}
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io/
