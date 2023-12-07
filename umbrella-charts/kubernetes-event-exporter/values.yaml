@@ -2,7 +2,7 @@ kubernetes-event-exporter:
   image:
     registry: ghcr.io
     repository: resmoio/kubernetes-event-exporter
-    tag: v1.0
+    tag: v1.6
   replicaCount: 2
   resources:
     limits:
