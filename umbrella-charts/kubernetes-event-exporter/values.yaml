@@ -1,0 +1,35 @@
+kubernetes-event-exporter:
+  image:
+    registry: ghcr.io
+    repository: resmoio/kubernetes-event-exporter
+    tag: v1.0
+  replicaCount: 2
+  resources:
+    limits:
+      cpu: 100m
+      memory: 250Mi
+    requests:
+      cpu: 10m
+      memory: 25Mi
+  config:
+    logLevel: warn
+    logFormat: pretty
+    receivers:
+      - name: "dump"
+        stdout:
+          layout:
+            message: "{{ .Message }}"
+            reason: "{{ .Reason }}"
+            type: "{{ .Type }}"
+            count: "{{ .Count }}"
+            kind: "{{ .InvolvedObject.Kind }}"
+            name: "{{ .InvolvedObject.Name }}"
+            namespace: "{{ .Namespace }}"
+            component: "{{ .Source.Component }}"
+            host: "{{ .Source.Host }}"
+    route:
+      routes:
+        - match:
+            - receiver: "dump"
+          drop:
+            - type: "Normal"
