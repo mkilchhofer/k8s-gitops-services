@@ -83,7 +83,7 @@ oauth2-proxy:
       spec:
         podSelector:
           matchLabels:
-            app.kubernetes.io/instance: echo-server-oauth2-proxy
+            app.kubernetes.io/instance: echo-server
             app.kubernetes.io/name: oauth2-proxy
         policyTypes:
           - Egress
@@ -112,7 +112,7 @@ oauth2-proxy:
           - from:
               - podSelector:
                   matchLabels:
-                    app.kubernetes.io/instance: echo-server-oauth2-proxy
+                    app.kubernetes.io/instance: echo-server
                     app.kubernetes.io/name: oauth2-proxy
             ports:
               - port: http
