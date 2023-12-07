@@ -7,15 +7,23 @@ victoria-metrics-single:
       size: 50Gi
     resources:
       limits:
-        cpu: 1000m
+        cpu: '1'
         memory: 1Gi
       requests:
         cpu: 500m
         memory: 512Mi
     podSecurityContext:
+      fsGroup: 1000
       runAsUser: 1000
     securityContext:
-      fsGroup: 1000
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      seccompProfile:
+        type: RuntimeDefault
     scrape:
       enabled: true
       config:
