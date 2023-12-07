@@ -16,25 +16,5 @@ spec:
       prune: true
       selfHeal: true
   source:
-    chart: kured
-    repoURL: https://kubereboot.github.io/charts/
-    targetRevision: 4.1.0
-    helm:
-      version: v3
-      values: |-
-        configuration:
-          timeZone: "Europe/Zurich"
-        podAnnotations:
-          prometheus.io/path: /metrics
-          prometheus.io/port: '8080'
-          prometheus.io/scrape: 'true'
-        resources:
-          limits:
-            cpu: 5m
-            memory: 48Mi
-          requests:
-            cpu: 1m
-            memory: 16Mi
-        containerSecurityContext:
-          allowPrivilegeEscalation: true
-          runAsNonRoot: false
+    path: umbrella-charts/kured
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

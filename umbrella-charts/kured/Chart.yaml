@@ -1,0 +1,11 @@
+apiVersion: v2
+name: kured
+description: Kubernetes Reboot Daemon
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: kured
+  version: 4.1.0
+  repository: https://kubereboot.github.io/charts/

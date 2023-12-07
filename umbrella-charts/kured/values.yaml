@@ -1,0 +1,17 @@
+kured:
+  configuration:
+    timeZone: "Europe/Zurich"
+  podAnnotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: '8080'
+    prometheus.io/scrape: 'true'
+  resources:
+    limits:
+      cpu: 5m
+      memory: 48Mi
+    requests:
+      cpu: 1m
+      memory: 16Mi
+  containerSecurityContext:
+    allowPrivilegeEscalation: true
+    runAsNonRoot: false
