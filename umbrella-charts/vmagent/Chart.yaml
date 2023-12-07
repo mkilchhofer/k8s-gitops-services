@@ -1,0 +1,11 @@
+apiVersion: v2
+name: victoria-metrics-agent
+description: vmagent for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: victoria-metrics-agent
+  version: "0.9.12"
+  repository: https://victoriametrics.github.io/helm-charts/
