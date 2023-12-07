@@ -4,6 +4,9 @@ kubernetes-event-exporter:
     repository: resmoio/kubernetes-event-exporter
     tag: v1.6.1
   replicaCount: 2
+  podAnnotations:
+    prometheus.io/port: '2112'
+    prometheus.io/scrape: 'true'
   resources:
     limits:
       cpu: 100m
