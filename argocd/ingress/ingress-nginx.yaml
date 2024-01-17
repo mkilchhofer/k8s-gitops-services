@@ -26,6 +26,7 @@ spec:
             name: nginx-external
           service:
             loadBalancerIP: "192.168.93.90"
+            externalTrafficPolicy: Local
           containerSecurityContext:
             capabilities:
               add:
