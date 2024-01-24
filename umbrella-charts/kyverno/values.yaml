@@ -1,0 +1,21 @@
+kyverno:
+  config:
+    webhooks:
+      - namespaceSelector:
+          matchExpressions:
+            - key: kubernetes.io/metadata.name
+              operator: NotIn
+              values:
+                - argocd
+                - kube-system
+
+  extraArgs:
+    - --loggingFormat=text
+    - --backgroundScan=true
+
+  networkPolicy:
+    enabled: true
+
+  podAnnotations:
+    prometheus.io/port: '8000'
+    prometheus.io/scrape: 'true'

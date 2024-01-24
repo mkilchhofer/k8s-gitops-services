@@ -15,28 +15,5 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    chart: kyverno
-    repoURL: https://kyverno.github.io/kyverno/
-    targetRevision: 2.7.1
-    helm:
-      values: |-
-        config:
-          webhooks:
-            - namespaceSelector:
-                matchExpressions:
-                  - key: kubernetes.io/metadata.name
-                    operator: NotIn
-                    values:
-                      - argocd
-                      - kube-system
-
-        extraArgs:
-          - --loggingFormat=text
-          - --backgroundScan=true
-
-        networkPolicy:
-          enabled: true
-
-        podAnnotations:
-          prometheus.io/port: '8000'
-          prometheus.io/scrape: 'true'
+    path: umbrella-charts/kyverno
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
