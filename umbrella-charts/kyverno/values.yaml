@@ -24,9 +24,9 @@ kyverno:
 
   # temporary for easier migration v1.9 -> v1.10
   reportsController:
-    enabled: false
+    enabled: true
   backgroundController:
-    enabled: false
+    enabled: true
 
   cleanupJobs:
     admissionReports:
