@@ -24,6 +24,8 @@ spec:
           - logging
           - kubescape-host-scanner
           - cattle-*
+          - testing
+          - falco
       - resources:
           namespaces:
           - ingress
