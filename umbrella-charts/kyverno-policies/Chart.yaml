@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: kyverno-policies
-  version: 2.7.1
+  version: 3.1.4
   repository: https://kyverno.github.io/kyverno/

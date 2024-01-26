@@ -20,7 +20,7 @@ kyverno:
 
   # Alpha feature in 1.9
   cleanupController:
-    enabled: false
+    enabled: true
 
   # temporary for easier migration v1.9 -> v1.10
   reportsController:
