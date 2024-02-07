@@ -16,6 +16,7 @@ spec:
         - matchName: registry.k8s.io
         - matchName: gcr.io
         - matchName: cr.fluentbit.io
+        - matchName: europe-west8-docker.pkg.dev
       toPorts:
         - ports:
             - port: "443"
