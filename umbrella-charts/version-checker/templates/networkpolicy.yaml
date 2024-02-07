@@ -13,6 +13,9 @@ spec:
         - matchName: public.ecr.aws
         - matchName: registry.hub.docker.com
         - matchName: api.github.com
+        - matchName: registry.k8s.io
+        - matchName: gcr.io
+        - matchName: cr.fluentbit.io
       toPorts:
         - ports:
             - port: "443"
