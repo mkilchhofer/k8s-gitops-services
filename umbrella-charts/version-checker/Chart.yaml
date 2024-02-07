@@ -1,0 +1,11 @@
+apiVersion: v2
+name: version-checker
+description:  version-checker for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: version-checker
+  version: 0.3.3
+  repository: https://charts.jetstack.io/

@@ -1,0 +1,18 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: version-checker-egress
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: version-checker
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  egress:
+    - toFQDNs:
+        - matchName: quay.io
+        - matchName: public.ecr.aws
+        - matchName: registry.hub.docker.com
+        - matchName: api.github.com
+      toPorts:
+        - ports:
+            - port: "443"

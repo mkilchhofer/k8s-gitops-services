@@ -1,0 +1,16 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: version-checker
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: apps-with-clusterroles
+  source:
+    path: umbrella-charts/version-checker
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
