@@ -1,1 +1,3 @@
-version-checker: {}
+version-checker:
+  additionalAnnotations:
+    prometheus.io/honor_labels: "true"
