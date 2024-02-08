@@ -36,8 +36,10 @@ spec:
       context:
         - name: pdb_count
           apiCall:
-            urlPath: "/apis/policy/v1/namespaces/{{request.namespace}}/poddisruptionbudgets"
             jmesPath: "items[?label_match(spec.selector.matchLabels, `{{request.object.spec.template.metadata.labels}}`)] | length(@)"
+            method: GET
+            urlPath: "/apis/policy/v1/namespaces/{{request.namespace}}/poddisruptionbudgets"
+      skipBackgroundRequests: true
       validate:
         message: "There is no corresponding PodDisruptionBudget found for this Deployment."
         deny:

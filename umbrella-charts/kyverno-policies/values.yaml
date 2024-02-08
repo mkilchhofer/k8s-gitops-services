@@ -1,6 +1,7 @@
 kyverno-policies:
   autogenControllers: none
   validationFailureAction: enforce
+  skipBackgroundRequests: true
   podSecurityStandard: baseline
 
   includeRestrictedPolicies:

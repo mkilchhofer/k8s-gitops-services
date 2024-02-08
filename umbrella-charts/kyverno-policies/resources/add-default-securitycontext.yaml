@@ -78,3 +78,4 @@ spec:
                 - ALL
               +(seccompProfile):
                 type: RuntimeDefault
+    skipBackgroundRequests: true
