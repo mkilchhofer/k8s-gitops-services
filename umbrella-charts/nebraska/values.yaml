@@ -2,7 +2,7 @@ nebraska:
   image:
     registry: docker.io
     repository: kicm/nebraska
-    tag: update-alpine3.18
+    tag: 2.8.6-72-g4d44da4b-dirty
   config:
     app:
       title: Flatcar Updates
