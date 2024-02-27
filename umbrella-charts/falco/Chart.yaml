@@ -8,4 +8,4 @@ version: 1.0.0
 dependencies:
 - name: falco
   version: 3.8.6
-  repository: https://falcosecurity.github.io/charts/
+  repository: oci://ghcr.io/falcosecurity/charts
