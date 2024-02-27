@@ -1,0 +1,27 @@
+policy-reporter:
+  revisionHistoryLimit: 1
+  networkPolicy:
+    enabled: true
+  ui:
+    enabled: true
+    revisionHistoryLimit: 1
+  metrics:
+    enabled: true
+    mode: custom
+    customLabels:
+      - namespace
+      - category
+      - kind
+      - name
+      - policy
+      - source
+      - severity
+      - status
+    filter:
+      status:
+        exclude:
+          - pass
+  service:
+    annotations:
+      prometheus.io/port: '8080'
+      prometheus.io/scrape: 'true'

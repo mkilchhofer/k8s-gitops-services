@@ -1,0 +1,11 @@
+apiVersion: v2
+name: policy-reporter
+description:  (kyverno-) Policy Reporter for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: policy-reporter
+  version: 2.21.2
+  repository: oci://ghcr.io/kyverno/charts
