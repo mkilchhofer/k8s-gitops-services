@@ -1,0 +1,11 @@
+apiVersion: v2
+name: reloader
+description: Reloader for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: reloader
+  version: 1.0.33
+  repository: https://stakater.github.io/stakater-charts/
