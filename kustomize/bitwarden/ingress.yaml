@@ -15,26 +15,19 @@ spec:
     http:
       paths:
       - path: /
-        pathType: ImplementationSpecific
+        pathType: Prefix
         backend:
           service:
             name: bitwarden
             port:
-              name: bitwarden-api
-      - path: /notifications/hub/negotiate
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: bitwarden
-            port:
-              name: bitwarden-api
+              name: http
       - path: /notifications/hub
-        pathType: ImplementationSpecific
+        pathType: Prefix
         backend:
           service:
             name: bitwarden
             port:
-              name: notifications
+              name: http
   tls:
   - hosts:
     - bw.tools.kilchhofer.info

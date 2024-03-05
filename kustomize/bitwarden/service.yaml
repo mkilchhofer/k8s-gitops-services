@@ -4,7 +4,6 @@ metadata:
   name: bitwarden
 spec:
   ports:
-  - name: bitwarden-api
+  - name: http
     port: 8080
-  - name: notifications
-    port: 3012
+    targetPort: http

@@ -21,5 +21,3 @@ spec:
     - ports:
       - port: http
         protocol: TCP
-      - port: notifications
-        protocol: TCP
