@@ -30,6 +30,16 @@ spec:
             secretKeyRef:
               name: bitwarden-secret
               key: emailPassword
+        - name: PUSH_INSTALLATION_ID
+          valueFrom:
+            secretKeyRef:
+              name: bitwarden-secret
+              key: pushInstallationId
+        - name: PUSH_INSTALLATION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: bitwarden-secret
+              key: pushInstallationKey
         ports:
         - name: http
           containerPort: 8080
