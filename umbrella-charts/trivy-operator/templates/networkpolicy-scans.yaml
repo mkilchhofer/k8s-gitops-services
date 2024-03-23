@@ -12,3 +12,19 @@ spec:
     - ports:
       - port: 443
         protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-ghcr-operator
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: trivy-operator
+      app.kubernetes.io/name: trivy-operator
+  policyTypes:
+    - Egress
+  egress:
+    - ports:
+      - port: 443
+        protocol: TCP
