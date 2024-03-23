@@ -30,9 +30,9 @@ resource "null_resource" "argocd_password" {
 
 resource "helm_release" "argocd" {
   name       = "argocd"
-  repository = "https://argoproj.github.io/argo-helm"
+  repository = "oci://ghcr.io/argoproj/argo-helm"
   chart      = "argo-cd"
-  version    = "5.55.0"
+  version    = "6.7.3"
   namespace  = kubernetes_namespace.argocd.metadata.0.name
 
   max_history = local.helm_max_history
