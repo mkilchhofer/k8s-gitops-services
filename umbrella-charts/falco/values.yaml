@@ -1,8 +1,11 @@
 falco:
+  serviceAccount:
+    create: true
+
   driver:
     enabled: true
-    kind: modern-bpf
-    modern_bpf:
+    kind: modern_ebpf
+    modernEbpf:
       # -- Constrain Falco with capabilities instead of running a privileged container.
       # Ensure the modern bpf driver is enabled (i.e., setting the `driver.kind` option to `modern-bpf`).
       # Capabilities used: {CAP_SYS_RESOURCE, CAP_BPF, CAP_PERFMON, CAP_SYS_PTRACE}.
@@ -12,11 +15,11 @@ falco:
     enabled: true
     docker:
       enabled: false
-  containerd:
-    enabled: true
-    socket: /run/k3s/containerd/containerd.sock
-  crio:
-    enabled: false
+    containerd:
+      enabled: true
+      socket: /run/k3s/containerd/containerd.sock
+    crio:
+      enabled: false
 
   # falcoctl:
   #   artifact:
