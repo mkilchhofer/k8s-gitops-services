@@ -70,6 +70,7 @@ grafana:
       egress:
         - toFQDNs:
             - matchName: grafana.com
+            - matchName: grafana.net
               # User avatars
             - matchName: secure.gravatar.com
               # Version check
