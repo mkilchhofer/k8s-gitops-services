@@ -8,6 +8,7 @@ trivy-operator:
     scanJobPodTemplateContainerSecurityContext:
       runAsUser: 0
       runAsNonRoot: false
+    scanJobPodTemplateLabels: app.kubernetes.io/name=scan-job
   operator:
     builtInTrivyServer: true
   trivy:
