@@ -9,25 +9,112 @@ kyverno:
                 - argocd
                 - kube-system
 
-  # Admission controller configuration
+  # Metrics configuration
+  metricsConfig:
+    # Reduce histogram resolution to mitigate high-cardinality issues.
+    # Today no dashboard is plotting histograms of kyverno
+    bucketBoundaries: [0.1, 1, 10]
+    metricsExposure:
+      kyverno_admission_requests:
+        disabledLabelDimensions:
+          - resource_namespace
+          - resource_request_operation
+      kyverno_admission_review_duration_seconds:
+        disabledLabelDimensions:
+          - resource_namespace
+          - resource_request_operation
+      kyverno_client_queries:
+        disabledLabelDimensions:
+          - resource_namespace
+      kyverno_policy_execution_duration_seconds:
+        disabledLabelDimensions:
+          - resource_namespace
+          - resource_request_operation
+      kyverno_policy_results:
+        disabledLabelDimensions:
+          - resource_namespace
+          - resource_request_operation
+
+  #----------------------------
+  # Component "Admission Controller"
+  #----------------------------
   admissionController:
     networkPolicy:
       enabled: true
 
-    podAnnotations:
-      prometheus.io/port: '8000'
-      prometheus.io/scrape: 'true'
+    # Admission controller is cluster-critical as it is in the chain of the API server
+    priorityClassName: system-cluster-critical
 
-  # Alpha feature in 1.9
+    initContainer:
+      resources:
+        limits:
+          cpu: 100m
+          memory: 256Mi
+        requests:
+          cpu: 10m
+          memory: 64Mi
+    container:
+      resources:
+        limits:
+          cpu: "1" # Chart default does not limit CPU, lets use a relatively high value to have some protection
+          memory: 384Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+
+  #----------------------------
+  # Component "Cleanup Controller"
+  # Cleanup is an beta feature: https://kyverno.io/docs/writing-policies/cleanup/
+  # > Warning
+  # > Cleanup policies are a beta feature.
+  # > It is not ready for production usage and there may be breaking changes.
+  # > Normal semantic versioning and compatibility rules will not apply.
+  #----------------------------
   cleanupController:
     enabled: true
 
-  # temporary for easier migration v1.9 -> v1.10
+    resources:
+      limits:
+        cpu: "1" # Chart default does not limit CPU, lets use a relatively high value to have some protection
+
+    metricsService:
+      annotations:
+        prometheus.io/port: "8000"
+        prometheus.io/scrape: "true"
+
+  #----------------------------
+  # Component "Reports Controller"
+  #----------------------------
   reportsController:
     enabled: true
+
+    resources:
+      limits:
+        cpu: "2" # Chart default does not limit CPU, lets use a relatively high value to have some protection
+
+    metricsService:
+      annotations:
+        prometheus.io/port: "8000"
+        prometheus.io/scrape: "true"
+
+  #----------------------------
+  # Component "Background Controller"
+  #----------------------------
   backgroundController:
     enabled: true
 
+    resources:
+      limits:
+        cpu: "1" # Chart default does not limit CPU, lets use a relatively high value to have some protection
+
+    metricsService:
+      annotations:
+        prometheus.io/port: "8000"
+        prometheus.io/scrape: "true"
+
+  #----------------------------
+  # Component "Cleanup cronjobs"
+  #----------------------------
   cleanupJobs:
     admissionReports:
       enabled: false
