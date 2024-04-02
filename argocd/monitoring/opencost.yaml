@@ -15,36 +15,6 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    chart: opencost
-    repoURL: https://opencost.github.io/opencost-helm-chart/
-    targetRevision: 1.7.0
-    helm:
-      values: |-
-        podAnnotations:
-          prometheus.io/port: '9003'
-          prometheus.io/scrape: 'true'
-        opencost:
-          prometheus:
-            internal:
-              serviceName: vmsingle-victoria-metrics-single-server
-              namespaceName: monitoring
-              port: 8428
-          exporter:
-            extraEnv:
-              KUBECOST_NAMESPACE: monitoring
-
-          ui:
-            extraVolumeMounts:
-              - mountPath: /tmp
-                name: ui-tmp-dir
-            securityContext:
-              capabilities:
-                drop:
-                - ALL
-              readOnlyRootFilesystem: true
-              runAsNonRoot: true
-              runAsUser: 65534
-
-        extraVolumes:
-          - name: ui-tmp-dir
-            emptyDir: {}
+    path: umbrella-charts/opencost
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main

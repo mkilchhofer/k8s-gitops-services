@@ -1,0 +1,29 @@
+opencost:
+  podAnnotations:
+    prometheus.io/port: '9003'
+    prometheus.io/scrape: 'true'
+  opencost:
+    prometheus:
+      internal:
+        serviceName: vmsingle-victoria-metrics-single-server
+        namespaceName: monitoring
+        port: 8428
+    exporter:
+      extraEnv:
+        KUBECOST_NAMESPACE: monitoring
+
+    ui:
+      extraVolumeMounts:
+        - mountPath: /tmp
+          name: ui-tmp-dir
+      securityContext:
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 65534
+
+  extraVolumes:
+    - name: ui-tmp-dir
+      emptyDir: {}

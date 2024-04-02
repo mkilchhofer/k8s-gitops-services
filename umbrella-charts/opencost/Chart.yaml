@@ -1,0 +1,11 @@
+apiVersion: v2
+name: opencost
+description: opencost
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: opencost
+  version: 1.7.0
+  repository: oci://ghcr.io/opencost/charts
