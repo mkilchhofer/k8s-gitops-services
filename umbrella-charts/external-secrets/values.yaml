@@ -17,4 +17,5 @@ external-secrets:
           group: cert-manager.io
           kind: "ClusterIssuer"
           name: "ca-issuer"
+        duration: 8760h0m0s
         renewBefore: 672h0m0s # 28d * 24
