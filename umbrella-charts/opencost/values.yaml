@@ -9,6 +9,17 @@ opencost:
         namespaceName: monitoring
         port: 8428
 
+    exporter:
+      securityContext:
+        capabilities:
+          drop:
+          - ALL
+        # UI requires writable access to /etc/nginx/conf.d/
+        # See https://github.com/opencost/opencost/pull/2366
+        readOnlyRootFilesystem: false
+        runAsNonRoot: true
+        runAsUser: 1001
+
     ui:
       extraVolumeMounts:
         - mountPath: /tmp
@@ -17,9 +28,11 @@ opencost:
         capabilities:
           drop:
           - ALL
-        readOnlyRootFilesystem: true
+        # UI requires writable access to /etc/nginx/conf.d/
+        # See https://github.com/opencost/opencost/pull/2366
+        readOnlyRootFilesystem: false
         runAsNonRoot: true
-        runAsUser: 65534
+        runAsUser: 1001
 
   extraVolumes:
     - name: ui-tmp-dir
