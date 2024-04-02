@@ -1,8 +1,13 @@
 external-secrets:
-  prometheus:
-    enabled: true
   certController:
     create: false
+  metrics:
+    service:
+      enabled: true
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: '8080'
+        prometheus.io/scrape: 'true'
   webhook:
     lookaheadInterval: 504h0m0s # 21d * 24
     certManager:
