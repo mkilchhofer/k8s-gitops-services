@@ -8,9 +8,6 @@ opencost:
         serviceName: vmsingle-victoria-metrics-single-server
         namespaceName: monitoring
         port: 8428
-    exporter:
-      extraEnv:
-        KUBECOST_NAMESPACE: monitoring
 
     ui:
       extraVolumeMounts:
