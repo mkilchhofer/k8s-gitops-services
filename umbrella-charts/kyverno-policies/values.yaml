@@ -99,6 +99,7 @@ kyverno-policies:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
+                - kured
                 - promtail
                 - prometheus-node-exporter
       - resources:
