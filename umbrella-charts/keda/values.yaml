@@ -2,8 +2,8 @@ keda:
   certificates:
     certManager:
       enabled: true
-      existingIssuer:
-        enabled: true
+      issuer:
+        generate: false
         name: ca-issuer
   prometheus:
     metricServer:
