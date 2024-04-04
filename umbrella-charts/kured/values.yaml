@@ -12,6 +12,7 @@ kured:
     requests:
       cpu: 1m
       memory: 16Mi
+  revisionHistoryLimit: 1
   containerSecurityContext:
     allowPrivilegeEscalation: true
     runAsNonRoot: false
