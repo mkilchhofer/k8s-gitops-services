@@ -15,6 +15,7 @@ spec:
       conversionStrategy: Default
       decodingStrategy: None
       key: /k3s/keda/prometheus-secret
+      metadataPolicy: None
 ---
 apiVersion: keda.sh/v1alpha1
 kind: ClusterTriggerAuthentication
