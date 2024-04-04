@@ -15,22 +15,6 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    chart: keda
-    repoURL: https://chartmuseum.tools.kilchhofer.info/
-    targetRevision: "2.10.2-existingIssuer.1"
-    helm:
-      version: v3
-      values: |-
-        certificates:
-          certManager:
-            enabled: true
-            existingIssuer:
-              enabled: true
-              name: ca-issuer
-        prometheus:
-          metricServer:
-            enabled: true
-          operator:
-            enabled: true
-          webhooks:
-            enabled: true
+    path: umbrella-charts/keda
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main

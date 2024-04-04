@@ -1,0 +1,14 @@
+keda:
+  certificates:
+    certManager:
+      enabled: true
+      existingIssuer:
+        enabled: true
+        name: ca-issuer
+  prometheus:
+    metricServer:
+      enabled: true
+    operator:
+      enabled: true
+    webhooks:
+      enabled: true
