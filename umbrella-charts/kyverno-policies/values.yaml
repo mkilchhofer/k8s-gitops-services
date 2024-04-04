@@ -406,6 +406,7 @@ kyverno-policies:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
+                - kured
                 - plex
                 - promtail
                 - prometheus-node-exporter
