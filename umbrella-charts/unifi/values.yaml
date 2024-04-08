@@ -17,6 +17,8 @@ unifi:
   livenessProbe:
     enabled: false
 
+  bindPrivilegedPorts: false
+
   resources:
     limits:
       cpu: 1000m
