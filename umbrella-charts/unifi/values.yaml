@@ -18,6 +18,8 @@ unifi:
     enabled: false
 
   bindPrivilegedPorts: false
+  securityContext:
+    runAsUser: 999
 
   resources:
     limits:
