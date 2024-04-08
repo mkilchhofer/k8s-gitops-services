@@ -13,7 +13,7 @@ unifi:
         - unifi.tools.kilchhofer.info
         secretName: unifi-ingress-cert
   image:
-    tag: "v7.4.162"
+    tag: "" # Use appVersion
   livenessProbe:
     enabled: false
 
