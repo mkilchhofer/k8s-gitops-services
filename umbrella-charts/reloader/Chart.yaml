@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: reloader
-  version: 1.0.74
+  version: 1.0.76
   repository: oci://ghcr.io/stakater/charts
