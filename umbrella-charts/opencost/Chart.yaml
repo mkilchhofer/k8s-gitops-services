@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: opencost
-  version: 1.33.2
+  version: 1.33.3
   repository: oci://ghcr.io/opencost/charts
