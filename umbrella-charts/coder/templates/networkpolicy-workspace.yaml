@@ -16,7 +16,7 @@ spec:
         - matchName: v1.telemetry.coder.com
         - matchName: code-server.dev
         - matchName: default.exp-tas.com # vscode liveshare and vscode intelisense
-        - matchName: "*.events.data.microsoft.com" # VSCode telemetry
+        - matchPattern: "*.events.data.microsoft.com" # VSCode telemetry
       toPorts:
         - ports:
             - port: "443"
