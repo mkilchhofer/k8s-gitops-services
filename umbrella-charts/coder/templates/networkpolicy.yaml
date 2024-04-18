@@ -1,0 +1,22 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: coder
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/instance: coder
+      app.kubernetes.io/name: coder
+  egress:
+    - toFQDNs:
+        - matchName: telemetry.coder.com
+        - matchName: api.github.com
+      toPorts:
+        - ports:
+            - port: "443"
+  ingress:
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "8080"
