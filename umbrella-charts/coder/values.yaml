@@ -1,0 +1,35 @@
+global:
+  postgresql:
+    auth:
+      existingSecret: "db-secret"
+      username: "coder"
+      database: "coder"
+      secretKeys:
+        adminPasswordKey: "adminPassword"
+        userPasswordKey: "userPassword"
+
+postgresql:
+  primary:
+    persistence:
+      storageClass: iscsi-manual
+      size: 10Gi
+    networkPolicy:
+      allowExternal: false
+
+coder:
+  coder:
+    env:
+      - name: PG_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: db-secret
+            key: userPassword
+
+      - name: CODER_PG_CONNECTION_URL
+        valueFrom: postgres://coder:$(PG_PASSWORD)@coder-postgresql.svc.cluster.local:5432/coder?sslmode=disable
+    podLabels:
+      coder-postgresql-client: "true"
+    securityContext:
+      capabilities:
+        drop:
+          - ALL
