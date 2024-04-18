@@ -56,7 +56,7 @@ coder:
         ingress.kubernetes.io/force-ssl-redirect: "true"
       className: contour
       host: coder.tools.kilchhofer.info
-      wildcardHost: *.coder.tools.kilchhofer.info
+      wildcardHost: "*.coder.tools.kilchhofer.info"
       tls:
         enable: true
         secretName: coder-ingress-cert
