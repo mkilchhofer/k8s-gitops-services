@@ -26,7 +26,7 @@ coder:
             key: userPassword
 
       - name: CODER_PG_CONNECTION_URL
-        valueFrom: postgres://coder:$(PG_PASSWORD)@coder-postgresql.svc.cluster.local:5432/coder?sslmode=disable
+        value: postgres://coder:$(PG_PASSWORD)@coder-postgresql.svc.cluster.local:5432/coder?sslmode=disable
     podLabels:
       coder-postgresql-client: "true"
     securityContext:
