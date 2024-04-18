@@ -19,6 +19,9 @@ postgresql:
 coder:
   coder:
     env:
+      - name: CODER_CACHE_DIRECTORY
+        value: /tmp/coder
+
       - name: PG_PASSWORD
         valueFrom:
           secretKeyRef:
@@ -33,3 +36,10 @@ coder:
       capabilities:
         drop:
           - ALL
+
+    volumes:
+      - name: "cache"
+        emptyDir: {}
+    volumeMounts:
+      - name: "cache"
+        mountPath: "/tmp"
