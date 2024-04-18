@@ -10,6 +10,7 @@ spec:
     - toFQDNs:
           # Self
         - matchName: coder.tools.kilchhofer.info
+        - matchName: code-server.dev
       toPorts:
         - ports:
             - port: "443"
