@@ -30,6 +30,9 @@ coder:
 
       - name: CODER_PG_CONNECTION_URL
         value: postgres://coder:$(PG_PASSWORD)@coder-postgresql.coder.svc.cluster.local:5432/coder?sslmode=disable
+
+      - name: CODER_ACCESS_URL
+        value: "https://coder.tools.kilchhofer.info"
     podLabels:
       coder-postgresql-client: "true"
     securityContext:
@@ -43,3 +46,18 @@ coder:
     volumeMounts:
       - name: "cache"
         mountPath: "/tmp"
+
+    service:
+      type: ClusterIP
+    ingress:
+      enable: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        ingress.kubernetes.io/force-ssl-redirect: "true"
+      className: contour
+      host: coder.tools.kilchhofer.info
+      wildcardHost: *.coder.tools.kilchhofer.info
+      tls:
+        enable: true
+        secretName: coder-ingress-cert
+        wildcardSecretName: coder-wildcard-ingress-cert
