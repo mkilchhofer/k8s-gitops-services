@@ -11,6 +11,13 @@ spec:
     - toFQDNs:
         - matchName: telemetry.coder.com
         - matchName: api.github.com
+          # Terraform dependencies
+        - matchName: registry.terraform.io
+        - matchName: releases.hashicorp.com
+        - matchName: github.com
+        - matchName: objects.githubusercontent.com
+          # Self
+        - matchName: coder.tools.kilchhofer.info
       toPorts:
         - ports:
             - port: "443"

@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: coder-workspace
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: coder-workspace
+  egress:
+    - toFQDNs:
+          # Self
+        - matchName: coder.tools.kilchhofer.info
+      toPorts:
+        - ports:
+            - port: "443"
