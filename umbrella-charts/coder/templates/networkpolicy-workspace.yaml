@@ -11,6 +11,12 @@ spec:
           # Self
         - matchName: coder.tools.kilchhofer.info
         - matchName: code-server.dev
+        - matchName: raw.githubusercontent.com
       toPorts:
         - ports:
             - port: "443"
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/instance: coder
+            app.kubernetes.io/name: coder
