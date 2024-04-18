@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: coder
     server: https://kubernetes.default.svc
-  project: core-services-unrestricted
+  project: apps-restricted
   syncPolicy:
     syncOptions:
       - ServerSideApply=true

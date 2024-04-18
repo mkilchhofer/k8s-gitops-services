@@ -10,11 +10,14 @@ spec:
     - toFQDNs:
           # Self
         - matchName: coder.tools.kilchhofer.info
+          # Stuff from GitHub
         - matchName: raw.githubusercontent.com
         - matchName: github.com
         - matchName: api.github.com
+          # Stuff from Coder
         - matchName: v1.telemetry.coder.com
         - matchName: code-server.dev
+          # VSCode / Microsoft
         - matchName: default.exp-tas.com # vscode liveshare and vscode intelisense
         - matchPattern: "*.events.data.microsoft.com" # VSCode telemetry
       toPorts:
