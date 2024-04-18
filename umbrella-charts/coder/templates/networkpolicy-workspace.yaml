@@ -10,8 +10,13 @@ spec:
     - toFQDNs:
           # Self
         - matchName: coder.tools.kilchhofer.info
-        - matchName: code-server.dev
         - matchName: raw.githubusercontent.com
+        - matchName: github.com
+        - matchName: api.github.com
+        - matchName: v1.telemetry.coder.com
+        - matchName: code-server.dev
+        - matchName: default.exp-tas.com # vscode liveshare and vscode intelisense
+        - matchName: "*.events.data.microsoft.com" # VSCode telemetry
       toPorts:
         - ports:
             - port: "443"
