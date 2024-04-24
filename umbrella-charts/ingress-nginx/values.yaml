@@ -1,0 +1,19 @@
+ingress-nginx:
+  controller:
+    image:
+      allowPrivilegeEscalation: false
+    ingressClass: nginx-external
+    ingressClassResource:
+      name: nginx-external
+    service:
+      loadBalancerIP: "192.168.93.90"
+      externalTrafficPolicy: Local
+    containerSecurityContext:
+      capabilities:
+        add:
+          - NET_BIND_SERVICE
+        drop:
+          - ALL
+      runAsUser: 101
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: false
