@@ -13,3 +13,6 @@ ingress-nginx:
       runAsUser: 101
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: false
+
+  defaultBackend:
+    enabled: true
