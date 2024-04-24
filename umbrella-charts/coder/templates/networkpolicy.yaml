@@ -21,6 +21,12 @@ spec:
       toPorts:
         - ports:
             - port: "443"
+    - toFQDNs:
+        - matchPattern: "*.l.google.com"
+      toPorts:
+        - ports:
+            - port: "19302"
+              protocol: UDP
   ingress:
     - fromEntities:
         - world
