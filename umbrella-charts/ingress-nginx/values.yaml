@@ -14,5 +14,9 @@ ingress-nginx:
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: false
 
+    admissionWebhooks:
+      certManager:
+        enabled: true
+
   defaultBackend:
     enabled: true
