@@ -3,5 +3,6 @@ ingress-nginx:
     ingressClass: nginx-external
     ingressClassResource:
       name: nginx-external
+      controllerValue: "k8s.io/nginx-external"
     service:
       loadBalancerIP: "192.168.93.90"
