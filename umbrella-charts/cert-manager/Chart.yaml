@@ -1,0 +1,11 @@
+apiVersion: v2
+name: cert-manager
+description: cert-manager for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: cert-manager
+  version: v1.12.3
+  repository: https://charts.jetstack.io/
