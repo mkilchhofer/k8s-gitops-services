@@ -14,3 +14,7 @@ spec:
   source:
     path: umbrella-charts/ingress-nginx
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    helm:
+      valueFiles:
+        - values.yaml
+        - external-values.yaml
