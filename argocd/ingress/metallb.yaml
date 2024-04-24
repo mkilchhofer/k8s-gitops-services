@@ -20,19 +20,5 @@ spec:
     jsonPointers:
     - /spec/conversion/webhook/clientConfig/caBundle
   source:
-    chart: metallb
-    repoURL: https://metallb.github.io/metallb/
-    targetRevision: 0.13.7
-    helm:
-      version: v3
-      values: |-
-        controller:
-          resources:
-            limits:
-              cpu: 100m
-              memory: 100Mi
-        speaker:
-          resources:
-            limits:
-              cpu: 100m
-              memory: 100Mi
+    path: umbrella-charts/metallb
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

@@ -1,0 +1,11 @@
+metallb:
+  controller:
+    resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+  speaker:
+    resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
