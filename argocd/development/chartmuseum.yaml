@@ -28,14 +28,14 @@ spec:
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt
             cert-manager.io/revision-history-limit: "1"
-            ingress.kubernetes.io/force-ssl-redirect: "true"
+            nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
           enabled: true
           hosts:
           - name: chartmuseum.tools.kilchhofer.info
             path: /
             tls: true
             tlsSecret: chartmuseum-ingress-cert
-          ingressClassName: contour
+          ingressClassName: nginx-internal
         persistence:
           accessMode: ReadWriteOnce
           enabled: true

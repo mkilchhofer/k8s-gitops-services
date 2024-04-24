@@ -1,0 +1,7 @@
+ingress-nginx:
+  controller:
+    ingressClass: nginx-internal
+    ingressClassResource:
+      name: nginx-internal
+    service:
+      loadBalancerIP: "192.168.93.83"

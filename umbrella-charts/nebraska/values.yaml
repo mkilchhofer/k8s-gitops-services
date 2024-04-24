@@ -48,8 +48,8 @@ nebraska:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       cert-manager.io/revision-history-limit: "1"
-      ingress.kubernetes.io/force-ssl-redirect: "true"
-    ingressClassName: contour
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    ingressClassName: nginx-internal
     hosts:
       - flatcar.tools.kilchhofer.info
     tls:

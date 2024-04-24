@@ -114,7 +114,7 @@ dex:
 
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
-      ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 
     className: nginx-external
     hosts:

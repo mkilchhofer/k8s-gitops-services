@@ -4,15 +4,15 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     cert-manager.io/revision-history-limit: "1"
-    ingress.kubernetes.io/force-ssl-redirect: "true"
-    projectcontour.io/response-timeout: 120s
-    projectcontour.io/websocket-routes: /terminal
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 120s
   labels:
     app.kubernetes.io/part-of: argocd
   name: argocd-server
   namespace: argocd
 spec:
-  ingressClassName: contour
+  ingressClassName: nginx-internal
   rules:
   - host: argocd.tools.kilchhofer.info
     http:
@@ -23,13 +23,6 @@ spec:
             port:
               number: 443
         path: /
-        pathType: Prefix
-      - backend:
-          service:
-            name: argocd-server
-            port:
-              number: 443
-        path: /terminal
         pathType: Prefix
   tls:
   - hosts:

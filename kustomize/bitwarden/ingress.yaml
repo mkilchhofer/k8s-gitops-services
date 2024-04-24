@@ -3,25 +3,17 @@ kind: Ingress
 metadata:
   name: bitwarden
   annotations:
-    ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt
     cert-manager.io/revision-history-limit: "1"
-    projectcontour.io/response-timeout: 120s
-    projectcontour.io/websocket-routes: "/notifications/hub"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 120
 spec:
-  ingressClassName: contour
+  ingressClassName: nginx-internal
   rules:
   - host: bw.tools.kilchhofer.info
     http:
       paths:
       - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: bitwarden
-            port:
-              name: http
-      - path: /notifications/hub
         pathType: Prefix
         backend:
           service:

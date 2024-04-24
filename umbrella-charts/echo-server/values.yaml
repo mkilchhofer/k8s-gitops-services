@@ -19,8 +19,8 @@ echo-server:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       cert-manager.io/revision-history-limit: "1"
-      ingress.kubernetes.io/force-ssl-redirect: "true"
-      kubernetes.io/ingress.class: contour
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      kubernetes.io/ingress.class: nginx-internal
 
     hosts:
       - host: echo-server.tools.kilchhofer.info
@@ -68,9 +68,9 @@ oauth2-proxy:
       - echo-server-oauth2-proxy.tools.kilchhofer.info
 
     annotations:
-      ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: letsencrypt
-    className: contour
+    className: nginx-internal
     tls:
       - secretName: echo-server-ingress-cert
         hosts:

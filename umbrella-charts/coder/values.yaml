@@ -53,8 +53,8 @@ coder:
       enable: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        ingress.kubernetes.io/force-ssl-redirect: "true"
-      className: contour
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      className: nginx-internal
       host: coder.tools.kilchhofer.info
       wildcardHost: "*.coder.tools.kilchhofer.info"
       tls:

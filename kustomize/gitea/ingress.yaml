@@ -3,11 +3,11 @@ kind: Ingress
 metadata:
   name: gitea
   annotations:
-    ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt
     cert-manager.io/revision-history-limit: "1"
 spec:
-  ingressClassName: contour
+  ingressClassName: nginx-internal
   rules:
   - host: git.tools.kilchhofer.info
     http:

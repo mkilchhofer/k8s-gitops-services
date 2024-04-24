@@ -3,13 +3,13 @@ kind: Ingress
 metadata:
   name: scaling-demo
   annotations:
-    ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt
     cert-manager.io/revision-history-limit: "1"
   labels:
     app.kubernetes.io/name: scaling-demo
 spec:
-  ingressClassName: contour
+  ingressClassName: nginx-internal
   rules:
   - host: scaling-demo.tools.kilchhofer.info
     http:

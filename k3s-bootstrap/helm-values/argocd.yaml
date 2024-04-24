@@ -257,12 +257,12 @@ server:
   ingress:
     enabled: false # deployed via argocd-extra
     annotations:
-      ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: letsencrypt
       cert-manager.io/revision-history-limit: "1"
-      projectcontour.io/response-timeout: 120s
+      nginx.ingress.kubernetes.io/proxy-read-timeout: 120
     hosts: ["argocd.tools.kilchhofer.info"]
-    ingressClassName: contour
+    ingressClassName: nginx-internal
     tls:
       - secretName: argocd-ingress-cert
         hosts: ["argocd.tools.kilchhofer.info"]
@@ -286,10 +286,6 @@ server:
     requests:
       cpu: 50m
       memory: 64Mi
-
-  service:
-    annotations:
-      projectcontour.io/upstream-protocol.tls: "443"
 
 configs:
   cm:

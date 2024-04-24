@@ -112,7 +112,7 @@ oauth2-proxy:
     hosts:
       - vm.cloud.kilchhofer.info
     annotations:
-      ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: letsencrypt
     className: nginx-external
     tls:

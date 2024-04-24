@@ -12,9 +12,9 @@ grafana:
   ingress:
     enabled: true
     annotations:
-      ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: letsencrypt
-    ingressClassName: contour
+    ingressClassName: nginx-internal
     hosts:
       - grafana.tools.kilchhofer.info
 

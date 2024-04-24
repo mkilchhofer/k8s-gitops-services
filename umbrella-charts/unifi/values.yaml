@@ -1,9 +1,10 @@
 unifi:
   ingress:
     enabled: true
-    ingressClassName: contour
+    ingressClassName: nginx-internal
     annotations:
-      ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
       cert-manager.io/cluster-issuer: letsencrypt
       cert-manager.io/revision-history-limit: "1"
     hosts:
@@ -53,7 +54,6 @@ unifi:
     loadBalancerIP: "192.168.93.87"
     annotations:
       metallb.universe.tf/allow-shared-ip: unifi
-      projectcontour.io/upstream-protocol.tls: "8443"
   discoveryService:
     type: LoadBalancer
     externalTrafficPolicy: Local
