@@ -27,6 +27,12 @@ spec:
         - ports:
             - port: "19302"
               protocol: UDP
+    - toFQDNs:
+        - matchPattern: "*.l.google.com"
+      icmps:
+        - fields:
+            - family: IPv4
+              type: 3
   ingress:
     - fromEntities:
         - world
