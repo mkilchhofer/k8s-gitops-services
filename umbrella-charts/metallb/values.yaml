@@ -9,3 +9,6 @@ metallb:
       limits:
         cpu: 100m
         memory: 100Mi
+    # Use classic mode for simplicity
+    frr:
+      enabled: false
