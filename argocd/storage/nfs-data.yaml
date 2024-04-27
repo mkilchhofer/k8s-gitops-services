@@ -12,33 +12,5 @@ spec:
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
   source:
-    chart: nfs-subdir-external-provisioner
-    repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
-    targetRevision: 4.0.17
-    helm:
-      version: v3
-      values: |-
-        image:
-          tag: v4.0.2
-
-        nameOverride: nfs-data-provisioner
-
-        nfs:
-          server: "nfs-data.ma.kilchhofer.info"
-          path: "/volume1/kubernetes/nfs-data"
-
-        resources:
-          limits:
-            cpu: 100m
-            memory: 128Mi
-          requests:
-            cpu: 10m
-            memory: 16Mi
-
-        securityContext:
-          runAsNonRoot: false
-
-        storageClass:
-          defaultClass: true
-          name: "nfs-data"
-          provisionerName: cluster.local/nfs-data-provisioner
+    path: umbrella-charts/nfs-subdir-external-provisioner
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

@@ -1,0 +1,25 @@
+nfs-subdir-external-provisioner:
+  image:
+    tag: v4.0.2
+
+  nameOverride: nfs-data-provisioner
+
+  nfs:
+    server: "nfs-data.ma.kilchhofer.info"
+    path: "/volume1/kubernetes/nfs-data"
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 10m
+      memory: 16Mi
+
+  securityContext:
+    runAsNonRoot: false
+
+  storageClass:
+    defaultClass: true
+    name: "nfs-data"
+    provisionerName: cluster.local/nfs-data-provisioner
