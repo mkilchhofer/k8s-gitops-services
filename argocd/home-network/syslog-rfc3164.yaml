@@ -15,56 +15,5 @@ spec:
       prune: true
       selfHeal: true
   source:
-    chart: fluent-bit
-    repoURL: https://fluent.github.io/helm-charts
-    targetRevision: "0.20.8"
-    helm:
-      releaseName: syslog-rfc3164
-      version: v3
-      values: |-
-        serviceAccount:
-          create: false
-        rbac:
-          create: false
-
-        kind: Deployment
-
-        extraPorts:
-          - name: syslog
-            containerPort: 5140
-            protocol: TCP
-            port: 5140
-
-        config:
-          inputs: |
-            [INPUT]
-                Name syslog
-                Parser syslog-rfc3164
-                Mode tcp
-                Port 5140
-
-          outputs: |
-            [OUTPUT]
-                Name        loki
-                Match       *
-                Host        loki.base-infra.svc.cluster.local
-                Port        3100
-                Tenant_id   syslog-rfc3164
-                Line_format json
-                Labels      job=fluent-bit-syslog-rfc3164
-                Label_keys  $pri,$host,$ident
-                Remove_keys time,pid
-
-          filters: ""
-
-        service:
-          type: LoadBalancer
-          loadBalancerIP: 192.168.93.85
-
-        securityContext:
-          runAsUser: 1001
-
-        networkPolicy:
-          enabled: true
-          ingress:
-            from: []
+    path: umbrella-charts/syslog-rfc3164
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

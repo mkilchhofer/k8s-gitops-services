@@ -1,0 +1,11 @@
+apiVersion: v2
+name: syslog-rfc3164
+description:  syslog server for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: fluent-bit
+  version: 0.20.8
+  repository: https://fluent.github.io/helm-charts
