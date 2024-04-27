@@ -13,7 +13,8 @@ prometheus-node-exporter:
     annotations:
       prometheus.io/port: '9100'
   extraManifests:
-    - apiVersion: networking.k8s.io/v1
+    - |
+      apiVersion: networking.k8s.io/v1
       kind: NetworkPolicy
       metadata:
         name: prometheus-node-exporter-vmagent
