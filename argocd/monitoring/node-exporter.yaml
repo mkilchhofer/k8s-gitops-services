@@ -15,43 +15,5 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    chart: prometheus-node-exporter
-    repoURL: https://prometheus-community.github.io/helm-charts/
-    targetRevision: "4.20.0"
-    helm:
-      version: v3
-      values: |-
-        extraArgs:
-          - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
-          - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
-        resources:
-          limits:
-            cpu: 200m
-            memory: 256Mi
-          requests:
-            cpu: 10m
-            memory: 32Mi
-        service:
-          annotations:
-            prometheus.io/port: '9100'
-        extraManifests:
-          - apiVersion: networking.k8s.io/v1
-            kind: NetworkPolicy
-            metadata:
-              name: prometheus-node-exporter-vmagent
-            spec:
-              podSelector:
-                matchLabels:
-                  app.kubernetes.io/instance: prometheus-node-exporter
-                  app.kubernetes.io/name: prometheus-node-exporter
-              policyTypes:
-                - Ingress
-              ingress:
-                - from:
-                    - podSelector:
-                        matchLabels:
-                          app.kubernetes.io/instance: vmagent
-                          app.kubernetes.io/name: victoria-metrics-agent
-                  ports:
-                    - port: 9100
-                      protocol: TCP
+    path: umbrella-charts/prometheus-node-exporter
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
