@@ -1,0 +1,32 @@
+kube-state-metrics:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+  service:
+    annotations:
+      prometheus.io/port: '8080'
+  extraManifests:
+    - apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: kube-state-metrics-vmagent
+      spec:
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/instance: kube-state-metrics
+            app.kubernetes.io/name: kube-state-metrics
+        policyTypes:
+          - Ingress
+        ingress:
+          - from:
+              - podSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: vmagent
+                    app.kubernetes.io/name: victoria-metrics-agent
+            ports:
+              - port: http
+                protocol: TCP
