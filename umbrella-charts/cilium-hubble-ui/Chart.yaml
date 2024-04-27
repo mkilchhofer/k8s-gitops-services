@@ -1,0 +1,12 @@
+apiVersion: v2
+name: hubble-ui
+description: hubble-ui (Cilium) for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: cilium
+  alias: hubble-ui
+  version: 1.13.9
+  repository: https://helm.cilium.io/
