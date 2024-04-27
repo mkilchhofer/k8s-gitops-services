@@ -1,0 +1,41 @@
+chartmuseum:
+  fullnameOverride: chartmuseum
+  env:
+    open:
+      DISABLE_API: false
+      STORAGE: local
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      cert-manager.io/revision-history-limit: "1"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    enabled: true
+    hosts:
+    - name: chartmuseum.tools.kilchhofer.info
+      path: /
+      tls: true
+      tlsSecret: chartmuseum-ingress-cert
+    ingressClassName: nginx-internal
+  persistence:
+    accessMode: ReadWriteOnce
+    enabled: true
+    size: 8Gi
+    storageClass: nfs-data
+
+  resources:
+    limits:
+      cpu: 300m
+      memory: 256Gi
+    requests:
+      cpu: 10m
+      memory: 16Mi
+
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+
+  securityContext:
+    runAsNonRoot: true
