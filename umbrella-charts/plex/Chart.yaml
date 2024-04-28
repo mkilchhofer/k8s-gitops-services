@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: plex
-  version: 2.3.0
+  version: 2.3.3
   repository: https://k8s-at-home.com/charts/
