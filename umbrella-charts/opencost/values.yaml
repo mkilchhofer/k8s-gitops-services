@@ -25,6 +25,8 @@ opencost:
         port: 8428
 
     exporter:
+      defaultClusterId: 'k3s'
+
       securityContext:
         capabilities:
           drop:
