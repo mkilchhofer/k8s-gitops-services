@@ -7,6 +7,13 @@ opencost:
     customPricing:
       enabled: true
 
+    metrics:
+      kubeStateMetrics:
+        emitPodAnnotations: false
+        emitNamespaceAnnotations: false
+        emitKsmV1Metrics: false
+        emitKsmV1MetricsOnly: false
+
     prometheus:
       internal:
         serviceName: vmsingle-victoria-metrics-single-server
