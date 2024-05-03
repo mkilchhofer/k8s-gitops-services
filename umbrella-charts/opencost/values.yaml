@@ -26,6 +26,8 @@ opencost:
 
     exporter:
       defaultClusterId: 'k3s'
+      extraEnv:
+        PROM_CLUSTER_ID_LABEL: cluster
 
       securityContext:
         capabilities:
