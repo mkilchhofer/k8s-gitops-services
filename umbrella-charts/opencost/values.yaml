@@ -4,6 +4,9 @@ opencost:
     prometheus.io/scrape: 'true'
     prometheus.io/honor_labels: "true"
   opencost:
+    customPricing:
+      enabled: true
+
     prometheus:
       internal:
         serviceName: vmsingle-victoria-metrics-single-server
