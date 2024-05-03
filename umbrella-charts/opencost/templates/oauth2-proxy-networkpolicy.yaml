@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: opencost-oauth2-proxy
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: opencost
+      app.kubernetes.io/name: oauth2-proxy
+  policyTypes:
+    - Egress
+    - Ingress
+  egress:
+      # To SSO (dex)
+    - ports:
+      - port: 443
+        protocol: TCP
+  ingress:
+    - ports:
+        - port: http
+          protocol: TCP

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: opencost
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: opencost
+      app.kubernetes.io/name: opencost
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/instance: opencost
+              app.kubernetes.io/name: oauth2-proxy
+      ports:
+        - port: http-ui
+          protocol: TCP

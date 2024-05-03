@@ -9,3 +9,6 @@ dependencies:
 - name: opencost
   version: 1.34.0
   repository: oci://ghcr.io/opencost/charts
+- name: oauth2-proxy
+  version: "7.5.3"
+  repository: oci://ghcr.io/oauth2-proxy/charts

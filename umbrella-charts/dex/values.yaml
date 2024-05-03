@@ -79,6 +79,12 @@ dex:
         redirectURIs:
           - https://grafana.tools.kilchhofer.info/login/generic_oauth
 
+      - id: opencost
+        secret: '{{ .Env.OPENCOST_CLIENT_SECRET }}'
+        name: OpenCost
+        redirectURIs:
+          - https://opencost.tools.kilchhofer.info/oauth2/callback
+
   envFrom:
     - secretRef:
         name: dex-clients
