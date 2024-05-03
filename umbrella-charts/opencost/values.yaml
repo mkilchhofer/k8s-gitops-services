@@ -16,7 +16,7 @@ opencost:
         emitPodAnnotations: false
         emitNamespaceAnnotations: false
         emitKsmV1Metrics: false
-        emitKsmV1MetricsOnly: false
+        emitKsmV1MetricsOnly: true
 
     prometheus:
       internal:
