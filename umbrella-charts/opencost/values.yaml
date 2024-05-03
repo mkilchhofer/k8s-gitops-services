@@ -6,6 +6,10 @@ opencost:
   opencost:
     customPricing:
       enabled: true
+      costModel:
+        firstFiveForwardingRulesCost: 0.1
+        additionalForwardingRuleCost: 0.1
+        LBIngressDataCost: 0.1
 
     metrics:
       kubeStateMetrics:
