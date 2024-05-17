@@ -2,3 +2,14 @@ version-checker:
   additionalAnnotations:
     prometheus.io/honor_labels: "true"
   existingSecret: version-checker
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 65534
+    seccompProfile:
+      type: RuntimeDefault
