@@ -43,39 +43,47 @@ spec:
                 - csi-nfs-node
                 - csi-nfs-controller
     mutate:
-      patchStrategicMerge:
-        spec:
-          containers:
-          - (name): '*'
-            securityContext:
-              +(allowPrivilegeEscalation): false
-              +(readOnlyRootFilesystem): true
-              +(runAsNonRoot): true
-              capabilities:
-                drop:
-                - ALL
-              +(seccompProfile):
-                type: RuntimeDefault
-          ephemeralContainers:
-          - (name): '*'
-            securityContext:
-              +(allowPrivilegeEscalation): false
-              +(readOnlyRootFilesystem): true
-              +(runAsNonRoot): true
-              capabilities:
-                drop:
-                - ALL
-              +(seccompProfile):
-                type: RuntimeDefault
-          initContainers:
-          - (name): '*'
-            securityContext:
-              +(allowPrivilegeEscalation): false
-              +(readOnlyRootFilesystem): true
-              +(runAsNonRoot): true
-              capabilities:
-                drop:
-                - ALL
-              +(seccompProfile):
-                type: RuntimeDefault
+      foreach:
+      - list: "request.object.spec.containers[]"
+        patchStrategicMerge:
+          spec:
+            containers:
+            - (name): '{{element.name}}'
+              securityContext:
+                +(allowPrivilegeEscalation): false
+                +(readOnlyRootFilesystem): true
+                +(runAsNonRoot): true
+                capabilities:
+                  drop:
+                  - ALL
+                +(seccompProfile):
+                  type: RuntimeDefault
+      - list: "request.object.spec.ephemeralContainers[]"
+        patchStrategicMerge:
+          spec:
+            ephemeralContainers:
+            - (name): '{{element.name}}'
+              securityContext:
+                +(allowPrivilegeEscalation): false
+                +(readOnlyRootFilesystem): true
+                +(runAsNonRoot): true
+                capabilities:
+                  drop:
+                  - ALL
+                +(seccompProfile):
+                  type: RuntimeDefault
+      - list: "request.object.spec.initContainers[]"
+        patchStrategicMerge:
+          spec:
+            initContainers:
+            - (name): '{{element.name}}'
+              securityContext:
+                +(allowPrivilegeEscalation): false
+                +(readOnlyRootFilesystem): true
+                +(runAsNonRoot): true
+                capabilities:
+                  drop:
+                  - ALL
+                +(seccompProfile):
+                  type: RuntimeDefault
     skipBackgroundRequests: true
