@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: external-secrets
-  version: 0.9.17
+  version: 0.9.18
   repository: oci://ghcr.io/external-secrets/charts
