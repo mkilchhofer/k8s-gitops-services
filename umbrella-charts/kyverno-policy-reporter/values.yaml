@@ -5,6 +5,22 @@ policy-reporter:
   ui:
     enabled: true
     revisionHistoryLimit: 1
+    resources:
+      limits:
+        memory: 100Mi
+        cpu: 100m
+      requests:
+        memory: 50Mi
+        cpu: 10m
+
+  resources:
+    limits:
+      memory: 100Mi
+      cpu: 100m
+    requests:
+      memory: 75Mi
+      cpu: 5m
+
   metrics:
     enabled: true
     mode: custom
