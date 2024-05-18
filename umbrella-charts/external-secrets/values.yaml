@@ -8,6 +8,14 @@ external-secrets:
         prometheus.io/path: /metrics
         prometheus.io/port: '8080'
         prometheus.io/scrape: 'true'
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
   webhook:
     lookaheadInterval: 504h0m0s # 21d * 24
     certManager:
@@ -19,3 +27,10 @@ external-secrets:
           name: "ca-issuer"
         duration: 8760h0m0s
         renewBefore: 672h0m0s # 28d * 24
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        cpu: 200m
+        memory: 200Mi
