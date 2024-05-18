@@ -33,6 +33,14 @@ echo-server:
 
 #######################################################
 oauth2-proxy:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+
   config:
     existingSecret: echo-server-oauth2-proxy-custom
     configFile: |-
