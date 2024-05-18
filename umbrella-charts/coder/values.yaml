@@ -40,6 +40,14 @@ coder:
         drop:
           - ALL
 
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 2Gi
+      requests:
+        cpu: 10m
+        memory: 256Mi
+
     volumes:
       - name: "cache"
         emptyDir: {}
