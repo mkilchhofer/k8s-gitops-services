@@ -6,6 +6,14 @@ fluent-bit:
 
   kind: Deployment
 
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 5m
+      memory: 32Mi
+
   extraPorts:
     - name: syslog
       containerPort: 5140
