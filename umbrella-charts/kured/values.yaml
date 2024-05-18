@@ -7,7 +7,7 @@ kured:
     prometheus.io/scrape: 'true'
   resources:
     limits:
-      cpu: 5m
+      cpu: 50m
       memory: 48Mi
     requests:
       cpu: 1m
