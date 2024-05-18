@@ -16,3 +16,11 @@ trivy-operator:
     storageClassName: nfs-data
   nodeCollector:
     excludeNodes: node-role.kubernetes.io/control-plane=true
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 512Mi
