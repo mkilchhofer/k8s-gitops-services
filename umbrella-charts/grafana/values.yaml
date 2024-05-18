@@ -1,4 +1,25 @@
+global:
+  postgresql:
+    auth:
+      existingSecret: "grafana-db-secret"
+      username: "grafana"
+      database: "grafana"
+      secretKeys:
+        adminPasswordKey: "adminPassword"
+        userPasswordKey: "userPassword"
+
+postgresql:
+  primary:
+    persistence:
+      storageClass: iscsi-manual
+      size: 10Gi
+    networkPolicy:
+      allowExternal: false
+
 grafana:
+  podLabels:
+    grafana-postgresql-client: "true"
+
   containerSecurityContext:
     allowPrivilegeEscalation: false
     capabilities:
@@ -49,10 +70,23 @@ grafana:
       scopes: openid profile email groups
       token_url: https://sso.cloud.kilchhofer.info/token
       email_attribute_path: email
+    database:
+      type: postgres
+      host: grafana-postgresql.base-infra.svc.cluster.local:5432
+      name: grafana
+      user: grafana
+      password: $__file{/etc/secrets/postgres/userPassword}
 
   envFromSecrets:
   - name: grafana-oidc-secret
     optional: false
+
+  extraSecretMounts:
+  - name: db-secret
+    mountPath: /etc/secrets/postgres
+    secretName: grafana-db-secret
+    readOnly: true
+    defaultMode: "0644"
 
   admin:
     existingSecret: grafana-admin-creds
