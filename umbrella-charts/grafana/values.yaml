@@ -17,6 +17,9 @@ postgresql:
       allowExternal: false
 
 grafana:
+  image:
+    tag: "11.0.0-ubuntu"
+
   podLabels:
     grafana-postgresql-client: "true"
 
