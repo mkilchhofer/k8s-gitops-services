@@ -18,11 +18,11 @@ applicationSet:
 
   resources:
     limits:
-      cpu: 500m
+      cpu: 50m
       memory: 256Mi
     requests:
-      cpu: 50m
-      memory: 64Mi
+      cpu: 5m
+      memory: 48Mi
 
 controller:
   enableStatefulSet: true
@@ -49,8 +49,8 @@ controller:
       cpu: 1
       memory: 1Gi
     requests:
-      cpu: 50m
-      memory: 128Mi
+      cpu: 100m
+      memory: 800Mi
 
 dex:
   enabled: false
@@ -159,10 +159,10 @@ notifications:
       - on-sync-status-unknown
   resources:
     limits:
-      cpu: 500m
-      memory: 256Mi
-    requests:
       cpu: 50m
+      memory: 128Mi
+    requests:
+      cpu: 1m
       memory: 64Mi
 
 redis:
@@ -173,11 +173,11 @@ redis:
       tag: v1.43.1
     resources:
       limits:
-        cpu: 100m
-        memory: 128Mi
+        cpu: 50m
+        memory: 64Mi
       requests:
         cpu: 5m
-        memory: 16Mi
+        memory: 28Mi
 
   containerSecurityContext:
     allowPrivilegeEscalation: false
@@ -199,11 +199,11 @@ redis:
 
   resources:
     limits:
-      cpu: 500m
-      memory: 256Mi
-    requests:
       cpu: 50m
       memory: 64Mi
+    requests:
+      cpu: 5m
+      memory: 24Mi
 
 repoServer:
   certificateSecret:
@@ -231,8 +231,8 @@ repoServer:
       cpu: 1
       memory: 1Gi
     requests:
-      cpu: 50m
-      memory: 64Mi
+      cpu: 10m
+      memory: 18Mi
 
   volumes:
     - name: gpg-private-keys
@@ -281,11 +281,11 @@ server:
 
   resources:
     limits:
-      cpu: 500m
+      cpu: 100m
       memory: 256Mi
     requests:
-      cpu: 50m
-      memory: 64Mi
+      cpu: 10m
+      memory: 80Mi
 
 configs:
   cm:
