@@ -3,15 +3,11 @@ createAggregateRoles: true
 global:
   networkPolicy:
     create: true
+  addPrometheusAnnotations: true
 
 applicationSet:
   metrics:
     enabled: true
-    service:
-      annotations:
-        prometheus.io/path: /metrics
-        prometheus.io/port: '8085'
-        prometheus.io/scrape: 'true'
 
     serviceMonitor:
       enabled: false # deployed via argocd-extra
@@ -37,9 +33,7 @@ controller:
     enabled: true
     service:
       annotations:
-        prometheus.io/path: /metrics
-        prometheus.io/port: '8082'
-        prometheus.io/scrape: 'true'
+        prometheus.io/honor_labels: "true"
 
     serviceMonitor:
       enabled: false # deployed via argocd-extra
@@ -60,11 +54,6 @@ notifications:
     - --argocd-repo-server-strict-tls
   metrics:
     enabled: true
-    service:
-      annotations:
-        prometheus.io/path: /metrics
-        prometheus.io/port: '9001'
-        prometheus.io/scrape: 'true'
 
     serviceMonitor:
       enabled: false # deployed via argocd-extra
@@ -188,11 +177,6 @@ redis:
 
   metrics:
     enabled: true
-    service:
-      annotations:
-        prometheus.io/path: /metrics
-        prometheus.io/port: '9121'
-        prometheus.io/scrape: 'true'
 
     serviceMonitor:
       enabled: false # deployed via argocd-extra
@@ -217,11 +201,6 @@ repoServer:
 
   metrics:
     enabled: true
-    service:
-      annotations:
-        prometheus.io/path: /metrics
-        prometheus.io/port: '8084'
-        prometheus.io/scrape: 'true'
 
     serviceMonitor:
       enabled: false # deployed via argocd-extra
@@ -269,12 +248,6 @@ server:
 
   metrics:
     enabled: true
-
-    service:
-      annotations:
-        prometheus.io/path: /metrics
-        prometheus.io/port: '8083'
-        prometheus.io/scrape: 'true'
 
     serviceMonitor:
       enabled: false # deployed via argocd-extra
