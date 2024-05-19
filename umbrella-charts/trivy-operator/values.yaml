@@ -14,6 +14,14 @@ trivy-operator:
   trivy:
     storageClassEnabled: true
     storageClassName: nfs-data
+    server:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 1Gi
+        requests:
+          cpu: 10m
+          memory: 150Mi
   nodeCollector:
     excludeNodes: node-role.kubernetes.io/control-plane=true
 
