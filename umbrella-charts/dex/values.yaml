@@ -96,8 +96,8 @@ dex:
       cpu: 100m
       memory: 128Mi
     requests:
-      cpu: 10m
-      memory: 24Mi
+      cpu: 1m
+      memory: 48Mi
 
   securityContext:
     allowPrivilegeEscalation: false
