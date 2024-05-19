@@ -14,7 +14,7 @@ metallb:
         memory: 100Mi
       requests:
         cpu: 10m
-        memory: 40Mi
+        memory: 50Mi
     # Use classic mode for simplicity
     frr:
       enabled: false
