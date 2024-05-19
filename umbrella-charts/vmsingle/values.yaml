@@ -7,11 +7,11 @@ victoria-metrics-single:
       size: 50Gi
     resources:
       limits:
-        cpu: '1'
+        cpu: 500m
         memory: 1Gi
       requests:
-        cpu: 500m
-        memory: 512Mi
+        cpu: 50m
+        memory: 950Mi
     podSecurityContext:
       fsGroup: 1000
       runAsUser: 1000
