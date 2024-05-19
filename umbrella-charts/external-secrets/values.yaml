@@ -10,10 +10,10 @@ external-secrets:
         prometheus.io/scrape: 'true'
   resources:
     requests:
-      cpu: 10m
-      memory: 32Mi
+      cpu: 5m
+      memory: 48Mi
     limits:
-      cpu: 200m
+      cpu: 100m
       memory: 256Mi
 
   webhook:
@@ -29,8 +29,8 @@ external-secrets:
         renewBefore: 672h0m0s # 28d * 24
     resources:
       requests:
-        cpu: 10m
+        cpu: 1m
         memory: 32Mi
       limits:
-        cpu: 200m
-        memory: 200Mi
+        cpu: 100m
+        memory: 128Mi
