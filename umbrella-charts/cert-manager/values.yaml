@@ -17,6 +17,17 @@ cert-manager:
     readOnlyRootFilesystem: true
     runAsNonRoot: true
 
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 512Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+  ###############################
+  # CA injector
+  ###############################
   cainjector:
     containerSecurityContext:
       allowPrivilegeEscalation: false
@@ -32,14 +43,10 @@ cert-manager:
         cpu: 10m
         memory: 32Mi
 
-  resources:
-    limits:
-      cpu: 1000m
-      memory: 512Mi
-    requests:
-      cpu: 10m
-      memory: 32Mi
-
+  ###############################
+  # webhook component
+  # (provides API validation, mutation and conversion functionality for cert-manager)
+  ###############################
   webhook:
     containerSecurityContext:
       allowPrivilegeEscalation: false
