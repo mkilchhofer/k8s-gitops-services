@@ -8,9 +8,8 @@ global:
 applicationSet:
   metrics:
     enabled: true
-
-    serviceMonitor:
-      enabled: false # deployed via argocd-extra
+    service:
+      clusterIP: None
 
   resources:
     limits:
@@ -34,9 +33,7 @@ controller:
     service:
       annotations:
         prometheus.io/honor_labels: "true"
-
-    serviceMonitor:
-      enabled: false # deployed via argocd-extra
+      clusterIP: None
 
   resources:
     limits:
@@ -54,9 +51,8 @@ notifications:
     - --argocd-repo-server-strict-tls
   metrics:
     enabled: true
-
-    serviceMonitor:
-      enabled: false # deployed via argocd-extra
+    service:
+      clusterIP: None
 
   notifiers:
     service.telegram: |
@@ -178,9 +174,6 @@ redis:
   metrics:
     enabled: true
 
-    serviceMonitor:
-      enabled: false # deployed via argocd-extra
-
   resources:
     limits:
       cpu: 50m
@@ -201,9 +194,8 @@ repoServer:
 
   metrics:
     enabled: true
-
-    serviceMonitor:
-      enabled: false # deployed via argocd-extra
+    service:
+      clusterIP: None
 
   resources:
     limits:
@@ -248,9 +240,8 @@ server:
 
   metrics:
     enabled: true
-
-    serviceMonitor:
-      enabled: false # deployed via argocd-extra
+    service:
+      clusterIP: None
 
   resources:
     limits:
