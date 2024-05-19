@@ -20,6 +20,7 @@ ingress-nginx:
         annotations:
           prometheus.io/scrape: "true"
           prometheus.io/port: "10254"
+          prometheus.io/honor_labels: "true"
         clusterIP: None
 
     admissionWebhooks:
