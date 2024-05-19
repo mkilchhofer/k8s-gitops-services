@@ -10,11 +10,11 @@ nfs-subdir-external-provisioner:
 
   resources:
     limits:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 50m
+      memory: 64Mi
     requests:
-      cpu: 10m
-      memory: 16Mi
+      cpu: 2m
+      memory: 24Mi
 
   securityContext:
     runAsNonRoot: false
