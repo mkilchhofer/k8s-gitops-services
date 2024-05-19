@@ -41,7 +41,7 @@ cert-manager:
         memory: 128Mi
       requests:
         cpu: 1m
-        memory: 70Mi
+        memory: 80Mi
 
   ###############################
   # webhook component
@@ -60,4 +60,4 @@ cert-manager:
         memory: 128Mi
       requests:
         cpu: 1m
-        memory: 20Mi
+        memory: 30Mi
