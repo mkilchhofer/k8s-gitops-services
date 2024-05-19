@@ -19,11 +19,11 @@ cert-manager:
 
   resources:
     limits:
-      cpu: 1000m
-      memory: 512Mi
+      cpu: 100m
+      memory: 128Mi
     requests:
-      cpu: 10m
-      memory: 32Mi
+      cpu: 5m
+      memory: 64Mi
 
   ###############################
   # CA injector
@@ -37,11 +37,11 @@ cert-manager:
       runAsNonRoot: true
     resources:
       limits:
-        cpu: 1000m
-        memory: 512Mi
+        cpu: 100m
+        memory: 128Mi
       requests:
-        cpu: 10m
-        memory: 32Mi
+        cpu: 1m
+        memory: 70Mi
 
   ###############################
   # webhook component
@@ -56,8 +56,8 @@ cert-manager:
       runAsNonRoot: true
     resources:
       limits:
-        cpu: 1000m
-        memory: 512Mi
+        cpu: 100m
+        memory: 128Mi
       requests:
-        cpu: 10m
-        memory: 32Mi
+        cpu: 1m
+        memory: 20Mi
