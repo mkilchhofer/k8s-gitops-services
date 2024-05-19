@@ -12,3 +12,7 @@ keda:
       enabled: true
     webhooks:
       enabled: true
+
+  service:
+    annotations:
+      prometheus.io/honor_labels: "true"
