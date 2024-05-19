@@ -24,11 +24,11 @@ unifi:
 
   resources:
     limits:
-      cpu: 1000m
-      memory: 1.25Gi
+      cpu: 500m
+      memory: 1280Mi
     requests:
-      cpu: 100m
-      memory: 640Mi
+      cpu: 10m
+      memory: 1100Mi
 
   extraVolumes:
     - name: tmp-dir
