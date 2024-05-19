@@ -64,11 +64,11 @@ spec:
           mountPath: /data
         resources:
           limits:
-            cpu: 300m
-            memory: 1Gi
+            cpu: 100m
+            memory: 300Mi
           requests:
-            cpu: 50m
-            memory: 256Mi
+            cpu: 10m
+            memory: 70Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
