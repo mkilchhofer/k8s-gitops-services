@@ -56,10 +56,10 @@ kyverno:
     container:
       resources:
         limits:
-          cpu: "1" # Chart default does not limit CPU, lets use a relatively high value to have some protection
-          memory: 384Mi
+          cpu: 200m
+          memory: 256Mi
         requests:
-          cpu: 100m
+          cpu: 10m
           memory: 128Mi
 
   #----------------------------
@@ -75,7 +75,11 @@ kyverno:
 
     resources:
       limits:
-        cpu: "1" # Chart default does not limit CPU, lets use a relatively high value to have some protection
+        cpu: 200m
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 40Mi
 
     metricsService:
       annotations:
@@ -90,7 +94,11 @@ kyverno:
 
     resources:
       limits:
-        cpu: "2" # Chart default does not limit CPU, lets use a relatively high value to have some protection
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
 
     metricsService:
       annotations:
@@ -105,7 +113,11 @@ kyverno:
 
     resources:
       limits:
-        cpu: "1" # Chart default does not limit CPU, lets use a relatively high value to have some protection
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 5m
+        memory: 80Mi
 
     metricsService:
       annotations:
