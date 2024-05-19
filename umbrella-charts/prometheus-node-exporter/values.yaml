@@ -8,7 +8,7 @@ prometheus-node-exporter:
       memory: 256Mi
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 24Mi
   service:
     annotations:
       prometheus.io/port: '9100'
