@@ -76,11 +76,11 @@ victoria-metrics-single:
 oauth2-proxy:
   resources:
     limits:
-      cpu: 200m
+      cpu: 100m
       memory: 64Mi
     requests:
-      cpu: 10m
-      memory: 20Mi
+      cpu: 5m
+      memory: 32Mi
 
   config:
     existingSecret: vm-oauth2-proxy-custom

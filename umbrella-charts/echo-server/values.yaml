@@ -38,8 +38,8 @@ oauth2-proxy:
       cpu: 200m
       memory: 64Mi
     requests:
-      cpu: 10m
-      memory: 20Mi
+      cpu: 1m
+      memory: 16Mi
 
   config:
     existingSecret: echo-server-oauth2-proxy-custom
