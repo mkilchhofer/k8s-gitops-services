@@ -22,5 +22,5 @@ trivy-operator:
       cpu: 500m
       memory: 1Gi
     requests:
-      cpu: 100m
-      memory: 512Mi
+      cpu: 10m
+      memory: 420Mi
