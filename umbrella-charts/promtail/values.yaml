@@ -47,7 +47,7 @@ promtail:
       memory: 512Mi
     requests:
       cpu: 20m
-      memory: 64Mi
+      memory: 128Mi
 
   extraArgs:
   - -config.expand-env=true
