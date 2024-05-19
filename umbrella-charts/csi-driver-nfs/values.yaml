@@ -1,5 +1,26 @@
 csi-driver-nfs:
   externalSnapshotter:
     enabled: false
+  controller:
+    resources:
+      csiProvisioner:
+        limits:
+          cpu: 10m
+        requests:
+          memory: 45Mi
+      csiSnapshotter:
+        limits:
+          cpu: 30m
+        requests:
+          memory: 45Mi
+      livenessProbe:
+        limits:
+          cpu: 10m
+      nfs:
+        limits:
+          cpu: 200m
+        requests:
+          cpu: 1m
+          memory: 16Mi
   node:
     priorityClassName: system-node-critical # default is system-cluster-critical
