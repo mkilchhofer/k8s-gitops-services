@@ -35,6 +35,9 @@ spec:
             secretKeyRef:
               name: cloudflared-token
               key: tunnelToken
+        ports:
+        - containerPort: 2000
+          name: metrics
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

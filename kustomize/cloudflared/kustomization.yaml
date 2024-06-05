@@ -4,3 +4,4 @@ resources:
   - statefulset.yaml
   - externalsecret.yaml
   - networkpolicy-egress.yaml
+  - metrics-service.yaml
