@@ -10,6 +10,12 @@ resource "akeyless_role" "k3s_eso" {
     path       = "/k3s/*"
     rule_type  = "item-rule"
   }
+
+  rules {
+    capability = ["read"]
+    path       = "/cloudflare-tunnels/*"
+    rule_type  = "item-rule"
+  }
 }
 
 resource "akeyless_associate_role_auth_method" "k3s_eso" {
