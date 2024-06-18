@@ -42,6 +42,7 @@ kyverno:
     networkPolicy:
       enabled: true
 
+    revisionHistoryLimit: 1
     # Admission controller is cluster-critical as it is in the chain of the API server
     priorityClassName: system-cluster-critical
 
@@ -73,6 +74,7 @@ kyverno:
   cleanupController:
     enabled: true
 
+    revisionHistoryLimit: 1
     resources:
       limits:
         cpu: 200m
@@ -92,6 +94,7 @@ kyverno:
   reportsController:
     enabled: true
 
+    revisionHistoryLimit: 1
     resources:
       limits:
         cpu: 500m
@@ -111,6 +114,7 @@ kyverno:
   backgroundController:
     enabled: true
 
+    revisionHistoryLimit: 1
     resources:
       limits:
         cpu: 100m
