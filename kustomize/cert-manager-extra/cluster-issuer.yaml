@@ -20,7 +20,6 @@ spec:
     # as part of a solver's selector too.
     - selector:
         dnsZones:
-        - "kilchhofer.info"
         - "tools.kilchhofer.info"
         - "tools-test.kilchhofer.info"
       dns01:
@@ -31,6 +30,7 @@ spec:
             key: api-token
     - selector:
         dnsZones:
+        - "kilchhofer.info"
         - "cloud.kilchhofer.info"
       http01:
         ingress:
@@ -58,7 +58,6 @@ spec:
     # as part of a solver's selector too.
     - selector:
         dnsZones:
-        - "kilchhofer.info"
         - "tools.kilchhofer.info"
         - "tools-test.kilchhofer.info"
       dns01:
@@ -69,6 +68,7 @@ spec:
             key: api-token
     - selector:
         dnsZones:
+        - "kilchhofer.info"
         - "cloud.kilchhofer.info"
       http01:
         ingress:
