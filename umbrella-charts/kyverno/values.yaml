@@ -133,12 +133,12 @@ kyverno:
   #----------------------------
   cleanupJobs:
     admissionReports:
-      schedule: '10 1 * * *'
+      schedule: '10 1,13 * * *'
     clusterAdmissionReports:
-      schedule: '10 2 * * *'
+      schedule: '10 2,14 * * *'
     updateRequests:
-      schedule: '10 3 * * *'
+      schedule: '10 3,15 * * *'
     ephemeralReports:
-      schedule: '10 4 * * *'
+      schedule: '10 4,16 * * *'
     clusterEphemeralReports:
-      schedule: '10 5 * * *'
+      schedule: '10 5,17 * * *'
