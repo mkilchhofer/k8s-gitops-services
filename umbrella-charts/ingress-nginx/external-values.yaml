@@ -11,4 +11,4 @@ ingress-nginx:
       # Use haproxy proxy protocol so we see the upstream client IP address
       # If you see errors like this "Error code: SSL_ERROR_RX_RECORD_TOO_LONG", chances are high that it is due
       # to this setting.
-      use-proxy-protocol: true
+      use-proxy-protocol: false
