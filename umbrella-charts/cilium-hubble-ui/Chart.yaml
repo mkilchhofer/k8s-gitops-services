@@ -8,5 +8,5 @@ version: 1.0.0
 dependencies:
 - name: cilium
   alias: hubble-ui
-  version: 1.13.15
+  version: 1.15.6
   repository: https://helm.cilium.io/
