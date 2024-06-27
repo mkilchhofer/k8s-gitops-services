@@ -10,5 +10,5 @@ dependencies:
   version: 0.5.0
   repository: https://ealenn.github.io/charts
 - name: oauth2-proxy
-  version: "7.7.4"
+  version: "7.7.6"
   repository: oci://ghcr.io/oauth2-proxy/charts
