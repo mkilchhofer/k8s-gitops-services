@@ -20,5 +20,5 @@ data:
   ICON_SERVICE: bitwarden
   DISABLE_ICON_DOWNLOAD: "true"
   PUSH_ENABLED: "true"
-  PUSH_RELAY_URI: https://push.bitwarden.eu
+  PUSH_RELAY_URI: https://api.bitwarden.eu
   PUSH_IDENTITY_URI: https://identity.bitwarden.eu
