@@ -11,6 +11,10 @@ proxy:
   prometheus:
     enabled: false
 
+envoy:
+  # Enable Envoy Proxy in standalone DaemonSet.
+  enabled: true
+
 operator:
   replicas: 1
   rollOutPods: true
