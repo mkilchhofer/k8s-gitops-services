@@ -1,5 +1,7 @@
 hubble-ui:
   agent: false
+  envoy:
+    enabled: false
   nodeinit:
     enabled: false
   operator:
