@@ -4,7 +4,7 @@ upgradeCompatibility: "1.11"
 policyEnforcementMode: always
 
 rollOutCiliumPods: true
-kubeProxyReplacement: disabled
+kubeProxyReplacement: false
 
 # -- Configure Istio proxy options.
 proxy:
