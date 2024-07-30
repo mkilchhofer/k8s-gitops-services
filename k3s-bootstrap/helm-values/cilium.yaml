@@ -14,6 +14,13 @@ proxy:
 envoy:
   # Enable Envoy Proxy in standalone DaemonSet.
   enabled: true
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+    requests:
+      cpu: 10m
+      memory: 32Mi
 
 operator:
   replicas: 1
