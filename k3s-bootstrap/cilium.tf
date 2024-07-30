@@ -59,6 +59,9 @@ resource "helm_release" "cilium" {
     value = base64encode(tls_private_key.hubble_relay.private_key_pem)
   }
 
+  # Use default chart values and merge them with customized ones in line below
+  reset_values = true
+
   values = [
     file("${path.module}/helm-values/cilium.yaml")
   ]
