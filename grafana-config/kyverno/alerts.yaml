@@ -1,0 +1,48 @@
+# Source: https://github.com/giantswarm/prometheus-rules/blob/618ee88dbfc000706aa4b1093b04f7a4c6951f16/helm/prometheus-rules/templates/platform/shield/alerting-rules/kyverno.rules.yml
+groups:
+- name: kyverno.webhooks
+  rules:
+  - alert: KyvernoWebhookHasNoAvailableReplicas
+    annotations:
+      description: 'Kyverno has no available replicas but webhooks are present.'
+    expr: sum(kube_validatingwebhookconfiguration_info{validatingwebhookconfiguration=~"kyverno-.*"}) by (cluster_id, installation, pipeline, provider) > 0 and sum(kube_deployment_status_replicas_ready{deployment=~"kyverno|kyverno-admission-controller"}) by (cluster_id, installation, pipeline, provider) == 0
+    for: 15m
+    labels:
+      severity: warning
+
+- name: kyverno.resources
+  rules:
+  - alert: KyvernoUpdateRequestsCountTooHigh
+    annotations:
+      description: "Kyverno {{ $labels.kind }} are too high. This is an indicator that Kyverno's background controller may not be able to create some resources."
+    expr: aggregation:kyverno_resource_counts{kind=~"(generate|update)requests.kyverno.io"} > 5000
+    for: 15m
+    labels:
+      severity: notify
+
+- name: kyverno.replicas
+  rules:
+  - alert: KyvernoScaledDownTooLong
+    annotations:
+      description: 'Kyverno has been scaled down for too long.'
+    expr: sum(kube_deployment_spec_replicas{deployment=~"kyverno|kyverno-kyverno-plugin|kyverno-policy-reporter"}) by (cluster_id, installation, pipeline, provider) == 0
+    for: 4h
+    labels:
+      severity: notify
+  - alert: KyvernoUnsafeReplicaCount
+    annotations:
+      description: "Kyverno's admission controller deployment must use at least 3 replicas, or be scaled to 0."
+    expr: sum(kube_deployment_spec_replicas{deployment="kyverno"}) by (cluster_id, installation, pipeline, provider) != 0 and sum(kube_deployment_spec_replicas{deployment="kyverno"}) by (cluster_id, installation, pipeline, provider) < 3
+    for: 1h
+    labels:
+      severity: notify
+
+- name: kyverno-policies
+  rules:
+    - alert: KyvernoPolicyViolation
+      expr: sum by (policy, exported_namespace, name) (policy_report_result{status="fail"}) > 0
+      labels:
+        severity: warning
+      annotations:
+        description: "Resources did not fulfil policy {{ $labels.policy }} on {{ $labels.exported_namespace }}"
+        summary: Resources did not fullfill kyverno policies.
