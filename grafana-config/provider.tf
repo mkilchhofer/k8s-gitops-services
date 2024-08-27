@@ -18,5 +18,5 @@ locals {
 provider "grafana" {
   # Configuration options
   auth = "${local.grafana_auth["admin-user"]}:${local.grafana_auth["admin-password"]}"
-  url  = "https://grafana.tools.kilchhofer.info"
+  url  = "https://grafana.kilchhofer.info"
 }
