@@ -1504,11 +1504,7 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "VictoriaMetrics",
-          "value": "bdw0otcg9t3i8d"
-        },
+        "current": {},
         "hide": 0,
         "includeAll": false,
         "label": "Data Source",
