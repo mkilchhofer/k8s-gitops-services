@@ -78,6 +78,7 @@ dex:
         name: Grafana
         redirectURIs:
           - https://grafana.tools.kilchhofer.info/login/generic_oauth
+          - https://grafana.kilchhofer.info/login/generic_oauth
 
       - id: opencost
         secret: '{{ .Env.OPENCOST_CLIENT_SECRET }}'

@@ -46,14 +46,14 @@ grafana:
     annotations:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: letsencrypt
-    ingressClassName: nginx-internal
+    ingressClassName: nginx-external
     hosts:
-      - grafana.tools.kilchhofer.info
+      - grafana.kilchhofer.info
 
     tls:
       - secretName: grafana-ingress-cert
         hosts:
-          - grafana.tools.kilchhofer.info
+          - grafana.kilchhofer.info
 
   rbac:
     pspEnabled: false
@@ -70,7 +70,7 @@ grafana:
 
   grafana.ini:
     server:
-      root_url: https://grafana.tools.kilchhofer.info
+      root_url: https://grafana.kilchhofer.info
     auth.generic_oauth:
       allow_sign_up: false
       api_url: https://sso.cloud.kilchhofer.info/userinfo
