@@ -31,7 +31,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bdw0otcg9t3i8d"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -113,7 +113,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bdw0otcg9t3i8d"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "rate(process_cpu_seconds_total{job=\"$job\", namespace=\"$namespace\", pod=\"$pod\"}[5m]) * 100",
@@ -131,7 +131,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bdw0otcg9t3i8d"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -213,7 +213,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bdw0otcg9t3i8d"
+            "uid": "${datasource}"
           },
           "exemplar": true,
           "expr": "process_resident_memory_bytes{job=\"$job\", namespace=\"$namespace\", pod=\"$pod\"}",
@@ -235,11 +235,7 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "VictoriaMetrics",
-          "value": "bdw0otcg9t3i8d"
-        },
+        "current": {},
         "hide": 0,
         "includeAll": false,
         "multi": false,
