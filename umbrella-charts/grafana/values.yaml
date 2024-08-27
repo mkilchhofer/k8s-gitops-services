@@ -81,6 +81,8 @@ grafana:
       scopes: openid profile email groups
       token_url: https://sso.cloud.kilchhofer.info/token
       email_attribute_path: email
+    auth.anonymous:
+      hide_version: true
     database:
       type: postgres
       host: grafana-postgresql.base-infra.svc.cluster.local:5432
