@@ -87,6 +87,8 @@ grafana:
       name: grafana
       user: grafana
       password: $__file{/etc/secrets/postgres/userPassword}
+    metrics:
+      enabled: false
 
   envFromSecrets:
   - name: grafana-oidc-secret
