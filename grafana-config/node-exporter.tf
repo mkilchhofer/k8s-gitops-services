@@ -3,7 +3,7 @@ resource "grafana_folder" "node_exporter" {
 }
 
 module "node_exporter_alerts" {
-  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=init"
+  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=main"
 
   prometheus_alerts_file_path = file("./node_exporter/alerts.yaml")
   folder_uid                  = grafana_folder.node_exporter.uid

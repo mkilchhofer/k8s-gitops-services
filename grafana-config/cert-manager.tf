@@ -3,7 +3,7 @@ resource "grafana_folder" "cert_manager" {
 }
 
 module "cert_manager_alerts" {
-  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=init"
+  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=main"
 
   prometheus_alerts_file_path = file("./cert-manager/alerts.yaml")
   folder_uid                  = grafana_folder.cert_manager.uid

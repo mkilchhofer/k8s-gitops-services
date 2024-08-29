@@ -3,7 +3,7 @@ resource "grafana_folder" "ingress_nginx" {
 }
 
 module "ingress_nginx_alerts" {
-  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=init"
+  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=main"
 
   prometheus_alerts_file_path = file("./ingress-nginx/alerts.yaml")
   folder_uid                  = grafana_folder.ingress_nginx.uid
