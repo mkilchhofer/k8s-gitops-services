@@ -21,8 +21,12 @@ kyverno-policies:
           namespaces:
           - kube-system
           selector:
-            matchLabels:
-              k8s-app: cilium
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - cilium-envoy
       - resources:
           selector:
             matchExpressions:
@@ -50,8 +54,12 @@ kyverno-policies:
           namespaces:
           - kube-system
           selector:
-            matchLabels:
-              k8s-app: cilium
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - cilium-envoy
       - resources:
           namespaces:
           - kube-system
@@ -91,8 +99,12 @@ kyverno-policies:
           namespaces:
           - kube-system
           selector:
-            matchLabels:
-              k8s-app: cilium
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - cilium-envoy
       - resources:
           selector:
             matchExpressions:
@@ -128,8 +140,12 @@ kyverno-policies:
           namespaces:
           - kube-system
           selector:
-            matchLabels:
-              k8s-app: cilium
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - cilium-envoy
       - resources:
           namespaces:
           - kube-system
@@ -189,8 +205,12 @@ kyverno-policies:
           namespaces:
           - kube-system
           selector:
-            matchLabels:
-              k8s-app: cilium
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - cilium-envoy
 
     restrict-apparmor-profiles:
       any:
@@ -198,8 +218,12 @@ kyverno-policies:
           namespaces:
           - kube-system
           selector:
-            matchLabels:
-              k8s-app: cilium
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - cilium-envoy
 
     ## Excludes for restricted Policies
     ## --------------------------------
@@ -217,6 +241,7 @@ kyverno-policies:
                 operator: In
                 values:
                 - cilium
+                - cilium-envoy
                 - hubble-relay
                 - hubble-ui
       - resources:
@@ -263,6 +288,7 @@ kyverno-policies:
                 operator: In
                 values:
                 - cilium
+                - cilium-envoy
                 - hubble-relay
                 - hubble-ui
       - resources:
@@ -342,6 +368,7 @@ kyverno-policies:
                 operator: In
                 values:
                 - cilium
+                - cilium-envoy
                 - hubble-relay
                 - hubble-ui
                 - kube-dns
@@ -398,8 +425,12 @@ kyverno-policies:
           namespaces:
           - kube-system
           selector:
-            matchLabels:
-              k8s-app: cilium
+            matchExpressions:
+              - key: k8s-app
+                operator: In
+                values:
+                - cilium
+                - cilium-envoy
       - resources:
           selector:
             matchExpressions:
