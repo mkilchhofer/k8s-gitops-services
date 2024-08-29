@@ -42,7 +42,13 @@ groups:
     - alert: KyvernoPolicyViolation
       expr: sum by (policy, namespace, name, kind, severity) (policy_report_result{status="fail"}) > 0
       labels:
-        severity: "{{ $labels.severity }}"
+        # Remap Kyverno severity to alert severity
+        # - critical -> use as-is
+        # - high     -> remap to warning
+        # - low      -> remap to info
+        # - medium   -> remap to warning
+        # - info     -> use as-is
+        severity: '{{ if (eq $labels.severity "low") -}} info {{ else if or (eq $labels.severity "medium") (eq $labels.severity "high") -}} warning {{ else -}} {{ $labels.severity }} {{- end }}'
       annotations:
         description: "{{ $labels.kind | title }} \"{{ $labels.name }}\" (namespace: {{ $labels.namespace }}) does not fulfil policy \"{{ $labels.policy }}\""
         summary: Resources did not fullfill kyverno policies.
