@@ -3,6 +3,7 @@ kyverno-policies:
   validationFailureAction: enforce
   skipBackgroundRequests: true
   podSecurityStandard: baseline
+  podSecuritySeverity: warning
 
   includeRestrictedPolicies:
   - disallow-capabilities-strict

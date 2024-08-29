@@ -6,7 +6,7 @@ metadata:
     pod-policies.kyverno.io/autogen-controllers: none
     policies.kyverno.io/title: Require Pod Probes
     policies.kyverno.io/category: Reliability
-    policies.kyverno.io/severity: medium
+    policies.kyverno.io/severity: info
     policies.kyverno.io/subject: DaemonSet, Deployment, StatefulSet
     policies.kyverno.io/description: >-
       Liveness and readiness probes need to be configured to correctly manage a Pod's
