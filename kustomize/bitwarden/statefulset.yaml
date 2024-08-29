@@ -75,6 +75,9 @@ spec:
             drop:
             - ALL
           readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
       terminationGracePeriodSeconds: 10
   volumeClaimTemplates:
   - metadata:
