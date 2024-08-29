@@ -3,7 +3,7 @@ resource "grafana_folder" "coredns" {
 }
 
 module "coredns_alerts" {
-  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=init"
+  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=main"
 
   prometheus_alerts_file_path = file("./coredns/alerts.yaml")
   folder_uid                  = grafana_folder.coredns.uid

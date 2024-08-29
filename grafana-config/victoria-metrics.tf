@@ -3,7 +3,7 @@ resource "grafana_folder" "victoria_metrics" {
 }
 
 module "victoria_metrics_alerts" {
-  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=init"
+  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=main"
 
   prometheus_alerts_file_path = file("./victoria-metrics/alerts.yaml")
   folder_uid                  = grafana_folder.victoria_metrics.uid

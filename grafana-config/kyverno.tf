@@ -3,7 +3,7 @@ resource "grafana_folder" "kyverno" {
 }
 
 module "kyverno_alerts" {
-  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=init"
+  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=main"
 
   prometheus_alerts_file_path = file("./kyverno/alerts.yaml")
   folder_uid                  = grafana_folder.kyverno.uid
