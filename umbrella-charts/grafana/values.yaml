@@ -128,6 +128,8 @@ grafana:
             - matchName: logs-prod-eu-west-0.grafana.net
               # VictoriaMetrics endpoint
             - matchName: vm.kilchhofer.info
+              # SSO with Dex
+            - matchName: sso.cloud.kilchhofer.info
           toPorts:
             - ports:
                 - port: "443"
