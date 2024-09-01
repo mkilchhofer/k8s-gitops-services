@@ -14,7 +14,7 @@ spec:
   - type: prometheus
     metricType: AverageValue
     metadata:
-      serverAddress: https://vm.cloud.kilchhofer.info/
+      serverAddress: https://vm.kilchhofer.info/
       threshold: '20'
       query: sum(rate(nginx_http_requests_total[1m]))
       authModes: "basic"

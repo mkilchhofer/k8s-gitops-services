@@ -9,7 +9,7 @@ locals {
 resource "grafana_data_source" "victoria_metrics" {
   name                = "VictoriaMetrics"
   type                = "prometheus"
-  url                 = "https://vm.cloud.kilchhofer.info"
+  url                 = "https://vm.kilchhofer.info"
   basic_auth_enabled  = true
   basic_auth_username = local.victoria_metrics_creds["username"]
   secure_json_data_encoded = jsonencode({

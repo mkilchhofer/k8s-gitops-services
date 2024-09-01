@@ -89,7 +89,7 @@ oauth2-proxy:
       real_client_ip_header = "X-Forwarded-For"
       provider = "oidc"
       provider_display_name = "GitHub / Dex"
-      redirect_url = "https://vm.cloud.kilchhofer.info/oauth2/callback"
+      redirect_url = "https://vm.kilchhofer.info/oauth2/callback"
       oidc_issuer_url = "https://sso.cloud.kilchhofer.info"
       email_domains = [ "*" ]
       upstreams = [ "http://vmsingle-victoria-metrics-single-server.monitoring.svc:8428" ]
@@ -118,16 +118,12 @@ oauth2-proxy:
   ingress:
     enabled: true
     hosts:
-      - vm.cloud.kilchhofer.info
       - vm.kilchhofer.info
     annotations:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       cert-manager.io/cluster-issuer: letsencrypt
     className: nginx-external
     tls:
-      - secretName: vm-oauth2-proxy-ingress-cert
-        hosts:
-          - vm.cloud.kilchhofer.info
       - secretName: vm-oauth2-proxy-toplevel-ingress-cert
         hosts:
           - vm.kilchhofer.info

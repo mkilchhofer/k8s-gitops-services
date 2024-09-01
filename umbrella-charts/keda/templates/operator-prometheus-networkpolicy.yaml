@@ -8,7 +8,7 @@ spec:
       app: keda-operator
   egress:
     - toFQDNs:
-        - matchName: vm.cloud.kilchhofer.info
+        - matchName: vm.kilchhofer.info
       toPorts:
         - ports:
             - port: "443"

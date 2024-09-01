@@ -71,7 +71,7 @@ dex:
         secret: '{{ .Env.VICTORIA_METRICS_CLIENT_SECRET }}'
         name: VictoriaMetrics
         redirectURIs:
-          - https://vm.cloud.kilchhofer.info/oauth2/callback
+          - https://vm.kilchhofer.info/oauth2/callback
 
       - id: grafana
         secret: '{{ .Env.GRAFANA_CLIENT_SECRET }}'
