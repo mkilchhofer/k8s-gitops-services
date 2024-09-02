@@ -1,6 +1,8 @@
 victoria-metrics-agent:
-  extraArgs:
-    remoteWrite.label: cluster=k3s
+  deployment:
+    enabled: false
+  statefulset:
+    enabled: true
   resources:
     limits:
       cpu: 500m
@@ -10,6 +12,20 @@ victoria-metrics-agent:
       memory: 128Mi
   remoteWriteUrls:
     - http://vmsingle-victoria-metrics-single-server.monitoring:8428/api/v1/write
+
+  extraArgs:
+    remoteWrite.label: cluster=k3s
+    promscrape.cluster.name: "$(POD_NAME)" # required to support multi-replica
+  env:
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+
   podSecurityContext:
     fsGroup: 1000
     runAsUser: 1000
@@ -28,6 +44,9 @@ victoria-metrics-agent:
       - job_name: vmagent
         static_configs:
           - targets: ["localhost:8429"]
+            labels:
+              pod: '%{POD_NAME}'
+              namespace: '%{POD_NAMESPACE}'
 
         ## COPY from Prometheus helm chart https://github.com/helm/charts/blob/master/stable/prometheus/values.yaml
 
