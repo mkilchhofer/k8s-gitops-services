@@ -30,6 +30,7 @@ opencost:
         PROM_CLUSTER_ID_LABEL: cluster
 
       securityContext:
+        allowPrivilegeEscalation: false
         capabilities:
           drop:
           - ALL
@@ -38,12 +39,15 @@ opencost:
         readOnlyRootFilesystem: false
         runAsNonRoot: true
         runAsUser: 1001
+        seccompProfile:
+          type: RuntimeDefault
 
     ui:
       extraVolumeMounts:
         - mountPath: /tmp
           name: ui-tmp-dir
       securityContext:
+        allowPrivilegeEscalation: false
         capabilities:
           drop:
           - ALL
@@ -52,6 +56,8 @@ opencost:
         readOnlyRootFilesystem: false
         runAsNonRoot: true
         runAsUser: 1001
+        seccompProfile:
+          type: RuntimeDefault
 
   extraVolumes:
     - name: ui-tmp-dir
