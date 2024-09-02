@@ -23,6 +23,15 @@ trivy-operator:
         requests:
           cpu: 10m
           memory: 150Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        seccompProfile:
+          type: RuntimeDefault
+
   nodeCollector:
     excludeNodes: node-role.kubernetes.io/control-plane=true
 
