@@ -72,7 +72,7 @@ grafana:
     server:
       root_url: https://grafana.kilchhofer.info
     auth.generic_oauth:
-      allow_sign_up: false
+      allow_sign_up: true
       api_url: https://sso.cloud.kilchhofer.info/userinfo
       auth_url: https://sso.cloud.kilchhofer.info/auth
       client_id: grafana
@@ -81,6 +81,9 @@ grafana:
       scopes: openid profile email groups
       token_url: https://sso.cloud.kilchhofer.info/token
       email_attribute_path: email
+      # Role mapping
+      role_attribute_path: contains(groups[*], 'kilchhofer-home:admins') && 'GrafanaAdmin' || contains(groups[*], 'kilchhofer-home:editors') && 'Editor' || 'None'
+      allow_assign_grafana_admin: true
     auth.anonymous:
       hide_version: true
     database:
