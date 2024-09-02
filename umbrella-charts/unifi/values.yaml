@@ -20,7 +20,11 @@ unifi:
 
   bindPrivilegedPorts: false
   securityContext:
+    allowPrivilegeEscalation: false
     runAsUser: 999
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
 
   resources:
     limits:
