@@ -3,7 +3,7 @@ victoria-metrics-single:
     namespaced: true # Don't deploy ClusterRoles / ClusterRoleBinding
   server:
     persistentVolume:
-      storageClass: "iscsi-manual"
+      storageClassName: "iscsi-manual"
       size: 50Gi
     resources:
       limits:
