@@ -12,8 +12,16 @@ victoria-metrics-agent:
     - http://vmsingle-victoria-metrics-single-server.monitoring:8428/api/v1/write
   podSecurityContext:
     fsGroup: 1000
-  securityContext:
     runAsUser: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
 
   config:
     scrape_configs:
