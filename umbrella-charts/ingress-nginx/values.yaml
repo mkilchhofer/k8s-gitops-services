@@ -5,14 +5,17 @@ ingress-nginx:
     service:
       externalTrafficPolicy: Local
     containerSecurityContext:
+      allowPrivilegeEscalation: false
       capabilities:
         add:
           - NET_BIND_SERVICE
         drop:
           - ALL
-      runAsUser: 101
-      allowPrivilegeEscalation: false
       readOnlyRootFilesystem: false
+      runAsNonRoot: true
+      runAsUser: 101
+      seccompProfile:
+        type: RuntimeDefault
 
     metrics:
       enabled: true
