@@ -37,6 +37,7 @@ groups:
     labels:
       severity: notify
 
+  # Source: https://github.com/cloudentity/acp-on-k8s/blob/eace20c17e3afd8b163929f67f0072f3a10ff994/middleware/monitoring/base/alerts/kyverno.yaml#L7-L15
 - name: kyverno-policies
   rules:
     - alert: KyvernoPolicyViolation
