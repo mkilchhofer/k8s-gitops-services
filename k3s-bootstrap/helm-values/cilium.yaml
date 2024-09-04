@@ -39,6 +39,8 @@ ipam:
   mode: kubernetes
 hubble:
   metrics:
+    # Inspiration can be taken there:
+    # https://github.com/isovalent/terraform-aws-talos/blob/4cbea7c5250d6ec5b69f4946306ef0d598ac1f83/example/03-cilium-values.yaml#L39-L49
     enabled:
       - dns:labelsContext=source_namespace,destination_namespace;query;ignoreAAAA
       - drop:labelsContext=source_namespace,destination_namespace
