@@ -40,14 +40,14 @@ ipam:
 hubble:
   metrics:
     enabled:
-      - dns:query;ignoreAAAA
-      - drop
-      - tcp
-      - flow
-      - icmp
+      - dns:labelsContext=source_namespace,destination_namespace;query;ignoreAAAA
+      - drop:labelsContext=source_namespace,destination_namespace
+      - tcp:labelsContext=source_namespace,destination_namespace
+      - flow:sourceContext=workload-name|reserved-identity;destinationContext=workload-name|reserved-identity;labelsContext=source_namespace,destination_namespace
+      - icmp:labelsContext=source_namespace,destination_namespace;sourceContext=workload-name|reserved-identity;destinationContext=workload-name|reserved-identity
         # Deprecated, use httpV2 instead.
       # - http:labelsContext=source_namespace,destination_namespace,traffic_direction
-      - port-distribution
+      - port-distribution:labelsContext=source_namespace,destination_namespace
         # 'httpV2' is an updated version of the existing 'http' metrics.
         # These metrics can not be enabled at the same time as 'http'.
       - httpV2:exemplars=true;labelsContext=source_namespace,destination_namespace,traffic_direction
