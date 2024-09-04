@@ -45,11 +45,12 @@ hubble:
       - tcp
       - flow
       - icmp
-      - http:labelsContext=source_namespace,destination_namespace,traffic_direction
+        # Deprecated, use httpV2 instead.
+      # - http:labelsContext=source_namespace,destination_namespace,traffic_direction
       - port-distribution
         # 'httpV2' is an updated version of the existing 'http' metrics.
         # These metrics can not be enabled at the same time as 'http'.
-      # - httpV2:exemplars=true;labelsContext=source_namespace,destination_namespace,traffic_direction
+      - httpV2:exemplars=true;labelsContext=source_namespace,destination_namespace,traffic_direction
 
   relay:
     enabled: true
