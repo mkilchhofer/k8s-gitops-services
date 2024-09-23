@@ -283,6 +283,13 @@ configs:
           - ClusterBackgroundScanReport
         clusters:
           - '*'
+      - apiGroups:
+          - reports.kyverno.io
+        kinds:
+          - EphemeralReport
+          - ClusterEphemeralReport
+        clusters:
+          - '*'
 
       - apiGroups:
           - cilium.io
