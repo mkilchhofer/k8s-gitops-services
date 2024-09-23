@@ -15,6 +15,15 @@ postgresql:
       size: 10Gi
     networkPolicy:
       allowExternal: false
+    resources:
+      limits:
+        cpu: 300m
+        ephemeral-storage: 2Gi
+        memory: 256Mi
+      requests:
+        cpu: 30m
+        ephemeral-storage: 50Mi
+        memory: 128Mi
 
 grafana:
   image:
