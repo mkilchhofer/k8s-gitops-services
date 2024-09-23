@@ -10,6 +10,25 @@ module "kubernetes_mixin_alerts" {
 
   # Data source to use
   datasource_uid = grafana_data_source.victoria_metrics.uid
+
+  overrides = {
+    # Disable several alerts since we use K3s here
+    KubeAPIDown = {
+      is_paused = true
+    }
+    KubeControllerManagerDown = {
+      is_paused = true
+    }
+    KubeProxyDown = {
+      is_paused = true
+    }
+    KubeletDown = {
+      is_paused = true
+    }
+    KubeSchedulerDown = {
+      is_paused = true
+    }
+  }
 }
 
 resource "grafana_dashboard" "kubernetes_mixin" {
