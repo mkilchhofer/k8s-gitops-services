@@ -5,17 +5,17 @@ csi-driver-nfs:
     resources:
       csiProvisioner:
         limits:
-          cpu: 10m
+          cpu: 100m
         requests:
           memory: 45Mi
       csiSnapshotter:
         limits:
-          cpu: 30m
+          cpu: 100m
         requests:
           memory: 45Mi
       livenessProbe:
         limits:
-          cpu: 10m
+          cpu: 100m
       nfs:
         limits:
           cpu: 200m
@@ -24,3 +24,13 @@ csi-driver-nfs:
           memory: 16Mi
   node:
     priorityClassName: system-node-critical # default is system-cluster-critical
+    resources:
+      livenessProbe:
+        limits:
+          cpu: 100m
+      nodeDriverRegistrar:
+        limits:
+          cpu: 100m
+      nfs:
+        limits:
+          cpu: 300m
