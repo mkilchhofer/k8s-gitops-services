@@ -30,7 +30,7 @@ csi-driver-nfs:
           cpu: 100m
       nodeDriverRegistrar:
         limits:
-          cpu: 100m
+          cpu: 200m
       nfs:
         limits:
           cpu: 300m
