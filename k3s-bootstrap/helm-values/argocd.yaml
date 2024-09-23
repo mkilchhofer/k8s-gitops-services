@@ -283,10 +283,18 @@ configs:
           - ClusterBackgroundScanReport
         clusters:
           - '*'
+
       - apiGroups:
           - cilium.io
         kinds:
           - CiliumEndpoint
+        clusters:
+          - '*'
+
+      - apiGroups:
+          - aquasecurity.github.io
+        kinds:
+          - '*'
         clusters:
           - '*'
 
