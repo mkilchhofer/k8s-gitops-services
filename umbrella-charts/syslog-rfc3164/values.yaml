@@ -68,6 +68,8 @@ fluent-bit:
               http_user: ${LOKI_USER}
               http_passwd: ${LOKI_PASSWORD}
               port: 443
+              tls: on
+              tls.verify: on
               tenant_id: syslog-rfc3164
               line_format: json
               labels: job=fluent-bit-syslog-rfc3164
