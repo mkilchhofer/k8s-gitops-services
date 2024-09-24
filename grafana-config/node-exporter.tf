@@ -18,6 +18,18 @@ module "node_exporter_alerts" {
         "__panelId__"      = "2"
       }
     }
+    NodeFilesystemSpaceFillingUp-warning = {
+      annotations = {
+        "__dashboardUid__" = grafana_dashboard.node_exporter["nodes.json"].uid
+        "__panelId__"      = "7"
+      }
+    }
+    NodeFilesystemSpaceFillingUp-critical = {
+      annotations = {
+        "__dashboardUid__" = grafana_dashboard.node_exporter["nodes.json"].uid
+        "__panelId__"      = "7"
+      }
+    }
   }
 }
 
