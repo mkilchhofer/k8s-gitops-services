@@ -23,6 +23,24 @@ fluent-bit:
   args:
     - --workdir=/fluent-bit/etc
     - --config=/fluent-bit/etc/conf/fluent-bit.yaml
+
+  env:
+    - name: LOKI_HOST
+      valueFrom:
+        secretKeyRef:
+          name: grafana-cloud-creds
+          key: host
+    - name: LOKI_USER
+      valueFrom:
+        secretKeyRef:
+          name: grafana-cloud-creds
+          key: user
+    - name: LOKI_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: grafana-cloud-creds
+          key: password
+
   config:
     inputs: ""
     outputs: ""
@@ -46,7 +64,9 @@ fluent-bit:
           outputs:
             - name: loki
               match: '*'
-              host: loki.base-infra.svc.cluster.local
+              host: ${LOKI_HOST}
+              http_user: ${LOKI_USER}
+              http_passwd: ${LOKI_PASSWORD}
               port: 3100
               tenant_id: syslog-rfc3164
               line_format: json
