@@ -122,6 +122,10 @@ oauth2-proxy:
                   matchLabels:
                     app.kubernetes.io/instance: echo-server
                     app.kubernetes.io/name: oauth2-proxy
+              - podSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: grafana
+                    app.kubernetes.io/name: grafana
             ports:
               - port: http
                 protocol: TCP
