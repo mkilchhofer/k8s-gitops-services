@@ -1,19 +1,27 @@
 {{- $Values := index .Values "fluent-bit" -}}
 {{- if not $Values.networkPolicy.enabled }}
-apiVersion: "networking.k8s.io/v1"
-kind: "NetworkPolicy"
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
 metadata:
   name: syslog-rfc3164-fluent-bit
   namespace: {{ .Release.Namespace }}
 spec:
-  policyTypes:
-    - "Ingress"
-  podSelector:
+  endpointSelector:
     matchLabels:
       app.kubernetes.io/instance: syslog-rfc3164
       app.kubernetes.io/name: fluent-bit
+  egress:
+    - toFQDNs:
+          # Loki logs at Grafana Cloud
+        - matchName: logs-prod-eu-west-0.grafana.net
+      toPorts:
+        - ports:
+            - port: "443"
   ingress:
-    - ports:
-        - protocol: "TCP"
-          port: 5140
+    - fromEntities:
+        - world
+      toPorts:
+        - ports:
+            - port: "5140"
+              protocol: TCP
 {{- end }}

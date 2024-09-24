@@ -67,7 +67,7 @@ fluent-bit:
               host: ${LOKI_HOST}
               http_user: ${LOKI_USER}
               http_passwd: ${LOKI_PASSWORD}
-              port: 3100
+              port: 443
               tenant_id: syslog-rfc3164
               line_format: json
               labels: job=fluent-bit-syslog-rfc3164
