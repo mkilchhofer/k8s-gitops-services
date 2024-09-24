@@ -10,6 +10,15 @@ module "node_exporter_alerts" {
 
   # Data source to use
   datasource_uid = grafana_data_source.victoria_metrics.uid
+
+  overrides = {
+    NodeCPUHighUsage = {
+      annotations = {
+        "__dashboardUid__" = grafana_dashboard.node_exporter["nodes.json"].uid
+        "__panelId__"      = "2"
+      }
+    }
+  }
 }
 
 resource "grafana_dashboard" "node_exporter" {
