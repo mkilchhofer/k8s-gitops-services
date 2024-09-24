@@ -20,27 +20,39 @@ fluent-bit:
       protocol: TCP
       port: 5140
 
+  args:
+    - --workdir=/fluent-bit/etc
+    - --config=/fluent-bit/etc/conf/fluent-bit.yaml
   config:
-    inputs: |
-      [INPUT]
-          Name syslog
-          Parser syslog-rfc3164
-          Mode tcp
-          Port 5140
-
-    outputs: |
-      [OUTPUT]
-          Name        loki
-          Match       *
-          Host        loki.base-infra.svc.cluster.local
-          Port        3100
-          Tenant_id   syslog-rfc3164
-          Line_format json
-          Labels      job=fluent-bit-syslog-rfc3164
-          Label_keys  $pri,$host,$ident
-          Remove_keys time,pid
-
+    inputs: ""
+    outputs: ""
     filters: ""
+    extraFiles:
+      fluent-bit.yaml: |
+        service:
+          daemon: Off
+          flush: 1
+          log_level: info
+          parsers_file: /fluent-bit/etc/parsers.conf
+          http_server: on
+
+        pipeline:
+          inputs:
+            - name: syslog
+              parser: syslog-rfc3164
+              mode: tcp
+              port: 5140
+
+          outputs:
+            - name: loki
+              match: '*'
+              host: loki.base-infra.svc.cluster.local
+              port: 3100
+              tenant_id: syslog-rfc3164
+              line_format: json
+              labels: job=fluent-bit-syslog-rfc3164
+              label_keys: $pri,$host,$ident
+              remove_keys: time,pid
 
   service:
     type: LoadBalancer
@@ -49,7 +61,3 @@ fluent-bit:
   securityContext:
     runAsUser: 1001
 
-  networkPolicy:
-    enabled: true
-    ingress:
-      from: []
