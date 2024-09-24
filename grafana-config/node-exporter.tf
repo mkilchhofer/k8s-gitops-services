@@ -30,6 +30,24 @@ module "node_exporter_alerts" {
         "__panelId__"      = "7"
       }
     }
+    NodeSystemSaturation = {
+      annotations = {
+        "__dashboardUid__" = grafana_dashboard.node_exporter["nodes.json"].uid
+        "__panelId__"      = "3"
+      }
+    }
+    NodeDiskIOSaturation = {
+      annotations = {
+        "__dashboardUid__" = grafana_dashboard.node_exporter["nodes.json"].uid
+        "__panelId__"      = "6"
+      }
+    }
+    NodeMemoryHighUtilization = {
+      annotations = {
+        "__dashboardUid__" = grafana_dashboard.node_exporter["nodes.json"].uid
+        "__panelId__"      = "4"
+      }
+    }
   }
 }
 
