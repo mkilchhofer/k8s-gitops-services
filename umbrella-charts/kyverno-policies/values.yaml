@@ -244,6 +244,7 @@ kyverno-policies:
                 - cilium-envoy
                 - hubble-relay
                 - hubble-ui
+                - kube-dns
       - resources:
           namespaces:
           - kube-system
