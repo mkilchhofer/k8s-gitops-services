@@ -6,11 +6,6 @@ policyEnforcementMode: always
 rollOutCiliumPods: true
 kubeProxyReplacement: false
 
-# -- Configure Istio proxy options.
-proxy:
-  prometheus:
-    enabled: false
-
 envoy:
   # Enable Envoy Proxy in standalone DaemonSet.
   enabled: true
@@ -21,6 +16,8 @@ envoy:
     requests:
       cpu: 10m
       memory: 32Mi
+  prometheus:
+    enabled: true
 
 operator:
   replicas: 1
