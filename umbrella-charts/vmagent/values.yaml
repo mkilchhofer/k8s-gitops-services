@@ -11,7 +11,7 @@ victoria-metrics-agent:
       cpu: 100m
       memory: 128Mi
   remoteWrite:
-    - http://vmsingle-victoria-metrics-single-server.monitoring:8428/api/v1/write
+    - url: http://vmsingle-victoria-metrics-single-server.monitoring:8428/api/v1/write
 
   extraArgs:
     remoteWrite.label: cluster=k3s
