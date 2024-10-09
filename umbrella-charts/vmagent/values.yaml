@@ -10,7 +10,7 @@ victoria-metrics-agent:
     requests:
       cpu: 100m
       memory: 128Mi
-  remoteWriteUrls:
+  remoteWrite:
     - http://vmsingle-victoria-metrics-single-server.monitoring:8428/api/v1/write
 
   extraArgs:
