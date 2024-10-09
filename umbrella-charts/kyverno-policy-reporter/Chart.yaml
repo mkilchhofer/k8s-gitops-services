@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: policy-reporter
-  version: 2.24.1
+  version: 2.24.2
   repository: oci://ghcr.io/kyverno/charts
