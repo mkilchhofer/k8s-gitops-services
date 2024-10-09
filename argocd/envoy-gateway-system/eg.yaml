@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: envoy-gateway
+  namespace: argocd
+spec:
+  destination:
+    namespace: envoy-gateway-system
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    path: umbrella-charts/envoy-gateway
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    helm:
+      releaseName: eg

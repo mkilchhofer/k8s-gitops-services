@@ -1,0 +1,12 @@
+apiVersion: v2
+name: envoy-gateway
+description:  Envoy Gateway for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: gateway-helm
+  version: v1.1.2
+  repository: oci://docker.io/envoyproxy
+
