@@ -4,7 +4,10 @@
     "config:recommended"
   ],
   "helm-values": {
-    "fileMatch": ["./.+\\.yaml$"]
+    "fileMatch": [
+      "k3s-bootstrap/helm-values/.+\\.yaml$",
+      "umbrella-charts/.+\\.yaml$"
+    ]
   },
   "kubernetes": {
     "fileMatch": ["\\.yaml$"],
