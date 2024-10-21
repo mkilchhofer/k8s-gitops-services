@@ -17,6 +17,8 @@ spec:
         # Notification via E-Mail
       - port: 587
         protocol: TCP
+      - port: 465
+        protocol: TCP
   ingress:
     - ports:
       - port: http-gui
