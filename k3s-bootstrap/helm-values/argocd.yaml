@@ -153,9 +153,6 @@ notifications:
 redis:
   exporter:
     enabled: true
-    image:
-      repository: quay.io/oliver006/redis_exporter
-      tag: v1.43.1
     resources:
       limits:
         cpu: 50m
