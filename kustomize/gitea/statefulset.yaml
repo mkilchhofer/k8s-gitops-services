@@ -14,7 +14,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: gitea
-        image: gitea/gitea:1.19.4
+        image: gitea/gitea:1.20.4
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -57,7 +57,8 @@ spec:
             path: /
             port: http-gui
             scheme: HTTP
-          initialDelaySeconds: 5
+          initialDelaySeconds: 60
+          periodSeconds: 60
         readinessProbe:
           httpGet:
             path: /
