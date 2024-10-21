@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: website
-        image: nginxinc/nginx-unprivileged:1.23-alpine-slim
+        image: nginxinc/nginx-unprivileged:1.27-alpine-slim
         ports:
         - name: http
           containerPort: 8080
