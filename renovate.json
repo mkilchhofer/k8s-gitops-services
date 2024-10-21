@@ -1,6 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
-  ]
+    "config:recommended"
+  ],
+  "helm-values": {
+    "fileMatch": ["./.+\\.yaml$"]
+  },
+  "kubernetes": {
+    "fileMatch": ["\\.yaml$"],
+    "ignorePaths": [
+      ".github"
+    ]
+  }
 }
