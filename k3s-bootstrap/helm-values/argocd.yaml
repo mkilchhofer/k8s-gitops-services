@@ -155,7 +155,7 @@ redis:
     enabled: true
     image:
       repository: quay.io/oliver006/redis_exporter
-      tag: v1.43.1
+      tag: v1.65.0
     resources:
       limits:
         cpu: 50m
