@@ -60,6 +60,10 @@ fluent-bit:
               parser: syslog-rfc3164
               mode: tcp
               port: 5140
+            - name: syslog
+              parser: syslog-rfc3164
+              mode: udp
+              port: 5140
 
           outputs:
             - name: loki
@@ -79,6 +83,8 @@ fluent-bit:
   service:
     type: LoadBalancer
     loadBalancerIP: 192.168.93.85
+    annotations:
+      metallb.universe.tf/allow-shared-ip: syslog-rfc3164
 
   securityContext:
     runAsUser: 1001
