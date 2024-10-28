@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: lldap
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: lldap
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+        - port: ldap
+          protocol: TCP
+        - port: web
+          protocol: TCP

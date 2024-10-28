@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lldap
+  labels:
+    app.kubernetes.io/name: lldap
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: lldap
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: lldap
+    spec:
+      containers:
+      - name: lldap
+        image: lldap/lldap:2024-10-26-debian-rootless
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        ports:
+        - name: ldap
+          containerPort: 3890
+        - name: web
+          containerPort: 17170
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - "ALL"
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - name: tmp-dir
+          mountPath: /tmp
+        - name: data
+          mountPath: /data
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 5m
+            memory: 16Mi
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      volumes:
+      - name: tmp-dir
+        emptyDir: {}
+      - name: data
+        persistentVolumeClaim:
+          claimName: lldap
