@@ -224,6 +224,9 @@ kyverno-policies:
                 values:
                 - cilium
                 - cilium-envoy
+      - resources:
+          namespaces:
+          - falco
 
     ## Excludes for restricted Policies
     ## --------------------------------
