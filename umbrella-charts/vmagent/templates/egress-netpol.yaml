@@ -6,7 +6,7 @@ spec:
   podSelector:
     matchLabels:
       {{- $context := dict "Chart" .Chart "Release" .Release "Values" .Values }}
-      {{- include "chart.selectorLabels" $context | nindent 6 }}
+      {{- include "vm.selectorLabels" $context | nindent 6 }}
   policyTypes:
     - Egress
   egress:
