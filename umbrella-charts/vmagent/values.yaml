@@ -1,7 +1,7 @@
 victoria-metrics-agent:
   deployment:
     enabled: false
-  statefulset:
+  statefulSet:
     enabled: true
   resources:
     limits:
