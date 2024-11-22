@@ -27,3 +27,20 @@ groups:
         The application '{{$labels.name}}' has not been synchronized for over
         12 hours which means that the state of this cloud has drifted away from the
         state inside Git.
+
+  - alert: ArgoAppTooManySyncs
+    expr: |
+      increase(argocd_app_sync_total[30m]) > 5
+    for: 12h
+    labels:
+      severity: warning
+    annotations:
+      summary: "Argo CD Application many sync"
+      description: >
+        The application '{{$labels.name}}' has been synchronized more than 5 times within
+        30 minutes. This mostly happens when Argo CD continuously detects a drift from your
+        desired state. Possible reasons:
+        - A Deployment specifies spec.replicas while HPA is also active
+        - An operator/controller makes changes which are not defined in Git
+        - An Admissions Enforcer is mutating your admission controller webhooks
+          (E.g. on Azure AKS)
