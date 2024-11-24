@@ -39,8 +39,8 @@ groups:
       description: >
         The application '{{$labels.name}}' has been synchronized more than 5 times within
         30 minutes. This mostly happens when Argo CD continuously detects a drift from your
-        desired state. Possible reasons:
-        - A Deployment specifies spec.replicas while HPA is also active
-        - An operator/controller makes changes which are not defined in Git
-        - An Admissions Enforcer is mutating your admission controller webhooks
+        desired state. Possible reasons:\n
+        - A Deployment specifies spec.replicas while HPA is also active\n
+        - An operator/controller makes changes which are not defined in Git\n
+        - An Admissions Enforcer is mutating your admission controller webhooks\n
           (E.g. on Azure AKS)
