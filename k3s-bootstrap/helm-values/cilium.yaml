@@ -86,3 +86,8 @@ resources:
   requests:
     cpu: 300m
     memory: 300Mi
+
+# Inspecting TLS Encrypted Connections
+# https://docs.cilium.io/en/stable/security/tls-visibility/#gs-tls-inspection
+tls:
+  secretsBackend: k8s
