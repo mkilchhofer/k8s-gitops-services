@@ -10,7 +10,7 @@ spec:
     - toFQDNs:
         - matchName: repo.jellyfin.org
         - matchName: api.themoviedb.org
-        - matchName: fra1.mirror.jellyfin.org
+        - matchPattern: "*.mirror.jellyfin.org"
         - matchName: www.omdbapi.com
         - matchName: image.tmdb.org
         - matchName: m.media-amazon.com
