@@ -445,6 +445,7 @@ kyverno-policies:
                 - plex
                 - promtail
                 - prometheus-node-exporter
+                - jellyfin
       - resources:
           selector:
             matchLabels:

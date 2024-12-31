@@ -1,0 +1,127 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jellyfin
+  labels:
+    app.kubernetes.io/name: jellyfin
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jellyfin
+  serviceName: jellyfin
+  replicas: 1
+  revisionHistoryLimit: 2
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jellyfin
+    spec:
+      securityContext:
+        fsGroup: 65534
+        runAsUser: 65534
+      containers:
+      - name: jellyfin
+        image: ghcr.io/jellyfin/jellyfin:10.10.3
+        ports:
+        - name: http
+          containerPort: 8096
+          protocol: TCP
+        volumeMounts:
+        - name: cache
+          mountPath: /cache
+        - name: config
+          mountPath: /config
+        - name: tmp
+          mountPath: /tmp
+
+          # Existing Media folders on Synology NAS (via NFS)
+        - name: syno1-movies1
+          mountPath: /media/syno1-movies1
+        - name: syno1-movies2
+          mountPath: /media/syno1-movies2
+        - name: syno1-music1
+          mountPath: /media/syno1-music1
+        - name: syno1-tv-recordings1
+          mountPath: /media/syno1-tv-recordings1
+        - name: syno1-tv-shows1
+          mountPath: /media/syno1-tv-shows1
+        - name: syno1-tv-shows2
+          mountPath: /media/syno1-tv-shows2
+        - name: syno1-home-movies1
+          mountPath: /media/syno1-home_movies1
+        - name: syno1-photos1
+          mountPath: /media/syno1-photos1
+
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: cache
+          emptyDir: {}
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyfin-config
+        - name: tmp
+          emptyDir: {}
+
+          # Existing Media folders on Synology NAS (via NFS)
+        - name: syno1-movies1
+          nfs:
+            server: nfs-data.ma.kilchhofer.info
+            path: /volume1/media1/Movies
+            readOnly: true
+        - name: syno1-movies2
+          nfs:
+            server: nfs-data.ma.kilchhofer.info
+            path: /volume1/media1/Movies2
+            readOnly: true
+        - name: syno1-music1
+          nfs:
+            server: nfs-data.ma.kilchhofer.info
+            path: /volume1/media1/Music
+            readOnly: true
+        - name: syno1-tv-recordings1
+          nfs:
+            server: nfs-data.ma.kilchhofer.info
+            path: /volume1/media1/TV Recordings
+            # path: /volume1/media1/TV\040Recordings
+            readOnly: true
+        - name: syno1-tv-shows1
+          nfs:
+            server: nfs-data.ma.kilchhofer.info
+            path: /volume1/media1/TV Shows
+            # path: /volume1/media1/TV\040Shows
+            readOnly: true
+        - name: syno1-tv-shows2
+          nfs:
+            server: nfs-data.ma.kilchhofer.info
+            path: /volume1/media1/TV Shows2
+            # path: /volume1/media1/TV\040Shows2
+            readOnly: true
+        - name: syno1-home-movies1
+          nfs:
+            server: nfs-data.ma.kilchhofer.info
+            path: /volume1/media1/Home Movies
+            # path: /volume1/media1/Home\040Movies
+            readOnly: true
+        - name: syno1-photos1
+          nfs:
+            server: nfs-data.ma.kilchhofer.info
+            path: /volume2/photo1/Photos
+            readOnly: true
