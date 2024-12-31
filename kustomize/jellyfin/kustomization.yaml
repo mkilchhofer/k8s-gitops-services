@@ -4,3 +4,5 @@ resources:
   - statefulset.yaml
   - networkpolicy-egress.yaml
   - pvc.yaml
+  - service.yaml
+  - ingress.yaml
