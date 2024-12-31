@@ -15,6 +15,7 @@ spec:
         - matchName: image.tmdb.org
         - matchName: m.media-amazon.com
         - matchName: musicbrainz.org
+        - matchName: raw.githubusercontent.com # Studio Images
         - matchPattern: "*.theaudiodb.com"
       toPorts:
         - ports:
