@@ -9,5 +9,5 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
-  storageClassName: nfs-csi
+      storage: 20Gi
+  storageClassName: iscsi-manual
