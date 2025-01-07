@@ -2,7 +2,7 @@ resource "helm_release" "cilium" {
   name       = "cilium"
   repository = "https://helm.cilium.io/"
   chart      = "cilium"
-  version    = "1.16.4" # also update in umbrella-charts/cilium-hubble-ui/Chart.yaml
+  version    = "1.16.5" # also update in umbrella-charts/cilium-hubble-ui/Chart.yaml
   namespace  = "kube-system"
 
   max_history = local.helm_max_history
