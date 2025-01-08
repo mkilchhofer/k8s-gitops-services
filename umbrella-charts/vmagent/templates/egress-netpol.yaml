@@ -1,3 +1,5 @@
+{{- $context := dict "Chart" .Chart "Release" .Release "Values" .Values "Capabilities" .Capabilities }}
+{{- $ctx := dict "helm" $context }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -5,8 +7,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      {{- $context := dict "Chart" .Chart "Release" .Release "Values" .Values }}
-      {{- include "vm.selectorLabels" $context | nindent 6 }}
+      {{- include "vm.selectorLabels" $ctx | nindent 6 }}
   policyTypes:
     - Egress
   egress:
