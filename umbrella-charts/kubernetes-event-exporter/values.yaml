@@ -1,3 +1,8 @@
+global:
+  security:
+    # Ref: https://github.com/bitnami/charts/issues/30850
+    allowInsecureImages: true
+
 kubernetes-event-exporter:
   image:
     registry: ghcr.io
