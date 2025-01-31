@@ -41,7 +41,7 @@ spec:
             urlPath: "/apis/policy/v1/namespaces/{{request.namespace}}/poddisruptionbudgets"
       skipBackgroundRequests: true
       validate:
-        failureAction: audit
+        failureAction: Audit
         allowExistingViolations: true
         message: "There is no corresponding PodDisruptionBudget found for this Deployment."
         deny:
