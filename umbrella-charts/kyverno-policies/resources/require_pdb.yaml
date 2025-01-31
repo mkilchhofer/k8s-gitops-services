@@ -16,7 +16,6 @@ metadata:
       to ensure they have a matching, preexisting PodDisruptionBudget.
       Note: This policy must be run in `enforce` mode to ensure accuracy.
 spec:
-  validationFailureAction: audit
   background: false
   rules:
     - name: require-pdb
@@ -42,6 +41,8 @@ spec:
             urlPath: "/apis/policy/v1/namespaces/{{request.namespace}}/poddisruptionbudgets"
       skipBackgroundRequests: true
       validate:
+        failureAction: audit
+        allowExistingViolations: true
         message: "There is no corresponding PodDisruptionBudget found for this Deployment."
         deny:
           conditions:

@@ -2,16 +2,12 @@ policy-reporter:
   revisionHistoryLimit: 1
   networkPolicy:
     enabled: true
-  ui:
-    enabled: true
-    revisionHistoryLimit: 1
-    resources:
-      limits:
-        memory: 100Mi
-        cpu: 100m
-      requests:
-        memory: 50Mi
-        cpu: 10m
+
+  service:
+    annotations:
+      prometheus.io/port: '8080'
+      prometheus.io/scrape: 'true'
+      prometheus.io/honor_labels: "true"
 
   resources:
     limits:
@@ -24,6 +20,7 @@ policy-reporter:
   metrics:
     enabled: true
     mode: custom
+    # Supported fields are: ["namespace", "rule", "policy", "report" // PolicyReport name, "kind" // resource kind, "name" // resource name, "status", "severity", "category", "source"]
     customLabels:
       - namespace
       - category
@@ -37,8 +34,15 @@ policy-reporter:
       status:
         exclude:
           - pass
-  service:
-    annotations:
-      prometheus.io/port: '8080'
-      prometheus.io/scrape: 'true'
-      prometheus.io/honor_labels: "true"
+
+  # Configure Policy Reporter UI
+  ui:
+    enabled: true
+    revisionHistoryLimit: 1
+    resources:
+      limits:
+        memory: 100Mi
+        cpu: 100m
+      requests:
+        memory: 50Mi
+        cpu: 10m

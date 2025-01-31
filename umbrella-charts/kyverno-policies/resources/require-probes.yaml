@@ -17,7 +17,6 @@ metadata:
       This policy validates that all containers have one of livenessProbe, readinessProbe,
       or startupProbe defined.      
 spec:
-  validationFailureAction: audit
   background: true
   rules:
   - name: validate-probes
@@ -37,6 +36,8 @@ spec:
         - UPDATE
     skipBackgroundRequests: true
     validate:
+      failureAction: audit
+      allowExistingViolations: true
       message: "Liveness, readiness, or startup probes are required for all containers."
       foreach:
       - list: request.object.spec.template.spec.containers[]
