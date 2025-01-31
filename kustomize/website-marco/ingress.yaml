@@ -4,10 +4,11 @@ metadata:
   name: website-marco
   annotations:
     kubernetes.io/ingress.class: nginx-external
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_set_headers "Strict-Transport-Security: max-age=86400; includeSubDomains"
-      more_set_headers "Content-Security-Policy: default-src 'self'; script-src 'self'"
-      more_set_headers "Expect-CT: max-age=86400, enforce";
+    ## Config snippets are not allowed in Nginx default config
+    # nginx.ingress.kubernetes.io/configuration-snippet: |
+    #   more_set_headers "Strict-Transport-Security: max-age=86400; includeSubDomains"
+    #   more_set_headers "Content-Security-Policy: default-src 'self'; script-src 'self'"
+    #   more_set_headers "Expect-CT: max-age=86400, enforce";
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt
     cert-manager.io/revision-history-limit: "1"
