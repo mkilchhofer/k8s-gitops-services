@@ -1,13 +1,13 @@
 kyverno:
   config:
     webhooks:
-      - namespaceSelector:
-          matchExpressions:
-            - key: kubernetes.io/metadata.name
-              operator: NotIn
-              values:
-                - argocd
-                - kube-system
+      namespaceSelector:
+        matchExpressions:
+          - key: kubernetes.io/metadata.name
+            operator: NotIn
+            values:
+              - argocd
+              - kube-system
 
   # Metrics configuration
   metricsConfig:
@@ -127,18 +127,3 @@ kyverno:
       annotations:
         prometheus.io/port: "8000"
         prometheus.io/scrape: "true"
-
-  #----------------------------
-  # Component "Cleanup cronjobs"
-  #----------------------------
-  cleanupJobs:
-    admissionReports:
-      schedule: '10 1,13 * * *'
-    clusterAdmissionReports:
-      schedule: '10 2,14 * * *'
-    updateRequests:
-      schedule: '10 3,15 * * *'
-    ephemeralReports:
-      schedule: '10 4,16 * * *'
-    clusterEphemeralReports:
-      schedule: '10 5,17 * * *'
