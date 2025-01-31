@@ -48,11 +48,19 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
-        livenessProbe:
+        startupProbe:
           httpGet:
           # Cloudflared has a /ready endpoint which returns 200 if and only if
           # it has an active connection to the edge.
             path: /ready
+            port: 2000
+          initialDelaySeconds: 3
+          periodSeconds: 2
+        livenessProbe:
+          httpGet:
+            # See https://github.com/cloudflare/cloudflared/blob/2feccd772c7bfe37e43531cf7524deb30190de8b/metrics/metrics.go#L75C21-L75C33
+            # Static return fmt.Fprintf(w, "OK\n")
+            path: /healthcheck
             port: 2000
           failureThreshold: 1
           initialDelaySeconds: 10
