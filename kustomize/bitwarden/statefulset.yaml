@@ -15,7 +15,7 @@ spec:
         runAsUser: 65534
       containers:
       - name: bitwarden
-        image: ghcr.io/dani-garcia/vaultwarden:1.33.0-alpine
+        image: ghcr.io/dani-garcia/vaultwarden:1.33.1-alpine
         envFrom:
         - configMapRef:
             name: bitwarden-config
