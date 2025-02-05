@@ -7,7 +7,7 @@ kubernetes-event-exporter:
   image:
     registry: ghcr.io
     repository: resmoio/kubernetes-event-exporter
-    tag: v1.6.1
+    tag: v1.7
   replicaCount: 2
   podAnnotations:
     prometheus.io/port: '2112'
