@@ -542,6 +542,7 @@ victoria-metrics-agent:
       static_configs:
         - targets:
           - "9.9.9.9"
+          - "149.112.112.112"
           - "212.25.1.1"
           - "212.25.3.3"
           labels:
