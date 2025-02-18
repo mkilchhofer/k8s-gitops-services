@@ -542,6 +542,8 @@ victoria-metrics-agent:
       static_configs:
         - targets:
           - "9.9.9.9"
+          - "212.25.1.1"
+          - "212.25.3.3"
           labels:
             namespace: "monitoring"
       relabel_configs:
