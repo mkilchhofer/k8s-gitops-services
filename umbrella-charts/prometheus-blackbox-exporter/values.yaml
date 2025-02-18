@@ -1,0 +1,21 @@
+networkPolicy:
+  enabled: true
+
+prometheus-blackbox-exporter:
+  resources:
+    limits:
+      memory: 300Mi
+    requests:
+      memory: 50Mi
+
+  config:
+    modules:
+      http_2xx:
+        timeout: 1m
+
+  service:
+    annotations:
+      prometheus.io/port: "9115"
+
+  configReloader:
+    enabled: true
