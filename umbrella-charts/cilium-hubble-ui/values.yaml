@@ -53,3 +53,7 @@ hubble-ui:
           requests:
             cpu: 100m
             memory: 64Mi
+  tls:
+    secretsNamespace:
+      create: false
+      name: ""
