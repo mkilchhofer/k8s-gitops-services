@@ -12,6 +12,8 @@ prometheus-blackbox-exporter:
     modules:
       http_2xx:
         timeout: 1m
+      icmp:
+        prober: icmp
 
   service:
     annotations:
