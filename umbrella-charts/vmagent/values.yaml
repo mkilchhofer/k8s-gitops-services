@@ -532,3 +532,22 @@ victoria-metrics-agent:
         source_labels:
         - __meta_kubernetes_endpoints_name
         target_label: job
+
+    - job_name: 'blackbox-exporter-icmp'
+      scrape_interval: 30m
+      scrape_timeout: 1m
+      metrics_path: /probe
+      params:
+        module: [icmp]
+      static_configs:
+        - targets:
+          - "9.9.9.9"
+          labels:
+            namespace: "monitoring"
+      relabel_configs:
+        - source_labels: [__address__]
+          target_label: __param_target
+        - source_labels: [__param_target]
+          target_label: instance
+        - target_label: __address__
+          replacement: prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
