@@ -534,7 +534,7 @@ victoria-metrics-agent:
         target_label: job
 
     - job_name: 'blackbox-exporter-icmp'
-      scrape_interval: 30m
+      scrape_interval: 30s
       scrape_timeout: 1m
       metrics_path: /probe
       params:
