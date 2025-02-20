@@ -14,5 +14,11 @@
     "ignorePaths": [
       ".github"
     ]
-  }
+  },
+  "packageRules": [
+    {
+      "matchFileNames": ["**/Chart.yaml"],
+      "commitMessageTopic": "{{depName}}"
+    }
+  ]
 }
