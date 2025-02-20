@@ -8,4 +8,4 @@ version: 1.0.0
 dependencies:
 - name: victoria-metrics-agent
   version: "0.15.8"
-  repository: https://victoriametrics.github.io/helm-charts/
+  repository: oci://ghcr.io/victoriametrics/helm-charts
