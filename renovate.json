@@ -19,6 +19,11 @@
     {
       "matchFileNames": ["**/Chart.yaml"],
       "commitMessageTopic": "{{depName}}"
+    },
+    {
+      "matchDepTypes": ["helm_release"],
+      "matchFileNames": ["**/*.tf"],
+      "commitMessageTopic": "{{depName}}"
     }
   ]
 }
