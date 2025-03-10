@@ -21,3 +21,7 @@ version-checker:
     requests:
       cpu: 5m
       memory: 128Mi
+
+  versionChecker:
+    # Check for updates every 4 hours
+    imageCacheTimeout: 4h
