@@ -110,6 +110,7 @@ oauth2-proxy:
       cookie_secure = false
       pass_access_token = true
       pass_authorization_header = true
+      footer = "Secured with <a href=\"https://github.com/oauth2-proxy/oauth2-proxy#oauth2_proxy\" class=\"has-text-grey\">OAuth2 Proxy</a>"
       allowed_groups = [
           "kilchhofer-home:admins"
       ]

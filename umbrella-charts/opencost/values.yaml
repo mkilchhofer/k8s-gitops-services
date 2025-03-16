@@ -86,6 +86,7 @@ oauth2-proxy:
       upstreams = [ "http://opencost.monitoring.svc:9090" ]
       silence_ping_logging = true
       cookie_secure = true
+      footer = "Secured with <a href=\"https://github.com/oauth2-proxy/oauth2-proxy#oauth2_proxy\" class=\"has-text-grey\">OAuth2 Proxy</a>"
       allowed_groups = [
           "kilchhofer-home:admins"
       ]
