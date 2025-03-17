@@ -10,5 +10,5 @@ dependencies:
   version: 15.5.38
   repository: oci://registry-1.docker.io/bitnamicharts
 - name: coder
-  version: 2.19.0
+  version: 2.20.1
   repository: https://helm.coder.com/v2
