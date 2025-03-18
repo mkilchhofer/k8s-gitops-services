@@ -20,11 +20,44 @@ spec:
           # VSCode / Microsoft
         - matchName: default.exp-tas.com # vscode liveshare and vscode intelisense
         - matchPattern: "*.events.data.microsoft.com" # VSCode telemetry
+        - matchName: main.vscode-cdn.net
       toPorts:
         - ports:
             - port: "443"
+      # tailscale netcheck
+      # Ref: https://github.com/tailscale/tailscale/blob/v1.26.2/net/netcheck/netcheck.go#L833
+    - toCIDRSet:
+        - cidr: 203.0.113.1/32
+      toPorts:
+        - ports:
+            - port: "12345"
+              protocol: UDP
+      # STUN servers
+    - toFQDNs:
+        - matchPattern: "*.l.google.com"
+      toPorts:
+        - ports:
+            - port: "19302"
+              protocol: UDP
+      # Multicast SSDP?
+    - toCIDRSet:
+        - cidr: 239.255.255.250/32
+      toPorts:
+        - ports:
+            - port: "1900"
+              protocol: UDP
+      # Home network
+    - toCIDRSet:
+        - cidr: 192.168.91.0/24
+    - toFQDNs:
+          # Self
+        - matchName: ma.kilchhofer.info
   ingress:
     - fromEndpoints:
         - matchLabels:
             app.kubernetes.io/instance: coder
             app.kubernetes.io/name: coder
+    - icmps:
+        - fields:
+            - family: IPv4
+              type: DestinationUnreachable
