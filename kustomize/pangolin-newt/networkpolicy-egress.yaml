@@ -11,5 +11,9 @@ spec:
         - matchName: pangolin.technat.dev
       toPorts:
         - ports:
+              # API
             - port: "443"
               protocol: TCP
+              # Wireguard
+            - port: "51820"
+              protocol: UDP
