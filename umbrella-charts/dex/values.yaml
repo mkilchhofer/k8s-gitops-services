@@ -1,6 +1,6 @@
 dex:
   image:
-    tag: v2.41.1-distroless
+    tag: v2.42.0-distroless
 
   config:
     issuer: https://sso.cloud.kilchhofer.info
