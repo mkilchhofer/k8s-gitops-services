@@ -21,7 +21,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: newt
-        image: fosrl/newt:1.1.1
+        image: fosrl/newt:1.1.2
         env:
         - name: PANGOLIN_ENDPOINT
           value: https://pangolin.technat.dev
