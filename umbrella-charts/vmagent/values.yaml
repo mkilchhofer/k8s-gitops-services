@@ -1,8 +1,5 @@
 victoria-metrics-agent:
-  deployment:
-    enabled: false
-  statefulSet:
-    enabled: true
+  mode: statefulSet
   resources:
     limits:
       cpu: 500m
@@ -18,10 +15,6 @@ victoria-metrics-agent:
     promscrape.cluster.name: "$(POD_NAME)" # required to support multi-replica
     promscrape.seriesLimitPerTarget: 20000
   env:
-    - name: POD_NAME
-      valueFrom:
-        fieldRef:
-          fieldPath: metadata.name
     - name: POD_NAMESPACE
       valueFrom:
         fieldRef:
