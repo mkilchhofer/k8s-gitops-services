@@ -14,7 +14,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: gitea
-        image: gitea/gitea:1.23.5
+        image: gitea/gitea:1.23.6
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
