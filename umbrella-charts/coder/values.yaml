@@ -40,6 +40,9 @@ coder:
 
       - name: CODER_ACCESS_URL
         value: "https://coder.tools.kilchhofer.info"
+
+      - name: CODER_DERP_SERVER_STUN_ADDRESSES
+        value: disable
     podLabels:
       coder-postgresql-client: "true"
     securityContext:
