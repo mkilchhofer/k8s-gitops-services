@@ -79,3 +79,15 @@ coder:
         enable: true
         secretName: coder-ingress-cert
         wildcardSecretName: coder-wildcard-ingress-cert
+
+coder-logstream-kube:
+  url: https://coder.tools.kilchhofer.info
+  labels:
+    app.kubernetes.io/component: coder-logstream-kube
+  resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 5m
+        memory: 64Mi

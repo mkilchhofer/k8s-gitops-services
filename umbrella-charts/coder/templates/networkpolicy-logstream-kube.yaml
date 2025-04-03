@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: coder-logstream-kube
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/component: coder-logstream-kube
+  egress:
+    - toFQDNs:
+          # Self
+        - matchName: coder.tools.kilchhofer.info
+      toPorts:
+        - ports:
+            - port: "443"

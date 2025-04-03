@@ -12,3 +12,6 @@ dependencies:
 - name: coder
   version: 2.21.0
   repository: https://helm.coder.com/v2
+- name: coder-logstream-kube
+  version: v0.0.11
+  repository: https://helm.coder.com/logstream-kube
