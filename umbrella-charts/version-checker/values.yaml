@@ -25,3 +25,6 @@ version-checker:
   versionChecker:
     # Check for updates every 4 hours
     imageCacheTimeout: 4h
+
+  serviceMonitor:
+    enabled: false
