@@ -192,3 +192,20 @@ groups:
           summary: "Scrape target reached 80% of the configured limit"
           description: "The job resp. scrape target {{ $labels.job }} reached {{ printf \"%.3f\" $value | humanizePercentage }} of the configured time series limit. Either contact the
             application operator to reduce the amount of exposed metrics or increase the limit."
+
+      - alert: SamplesLimitPerTarget
+        expr: |
+          label_replace(
+              (scrape_samples_scraped / scrape_samples_limit > 0.8),
+              "namespace",
+              "k8s-infrastructure",
+              "job",
+              "kubernetes-.*"
+          )
+        for: 10m
+        labels:
+          severity: "{{ if (gt $values.QUERY_RESULT.Value 0.9) -}}critical{{ else -}}warning{{- end }}"
+        annotations:
+          summary: "Scrape target reached 80% of the configured samples limit"
+          description: "The job resp. scrape target {{ $labels.job }} reached {{ printf \"%.3f\" $value | humanizePercentage }} of the configured samples limit. Either contact the
+            application operator to reduce the amount of exposed metrics or increase the limit."
