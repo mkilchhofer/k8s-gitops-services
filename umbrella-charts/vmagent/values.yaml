@@ -13,7 +13,6 @@ victoria-metrics-agent:
   extraArgs:
     remoteWrite.label: cluster=k3s
     promscrape.cluster.name: "$(POD_NAME)" # required to support multi-replica
-    promscrape.seriesLimitPerTarget: 20000
   env:
     - name: POD_NAMESPACE
       valueFrom:
@@ -52,7 +51,7 @@ victoria-metrics-agent:
         # default named port `https`. This works for single API server deployments as
         # well as HA API server deployments.
       - job_name: "kubernetes-apiservers"
-        series_limit: 120000 # Override default as kube-apiserver has a lot of metrics
+        sample_limit: 120000 # Override default as kube-apiserver has a lot of metrics
         kubernetes_sd_configs:
           - role: endpoints
         # Default to scraping over https. If required, just disable this or change to
@@ -88,6 +87,7 @@ victoria-metrics-agent:
             regex: default;kubernetes;https
 
       - job_name: "kubernetes-nodes"
+        sample_limit: 20000
         # Default to scraping over https. If required, just disable this or change to
         # `http`.
         scheme: https
@@ -125,6 +125,7 @@ victoria-metrics-agent:
             replacement: /api/v1/nodes/$1/proxy/metrics
 
       - job_name: "kubernetes-nodes-cadvisor"
+        sample_limit: 20000
         # Default to scraping over https. If required, just disable this or change to
         # `http`.
         scheme: https
@@ -173,6 +174,7 @@ victoria-metrics-agent:
       # * `prometheus.io/port`: If the metrics are exposed on a different port to the
       # service then set this appropriately.
       - job_name: "kubernetes-service-endpoints"
+        sample_limit: 20000
         kubernetes_sd_configs:
           - role: endpointslices
         relabel_configs:
@@ -239,6 +241,7 @@ victoria-metrics-agent:
       # * `prometheus.io/port`: If the metrics are exposed on a different port to the
       # service then set this appropriately.
       - job_name: "kubernetes-service-endpoints-slow"
+        sample_limit: 20000
         scrape_interval: 5m
         scrape_timeout: 30s
         kubernetes_sd_configs:
@@ -301,6 +304,7 @@ victoria-metrics-agent:
       #
       # * `prometheus.io/probe`: Only probe services that have a value of `true`
       - job_name: "kubernetes-services"
+        sample_limit: 20000
         metrics_path: /probe
         params:
           module: [http_2xx]
@@ -333,6 +337,7 @@ victoria-metrics-agent:
       # * `prometheus.io/path`: If the metrics path is not `/metrics` override this.
       # * `prometheus.io/port`: Scrape the pod on the indicated port instead of the default of `9102`.
       - job_name: "kubernetes-pods"
+        sample_limit: 20000
         kubernetes_sd_configs:
           - role: pod
         relabel_configs:
@@ -377,6 +382,7 @@ victoria-metrics-agent:
   extraScrapeConfigs:
       # Probe metrics
     - job_name: 'kubernetes-nodes-probes'
+      sample_limit: 20000
       kubernetes_sd_configs:
         - role: node
       scheme: https
@@ -395,6 +401,7 @@ victoria-metrics-agent:
 
       # Implement annotation "prometheus.io/honor_labels: true"
     - job_name: "kubernetes-service-endpoints-honor-labels"
+      sample_limit: 20000
       honor_labels: true
       kubernetes_sd_configs:
         - role: endpointslices
@@ -448,6 +455,7 @@ victoria-metrics-agent:
           target_label: node
 
     - job_name: "kubernetes-pods-honor-labels"
+      sample_limit: 20000
       honor_labels: true
       kubernetes_sd_configs:
         - role: pod
@@ -490,6 +498,7 @@ victoria-metrics-agent:
 
       # Monitor Kubernetes-external endpoints like OPNsense
     - job_name: external-endpoints
+      sample_limit: 20000
       kubernetes_sd_configs:
       - role: endpoints
       relabel_configs:
@@ -529,6 +538,7 @@ victoria-metrics-agent:
         target_label: job
 
     - job_name: 'blackbox-exporter-icmp'
+      sample_limit: 20000
       scrape_interval: 30s
       scrape_timeout: 1m
       metrics_path: /probe
