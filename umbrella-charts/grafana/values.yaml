@@ -146,7 +146,7 @@ grafana:
             - ports:
                 - port: "443"
 
-  - apiVersion: external-secrets.io/v1beta1
+  - apiVersion: external-secrets.io/v1
     kind: ExternalSecret
     metadata:
       name: grafana-oidc-secret
@@ -163,7 +163,7 @@ grafana:
           remoteRef:
             key: /k3s/grafana/oidc-clientSecret
 
-  - apiVersion: external-secrets.io/v1beta1
+  - apiVersion: external-secrets.io/v1
     kind: ExternalSecret
     metadata:
       name: grafana-admin-creds

@@ -165,7 +165,7 @@ oauth2-proxy:
               - port: http
                 protocol: TCP
 
-    - apiVersion: external-secrets.io/v1beta1
+    - apiVersion: external-secrets.io/v1
       kind: ExternalSecret
       metadata:
         name: vm-oauth2-proxy-custom
@@ -181,7 +181,7 @@ oauth2-proxy:
         - extract:
             key: /k3s/victoria-metrics-vmsingle/oauth2-proxy
 
-    - apiVersion: external-secrets.io/v1beta1
+    - apiVersion: external-secrets.io/v1
       kind: ExternalSecret
       metadata:
         name: vm-oauth2-proxy-custom-htpasswd-file
