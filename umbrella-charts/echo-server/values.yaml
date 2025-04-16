@@ -131,7 +131,7 @@ oauth2-proxy:
               - port: http
                 protocol: TCP
 
-    - apiVersion: external-secrets.io/v1beta1
+    - apiVersion: external-secrets.io/v1
       kind: ExternalSecret
       metadata:
         name: echo-server-oauth2-proxy-custom
@@ -147,7 +147,7 @@ oauth2-proxy:
         - extract:
             key: /k3s/echo-server/oauth2-proxy
 
-    - apiVersion: external-secrets.io/v1beta1
+    - apiVersion: external-secrets.io/v1
       kind: ExternalSecret
       metadata:
         name: echo-server-oauth2-proxy-htpasswd-file-custom
