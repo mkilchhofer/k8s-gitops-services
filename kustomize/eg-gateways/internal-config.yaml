@@ -8,3 +8,8 @@ spec:
     kubernetes:
       envoyDeployment:
         replicas: 2
+        container:
+          resources:
+            requests:
+              cpu: 100m
+              memory: 96Mi
