@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: eg-gateways
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "5" # After envoy-gateway
+spec:
+  destination:
+    namespace: envoy-gateway-system
+    server: 'https://kubernetes.default.svc'
+  project: core-services-unrestricted
+  source:
+    path: kustomize/eg-gateways
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    targetRevision: main
