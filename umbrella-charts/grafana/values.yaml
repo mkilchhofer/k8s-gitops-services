@@ -27,7 +27,7 @@ postgresql:
 
 grafana:
   image:
-    tag: "11.5.2-ubuntu"
+    tag: "11.6.0+security-01-ubuntu"
 
   podLabels:
     grafana-postgresql-client: "true"
