@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - gatewayclass.yaml
   - internal-gateway.yaml
+  - internal-config.yaml
   - internal-netpol.yaml
