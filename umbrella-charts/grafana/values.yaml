@@ -29,6 +29,8 @@ grafana:
   image:
     tag: "11.6.1-ubuntu"
 
+  revisionHistoryLimit: 1
+
   podLabels:
     grafana-postgresql-client: "true"
 
