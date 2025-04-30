@@ -21,7 +21,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: cloudflared
-        image: cloudflare/cloudflared:2025.4.0
+        image: cloudflare/cloudflared:2025.4.2
         command:
         - cloudflared
         - tunnel
