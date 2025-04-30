@@ -16,6 +16,9 @@ ingress-nginx:
       runAsUser: 101
       seccompProfile:
         type: RuntimeDefault
+    extraArgs:
+      # Ref: https://grafana.com/blog/2025/04/29/how-to-keep-ingress-nginx-controller-metric-volumes-manageable-and-still-meaningful/
+      report-status-classes: ""
 
     metrics:
       enabled: true
