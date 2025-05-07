@@ -105,6 +105,12 @@ grafana:
       password: $__file{/etc/secrets/postgres/userPassword}
     metrics:
       enabled: false
+    security:
+      # Ref: https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/configure-security-hardening/
+      cookie_secure: true
+      cookie_samesite: strict
+      content_security_policy: true
+      content_security_policy_template: script-src 'self' 'unsafe-eval' 'unsafe-inline' 'strict-dynamic' $NONCE;object-src 'none';font-src 'self';style-src 'self' 'unsafe-inline' blob:;img-src * data:;base-uri 'self';connect-src 'self' grafana.com ws://$ROOT_PATH wss://$ROOT_PATH;manifest-src 'self';media-src 'none';form-action 'self';
 
   envFromSecrets:
   - name: grafana-oidc-secret
