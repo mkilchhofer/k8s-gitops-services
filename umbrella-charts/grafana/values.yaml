@@ -27,7 +27,7 @@ postgresql:
 
 grafana:
   image:
-    tag: "12.0.0-ubuntu"
+    tag: "12.0.0-security-01-ubuntu"
 
   revisionHistoryLimit: 1
 
