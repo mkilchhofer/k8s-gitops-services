@@ -5,7 +5,18 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   ingress:
-    - {}
+      # Allow webhook connections from Kube-apiserver
+    - ports:
+        - port: https-webhooks
+          protocol: TCP
+      # From within cluster (envoy sidecars)
+    - from:
+        - namespaceSelector: {}
+      ports:
+        - port: grpc-xds
+          protocol: TCP
+        - port: tls-xds
+          protocol: TCP
   podSelector:
     matchLabels:
       app: istiod
