@@ -16,3 +16,9 @@ spec:
   source:
     path: umbrella-charts/istiod
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      name: istio-validator-istio-system
+      jsonPointers:
+        - /webhooks/0/failurePolicy
