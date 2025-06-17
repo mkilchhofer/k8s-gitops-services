@@ -1,0 +1,11 @@
+apiVersion: v2
+name: istiod
+description: Istiod for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: istiod
+  version: 1.26.1
+  repository: oci://gcr.io/istio-release/charts

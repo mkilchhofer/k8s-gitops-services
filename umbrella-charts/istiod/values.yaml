@@ -1,0 +1,7 @@
+# placeholder
+global:
+  defaultPodDisruptionBudget:
+    enabled: false
+
+istiod:
+  autoscaleEnabled: false
