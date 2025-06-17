@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: istio-base
+  namespace: argocd
+spec:
+  destination:
+    namespace: istio-system
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy:
+    syncOptions:
+    - ServerSideApply=true
+  source:
+    path: umbrella-charts/istio-base
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
