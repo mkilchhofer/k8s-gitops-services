@@ -10,7 +10,7 @@ dependencies:
   version: 16.7.14
   repository: oci://registry-1.docker.io/bitnamicharts
 - name: coder
-  version: 2.23.1
+  version: 2.23.2
   repository: https://helm.coder.com/v2
 - name: coder-logstream-kube
   version: v0.0.11
