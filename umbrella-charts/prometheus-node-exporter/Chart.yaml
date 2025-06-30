@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: prometheus-node-exporter
-  version: 4.46.1
+  version: 4.47.1
   repository: oci://ghcr.io/prometheus-community/charts
