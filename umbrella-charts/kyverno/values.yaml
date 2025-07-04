@@ -9,6 +9,10 @@ kyverno:
               - argocd
               - kube-system
 
+  features:
+    logging:
+      format: json
+
   # Metrics configuration
   metricsConfig:
     # Reduce histogram resolution to mitigate high-cardinality issues.
