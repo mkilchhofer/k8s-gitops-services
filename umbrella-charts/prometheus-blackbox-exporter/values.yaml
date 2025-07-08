@@ -14,6 +14,14 @@ prometheus-blackbox-exporter:
         timeout: 1m
       icmp:
         prober: icmp
+      dns_udp_prometheus_io:
+        prober: dns
+        timeout: 5s
+        dns:
+          query_name: "www.prometheus.io"
+          query_type: "A"
+          valid_rcodes:
+            - NOERROR
 
   service:
     annotations:

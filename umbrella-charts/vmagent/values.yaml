@@ -559,3 +559,28 @@ victoria-metrics-agent:
           target_label: instance
         - target_label: __address__
           replacement: prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+
+    - job_name: 'blackbox-exporter-dns'
+      metrics_path: /probe
+      params:
+        module: [dns_udp_prometheus_io]
+      static_configs:
+      - labels:
+          namespace: monitoring
+        targets:
+        - 8.8.4.4  # Test various public DNS providers are working.
+        - 8.8.8.8
+        - 1.0.0.1
+        - 1.1.1.1
+        - 9.9.9.9
+        - 149.112.112.112
+        - 192.168.91.1
+      relabel_configs:
+      - source_labels:
+        - __address__
+        target_label: __param_target
+      - source_labels:
+        - __param_target
+        target_label: instance
+      - replacement: prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115
+        target_label: __address__
