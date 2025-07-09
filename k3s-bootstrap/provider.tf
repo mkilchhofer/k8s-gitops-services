@@ -9,7 +9,7 @@ provider "akeyless" {
 
 provider "helm" {
   # Configuration options
-  kubernetes {
+  kubernetes = {
     host                   = "https://192.168.92.31:6443"
     cluster_ca_certificate = var.kubernetes_cluster_ca_certificate
 
