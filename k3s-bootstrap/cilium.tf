@@ -22,42 +22,44 @@ resource "helm_release" "cilium" {
   # CA
   # TODO: Remove "hubble.tls.ca.cert" on migration to 1.13
   # (check again in next release, still seems required in 1.13.9)
-  set {
-    name  = "tls.ca.cert"
-    value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
-  }
-  set {
-    name  = "hubble.tls.ca.cert"
-    value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
-  }
+  set = [
+    {
+      name  = "tls.ca.cert"
+      value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
+    },
+    {
+      name  = "hubble.tls.ca.cert"
+      value = base64encode(tls_self_signed_cert.cilium_ca.cert_pem)
+    },
 
-  # Hubble Server
-  set {
-    name  = "hubble.tls.server.cert"
-    value = base64encode(tls_locally_signed_cert.hubble_server.cert_pem)
-  }
-  set {
-    name  = "hubble.tls.server.key"
-    value = base64encode(tls_private_key.hubble_server.private_key_pem)
-  }
+    # Hubble Server
+    {
+      name  = "hubble.tls.server.cert"
+      value = base64encode(tls_locally_signed_cert.hubble_server.cert_pem)
+    },
+    {
+      name  = "hubble.tls.server.key"
+      value = base64encode(tls_private_key.hubble_server.private_key_pem)
+    },
 
-  # Hubble Relay
-  set {
-    name  = "hubble.relay.tls.client.cert"
-    value = base64encode(tls_locally_signed_cert.hubble_relay.cert_pem)
-  }
-  set {
-    name  = "hubble.relay.tls.client.key"
-    value = base64encode(tls_private_key.hubble_relay.private_key_pem)
-  }
-  set {
-    name  = "hubble.relay.tls.server.cert"
-    value = base64encode(tls_locally_signed_cert.hubble_relay.cert_pem)
-  }
-  set {
-    name  = "hubble.relay.tls.server.key"
-    value = base64encode(tls_private_key.hubble_relay.private_key_pem)
-  }
+    # Hubble Relay
+    {
+      name  = "hubble.relay.tls.client.cert"
+      value = base64encode(tls_locally_signed_cert.hubble_relay.cert_pem)
+    },
+    {
+      name  = "hubble.relay.tls.client.key"
+      value = base64encode(tls_private_key.hubble_relay.private_key_pem)
+    },
+    {
+      name  = "hubble.relay.tls.server.cert"
+      value = base64encode(tls_locally_signed_cert.hubble_relay.cert_pem)
+    },
+    {
+      name  = "hubble.relay.tls.server.key"
+      value = base64encode(tls_private_key.hubble_relay.private_key_pem)
+    }
+  ]
 
   # Use default chart values and merge them with customized ones in line below
   reset_values = true

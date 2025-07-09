@@ -41,59 +41,62 @@ resource "helm_release" "argocd" {
     file("${path.module}/helm-values/argocd.yaml")
   ]
 
-  set {
-    name  = "configs.secret.argocdServerAdminPasswordMtime"
-    value = null_resource.argocd_password.triggers.modified
-  }
+  set_sensitive = [
+    {
+      name  = "configs.secret.argocdServerAdminPasswordMtime"
+      value = null_resource.argocd_password.triggers.modified
+    },
+    {
+      name  = "configs.secret.argocdServerAdminPassword"
+      value = null_resource.argocd_password.triggers.hash
+    },
 
-  set_sensitive {
-    name  = "configs.secret.argocdServerAdminPassword"
-    value = null_resource.argocd_password.triggers.hash
-  }
+    {
+      name  = "configs.secret.extra.oidc\\.dex\\.clientSecret"
+      value = var.argocd_oidc_client_secret
+    },
 
-  set_sensitive {
-    name  = "configs.secret.extra.oidc\\.dex\\.clientSecret"
-    value = var.argocd_oidc_client_secret
-  }
+    {
+      name  = "notifications.secret.items.telegram-token"
+      value = var.telegram_token
+    },
 
-  set_sensitive {
-    name  = "notifications.secret.items.telegram-token"
-    value = var.telegram_token
-  }
+    {
+      name  = "configs.credentialTemplates.gh-mkilchhofer-ssh.sshPrivateKey"
+      value = var.argocd_github_deploy_key
+    },
 
-  set_sensitive {
-    name  = "configs.credentialTemplates.gh-mkilchhofer-ssh.sshPrivateKey"
-    value = var.argocd_github_deploy_key
-  }
+    {
+      name  = "configs.credentialTemplates.internal-mkilchhofer-ssh.sshPrivateKey"
+      value = var.argocd_github_deploy_key
+    }
+  ]
 
-  set_sensitive {
-    name  = "configs.credentialTemplates.internal-mkilchhofer-ssh.sshPrivateKey"
-    value = var.argocd_github_deploy_key
-  }
+  set = [
+    # TLS for server
+    {
+      name  = "server.certificateSecret.crt"
+      value = tls_locally_signed_cert.argocd_server.cert_pem
+    },
+    {
+      name  = "server.certificateSecret.key"
+      value = tls_private_key.argocd_server.private_key_pem
+    },
 
-  # TLS for server
-  set {
-    name = "server.certificateSecret.crt"
-    value = tls_locally_signed_cert.argocd_server.cert_pem
-  }
-  set {
-    name = "server.certificateSecret.key"
-    value = tls_private_key.argocd_server.private_key_pem
-  }
-
-  # TLS for repo-server
-  set {
-    name = "repoServer.certificateSecret.ca"
-    value = tls_self_signed_cert.cilium_ca.cert_pem
-  }
-  set {
-    name = "repoServer.certificateSecret.crt"
-    value = tls_locally_signed_cert.argocd_repo_server.cert_pem
-  }
-  set {
-    name = "repoServer.certificateSecret.key"
-    value = tls_private_key.argocd_repo_server.private_key_pem
-  }
+    # TLS for repo-server
+    {
+      name  = "repoServer.certificateSecret.ca"
+      value = tls_self_signed_cert.cilium_ca.cert_pem
+    },
+    {
+      name  = "repoServer.certificateSecret.crt"
+      value = tls_locally_signed_cert.argocd_repo_server.cert_pem
+    },
+    {
+      name  = "repoServer.certificateSecret.key"
+      value = tls_private_key.argocd_repo_server.private_key_pem
+    }
+  ]
 
   depends_on = [
     helm_release.cilium,
