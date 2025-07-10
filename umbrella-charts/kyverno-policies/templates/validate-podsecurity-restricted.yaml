@@ -2,6 +2,10 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: podsecurity-restricted
+  annotations:
+    pod-policies.kyverno.io/autogen-controllers: none
+    policies.kyverno.io/title: Validate Pod Security Standards of type restricted
+    policies.kyverno.io/subject: Pod
 spec:
   background: true
   rules:
