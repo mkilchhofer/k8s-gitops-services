@@ -11,7 +11,9 @@ spec:
       - resources:
           kinds:
           - Pod
+    skipBackgroundRequests: true
     validate:
+      allowExistingViolations: true
       failureAction: Audit
       podSecurity:
         level: restricted
