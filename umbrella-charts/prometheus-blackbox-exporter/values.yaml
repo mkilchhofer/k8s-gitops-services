@@ -22,6 +22,18 @@ prometheus-blackbox-exporter:
           query_type: "A"
           valid_rcodes:
             - NOERROR
+      dns_over_tls_prometheus_io:
+        dns:
+          transport_protocol: tcp
+          dns_over_tls: true
+          query_name: www.prometheus.io
+          query_type: A
+          valid_rcodes:
+          - NOERROR
+          tls_config:
+            insecure_skip_verify: true
+        prober: dns
+        timeout: 5s
 
   service:
     annotations:
