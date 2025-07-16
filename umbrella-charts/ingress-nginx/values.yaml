@@ -34,6 +34,10 @@ ingress-nginx:
         enabled: true
 
     config:
+      log-format-escape-json: 'true'
+      # Default is defined here:
+      # https://github.com/kubernetes/ingress-nginx/blob/1e6ebc15974efc5d9fd7ad2e35e2deae947861b2/internal/ingress/controller/config/config.go#L54
+      # Field reference: https://nginx.org/en/docs/varindex.html
       log-format-upstream: >-
         {
         "time": "$time_iso8601",
@@ -53,6 +57,19 @@ ingress-nginx:
         "method": "$request_method",
         "http_referrer": "$http_referer",
         "http_user_agent": "$http_user_agent"
+        }
+      # Default is defined here:
+      # https://github.com/kubernetes/ingress-nginx/blob/1e6ebc15974efc5d9fd7ad2e35e2deae947861b2/internal/ingress/controller/config/config.go#L56
+      log-format-stream: >-
+        {
+        "time": "$time_iso8601",
+        "access_type": "stream",
+        "remote_addr": "$remote_addr",
+        "protocol": "$protocol",
+        "status": $status,
+        "bytes_sent": $bytes_sent,
+        "bytes_received": $bytes_received,
+        "session_time": $session_time
         }
 
   defaultBackend:
