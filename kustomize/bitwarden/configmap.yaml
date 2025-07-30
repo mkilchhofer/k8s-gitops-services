@@ -10,7 +10,7 @@ data:
   SMTP_USERNAME: noreply.maurer@gmail.com
   SMTP_FROM_NAME: Kilchhofer Password safe
   SMTP_PORT: "587"
-  SMTP_SECURITY: force_tls
+  SMTP_SECURITY: starttls
   DOMAIN: 'https://bw.tools.kilchhofer.info'
   WEBSOCKET_ENABLED: "true"
   LOG_LEVEL: "warn"
