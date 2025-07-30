@@ -5,11 +5,11 @@ metadata:
 data:
   ROCKET_PORT: "8080"
   SIGNUPS_ALLOWED: "false"
-  SMTP_HOST: mail.infomaniak.com
-  SMTP_FROM: noreply@kilchhofer.info
-  SMTP_USERNAME: infra@kilchhofer.info
+  SMTP_HOST: smtp.googlemail.com
+  SMTP_FROM: noreply.maurer@gmail.com
+  SMTP_USERNAME: noreply.maurer@gmail.com
   SMTP_FROM_NAME: Kilchhofer Password safe
-  SMTP_PORT: "465"
+  SMTP_PORT: "587"
   SMTP_SECURITY: force_tls
   DOMAIN: 'https://bw.tools.kilchhofer.info'
   WEBSOCKET_ENABLED: "true"
