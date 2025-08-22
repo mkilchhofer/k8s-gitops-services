@@ -7,6 +7,9 @@ metallb:
       requests:
         cpu: 10m
         memory: 85Mi
+    securityContext:
+      seccompProfile:
+        type: RuntimeDefault
   speaker:
     resources:
       limits:
