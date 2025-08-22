@@ -29,4 +29,7 @@ spec:
     - controlName: "Running as Non-root"
       images:
         - "*/falcosecurity/falco*"
+    - controlName: "Seccomp"
+      images:
+        - "*/falcosecurity/falco*"
     - controlName: "Volume Types"
