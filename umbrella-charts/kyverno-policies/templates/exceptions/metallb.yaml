@@ -1,0 +1,31 @@
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: metallb
+spec:
+  exceptions:
+  - policyName: podsecurity-restricted
+    ruleNames:
+    - restricted
+  match:
+    any:
+    - resources:
+        kinds:
+        - Pod
+        - DaemonSet
+        namespaces:
+        - logging
+        names:
+        - ingress*
+  podSecurity:
+    - controlName: "Capabilities"
+      images:
+        - "*/metallb/speaker*"
+    - controlName: "Host Namespaces"
+    - controlName: "Host Ports"
+      images:
+        - "*/metallb/speaker*"
+    - controlName: "Running as Non-root"
+    - controlName: "Seccomp"
+      images:
+        - "*/metallb/speaker*"
