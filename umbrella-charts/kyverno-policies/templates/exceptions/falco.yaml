@@ -1,0 +1,32 @@
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: falco
+spec:
+  exceptions:
+  - policyName: podsecurity-restricted
+    ruleNames:
+    - restricted
+  match:
+    any:
+    - resources:
+        kinds:
+        - Pod
+        - DaemonSet
+        namespaces:
+        - falco
+        names:
+        - falco*
+  podSecurity:
+    - controlName: "AppArmor"
+    - controlName: "Capabilities"
+      images:
+        - "*/falcosecurity/falco*"
+    - controlName: "HostPath Volumes"
+    - controlName: "Privilege Escalation"
+      images:
+        - "*/falcosecurity/falco*"
+    - controlName: "Running as Non-root"
+      images:
+        - "*/falcosecurity/falco*"
+    - controlName: "Volume Types"
