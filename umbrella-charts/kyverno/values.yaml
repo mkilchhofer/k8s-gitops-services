@@ -12,6 +12,9 @@ kyverno:
   features:
     logging:
       format: json
+    policyExceptions:
+      enabled: true
+      namespace: kyverno
 
   # Metrics configuration
   metricsConfig:
