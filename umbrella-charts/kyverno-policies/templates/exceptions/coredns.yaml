@@ -14,7 +14,7 @@ spec:
         - Pod
         - DaemonSet
         namespaces:
-        - base-infra
+        - kube-system
         names:
         - coredns*
   podSecurity:
