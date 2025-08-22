@@ -20,10 +20,10 @@ spec:
   podSecurity:
     - controlName: "Capabilities"
       images:
-        - "*/rancher/mirrored-coredns-coredns*"
+        - "*rancher/mirrored-coredns-coredns*"
     - controlName: "Running as Non-root"
       images:
-        - "*/rancher/mirrored-coredns-coredns*"
+        - "*rancher/mirrored-coredns-coredns*"
     - controlName: "Seccomp"
       images:
-        - "*/rancher/mirrored-coredns-coredns*"
+        - "*rancher/mirrored-coredns-coredns*"
