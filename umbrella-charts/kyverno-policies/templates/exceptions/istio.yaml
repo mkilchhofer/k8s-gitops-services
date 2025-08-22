@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: istio
+spec:
+  exceptions:
+  - policyName: podsecurity-restricted
+    ruleNames:
+    - restricted
+  match:
+    any:
+    - resources:
+        kinds:
+          - Pod
+  podSecurity:
+    - controlName: Capabilities
+      images:
+        - "*/istio/proxyv2*"
+      restrictedField: spec.initContainers[*].securityContext.capabilities.add
+      values:
+        - NET_ADMIN
+        - NET_RAW
