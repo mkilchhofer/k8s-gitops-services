@@ -21,7 +21,7 @@ spec:
     - controlName: "Running as Non-root"
       images:
         - "*/aquasec/trivy*"
-    - controlName: "Running as Non-root"
+    - controlName: "Running as Non-root user"
       images:
         - "*/aquasec/trivy*"
     - controlName: "Seccomp"
