@@ -40,4 +40,11 @@ spec:
       images:
         - "*/cilium/cilium*"
     - controlName: "SELinux"
+      restrictedField: "spec.initContainers[*].securityContext.seLinuxOptions.type"
+      values:
+      - "spc_t"
+    - controlName: "SELinux"
+      restrictedField: "spec.containers[*].securityContext.seLinuxOptions.type"
+      values:
+      - "spc_t"
     - controlName: "Volume Types"
