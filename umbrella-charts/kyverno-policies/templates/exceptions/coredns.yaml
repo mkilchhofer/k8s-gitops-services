@@ -1,0 +1,29 @@
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: coredns
+spec:
+  exceptions:
+  - policyName: podsecurity-restricted
+    ruleNames:
+    - restricted
+  match:
+    any:
+    - resources:
+        kinds:
+        - Pod
+        - DaemonSet
+        namespaces:
+        - base-infra
+        names:
+        - coredns*
+  podSecurity:
+    - controlName: "Capabilities"
+      images:
+        - "*/rancher/mirrored-coredns-coredns*"
+    - controlName: "Running as Non-root"
+      images:
+        - "*/rancher/mirrored-coredns-coredns*"
+    - controlName: "Seccomp"
+      images:
+        - "*/rancher/mirrored-coredns-coredns*"
