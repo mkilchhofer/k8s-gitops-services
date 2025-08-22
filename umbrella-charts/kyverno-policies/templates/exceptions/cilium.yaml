@@ -1,0 +1,41 @@
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: cilium
+spec:
+  exceptions:
+  - policyName: podsecurity-restricted
+    ruleNames:
+    - restricted
+  match:
+    any:
+    - resources:
+        kinds:
+        - Pod
+        - DaemonSet
+        namespaces:
+        - kube-system
+        names:
+        - cilium*
+  podSecurity:
+    - controlName: "AppArmor"
+    - controlName: "Capabilities"
+      images:
+        - "*/cilium/cilium*"
+    - controlName: "Host Namespaces"
+    - controlName: "Host Ports"
+    - controlName: "HostPath Volumes"
+    - controlName: "Privilege Escalation"
+      images:
+        - "*/cilium/cilium*"
+    - controlName: "Privileged Containers"
+      images:
+        - "*/cilium/cilium*"
+    - controlName: "Running as Non-root"
+      images:
+        - "*/cilium/cilium*"
+    - controlName: "Seccomp"
+      images:
+        - "*/cilium/cilium*"
+    - controlName: "SELinux"
+    - controlName: "Volume Types"
