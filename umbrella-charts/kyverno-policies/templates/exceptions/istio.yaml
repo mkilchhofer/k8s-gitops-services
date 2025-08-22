@@ -20,3 +20,12 @@ spec:
       values:
         - NET_ADMIN
         - NET_RAW
+    - controlName: "Running as Non-root"
+      images:
+        - "*/istio/proxyv2*"
+    - controlName: "Running as Non-root user"
+      images:
+        - "*/istio/proxyv2*"
+    - controlName: "Seccomp"
+      images:
+        - "*/istio/proxyv2*"
