@@ -19,6 +19,14 @@ spec:
         - prometheus-node-exporter*
   podSecurity:
     - controlName: "Host Namespaces"
+      images:
+        - "*/prometheus/node-exporter*"
     - controlName: "HostPath Volumes"
+      images:
+        - "*/prometheus/node-exporter*"
     - controlName: "Host Ports"
+      images:
+        - "*/prometheus/node-exporter*"
     - controlName: "Volume Types"
+      images:
+        - "*/prometheus/node-exporter*"
