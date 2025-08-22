@@ -17,11 +17,14 @@ spec:
         - kube-system
         names:
         - cilium*
+        - hubble*
   podSecurity:
     - controlName: "AppArmor"
     - controlName: "Capabilities"
       images:
         - "*/cilium/cilium*"
+        - "*/cilium/operator-generic*"
+        - "*/cilium/hubble-ui*"
     - controlName: "Host Namespaces"
     - controlName: "Host Ports"
       images:
@@ -30,15 +33,21 @@ spec:
     - controlName: "Privilege Escalation"
       images:
         - "*/cilium/cilium*"
+        - "*/cilium/operator-generic*"
+        - "*/cilium/hubble-ui*"
     - controlName: "Privileged Containers"
       images:
         - "*/cilium/cilium*"
     - controlName: "Running as Non-root"
       images:
         - "*/cilium/cilium*"
+        - "*/cilium/operator-generic*"
+        - "*/cilium/hubble-ui*"
     - controlName: "Seccomp"
       images:
         - "*/cilium/cilium*"
+        - "*/cilium/operator-generic*"
+        - "*/cilium/hubble-ui*"
     - controlName: "SELinux"
       images:
         - '*/cilium/cilium*'
