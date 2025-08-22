@@ -21,6 +21,9 @@ spec:
     - controlName: "Capabilities"
       images:
         - "*/metallb/speaker*"
+      restrictedField: spec.containers[*].securityContext.capabilities.add
+      values:
+        - NET_RAW
     - controlName: "Host Namespaces"
     - controlName: "Host Ports"
       images:
