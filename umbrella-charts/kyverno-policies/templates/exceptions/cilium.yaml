@@ -35,6 +35,7 @@ spec:
         - "*/cilium/cilium*"
         - "*/cilium/operator-generic*"
         - "*/cilium/hubble-ui*"
+        - "*/cilium/hubble-relay*"
     - controlName: "Privileged Containers"
       images:
         - "*/cilium/cilium*"
@@ -48,6 +49,7 @@ spec:
         - "*/cilium/cilium*"
         - "*/cilium/operator-generic*"
         - "*/cilium/hubble-ui*"
+        - "*/cilium/hubble-relay*"
     - controlName: "SELinux"
       images:
         - '*/cilium/cilium*'
