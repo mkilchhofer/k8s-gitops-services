@@ -4,8 +4,10 @@ metadata:
   name: podsecurity-restricted
   annotations:
     pod-policies.kyverno.io/autogen-controllers: none
-    policies.kyverno.io/title: Validate Pod Security Standards of type restricted
+    policies.kyverno.io/category: Pod Security Standards
+    policies.kyverno.io/severity: medium
     policies.kyverno.io/subject: Pod
+    policies.kyverno.io/title: Validate Pod Security Standards of type restricted
 spec:
   background: true
   rules:
@@ -18,7 +20,7 @@ spec:
     skipBackgroundRequests: true
     validate:
       allowExistingViolations: false
-      failureAction: Audit
+      failureAction: Enforce
       podSecurity:
         level: restricted
         version: latest
