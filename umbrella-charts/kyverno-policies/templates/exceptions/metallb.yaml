@@ -14,9 +14,9 @@ spec:
         - Pod
         - DaemonSet
         namespaces:
-        - logging
+        - ingress
         names:
-        - ingress*
+        - metallb-speaker*
   podSecurity:
     - controlName: "Capabilities"
       images:
