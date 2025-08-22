@@ -17,30 +17,33 @@ spec:
         - falco
         names:
         - falco*
-  podSecurity:
-    - controlName: "AppArmor"
-      images:
-        - "*/falcosecurity/falco*"
-    #   restrictedField: spec.containers[*].securityContext.appArmorProfile.type
-    #   values:
-    #     - Unconfined
-    - controlName: "AppArmor"
-      images:
-        - "*/falcosecurity/falco*"
-      restrictedField: metadata.annotations["container.apparmor.security.beta.kubernetes.io/falco"]
-      values:
-        - unconfined
-    - controlName: "Capabilities"
-      images:
-        - "*/falcosecurity/falco*"
-    - controlName: "HostPath Volumes"
-    - controlName: "Privilege Escalation"
-      images:
-        - "*/falcosecurity/falco*"
-    - controlName: "Running as Non-root"
-      images:
-        - "*/falcosecurity/falco*"
-    - controlName: "Seccomp"
-      images:
-        - "*/falcosecurity/falco*"
-    - controlName: "Volume Types"
+# TODO: Re-evaluate AppArmor exclude at a later time.
+## It seems that there is a bug in Kyverno (or at least missing documentation) on
+## howto tolerate the deprecated apparmor annotation.
+#   podSecurity:
+#     - controlName: "AppArmor"
+#       images:
+#         - "*/falcosecurity/falco*"
+#     #   restrictedField: spec.containers[*].securityContext.appArmorProfile.type
+#     #   values:
+#     #     - Unconfined
+#     - controlName: "AppArmor"
+#       images:
+#         - "*/falcosecurity/falco*"
+#       restrictedField: metadata.annotations["container.apparmor.security.beta.kubernetes.io/falco"]
+#       values:
+#         - unconfined
+#     - controlName: "Capabilities"
+#       images:
+#         - "*/falcosecurity/falco*"
+#     - controlName: "HostPath Volumes"
+#     - controlName: "Privilege Escalation"
+#       images:
+#         - "*/falcosecurity/falco*"
+#     - controlName: "Running as Non-root"
+#       images:
+#         - "*/falcosecurity/falco*"
+#     - controlName: "Seccomp"
+#       images:
+#         - "*/falcosecurity/falco*"
+#     - controlName: "Volume Types"
