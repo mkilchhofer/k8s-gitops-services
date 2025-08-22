@@ -4,8 +4,3 @@ description:  kyverno (Cluster-)policies for kilchhofer-home
 type: application
 
 version: 1.0.0
-
-dependencies:
-- name: kyverno-policies
-  version: 3.4.4
-  repository: oci://ghcr.io/kyverno/charts
