@@ -29,6 +29,7 @@ spec:
     - controlName: "Host Ports"
       images:
         - "*/cilium/cilium*"
+        - "*/cilium/operator-generic*"
     - controlName: "HostPath Volumes"
     - controlName: "Privilege Escalation"
       images:
