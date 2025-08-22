@@ -19,6 +19,8 @@ spec:
         - falco*
   podSecurity:
     - controlName: "AppArmor"
+      images:
+        - "*/falcosecurity/falco*"
     - controlName: "Capabilities"
       images:
         - "*/falcosecurity/falco*"
