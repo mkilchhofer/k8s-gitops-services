@@ -1,0 +1,29 @@
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: trivy-operator
+spec:
+  exceptions:
+  - policyName: podsecurity-restricted
+    ruleNames:
+    - restricted
+  match:
+    any:
+    - resources:
+        kinds:
+        - Pod
+        - DaemonSet
+        namespaces:
+        - trivy-system
+        names:
+        - scan*
+  podSecurity:
+    - controlName: "Running as Non-root"
+      images:
+        - "*/aquasec/trivy*"
+    - controlName: "Running as Non-root"
+      images:
+        - "*/aquasec/trivy*"
+    - controlName: "Seccomp"
+      images:
+        - "*/aquasec/trivy*"
