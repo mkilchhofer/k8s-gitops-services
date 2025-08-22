@@ -1,0 +1,21 @@
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: jellyfin
+spec:
+  exceptions:
+  - policyName: podsecurity-restricted
+    ruleNames:
+    - restricted
+  match:
+    any:
+    - resources:
+        kinds:
+        - Pod
+        - DaemonSet
+        namespaces:
+        - media
+        names:
+        - jellyfin*
+  podSecurity:
+    - controlName: "Volume Types"
