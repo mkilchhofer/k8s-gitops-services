@@ -25,6 +25,7 @@ spec:
     - controlName: "HostPath Volumes"
     - controlName: "Privilege Escalation"
       images:
+        - "*/sig-storage/csi-node-driver-registrar*"
         - "*/sig-storage/csi-provisioner*"
         - "*/sig-storage/csi-resizer*"
         - "*/sig-storage/csi-snapshotter*"
@@ -35,6 +36,7 @@ spec:
         - "*/sig-storage/nfsplugin*"
     - controlName: "Running as Non-root"
       images:
+        - "*/sig-storage/csi-node-driver-registrar*"
         - "*/sig-storage/csi-provisioner*"
         - "*/sig-storage/csi-resizer*"
         - "*/sig-storage/csi-snapshotter*"
