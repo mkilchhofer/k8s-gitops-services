@@ -1,0 +1,35 @@
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: kured
+spec:
+  exceptions:
+  - policyName: podsecurity-restricted
+    ruleNames:
+    - restricted
+  match:
+    any:
+    - resources:
+        kinds:
+        - Pod
+        - DaemonSet
+        namespaces:
+        - base-infra
+        names:
+        - kured*
+  podSecurity:
+    - controlName: "Host Namespaces"
+    - controlName: "Host Ports"
+      images:
+        - "*/kubereboot/kured*"
+    - controlName: "HostPath Volumes"
+    - controlName: "Privilege Escalation"
+      images:
+        - "*/kubereboot/kured*"
+    - controlName: "Privileged Containers"
+      images:
+        - "*/kubereboot/kured*"
+    - controlName: "Running as Non-root"
+      images:
+        - "*/kubereboot/kured*"
+    - controlName: "Volume Types"
