@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: falco
-  version: 6.0.2
+  version: 6.2.5
   repository: oci://ghcr.io/falcosecurity/charts
