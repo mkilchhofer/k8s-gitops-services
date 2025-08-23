@@ -7,7 +7,7 @@ version: 1.0.0
 
 dependencies:
 - name: postgresql
-  version: 16.7.21
+  version: 16.7.26
   repository: oci://registry-1.docker.io/bitnamicharts
 - name: grafana
   version: 9.2.10
