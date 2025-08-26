@@ -81,7 +81,7 @@ coder:
         wildcardSecretName: coder-wildcard-ingress-cert
 
 coder-logstream-kube:
-  url: https://coder.tools.kilchhofer.info
+  url: http://coder.coder.svc.cluster.local
   labels:
     app.kubernetes.io/component: coder-logstream-kube
   namespaces:

@@ -24,6 +24,7 @@ spec:
       toPorts:
         - ports:
             - port: "443"
+              protocol: TCP
       # tailscale netcheck
       # Ref: https://github.com/tailscale/tailscale/blob/v1.26.2/net/netcheck/netcheck.go#L833
     - toCIDRSet:

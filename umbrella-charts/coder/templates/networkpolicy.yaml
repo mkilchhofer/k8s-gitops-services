@@ -16,11 +16,13 @@ spec:
         - matchName: releases.hashicorp.com
         - matchName: github.com
         - matchName: objects.githubusercontent.com
+        - matchName: release-assets.githubusercontent.com
           # Self
         - matchName: coder.tools.kilchhofer.info
       toPorts:
         - ports:
             - port: "443"
+              protocol: TCP
     - toFQDNs:
         - matchPattern: "*.l.google.com"
       toPorts:
@@ -38,4 +40,12 @@ spec:
         - world
       toPorts:
         - ports:
-            - port: "8080"
+            - port: http
+              protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            app.kubernetes.io/component: coder-logstream-kube
+      toPorts:
+        - ports:
+            - port: http
+              protocol: TCP
