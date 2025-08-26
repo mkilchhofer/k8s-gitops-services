@@ -84,6 +84,8 @@ coder-logstream-kube:
   url: https://coder.tools.kilchhofer.info
   labels:
     app.kubernetes.io/component: coder-logstream-kube
+  namespaces:
+  - coder
   resources:
       limits:
         cpu: 500m
