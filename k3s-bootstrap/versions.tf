@@ -6,7 +6,7 @@ terraform {
     }
     argocd = {
       source  = "argoproj-labs/argocd"
-      version = "7.10.1"
+      version = "7.11.0"
     }
     helm = {
       source  = "hashicorp/helm"
