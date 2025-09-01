@@ -72,7 +72,7 @@ spec:
                   - ALL
                 +(seccompProfile):
                   type: RuntimeDefault
-      - list: "request.object.spec.initContainers[]"
+      - list: "request.object.spec.initContainers[?(name!='istio-init')]"
         patchStrategicMerge:
           spec:
             initContainers:
