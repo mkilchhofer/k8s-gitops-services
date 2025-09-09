@@ -8,7 +8,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: base-infra
+    namespace: development
     server: https://kubernetes.default.svc
   project: apps-restricted
   source:
