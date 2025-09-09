@@ -41,3 +41,7 @@ athens-proxy:
   extraVolumes:
   - name: tmp-dir
     emptyDir: {}
+
+  upstreamProxy:
+    enabled: true
+    url: "https://proxy.golang.org" # chart default is "https://gocenter.io"
