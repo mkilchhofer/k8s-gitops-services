@@ -9,7 +9,9 @@ spec:
         release: athens-proxy
   egress:
     - toFQDNs:
+          # code targets/repos
         - matchName: github.com
+        - matchName: go.googlesource.com
           # checksum database to authenticate (Go) modules
         - matchName: sum.golang.org
       toPorts:
