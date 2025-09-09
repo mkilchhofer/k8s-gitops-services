@@ -7,6 +7,17 @@ athens-proxy:
       cpu: 10m
       memory: 64Mi
 
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+    seccompProfile:
+      type: RuntimeDefault
+
   ingress:
     enabled: true
     annotations:
