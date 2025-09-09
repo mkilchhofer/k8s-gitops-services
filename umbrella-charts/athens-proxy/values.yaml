@@ -45,3 +45,7 @@ athens-proxy:
   upstreamProxy:
     enabled: true
     url: "https://proxy.golang.org" # chart default is "https://gocenter.io"
+
+  configEnvVars:
+  - name: ATHENS_LOG_FORMAT
+    value: json
