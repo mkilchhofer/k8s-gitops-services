@@ -10,6 +10,8 @@ spec:
   egress:
     - toFQDNs:
         - matchName: github.com
+          # checksum database to authenticate (Go) modules
+        - matchName: sum.golang.org
       toPorts:
         - ports:
             - port: "443"
