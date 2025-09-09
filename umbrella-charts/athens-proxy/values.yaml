@@ -33,3 +33,11 @@ athens-proxy:
       - hosts:
         - athens-proxy.tools.kilchhofer.info
         secretName: athens-proxy-ingress-cert
+
+  extraVolumeMounts:
+  - mountPath: /tmp
+    name: tmp-dir
+
+  extraVolumes:
+  - name: tmp-dir
+    emptyDir: {}
