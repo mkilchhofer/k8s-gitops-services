@@ -1,0 +1,16 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: athens-proxy-egress
+spec:
+  endpointSelector:
+    matchLabels:
+        app: athens-proxy
+        release: athens-proxy
+  egress:
+    - toFQDNs:
+        - matchName: github.com
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
