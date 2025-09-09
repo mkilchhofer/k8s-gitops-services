@@ -1,0 +1,11 @@
+apiVersion: v2
+name: athens-proxy
+description: athens-proxy for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: athens-proxy
+  version: 0.15.1
+  repository: https://gomods.github.io/athens-charts/
