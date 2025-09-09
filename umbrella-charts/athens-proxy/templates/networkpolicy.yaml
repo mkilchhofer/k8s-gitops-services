@@ -12,6 +12,7 @@ spec:
           # code targets/repos
         - matchName: github.com
         - matchName: go.googlesource.com
+        - matchName: golang.org
         - matchPattern: "*.go.dev"
           # checksum database to authenticate (Go) modules
         - matchName: sum.golang.org
