@@ -42,10 +42,8 @@ athens-proxy:
   - name: tmp-dir
     emptyDir: {}
 
-  # upstreamProxy:
-  #   enabled: true
-  #   url: "https://proxy.golang.org" # chart default is "https://gocenter.io"
-
   configEnvVars:
   - name: ATHENS_LOG_FORMAT
     value: json
+  - name: ATHENS_GO_BINARY_ENV_VARS
+    value: GOPROXY=proxy.golang.org

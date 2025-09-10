@@ -10,10 +10,7 @@ spec:
   egress:
     - toFQDNs:
           # code targets/repos
-        - matchName: github.com
-        - matchName: go.googlesource.com
-        - matchName: golang.org
-        - matchPattern: "*.go.dev"
+        - matchName: proxy.golang.org
           # checksum database to authenticate (Go) modules
         - matchName: sum.golang.org
       toPorts:
