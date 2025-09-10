@@ -11,6 +11,8 @@ spec:
     - toFQDNs:
           # code targets/repos
         - matchName: proxy.golang.org
+          # sometimes athens need to download a newer Go version
+        - matchName: storage.googleapis.com
           # checksum database to authenticate (Go) modules
         - matchName: sum.golang.org
       toPorts:
