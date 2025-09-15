@@ -1,0 +1,155 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: validate-wildcard-roles
+  annotations:
+    policies.kyverno.io/title: Restrict Wildcards in Roles and ClusterRoles
+    policies.kyverno.io/category: Security, CIS
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/subject: ClusterRole, Role, RBAC
+    policies.kyverno.io/description: >-
+      Wildcards ('*') in resources grants access to all of the resources referenced by
+      the given API group and does not follow the principal of least privilege. As much as possible,
+      avoid such open resources unless scoped to perhaps a custom API group.
+      This policy blocks any Role or ClusterRole that contains a wildcard entry in
+      the resources list found in any rule.
+spec:
+  background: true
+  rules:
+      # I split Roles and ClusterRoles into separate rules, so I ...
+      # - have a dedicated rule name for the exception (e.g. we tolerate that Argo CD has a ClusterRole with wildcards, but not Roles or the other way around)
+      # - are able to enforce ClusterRoles but only audit the Roles (or vice-versa)
+
+      ##############################
+      # Check apiGroups
+      ##############################
+    - name: deny-wildcard-apigroups-role
+      match:
+        any:
+        - resources:
+            kinds:
+            - Role
+            operations:
+            - CREATE
+            - UPDATE
+      skipBackgroundRequests: {{ .Values.global.skipBackgroundRequests }}
+      validate:
+        allowExistingViolations: {{ .Values.global.allowExistingViolations }}
+        deny:
+          conditions:
+            any:
+            - key: {{ quote "{{ request.object.rules != null && contains(request.object.rules[].apiGroups[], '*') }}" }}
+              operator: Equals
+              value: true
+        message: "Audit Only: Use of a wildcard ('*') in any apiGroups is forbidden."
+        failureAction: Audit
+    - name: deny-wildcard-apigroups-clusterrole
+      match:
+        any:
+        - resources:
+            kinds:
+            - ClusterRole
+            operations:
+            - CREATE
+            - UPDATE
+      skipBackgroundRequests: {{ .Values.global.skipBackgroundRequests }}
+      validate:
+        allowExistingViolations: {{ .Values.global.allowExistingViolations }}
+        deny:
+          conditions:
+            any:
+            - key: {{ quote "{{ request.object.rules != null && contains(request.object.rules[].apiGroups[], '*') }}" }}
+              operator: Equals
+              value: true
+        message: "Audit Only: Use of a wildcard ('*') in any apiGroups is forbidden."
+        failureAction: Audit
+
+      ##############################
+      # Check resources
+      # Source: https://kyverno.io/policies/other-cel/restrict-wildcard-resources/restrict-wildcard-resources/
+      ##############################
+    - name: deny-wildcard-resources-role
+      match:
+        any:
+        - resources:
+            kinds:
+            - Role
+            operations:
+            - CREATE
+            - UPDATE
+      skipBackgroundRequests: {{ .Values.global.skipBackgroundRequests }}
+      validate:
+        allowExistingViolations: {{ .Values.global.allowExistingViolations }}
+        deny:
+          conditions:
+            any:
+            - key: {{ quote "{{ request.object.rules != null && contains(request.object.rules[].resources[], '*') }}" }}
+              operator: Equals
+              value: true
+        message: "Audit Only: Use of a wildcard ('*') in any resources is forbidden."
+        failureAction: Audit
+    - name: deny-wildcard-resources-clusterrole
+      match:
+        any:
+        - resources:
+            kinds:
+            - ClusterRole
+            operations:
+            - CREATE
+            - UPDATE
+      skipBackgroundRequests: {{ .Values.global.skipBackgroundRequests }}
+      validate:
+        allowExistingViolations: {{ .Values.global.allowExistingViolations }}
+        deny:
+          conditions:
+            any:
+            - key: {{ quote "{{ request.object.rules != null && contains(request.object.rules[].resources[], '*') }}" }}
+              operator: Equals
+              value: true
+        message: "Audit Only: Use of a wildcard ('*') in any resources is forbidden."
+        failureAction: Audit
+
+      ##############################
+      # Check verbs
+      # Source: https://kyverno.io/policies/other-cel/restrict-wildcard-verbs/restrict-wildcard-verbs/
+      ##############################
+    - name: deny-wildcard-verbs-role
+      match:
+        any:
+        - resources:
+            kinds:
+            - Role
+            operations:
+            - CREATE
+            - UPDATE
+      skipBackgroundRequests: {{ .Values.global.skipBackgroundRequests }}
+      validate:
+        allowExistingViolations: {{ .Values.global.allowExistingViolations }}
+        deny:
+          conditions:
+            any:
+            - key: {{ quote "{{ request.object.rules != null && contains(request.object.rules[].verbs[], '*') }}" }}
+              operator: Equals
+              value: true
+        message: "Audit Only: Use of a wildcard ('*') in any verbs is forbidden."
+        failureAction: Audit
+    - name: deny-wildcard-verbs-clusterrole
+      match:
+        any:
+        - resources:
+            kinds:
+            - ClusterRole
+            operations:
+            - CREATE
+            - UPDATE
+      skipBackgroundRequests: {{ .Values.global.skipBackgroundRequests }}
+      validate:
+        allowExistingViolations: {{ .Values.global.allowExistingViolations }}
+        deny:
+          conditions:
+            any:
+            - key: {{ quote "{{ request.object.rules != null && contains(request.object.rules[].verbs[], '*') }}" }}
+              operator: Equals
+              value: true
+        message: "Audit Only: Use of a wildcard ('*') in any verbs is forbidden."
+        failureAction: Audit

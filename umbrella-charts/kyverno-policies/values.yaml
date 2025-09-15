@@ -1,1 +1,4 @@
 # Empty for now
+global:
+  allowExistingViolations: false
+  skipBackgroundRequests: true
