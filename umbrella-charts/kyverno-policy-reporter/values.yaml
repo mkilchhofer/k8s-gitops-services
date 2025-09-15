@@ -23,6 +23,7 @@ policy-reporter:
     # Supported fields are: ["namespace", "rule", "policy", "report" // PolicyReport name, "kind" // resource kind, "name" // resource name, "status", "severity", "category", "source"]
     customLabels:
       - namespace
+      - rule
       - category
       - kind
       - name
