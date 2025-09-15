@@ -115,6 +115,20 @@ kyverno:
         prometheus.io/port: "8000"
         prometheus.io/scrape: "true"
 
+    rbac:
+      clusterRole:
+        extraResources:
+            # Used to check wildcard Roles and ClusterRoles
+          - apiGroups:
+              - rbac.authorization.k8s.io
+            resources:
+              - roles
+              - clusterroles
+            verbs:
+              - get
+              - list
+              - watch
+
   #----------------------------
   # Component "Background Controller"
   #----------------------------
