@@ -16,3 +16,10 @@ keda:
   service:
     annotations:
       prometheus.io/honor_labels: "true"
+
+  # -- List of custom resources that support the `scale` subresource and can be referenced by `scaledobject.spec.scaleTargetRef`.
+  # The feature needs to be also enabled by `enabledCustomScaledRefKinds`.
+  # If left empty, RBAC for `apiGroups: *` and `resources: *, */scale` will be created
+  # note: Deployments and StatefulSets are supported out of the box
+  rbac:
+    scaledRefKinds: [] # drop default wildcard rules
