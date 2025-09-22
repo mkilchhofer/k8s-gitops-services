@@ -9,9 +9,21 @@ spec:
     - restricted
   match:
     any:
+      # Istio Sidecar injection at namespace level
+      # https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/#controlling-the-injection-policy
     - resources:
         kinds:
           - Pod
+        namespaceSelector:
+          matchLabels:
+            istio-injection: enabled
+      # Sidecar injection can also be controlled on a per-pod basis
+    - resources:
+        kinds:
+          - Pod
+        selector:
+          matchLabels:
+            sidecar.istio.io/inject: 'true'
   podSecurity:
     - controlName: Capabilities
       images:
