@@ -3,7 +3,8 @@ resource "grafana_folder" "keda" {
 }
 
 module "keda_alerts" {
-  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=main"
+  source  = "swisspost/prometheus-alerts/grafana"
+  version = "~> 1.0"
 
   prometheus_alerts_file_path = file("./keda/alerts.yaml")
   folder_uid                  = grafana_folder.keda.uid
