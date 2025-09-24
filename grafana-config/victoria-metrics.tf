@@ -3,7 +3,8 @@ resource "grafana_folder" "victoria_metrics" {
 }
 
 module "victoria_metrics_alerts" {
-  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=main"
+  source  = "swisspost/prometheus-alerts/grafana"
+  version = "~> 1.0"
 
   prometheus_alerts_file_path = file("./victoria-metrics/alerts.yaml")
   folder_uid                  = grafana_folder.victoria_metrics.uid
@@ -13,7 +14,8 @@ module "victoria_metrics_alerts" {
 }
 
 module "victoria_metrics_single_alerts" {
-  source = "github.com/mkilchhofer/terraform-grafana-prometheus-alerts?ref=main"
+  source  = "swisspost/prometheus-alerts/grafana"
+  version = "~> 1.0"
 
   prometheus_alerts_file_path = file("./victoria-metrics/alerts-vmsingle.yaml")
   folder_uid                  = grafana_folder.victoria_metrics.uid
