@@ -14,3 +14,11 @@ spec:
         - ports:
             - port: "7844"
               protocol: UDP
+      # Let's Encrypt HTTP-01 challenges outside Kubernetes cluster
+    - toCIDR:
+        - "192.168.91.10/32"  # NAS incl. Minio
+        - "192.168.201.11/32" # NAS2 (secondary location)
+      toPorts:
+        - ports:
+            - port: "80"
+              protocol: TCP
