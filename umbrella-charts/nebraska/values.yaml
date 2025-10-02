@@ -16,7 +16,7 @@ nebraska:
       mode: oidc
       oidc:
         existingSecret: nebraska-custom
-        issuerURL: https://sso.cloud.kilchhofer.info
+        issuerURL: https://sso.kilchhofer.info
         validRedirectURLs: https://flatcar.tools.kilchhofer.info/*
         adminRoles: kilchhofer-home:admins
         viewerRoles: kilchhofer-home:developers

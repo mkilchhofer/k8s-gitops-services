@@ -257,7 +257,7 @@ configs:
     admin.enabled: "true" # Required to use argocd TF provider
     oidc.config: |
       name: Dex
-      issuer: https://sso.cloud.kilchhofer.info
+      issuer: https://sso.kilchhofer.info
       clientID: argocd
       clientSecret: $oidc.dex.clientSecret
       requestedScopes:
@@ -347,7 +347,7 @@ extraObjects:
           app.kubernetes.io/component: server
       egress:
         - toFQDNs:
-            - matchName: sso.cloud.kilchhofer.info
+            - matchName: sso.kilchhofer.info
           toPorts:
             - ports:
                 - port: "443"

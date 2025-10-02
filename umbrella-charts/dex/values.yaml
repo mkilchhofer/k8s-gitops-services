@@ -3,7 +3,7 @@ dex:
     tag: v2.42.0-distroless
 
   config:
-    issuer: https://sso.cloud.kilchhofer.info
+    issuer: https://sso.kilchhofer.info
     oauth2:
       skipApprovalScreen: true
     storage:
@@ -20,7 +20,7 @@ dex:
           clientSecret: '{{ .Env.GH_CLIENT_SECRET }}'
           orgs:
             - name: kilchhofer-home
-          redirectURI: https://sso.cloud.kilchhofer.info/callback
+          redirectURI: https://sso.kilchhofer.info/callback
           loadAllGroups: true
 
     staticClients:
@@ -125,14 +125,14 @@ dex:
 
     className: nginx-external
     hosts:
-      - host: sso.cloud.kilchhofer.info
+      - host: sso.kilchhofer.info
         paths:
           - path: /
             pathType: Prefix
     tls:
       - secretName: dex-ingress-cert
         hosts:
-          - sso.cloud.kilchhofer.info
+          - sso.kilchhofer.info
 
   networkPolicy:
     enabled: true
