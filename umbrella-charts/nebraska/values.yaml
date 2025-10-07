@@ -9,6 +9,7 @@ nebraska:
       interval: 12h
     hostFlatcarPackages:
       enabled: true
+      nebraskaURL: https://flatcar.tools.kilchhofer.info
       persistence:
         enabled: true
         storageClass: nfs-data
@@ -40,7 +41,7 @@ nebraska:
     runAsNonRoot: true
 
   ingress:
-    enabled: true
+    enabled: false
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       cert-manager.io/revision-history-limit: "1"
