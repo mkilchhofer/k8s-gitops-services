@@ -4,7 +4,7 @@ commonLabels:
   app.kubernetes.io/name: bitwarden
 resources:
   - configmap.yaml
-  - ingress.yaml
+  - httproute.yaml
   - service.yaml
   - statefulset.yaml
   - externalsecret.yaml

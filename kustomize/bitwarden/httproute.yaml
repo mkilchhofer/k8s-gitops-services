@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: bitwarden
+spec:
+  parentRefs:
+    - name: eg-internal
+      namespace: envoy-gateway-system
+  hostnames:
+    - bw.tools.kilchhofer.info
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: bitwarden
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
