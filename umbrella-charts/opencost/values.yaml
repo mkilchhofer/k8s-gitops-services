@@ -92,14 +92,4 @@ oauth2-proxy:
       ]
 
   ingress:
-    enabled: true
-    hosts:
-      - opencost.tools.kilchhofer.info
-    annotations:
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      cert-manager.io/cluster-issuer: letsencrypt
-    className: nginx-internal
-    tls:
-      - secretName: opencost-ingress-cert
-        hosts:
-          - opencost.tools.kilchhofer.info
+    enabled: false # We use HTTPRoute instead
