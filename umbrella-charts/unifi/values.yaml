@@ -1,7 +1,18 @@
 unifi:
   ingress:
-    enabled: false # We use HTTPRoute instead
-
+    enabled: true
+    ingressClassName: nginx-internal
+    annotations:
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      cert-manager.io/cluster-issuer: letsencrypt
+      cert-manager.io/revision-history-limit: "1"
+    hosts:
+      - unifi.tools.kilchhofer.info
+    tls:
+      - hosts:
+        - unifi.tools.kilchhofer.info
+        secretName: unifi-ingress-cert
   image:
     tag: "" # Use appVersion
   livenessProbe:
