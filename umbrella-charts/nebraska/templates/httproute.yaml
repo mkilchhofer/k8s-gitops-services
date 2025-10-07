@@ -20,3 +20,9 @@ spec:
         - path:
             type: PathPrefix
             value: /
+    - filters:
+      - type: RequestRedirect
+        requestRedirect:
+          scheme: https
+          statusCode: 301
+          hostname: flatcar.tools.kilchhofer.info
