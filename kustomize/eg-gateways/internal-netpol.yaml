@@ -14,3 +14,5 @@ spec:
     - ports:
         - port: 10080
           protocol: TCP
+        - port: 10443
+          protocol: TCP
