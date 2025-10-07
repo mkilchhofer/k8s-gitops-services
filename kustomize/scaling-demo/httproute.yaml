@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: scaling-demo
+spec:
+  parentRefs:
+    - name: eg-internal
+      namespace: envoy-gateway-system
+  hostnames:
+    - scaling-demo.tools.kilchhofer.info
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: scaling-demo
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
