@@ -3,7 +3,7 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/name: gitea
 resources:
-  - ingress.yaml
+  - httproute.yaml
   - service-clusterip.yaml
   - service-loadbalancer.yaml
   - statefulset.yaml

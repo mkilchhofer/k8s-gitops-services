@@ -1,0 +1,21 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: gitea
+spec:
+  parentRefs:
+    - name: eg-internal
+      namespace: envoy-gateway-system
+  hostnames:
+    - git.tools.kilchhofer.info
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: gitea
+          port: 3000
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
