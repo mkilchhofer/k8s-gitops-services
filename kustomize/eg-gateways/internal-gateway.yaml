@@ -15,7 +15,7 @@ spec:
       port: 80
       allowedRoutes:
         namespaces:
-          from: All
+          from: Same # Only accept the HTTPRoute which specifies the HTTP -> HTTPS redirect
 
     - name: https
       port: 443

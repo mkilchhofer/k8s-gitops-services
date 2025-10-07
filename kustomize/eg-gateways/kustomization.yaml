@@ -5,3 +5,4 @@ resources:
   - internal-gateway.yaml
   - internal-config.yaml
   - internal-netpol.yaml
+  - internal-https-redirect.yaml
