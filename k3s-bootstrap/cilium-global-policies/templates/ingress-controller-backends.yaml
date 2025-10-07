@@ -8,5 +8,9 @@ spec:
   endpointSelector: {}
   ingress:
   - fromEndpoints:
-      - matchLabels:
-          'k8s:io.kubernetes.pod.namespace': 'ingress'
+      - matchExpressions:
+          - key: 'k8s:io.kubernetes.pod.namespace'
+            operator: In
+            values:
+            - ingress
+            - envoy-gateway-system
