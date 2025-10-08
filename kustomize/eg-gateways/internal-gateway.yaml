@@ -30,6 +30,23 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+
+    - name: https
+      port: 443
+      protocol: HTTPS
+      hostname: "*.coder.tools.kilchhofer.info"
+      tls:
+        certificateRefs:
+        - group: ""
+          kind: Secret
+          name: wildcard-coder-tools-kilchhofer-info
+        mode: Terminate
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              kubernetes.io/metadata.name: coder
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -43,6 +60,22 @@ spec:
     kind: ClusterIssuer
     name: letsencrypt
   secretName: wildcard-tools-kilchhofer-info
+  usages:
+  - digital signature
+  - key encipherment
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-coder-tools-kilchhofer-info
+spec:
+  dnsNames:
+  - "*.coder.tools.kilchhofer.info"
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt
+  secretName: wildcard-coder-tools-kilchhofer-info
   usages:
   - digital signature
   - key encipherment
