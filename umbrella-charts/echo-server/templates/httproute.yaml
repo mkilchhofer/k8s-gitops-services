@@ -6,6 +6,8 @@ metadata:
 spec:
   parentRefs:
     - name: eg-internal
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: envoy-gateway-system
   hostnames:
     - echo-server-oauth2-proxy.tools.kilchhofer.info
