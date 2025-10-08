@@ -5,6 +5,8 @@ metadata:
 spec:
   parentRefs:
     - name: eg-internal
+      group: gateway.networking.k8s.io
+      kind: Gateway
       namespace: envoy-gateway-system
   hostnames:
     - git.tools.kilchhofer.info
