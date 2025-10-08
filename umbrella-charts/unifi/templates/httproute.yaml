@@ -11,12 +11,23 @@ spec:
     - unifi.tools.kilchhofer.info
   rules:
     - backendRefs:
-        - group: ""
-          kind: Service
-          name: unifi-gui
-          port: 8443
-          weight: 1
+        - group: gateway.envoyproxy.io
+          kind: Backend
+          name: tls-backend
       matches:
         - path:
             type: PathPrefix
             value: /
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: Backend
+metadata:
+  name: tls-backend
+  namespace: {{ .Release.Namespace }}
+spec:
+  endpoints:
+    - fqdn:
+        hostname: unifi-gui.{{ .Release.Namespace }}.svc.cluster.local
+        port: 8443
+  tls:
+    insecureSkipVerify: true
