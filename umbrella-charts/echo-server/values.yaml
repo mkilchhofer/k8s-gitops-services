@@ -71,18 +71,8 @@ oauth2-proxy:
     enabled: true
     existingSecret: echo-server-oauth2-proxy-htpasswd-file-custom
   ingress:
-    enabled: true
-    hosts:
-      - echo-server-oauth2-proxy.tools.kilchhofer.info
+    enabled: false # We use HTTPRoute instead
 
-    annotations:
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      cert-manager.io/cluster-issuer: letsencrypt
-    className: nginx-internal
-    tls:
-      - secretName: echo-server-ingress-cert
-        hosts:
-          - echo-server-oauth2-proxy.tools.kilchhofer.info
   extraObjects:
     - apiVersion: networking.k8s.io/v1
       kind: NetworkPolicy

@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: echo-server-oauth2-proxy
+  namespace: {{ .Release.Namespace }}
+spec:
+  parentRefs:
+    - name: eg-internal
+      namespace: envoy-gateway-system
+  hostnames:
+    - echo-server-oauth2-proxy.tools.kilchhofer.info
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: echo-server-oauth2-proxy
+          port: 80
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
