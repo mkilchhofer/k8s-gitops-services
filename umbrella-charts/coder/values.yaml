@@ -68,17 +68,7 @@ coder:
     service:
       type: ClusterIP
     ingress:
-      enable: true
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      className: nginx-internal
-      host: coder.tools.kilchhofer.info
-      wildcardHost: "*.coder.tools.kilchhofer.info"
-      tls:
-        enable: true
-        secretName: coder-ingress-cert
-        wildcardSecretName: coder-wildcard-ingress-cert
+      enable: false # We use HTTPRoute instead
 
 coder-logstream-kube:
   url: http://coder.coder.svc.cluster.local
