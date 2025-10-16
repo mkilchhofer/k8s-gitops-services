@@ -1,0 +1,11 @@
+apiVersion: v2
+name: cloudnative-pg
+description: cloudnative-pg (cnpg) for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: cloudnative-pg
+  version: 0.26.0
+  repository: oci://ghcr.io/cloudnative-pg/charts
