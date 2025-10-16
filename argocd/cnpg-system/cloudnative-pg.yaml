@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: cloudnative-pg
+  namespace: argocd
+spec:
+  destination:
+    namespace: cnpg-system
+    server: https://kubernetes.default.svc
+  project: core-services-unrestricted
+  syncPolicy:
+    syncOptions:
+    - ServerSideApply=true
+  source:
+    path: umbrella-charts/cloudnative-pg
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    helm:
+      releaseName: cnpg
