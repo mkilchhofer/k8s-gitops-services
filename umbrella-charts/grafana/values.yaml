@@ -161,6 +161,8 @@ grafana:
             - matchName: vm.kilchhofer.info
               # SSO with Dex
             - matchName: sso.kilchhofer.info
+              # Plugin downloads
+            - matchName: storage.googleapis.com
           toPorts:
             - ports:
                 - port: "443"
