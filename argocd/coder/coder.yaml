@@ -6,6 +6,8 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
   name: coder
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
 spec:
   destination:
     namespace: coder
