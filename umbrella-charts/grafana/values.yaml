@@ -127,6 +127,16 @@ grafana:
   admin:
     existingSecret: grafana-admin-creds
 
+  extraVolumeMounts:
+  - mountPath: /tmp
+    name: tmp-dir
+    subPath: ""
+    readOnly: false
+  extraContainerVolumes:
+  - name: tmp-dir
+    emptyDir:
+      sizeLimit: 1Gi
+
   extraObjects:
   - apiVersion: cilium.io/v2
     kind: CiliumNetworkPolicy
