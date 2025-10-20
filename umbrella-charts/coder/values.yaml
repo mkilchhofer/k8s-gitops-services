@@ -9,6 +9,8 @@ global:
         userPasswordKey: "userPassword"
 
 postgresql:
+  image:
+    repository: bitnamilegacy/postgresql
   primary:
     persistence:
       storageClass: iscsi-manual
