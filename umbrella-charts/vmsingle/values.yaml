@@ -44,6 +44,10 @@ victoria-metrics-single:
                   pod: '%{POD_NAME}'
                   namespace: '%{POD_NAMESPACE}'
 
+    statefulSet:
+      spec:
+        revisionHistoryLimit: 1
+
   extraObjects:
     - apiVersion: networking.k8s.io/v1
       kind: NetworkPolicy
@@ -87,6 +91,8 @@ victoria-metrics-single:
 
 #######################################################
 oauth2-proxy:
+  revisionHistoryLimit: 1
+
   resources:
     limits:
       cpu: 100m
