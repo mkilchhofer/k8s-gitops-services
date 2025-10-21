@@ -57,7 +57,7 @@ nebraska:
   postgresql:
     image:
       repository: bitnamilegacy/postgresql
-      tag: 13.9.0-debian-11-r6
+      tag: 16.2.0-debian-11-r6
     auth:
       username: ""
     resources:
