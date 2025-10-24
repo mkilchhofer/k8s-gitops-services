@@ -23,6 +23,10 @@ dex:
           redirectURI: https://sso.kilchhofer.info/callback
           loadAllGroups: true
 
+    web:
+      allowedOrigins:
+      - https://flatcar.tools.kilchhofer.info
+
     staticClients:
       - id: argocd
         secret: '{{ .Env.ARGOCD_CLIENT_SECRET }}'
@@ -31,10 +35,10 @@ dex:
           - https://argocd.tools.kilchhofer.info/auth/callback
 
       - id: nebraska
-        secret: '{{ .Env.NEBRASKA_CLIENT_SECRET }}'
+        public: true
         name: Nebraska
         redirectURIs:
-          - https://flatcar.tools.kilchhofer.info/login/cb
+          - https://flatcar.tools.kilchhofer.info/auth/callback
 
       - id: polaris
         secret: '{{ .Env.POLARIS_CLIENT_SECRET }}'
