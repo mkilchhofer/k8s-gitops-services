@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: nebraska
-  version: 1.6.0
+  version: 1.7.0
   repository: https://flatcar.github.io/nebraska/
