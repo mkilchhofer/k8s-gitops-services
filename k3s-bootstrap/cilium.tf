@@ -69,10 +69,20 @@ resource "helm_release" "cilium" {
   ]
 }
 
+# Workaround
+# Ref: https://github.com/hashicorp/terraform-provider-helm/issues/1664#issuecomment-3438973448
+data "local_file" "cilium_global_policies_chart_yaml" {
+  filename = "${path.module}/cilium-global-policies/Chart.yaml"
+}
+
 resource "helm_release" "cilium_global_policies" {
   name       = "cilium-global-policies"
   chart      = "${path.module}/cilium-global-policies"
   namespace  = "kube-system"
+
+  # Workaround
+  # Ref: https://github.com/hashicorp/terraform-provider-helm/issues/1664#issuecomment-3438973448
+  version    = tostring(yamldecode(data.local_file.cilium_global_policies_chart_yaml.content).version)
 
   max_history = local.helm_max_history
 
