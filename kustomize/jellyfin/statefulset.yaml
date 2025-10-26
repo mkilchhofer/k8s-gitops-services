@@ -56,8 +56,8 @@ spec:
 
         resources:
           limits:
-            cpu: 1000m
-            memory: 1Gi
+            # avoid setting CPU limits (https://home.robusta.dev/blog/stop-using-cpu-limits)
+            memory: 2Gi
           requests:
             cpu: 10m
             memory: 256Mi
