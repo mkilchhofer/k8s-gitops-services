@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: ephemeral-storage-metrics
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: apps-with-clusterroles
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    path: umbrella-charts/k8s-ephemeral-storage-metrics
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    helm:
+      releaseName: k8s-ephemeral-storage-metrics
