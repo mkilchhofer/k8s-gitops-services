@@ -1,0 +1,14 @@
+k8s-ephemeral-storage-metrics:
+  serviceMonitor:
+    enable: false
+
+  prometheus:
+    enable: false
+
+  containerSecurityContext:
+    readOnlyRootFilesystem: true
+
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9100"
+    prometheus.io/path: "/metrics"

@@ -1,0 +1,11 @@
+apiVersion: v2
+name: k8s-ephemeral-storage-metrics
+description:  Metrics for emptyDirs and resources.ephemeral-storage for Kubernetes
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: k8s-ephemeral-storage-metrics
+  version: 1.18.2
+  repository: https://jmcgrath207.github.io/k8s-ephemeral-storage-metrics/chart
