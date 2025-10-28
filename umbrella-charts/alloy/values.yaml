@@ -1,0 +1,147 @@
+alloy:
+  alloy:
+    crds:
+      create: false
+    storagePath: /var/lib/alloy
+    mounts:
+      extra:
+      - mountPath: /var/lib/alloy
+        name: alloy-log-positions
+      - mountPath: /var/lib/promtail
+        name: varlibpromtail
+    configMap:
+      # Used convert command to generate from existing promtail config:
+      # $ kubectl exec -ti promtail-f8qdn -- cat /etc/promtail/promtail.yaml > promtail_config.yaml
+      # $ alloy -v
+      # alloy, version v1.11.3 (branch: HEAD, revision: 091a20e)
+      # $ alloy convert --source-format=promtail --output=alloy.config.yaml promtail_config.yaml
+      content: |
+        loki.write "default" {
+          endpoint {
+            url = "https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push"
+
+            // Get basic authentication based on environment variables.
+            basic_auth {
+              username = sys.env("LOKI_USER")
+              password = sys.env("LOKI_PASSWORD")
+            }
+          }
+        }
+
+        discovery.kubernetes "kubernetes_pods" {
+          role = "pod"
+        }
+
+        discovery.relabel "kubernetes_pods" {
+          targets = discovery.kubernetes.kubernetes_pods.targets
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_controller_name"]
+            regex         = "([0-9a-z-.]+?)(-[0-9a-f]{8,10})?"
+            target_label  = "__tmp_controller_name"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name", "__meta_kubernetes_pod_label_app", "__tmp_controller_name", "__meta_kubernetes_pod_name"]
+            regex         = "^;*([^;]+)(;.*)?$"
+            target_label  = "app"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_instance", "__meta_kubernetes_pod_label_instance"]
+            regex         = "^;*([^;]+)(;.*)?$"
+            target_label  = "instance"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_component", "__meta_kubernetes_pod_label_component"]
+            regex         = "^;*([^;]+)(;.*)?$"
+            target_label  = "component"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_node_name"]
+            target_label  = "node_name"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_namespace"]
+            target_label  = "namespace"
+          }
+
+          rule {
+            source_labels = ["namespace", "app"]
+            separator     = "/"
+            target_label  = "job"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_name"]
+            target_label  = "pod"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_container_name"]
+            target_label  = "container"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+            separator     = "/"
+            target_label  = "__path__"
+            replacement   = "/var/log/pods/*$1/*.log"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_annotationpresent_kubernetes_io_config_hash", "__meta_kubernetes_pod_annotation_kubernetes_io_config_hash", "__meta_kubernetes_pod_container_name"]
+            separator     = "/"
+            regex         = "true/(.*)"
+            target_label  = "__path__"
+            replacement   = "/var/log/pods/*$1/*.log"
+          }
+        }
+
+        local.file_match "kubernetes_pods" {
+          path_targets = discovery.relabel.kubernetes_pods.output
+        }
+
+        loki.process "kubernetes_pods" {
+          forward_to = [loki.write.default.receiver]
+
+          stage.cri { }
+        }
+
+        loki.source.file "kubernetes_pods" {
+          targets               = local.file_match.kubernetes_pods.targets
+          forward_to            = [loki.process.kubernetes_pods.receiver]
+          legacy_positions_file = "/var/lib/promtail/positions.yaml"
+        }
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+    extraEnv:
+      - name: LOKI_USER
+        valueFrom:
+          secretKeyRef:
+            name: grafana-cloud-credentials
+            key: loki_user
+      - name: LOKI_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: grafana-cloud-credentials
+            key: loki_password
+
+  controller:
+    volumes:
+      extra:
+      - hostPath:
+          path: /var/lib/alloy
+          type: DirectoryOrCreate
+        name: data-alloy
+      - hostPath:
+          path: /var/lib/promtail
+          type: ''
+        name: varlibpromtail

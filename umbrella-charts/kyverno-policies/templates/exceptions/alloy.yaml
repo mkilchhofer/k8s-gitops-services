@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v2
 kind: PolicyException
 metadata:
-  name: promtail
+  name: alloy
 spec:
   exceptions:
   - policyName: podsecurity-restricted
@@ -16,14 +16,14 @@ spec:
         namespaces:
         - logging
         names:
-        - promtail*
+        - alloy*
   podSecurity:
     - controlName: "Running as Non-root"
       images:
-        - "*/grafana/promtail*"
+        - "*/grafana/alloy*"
     - controlName: "Running as Non-root user"
     - controlName: "Seccomp"
       images:
-        - "*/grafana/promtail*"
+        - "*/grafana/alloy*"
     - controlName: "HostPath Volumes"
     - controlName: "Volume Types"
