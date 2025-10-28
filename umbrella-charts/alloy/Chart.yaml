@@ -1,0 +1,11 @@
+apiVersion: v2
+name: alloy
+description: Grafana Alloy for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: alloy
+  version: 1.4.0
+  repository: https://grafana.github.io/helm-charts
