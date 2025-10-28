@@ -1,6 +1,8 @@
 alloy:
   crds:
     create: false
+  configReloader:
+    enabled: false
   alloy:
     storagePath: /var/lib/alloy
     mounts:
