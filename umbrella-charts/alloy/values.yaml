@@ -1,7 +1,7 @@
 alloy:
+  crds:
+    create: false
   alloy:
-    crds:
-      create: false
     storagePath: /var/lib/alloy
     mounts:
       extra:
