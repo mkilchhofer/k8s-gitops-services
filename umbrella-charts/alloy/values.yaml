@@ -6,7 +6,7 @@ alloy:
     mounts:
       extra:
       - mountPath: /var/lib/alloy
-        name: alloy-log-positions
+        name: data-alloy
       - mountPath: /var/lib/promtail
         name: varlibpromtail
     configMap:
