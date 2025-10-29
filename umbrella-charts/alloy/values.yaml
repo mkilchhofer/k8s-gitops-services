@@ -6,6 +6,7 @@ alloy:
   alloy:
     storagePath: /var/lib/alloy
     mounts:
+      varlog: true
       extra:
       - mountPath: /var/lib/alloy
         name: data-alloy
