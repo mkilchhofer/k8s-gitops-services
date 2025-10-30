@@ -10,5 +10,5 @@ dependencies:
   version: 2.4.0
   repository: oci://ghcr.io/opencost/charts
 - name: oauth2-proxy
-  version: "8.3.1"
+  version: "8.3.2"
   repository: oci://ghcr.io/oauth2-proxy/charts
