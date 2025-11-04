@@ -3,4 +3,6 @@ kind: Namespace
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-5"
+  labels:
+    observability.example.com/inventory-ref: "dfa04b46-cbd6-442e-b4b0-139e537c9a6d"
   name: testing
