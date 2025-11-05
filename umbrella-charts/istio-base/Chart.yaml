@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: base
-  version: 1.27.3
+  version: 1.28.0
   repository: oci://gcr.io/istio-release/charts
