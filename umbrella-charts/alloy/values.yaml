@@ -12,6 +12,13 @@ alloy:
         name: data-alloy
       - mountPath: /var/lib/promtail
         name: varlibpromtail
+    resources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
     configMap:
       # Used convert command to generate from existing promtail config:
       # $ kubectl exec -ti promtail-f8qdn -- cat /etc/promtail/promtail.yaml > promtail_config.yaml
