@@ -2,6 +2,8 @@ networkPolicy:
   enabled: true
 
 prometheus-blackbox-exporter:
+  revisionHistoryLimit: 1
+
   resources:
     limits:
       memory: 300Mi
