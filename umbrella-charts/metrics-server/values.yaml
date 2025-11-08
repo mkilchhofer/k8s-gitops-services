@@ -1,4 +1,6 @@
 metrics-server:
+  revisionHistoryLimit: 1
+
   metrics:
     enabled: true
 
