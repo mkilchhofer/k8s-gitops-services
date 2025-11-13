@@ -22,6 +22,10 @@ spec:
         env:
         - name: TZ
           value: Europe/Zurich
+        - name: APP_URL
+          value: https://auth.kilchhofer.info
+        - name: TRUST_PROXY
+          value: "true"
         - name: SMTP_HOST
           value: smtp.googlemail.com
         - name: SMTP_PORT
