@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pocket-id
+  labels:
+    app.kubernetes.io/name: pocket-id
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pocket-id
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: pocket-id
+    spec:
+      containers:
+      - name: pocket-id
+        image: ghcr.io/pocket-id/pocket-id:v1.15.0
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        - name: SMTP_HOST
+          value: smtp.googlemail.com
+        - name: SMTP_PORT
+          value: "587"
+        - name: SMTP_FROM
+          value: noreply.maurer@gmail.com
+        - name: SMTP_USER
+          value: noreply.maurer@gmail.com
+        - name: SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pocket-id
+              key: emailPassword
+        - name: SMTP_TLS
+          value: starttls
+        - name: ENCRYPTION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: pocket-id
+              key: encryptionKey
+        ports:
+        - name: web
+          containerPort: 1411
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - "ALL"
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 5m
+            memory: 16Mi
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: pocket-id

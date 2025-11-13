@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pocket-id
+  annotations:
+    kubernetes.io/ingress.class: nginx-external
+    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/revision-history-limit: "1"
+spec:
+  ingressClassName: nginx-external
+  rules:
+  - host: auth.kilchhofer.info
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: pocket-id
+            port:
+              name: web
+  tls:
+  - hosts:
+    - auth.kilchhofer.info
+    secretName: pocket-id-ingress-cert
