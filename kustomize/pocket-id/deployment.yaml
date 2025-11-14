@@ -26,6 +26,8 @@ spec:
           value: "true"
         - name: APP_URL
           value: https://auth.kilchhofer.info
+        - name: SESSION_DURATION
+          value: "720" # => 12 hours
         - name: TRUST_PROXY
           value: "true"
         - name: MAXMIND_LICENSE_KEY
@@ -33,6 +35,10 @@ spec:
             secretKeyRef:
               name: pocket-id
               key: maxmindLicenseKey
+        - name: EMAIL_ONE_TIME_ACCESS_AS_ADMIN_ENABLED
+          value: "true"
+        - name: EMAIL_API_KEY_EXPIRATION_ENABLED
+          value: "true"
         - name: SMTP_HOST
           value: smtp.googlemail.com
         - name: SMTP_PORT
