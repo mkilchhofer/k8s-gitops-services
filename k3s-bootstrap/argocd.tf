@@ -1,3 +1,11 @@
+data "akeyless_static_secret" "argocd" {
+  path = "/k3s/argocd/credentials"
+}
+
+data "akeyless_static_secret" "argocd_gh_deploy_key" {
+  path = "/k3s/argocd/github_deploy_key"
+}
+
 resource "kubernetes_namespace" "argocd" {
   metadata {
     name = "argocd"
@@ -15,8 +23,8 @@ resource "kubernetes_namespace" "argocd" {
 
 resource "null_resource" "argocd_password" {
   triggers = {
-    plain    = var.argocd_admin_password
-    hash     = bcrypt(var.argocd_admin_password)
+    plain    = data.akeyless_static_secret.argocd.key_value_pairs["admin_password"]
+    hash     = bcrypt(data.akeyless_static_secret.argocd.key_value_pairs["admin_password"])
     modified = timestamp()
   }
 
@@ -53,22 +61,22 @@ resource "helm_release" "argocd" {
 
     {
       name  = "configs.secret.extra.oidc\\.dex\\.clientSecret"
-      value = var.argocd_oidc_client_secret
+      value = data.akeyless_static_secret.argocd.key_value_pairs["oidc_client_secret"]
     },
 
     {
       name  = "notifications.secret.items.telegram-token"
-      value = var.telegram_token
+      value = data.akeyless_static_secret.argocd.key_value_pairs["telegram_token"]
     },
 
     {
       name  = "configs.credentialTemplates.gh-mkilchhofer-ssh.sshPrivateKey"
-      value = var.argocd_github_deploy_key
+      value = data.akeyless_static_secret.argocd_gh_deploy_key.value
     },
 
     {
       name  = "configs.credentialTemplates.internal-mkilchhofer-ssh.sshPrivateKey"
-      value = var.argocd_github_deploy_key
+      value = data.akeyless_static_secret.argocd_gh_deploy_key.value
     }
   ]
 
