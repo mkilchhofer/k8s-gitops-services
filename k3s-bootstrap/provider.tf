@@ -11,24 +11,24 @@ provider "helm" {
   # Configuration options
   kubernetes = {
     host                   = "https://192.168.92.31:6443"
-    cluster_ca_certificate = var.kubernetes_cluster_ca_certificate
+    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 
-    client_certificate = var.kubernetes_client_certificate
-    client_key         = var.kubernetes_client_key
+    client_certificate = local.kubernetes_client_certificate
+    client_key         = local.kubernetes_client_key
   }
 }
 provider "kubernetes" {
   # Configuration options
   host                   = "https://192.168.92.31:6443"
-  cluster_ca_certificate = var.kubernetes_cluster_ca_certificate
+  cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 
-  client_certificate = var.kubernetes_client_certificate
-  client_key         = var.kubernetes_client_key
+  client_certificate = local.kubernetes_client_certificate
+  client_key         = local.kubernetes_client_key
 }
 
 provider "argocd" {
   username    = "admin"
-  password    = var.argocd_admin_password
+  password    = data.akeyless_static_secret.argocd.key_value_pairs["admin_password"]
 
   port_forward_with_namespace = kubernetes_namespace.argocd.metadata.0.name
 
@@ -36,9 +36,9 @@ provider "argocd" {
 
   kubernetes {
     host                   = "https://192.168.92.31:6443"
-    cluster_ca_certificate = var.kubernetes_cluster_ca_certificate
+    cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 
-    client_certificate = var.kubernetes_client_certificate
-    client_key         = var.kubernetes_client_key
+    client_certificate = local.kubernetes_client_certificate
+    client_key         = local.kubernetes_client_key
   }
 }
