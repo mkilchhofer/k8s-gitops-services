@@ -18,6 +18,8 @@ spec:
           # Self-Hosted Dashboard Icons
           # See: https://selfh.st/icons/
         - matchName: cdn.jsdelivr.net
+          # MaxMind GeoIP Updates
+        - matchName: download.maxmind.com
       toPorts:
         - ports:
             - port: "443"

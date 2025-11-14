@@ -28,6 +28,11 @@ spec:
           value: https://auth.kilchhofer.info
         - name: TRUST_PROXY
           value: "true"
+        - name: MAXMIND_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: pocket-id
+              key: maxmindLicenseKey
         - name: SMTP_HOST
           value: smtp.googlemail.com
         - name: SMTP_PORT
