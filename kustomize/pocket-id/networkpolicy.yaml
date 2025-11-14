@@ -20,6 +20,7 @@ spec:
         - matchName: cdn.jsdelivr.net
           # MaxMind GeoIP Updates
         - matchName: download.maxmind.com
+        - matchPattern: "*.*.r2.cloudflarestorage.com"
       toPorts:
         - ports:
             - port: "443"
