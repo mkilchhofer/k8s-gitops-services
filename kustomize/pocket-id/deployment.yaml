@@ -22,6 +22,8 @@ spec:
         env:
         - name: TZ
           value: Europe/Zurich
+        - name: UI_CONFIG_DISABLED
+          value: "true"
         - name: APP_URL
           value: https://auth.kilchhofer.info
         - name: TRUST_PROXY
