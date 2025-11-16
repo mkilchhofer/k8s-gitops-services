@@ -22,3 +22,10 @@ spec:
         - ports:
             - port: "80"
               protocol: TCP
+      # Expose Valetudo UI through ZTNA
+    - toFQDNs:
+        - matchName: robi.ma.kilchhofer.info
+      toPorts:
+        - ports:
+            - port: '80'
+              protocol: TCP
