@@ -8,5 +8,5 @@ version: 1.0.0
 dependencies:
 - name: cilium
   alias: hubble-ui
-  version: 1.18.3 # also update in k3s-bootstrap/cilium.tf
+  version: 1.18.4 # also update in k3s-bootstrap/cilium.tf
   repository: https://helm.cilium.io/
