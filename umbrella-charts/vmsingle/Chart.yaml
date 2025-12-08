@@ -10,5 +10,5 @@ dependencies:
   version: "0.25.5"
   repository: oci://ghcr.io/victoriametrics/helm-charts
 - name: oauth2-proxy
-  version: "8.5.0"
+  version: "9.0.1"
   repository: oci://ghcr.io/oauth2-proxy/charts
