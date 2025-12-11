@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: pocket-id
-        image: ghcr.io/pocket-id/pocket-id:v1.15.0
+        image: ghcr.io/pocket-id/pocket-id:v1.16.0
         env:
         - name: TZ
           value: Europe/Zurich
