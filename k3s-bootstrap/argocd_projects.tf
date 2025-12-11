@@ -14,7 +14,8 @@ resource "argocd_project" "base" {
     }
 
     cluster_resource_whitelist {
-      kind = "Namespace"
+      group = ""
+      kind  = "Namespace"
     }
 
     namespace_resource_whitelist {
@@ -67,7 +68,8 @@ resource "argocd_project" "apps_with_clusterroles" {
 
     # Deny all cluster-scoped resources from being created, except for Namespace, ClusterRole, ClusterRoleBinding
     cluster_resource_whitelist {
-      kind = "Namespace"
+      group = ""
+      kind  = "Namespace"
     }
     cluster_resource_whitelist {
       group = "rbac.authorization.k8s.io"
@@ -81,10 +83,12 @@ resource "argocd_project" "apps_with_clusterroles" {
 
     # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange
     namespace_resource_blacklist {
-      kind = "ResourceQuota"
+      group = ""
+      kind  = "ResourceQuota"
     }
     namespace_resource_blacklist {
-      kind = "LimitRange"
+      group = ""
+      kind  = "LimitRange"
     }
   }
 
@@ -108,15 +112,18 @@ resource "argocd_project" "apps_restricted" {
 
     # Deny all cluster-scoped resources from being created, except for Namespace, ClusterRole, ClusterRoleBinding
     cluster_resource_whitelist {
-      kind = "Namespace"
+      group = ""
+      kind  = "Namespace"
     }
 
     # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange
     namespace_resource_blacklist {
-      kind = "ResourceQuota"
+      group = ""
+      kind  = "ResourceQuota"
     }
     namespace_resource_blacklist {
-      kind = "LimitRange"
+      group = ""
+      kind  = "LimitRange"
     }
   }
 
