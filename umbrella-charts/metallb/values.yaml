@@ -21,3 +21,7 @@ metallb:
     # Use classic mode for simplicity
     frr:
       enabled: false
+
+  networkpolicies:
+    enabled: true
+    apiPort: 443
