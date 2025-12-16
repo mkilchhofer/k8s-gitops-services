@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: istio-demo-ingress
+  namespace: argocd
+spec:
+  destination:
+    namespace: istio-demo
+    server: https://kubernetes.default.svc
+  project: apps-restricted
+  syncPolicy:
+    syncOptions:
+    - ServerSideApply=true
+  source:
+    path: kustomize/istio-demo-ingress
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
