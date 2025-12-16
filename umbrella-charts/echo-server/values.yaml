@@ -47,9 +47,9 @@ oauth2-proxy:
       reverse_proxy = true
       real_client_ip_header = "X-Forwarded-For"
       provider = "oidc"
-      provider_display_name = "GitHub / Dex"
+      provider_display_name = "Pocket ID"
       redirect_url = "http://echo-server-oauth2-proxy.tools.kilchhofer.info/oauth2/callback"
-      oidc_issuer_url = "https://sso.kilchhofer.info"
+      oidc_issuer_url = "https://auth.kilchhofer.info"
       email_domains = [ "*" ]
       upstreams = [ "http://echo-server.base-infra.svc:8080" ]
       silence_ping_logging = true
@@ -57,10 +57,10 @@ oauth2-proxy:
       pass_access_token = true
       pass_authorization_header = true
       allowed_groups = [
-          "kilchhofer-home:admins"
+          "infrastructure_admins"
       ]
       htpasswd_user_groups = [
-          "kilchhofer-home:admins",
+          "infrastructure_admins",
           "basic-auth"
       ]
       # display_htpasswd_form = false
@@ -87,7 +87,7 @@ oauth2-proxy:
           - Egress
           - Ingress
         egress:
-            # To SSO (dex)
+            # To SSO (Pocket ID)
           - ports:
             - port: 443
               protocol: TCP
