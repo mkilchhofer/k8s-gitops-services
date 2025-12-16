@@ -1,0 +1,11 @@
+apiVersion: v2
+name: gateway
+description: Istio gateway for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: gateway
+  version: 1.28.0
+  repository: oci://gcr.io/istio-release/charts

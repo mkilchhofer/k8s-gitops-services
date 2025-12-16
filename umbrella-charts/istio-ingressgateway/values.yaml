@@ -1,0 +1,9 @@
+global:
+  networkPolicy:
+    enabled: true
+
+gateway:
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 2
