@@ -17,8 +17,8 @@ nebraska:
       mode: oidc
       oidc:
         existingSecret: nebraska-custom
-        issuerURL: https://sso.kilchhofer.info
-        adminRoles: kilchhofer-home:admins
+        issuerURL: https://auth.kilchhofer.info
+        adminRoles: infrastructure_admins
         viewerRoles: kilchhofer-home:developers
         rolesPath: groups
         scopes: groups,openid,profile
@@ -112,7 +112,7 @@ nebraska:
           - Egress
         egress:
             # 1. flatcar online service (https://public.update.flatcar-linux.net/v1/update/)
-            # 2. SSO via dex/OIDC
+            # 2. SSO via OIDC (Pocket ID)
           - ports:
             - port: 443
               protocol: TCP

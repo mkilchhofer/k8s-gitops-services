@@ -256,8 +256,8 @@ configs:
 
     admin.enabled: "true" # Required to use argocd TF provider
     oidc.config: |
-      name: Dex
-      issuer: https://sso.kilchhofer.info
+      name: Pocket ID
+      issuer: https://auth.kilchhofer.info
       clientID: argocd
       clientSecret: $oidc.dex.clientSecret
       requestedScopes:
@@ -309,7 +309,7 @@ configs:
 
   rbac:
     policy.csv: |
-      g, kilchhofer-home:admins, role:admin
+      g, infrastructure_admins, role:admin
     policy.default: role:readonly
 
   credentialTemplates:
@@ -347,7 +347,7 @@ extraObjects:
           app.kubernetes.io/component: server
       egress:
         - toFQDNs:
-            - matchName: sso.kilchhofer.info
+            - matchName: auth.kilchhofer.info
           toPorts:
             - ports:
                 - port: "443"

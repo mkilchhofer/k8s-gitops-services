@@ -11,7 +11,7 @@ spec:
     - Egress
     - Ingress
   egress:
-      # To SSO (dex)
+      # To SSO (Pocket ID)
     - ports:
       - port: 443
         protocol: TCP

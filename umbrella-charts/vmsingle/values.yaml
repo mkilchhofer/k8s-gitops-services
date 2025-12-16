@@ -107,9 +107,9 @@ oauth2-proxy:
       reverse_proxy = true
       real_client_ip_header = "X-Forwarded-For"
       provider = "oidc"
-      provider_display_name = "GitHub / Dex"
+      provider_display_name = "Pocket ID"
       redirect_url = "https://vm.kilchhofer.info/oauth2/callback"
-      oidc_issuer_url = "https://sso.kilchhofer.info"
+      oidc_issuer_url = "https://auth.kilchhofer.info"
       email_domains = [ "*" ]
       upstreams = [ "http://vmsingle-victoria-metrics-single-server.monitoring.svc:8428" ]
       silence_ping_logging = true
@@ -118,10 +118,10 @@ oauth2-proxy:
       pass_authorization_header = true
       footer = "Secured with <a href=\"https://github.com/oauth2-proxy/oauth2-proxy#oauth2_proxy\" class=\"has-text-grey\">OAuth2 Proxy</a>"
       allowed_groups = [
-          "kilchhofer-home:admins"
+          "infrastructure_admins"
       ]
       htpasswd_user_groups = [
-          "kilchhofer-home:admins",
+          "infrastructure_admins",
           "basic-auth"
       ]
 
@@ -162,7 +162,7 @@ oauth2-proxy:
           - Egress
           - Ingress
         egress:
-            # To SSO (dex)
+            # To SSO (Pocket ID)
           - ports:
             - port: 443
               protocol: TCP
