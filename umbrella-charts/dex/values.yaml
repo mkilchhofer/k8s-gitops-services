@@ -16,7 +16,7 @@ dex:
         id: pocket-id
         name: Pocket ID
         config:
-          issuer: https://accounts.google.com
+          issuer: https://auth.kilchhofer.info
           clientID: '{{ .Env.OIDC_CLIENT_ID }}'
           clientSecret: '{{ .Env.OIDC_CLIENT_SECRET }}'
           redirectURI: https://sso-legacy.kilchhofer.info/callback
