@@ -24,7 +24,7 @@ dex:
           - profile
           - email
           - groups
-          getUserInfo: true
+          # getUserInfo: true
 
     web:
       allowedOrigins:
