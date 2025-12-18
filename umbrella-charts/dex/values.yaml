@@ -24,10 +24,10 @@ dex:
           - profile
           - email
           - groups
-          # getUserInfo: true
+          getUserInfo: true
           insecureEnableGroups: true
-          claimMapping:
-            groups: "groups"
+          # claimMapping:
+          #   groups: "groups"
 
     web:
       allowedOrigins:
