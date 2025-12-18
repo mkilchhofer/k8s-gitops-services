@@ -25,6 +25,8 @@ dex:
           - email
           - groups
           # getUserInfo: true
+          claimMapping:
+            groups: "groups"
 
     web:
       allowedOrigins:
