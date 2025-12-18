@@ -17,9 +17,9 @@ nebraska:
       mode: oidc
       oidc:
         existingSecret: nebraska-custom
-        issuerURL: https://auth.kilchhofer.info
+        issuerURL: https://sso-legacy.kilchhofer.info
         adminRoles: infrastructure_admins
-        viewerRoles: kilchhofer-home:developers
+        viewerRoles: developers
         rolesPath: groups
         scopes: groups,openid,profile
 

@@ -3,7 +3,7 @@ dex:
     tag: v2.42.0-distroless
 
   config:
-    issuer: https://sso.kilchhofer.info
+    issuer: https://sso-legacy.kilchhofer.info
     oauth2:
       skipApprovalScreen: true
     storage:
@@ -12,89 +12,34 @@ dex:
         inCluster: true
 
     connectors:
-      - type: github
-        id: github
-        name: GitHub
+      - type: oidc
+        id: pocket-id
+        name: Pocket ID
         config:
-          clientID: '{{ .Env.GH_CLIENT_ID }}'
-          clientSecret: '{{ .Env.GH_CLIENT_SECRET }}'
-          orgs:
-            - name: kilchhofer-home
-          redirectURI: https://sso.kilchhofer.info/callback
-          loadAllGroups: true
+          issuer: https://accounts.google.com
+          clientID: '{{ .Env.OIDC_CLIENT_ID }}'
+          clientSecret: '{{ .Env.OIDC_CLIENT_SECRET }}'
+          redirectURI: https://sso-legacy.kilchhofer.info/callback
+          scopes:
+          - profile
+          - email
+          - groups
+          getUserInfo: true
 
     web:
       allowedOrigins:
       - https://flatcar.tools.kilchhofer.info
 
     staticClients:
-      - id: argocd
-        secret: '{{ .Env.ARGOCD_CLIENT_SECRET }}'
-        name: ArgoCD
-        redirectURIs:
-          - https://argocd.tools.kilchhofer.info/auth/callback
-
       - id: nebraska
         public: true
         name: Nebraska
         redirectURIs:
           - https://flatcar.tools.kilchhofer.info/auth/callback
 
-      - id: polaris
-        secret: '{{ .Env.POLARIS_CLIENT_SECRET }}'
-        name: Polaris
-        redirectURIs:
-          - https://polaris.tools.kilchhofer.info/oauth/callback
-
-      - id: kubeview
-        secret: '{{ .Env.KUBEVIEW_CLIENT_SECRET }}'
-        name: KubeView
-        redirectURIs:
-          - https://kubeview.tools.kilchhofer.info/oauth/callback
-
-      - id: echo-server
-        secret: '{{ .Env.ECHO_SERVER_CLIENT_SECRET }}'
-        name: EchoServer
-        redirectURIs:
-          - http://echo-server-gatekeeper.tools.kilchhofer.info/oauth/callback
-          - http://echo-server-oauth2-proxy.tools.kilchhofer.info/oauth2/callback
-
-      - id: proxmox
-        secret: '{{ .Env.PROXMOX_CLIENT_SECRET }}'
-        name: Proxmox
-        redirectURIs:
-          - https://proxmox.ma.kilchhofer.info:8006
-
-      - id: hubble
-        secret: '{{ .Env.HUBBLE_CLIENT_SECRET }}'
-        name: Hubble
-        redirectURIs:
-          - https://hubble.tools.kilchhofer.info/oauth/callback
-
-      - id: victoria-metrics
-        secret: '{{ .Env.VICTORIA_METRICS_CLIENT_SECRET }}'
-        name: VictoriaMetrics
-        redirectURIs:
-          - https://vm.kilchhofer.info/oauth2/callback
-
-      - id: grafana
-        secret: '{{ .Env.GRAFANA_CLIENT_SECRET }}'
-        name: Grafana
-        redirectURIs:
-          - https://grafana.tools.kilchhofer.info/login/generic_oauth
-          - https://grafana.kilchhofer.info/login/generic_oauth
-
-      - id: opencost
-        secret: '{{ .Env.OPENCOST_CLIENT_SECRET }}'
-        name: OpenCost
-        redirectURIs:
-          - https://opencost.tools.kilchhofer.info/oauth2/callback
-
   envFrom:
     - secretRef:
-        name: dex-clients
-    - secretRef:
-        name: dex-github
+        name: dex-upstream-oidc
 
   resources:
     limits:
@@ -129,14 +74,14 @@ dex:
 
     className: nginx-external
     hosts:
-      - host: sso.kilchhofer.info
+      - host: sso-legacy.kilchhofer.info
         paths:
           - path: /
             pathType: Prefix
     tls:
       - secretName: dex-ingress-cert
         hosts:
-          - sso.kilchhofer.info
+          - sso-legacy.kilchhofer.info
 
   networkPolicy:
     enabled: true
