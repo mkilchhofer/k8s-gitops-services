@@ -1,6 +1,6 @@
 dex:
   image:
-    tag: v2.42.0-distroless
+    tag: v2.44.0-distroless
 
   config:
     issuer: https://sso-legacy.kilchhofer.info
