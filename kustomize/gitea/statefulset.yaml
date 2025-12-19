@@ -5,6 +5,7 @@ metadata:
 spec:
   serviceName: gitea
   replicas: 1
+  revisionHistoryLimit: 1
   updateStrategy:
     type: RollingUpdate
   template:

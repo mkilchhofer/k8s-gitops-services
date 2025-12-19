@@ -10,7 +10,7 @@ spec:
       app.kubernetes.io/name: jellyfin
   serviceName: jellyfin
   replicas: 1
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 1
   updateStrategy:
     type: RollingUpdate
   template:

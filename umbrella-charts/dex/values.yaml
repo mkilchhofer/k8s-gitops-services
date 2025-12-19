@@ -2,6 +2,8 @@ dex:
   image:
     tag: v2.44.0-distroless
 
+  revisionHistoryLimit: 1
+
   config:
     issuer: https://sso-legacy.kilchhofer.info
     oauth2:
