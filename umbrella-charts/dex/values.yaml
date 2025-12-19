@@ -34,6 +34,7 @@ dex:
     web:
       allowedOrigins:
       - https://flatcar.tools.kilchhofer.info
+      - http://localhost:3000
 
     staticClients:
       - id: nebraska
@@ -41,6 +42,7 @@ dex:
         name: Nebraska
         redirectURIs:
           - https://flatcar.tools.kilchhofer.info/auth/callback
+          - http://localhost:3000/auth/callback
 
   envFrom:
     - secretRef:
