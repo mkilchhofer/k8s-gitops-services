@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: k8s-ephemeral-storage-metrics
-  version: 1.18.2
+  version: 1.19.1
   repository: https://jmcgrath207.github.io/k8s-ephemeral-storage-metrics/chart
