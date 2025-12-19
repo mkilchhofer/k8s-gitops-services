@@ -1,4 +1,6 @@
 nebraska:
+  extraArgs:
+    - "-oidc-management-url=https://auth.kilchhofer.info/settings/account"
   config:
     app:
       title: Flatcar Updates
