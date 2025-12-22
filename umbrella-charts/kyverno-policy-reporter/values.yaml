@@ -47,3 +47,40 @@ policy-reporter:
       requests:
         memory: 50Mi
         cpu: 10m
+
+    openIDConnect:
+      enabled: true
+      callbackUrl: https://policy-reports.tools.kilchhofer.info/callback
+      secretRef: 'policy-reporter-ui-sso'
+      groupClaim: groups
+      scopes:
+      - openid
+      - email
+      - profile
+      - groups
+
+    networkPolicy:
+      enabled: true
+      egress:
+        - ports:
+              # Allow egress traffic to SSO provider
+            - protocol: TCP
+              port: 443
+
+    httproute:
+      enabled: true
+      # Must reference an existing Gateway resource
+      parentRefs:
+        - name: eg-internal
+          group: gateway.networking.k8s.io
+          kind: Gateway
+          namespace: envoy-gateway-system
+      # -- List of hostnames for HTTPRoute
+      hostnames:
+        - policy-reports.tools.kilchhofer.info
+
+      rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
