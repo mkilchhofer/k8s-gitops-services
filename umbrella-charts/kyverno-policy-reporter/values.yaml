@@ -59,6 +59,14 @@ policy-reporter:
       - profile
       - groups
 
+    networkPolicy:
+      enabled: true
+      egress:
+        - ports:
+              # Allow egress traffic to SSO provider
+            - protocol: TCP
+              port: 443
+
     httproute:
       enabled: true
       # Must reference an existing Gateway resource
