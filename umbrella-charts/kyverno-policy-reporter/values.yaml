@@ -50,7 +50,7 @@ policy-reporter:
 
     openIDConnect:
       enabled: true
-      callback: https://policy-reports.tools.kilchhofer.info/callback
+      callbackUrl: https://policy-reports.tools.kilchhofer.info/callback
       secretRef: 'policy-reporter-ui-sso'
       groupClaim: groups
       scopes:
