@@ -3,6 +3,6 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/name: website-marco
 resources:
-  - ingress.yaml
+  - httproute.yaml
   - service.yaml
   - statefulset.yaml
