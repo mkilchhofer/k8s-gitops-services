@@ -31,7 +31,7 @@ spec:
         namespaces:
           from: All
 
-    - name: https
+    - name: https-root
       port: 443
       protocol: HTTPS
       hostname: "kilchhofer.info"
