@@ -3,10 +3,10 @@ kind: EnvoyProxy
 metadata:
   name: eg-external-config
 spec:
+  shutdown:
+    drainTimeout: 30s # Optimize for rollout speed rather than graceful shutdown
   provider:
     type: Kubernetes
-    shutdown:
-      drainTimeout: 30s # Optimize for rollout speed rather than graceful shutdown
     kubernetes:
       envoyDeployment:
         replicas: 2
