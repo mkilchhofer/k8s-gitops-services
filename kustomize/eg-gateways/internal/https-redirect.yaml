@@ -2,7 +2,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: tls-redirect
+  name: eg-internal-global-https-redirect
 spec:
   parentRefs:
     - name: eg-internal
