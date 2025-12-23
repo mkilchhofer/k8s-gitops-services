@@ -20,6 +20,8 @@ spec:
     # as part of a solver's selector too.
     - selector:
         dnsZones:
+        - "kilchhofer.info"
+        - "cloud.kilchhofer.info"
         - "tools.kilchhofer.info"
         - "tools-test.kilchhofer.info"
       dns01:
@@ -28,13 +30,6 @@ spec:
           apiTokenSecretRef:
             name: cloudflare-api-token-secret
             key: api-token
-    - selector:
-        dnsZones:
-        - "kilchhofer.info"
-        - "cloud.kilchhofer.info"
-      http01:
-        ingress:
-          class: nginx-external
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -58,6 +53,8 @@ spec:
     # as part of a solver's selector too.
     - selector:
         dnsZones:
+        - "kilchhofer.info"
+        - "cloud.kilchhofer.info"
         - "tools.kilchhofer.info"
         - "tools-test.kilchhofer.info"
       dns01:
@@ -66,10 +63,3 @@ spec:
           apiTokenSecretRef:
             name: cloudflare-api-token-secret
             key: api-token
-    - selector:
-        dnsZones:
-        - "kilchhofer.info"
-        - "cloud.kilchhofer.info"
-      http01:
-        ingress:
-          class: nginx-external
