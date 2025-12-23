@@ -1,5 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - gatewayclass.yaml
-  - ./internal
+  - gateway.yaml
+  - config.yaml
+  - netpol.yaml
+  - https-redirect.yaml
