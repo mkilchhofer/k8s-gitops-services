@@ -1,0 +1,17 @@
+# Ref: https://gateway.envoyproxy.io/docs/tasks/traffic/http-redirect/#force-http--https-redirect
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: eg-external-global-https-redirect
+spec:
+  parentRefs:
+    - name: eg-external
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      sectionName: http
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
