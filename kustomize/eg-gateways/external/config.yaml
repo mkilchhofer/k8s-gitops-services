@@ -1,0 +1,27 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: eg-external-config
+spec:
+  provider:
+    type: Kubernetes
+    shutdown:
+      drainTimeout: 30s # Optimize for rollout speed rather than graceful shutdown
+    kubernetes:
+      envoyDeployment:
+        replicas: 2
+        container:
+          resources:
+            requests:
+              cpu: 100m
+              memory: 96Mi
+        patch:
+          type: StrategicMerge
+          value:
+            spec:
+              template:
+                spec:
+                  terminationGracePeriodSeconds: 60 # Optimize for rollout speed rather than graceful shutdown
+      envoyService:
+        name: eg-external-envoy
+        type: ClusterIP

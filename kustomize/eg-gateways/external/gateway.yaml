@@ -1,0 +1,63 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: eg-external
+spec:
+  gatewayClassName: eg
+  infrastructure:
+    parametersRef:
+      group: gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: eg-external-config
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: Same # Only accept the HTTPRoute which specifies the HTTP -> HTTPS redirect
+
+    - name: https
+      port: 443
+      protocol: HTTPS
+      hostname: "*.kilchhofer.info"
+      tls:
+        certificateRefs:
+        - group: ""
+          kind: Secret
+          name: wildcard-kilchhofer-info
+        mode: Terminate
+      allowedRoutes:
+        namespaces:
+          from: All
+
+    - name: https
+      port: 443
+      protocol: HTTPS
+      hostname: "kilchhofer.info"
+      tls:
+        certificateRefs:
+        - group: ""
+          kind: Secret
+          name: wildcard-kilchhofer-info
+        mode: Terminate
+      allowedRoutes:
+        namespaces:
+          from: All
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-kilchhofer-info
+spec:
+  dnsNames:
+  - "*.kilchhofer.info"
+  - "kilchhofer.info"
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt
+  secretName: wildcard-kilchhofer-info
+  usages:
+  - digital signature
+  - key encipherment
