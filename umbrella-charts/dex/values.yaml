@@ -71,22 +71,7 @@ dex:
       name: tmp
 
   ingress:
-    enabled: true
-
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-
-    className: nginx-external
-    hosts:
-      - host: sso-legacy.kilchhofer.info
-        paths:
-          - path: /
-            pathType: Prefix
-    tls:
-      - secretName: dex-ingress-cert
-        hosts:
-          - sso-legacy.kilchhofer.info
+    enabled: false # We use HTTPRoute instead
 
   networkPolicy:
     enabled: true
