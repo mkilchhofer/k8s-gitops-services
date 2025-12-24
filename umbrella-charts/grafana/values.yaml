@@ -55,18 +55,7 @@ grafana:
       type: RuntimeDefault
 
   ingress:
-    enabled: true
-    annotations:
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      cert-manager.io/cluster-issuer: letsencrypt
-    ingressClassName: nginx-external
-    hosts:
-      - grafana.kilchhofer.info
-
-    tls:
-      - secretName: grafana-ingress-cert
-        hosts:
-          - grafana.kilchhofer.info
+    enabled: false # We use HTTPRoute instead
 
   rbac:
     pspEnabled: false
