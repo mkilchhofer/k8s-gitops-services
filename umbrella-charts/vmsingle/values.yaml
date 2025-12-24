@@ -136,17 +136,7 @@ oauth2-proxy:
       prometheus.io/scrape: 'true'
 
   ingress:
-    enabled: true
-    hosts:
-      - vm.kilchhofer.info
-    annotations:
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      cert-manager.io/cluster-issuer: letsencrypt
-    className: nginx-external
-    tls:
-      - secretName: vm-oauth2-proxy-toplevel-ingress-cert
-        hosts:
-          - vm.kilchhofer.info
+    enabled: false # We use HTTPRoute instead
 
   extraObjects:
     - apiVersion: networking.k8s.io/v1
