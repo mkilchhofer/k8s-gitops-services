@@ -40,7 +40,7 @@ resource "helm_release" "argocd" {
   name       = "argocd"
   repository = "oci://ghcr.io/argoproj/argo-helm"
   chart      = "argo-cd"
-  version    = "9.2.0"
+  version    = "9.2.1"
   namespace  = kubernetes_namespace.argocd.metadata.0.name
 
   max_history = local.helm_max_history
