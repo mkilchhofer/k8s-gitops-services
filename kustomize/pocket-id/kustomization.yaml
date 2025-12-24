@@ -5,5 +5,5 @@ resources:
   - pvc.yaml
   - networkpolicy.yaml
   - service.yaml
-  - ingress.yaml
+  - httproute.yaml
   - externalsecret.yaml
