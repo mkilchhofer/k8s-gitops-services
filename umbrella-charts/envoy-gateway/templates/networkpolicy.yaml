@@ -20,6 +20,8 @@ spec:
           protocol: TCP
         - port: metrics
           protocol: TCP
+      # Webhook port is accessible from everywhere (accessed by the kube-apiserver)
+    - ports:
         - port: webhook
           protocol: TCP
   podSelector:
