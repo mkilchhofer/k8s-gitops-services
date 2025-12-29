@@ -30,7 +30,7 @@ provider "argocd" {
   username    = "admin"
   password    = data.akeyless_static_secret.argocd.key_value_pairs["admin_password"]
 
-  port_forward_with_namespace = kubernetes_namespace.argocd.metadata.0.name
+  port_forward_with_namespace = kubernetes_namespace_v1.argocd.metadata.0.name
 
   # grpc_web = true
 

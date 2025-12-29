@@ -6,9 +6,9 @@ data "akeyless_static_secret" "argocd_gh_deploy_key" {
   path = "/k3s/argocd/github_deploy_key"
 }
 
-resource "kubernetes_namespace" "argocd" {
+resource "kubernetes_namespace_v1" "argocd" {
   metadata {
-    name = "argocd"
+    name = local.argocd_namespace
   }
   lifecycle {
     ignore_changes = [
@@ -41,7 +41,7 @@ resource "helm_release" "argocd" {
   repository = "oci://ghcr.io/argoproj/argo-helm"
   chart      = "argo-cd"
   version    = "9.2.1"
-  namespace  = kubernetes_namespace.argocd.metadata.0.name
+  namespace  = kubernetes_namespace_v1.argocd.metadata.0.name
 
   max_history = local.helm_max_history
 

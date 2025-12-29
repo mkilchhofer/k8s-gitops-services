@@ -1,5 +1,6 @@
 locals {
   helm_max_history = 3
+  argocd_namespace = "argocd"
 
   # Cluster credentials
   kubernetes_client_certificate     = base64decode(data.akeyless_static_secret.cluster_credentials.key_value_pairs["client-certificate-data"])

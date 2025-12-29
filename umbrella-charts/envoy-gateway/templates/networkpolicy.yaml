@@ -6,8 +6,11 @@ metadata:
 spec:
   ingress:
     - from:
-          # All pods in same namespace (all Gateway pods)
-        - podSelector: {}
+          # Match all proxy pods managed by the Gateway resource
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: proxy
+              app.kubernetes.io/managed-by: envoy-gateway
       ports:
         - port: grpc
           protocol: TCP
@@ -16,6 +19,10 @@ spec:
         - port: wasm
           protocol: TCP
         - port: metrics
+          protocol: TCP
+      # Webhook port is accessible from everywhere (accessed by the kube-apiserver)
+    - ports:
+        - port: webhook
           protocol: TCP
   podSelector:
     matchLabels:
