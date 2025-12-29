@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: envoy-gateway
+  namespace: {{ .Release.Namespace }}
+spec:
+  ingress:
+    - from:
+          # All pods in same namespace (all Gateway pods)
+        - podSelector: {}
+      ports:
+        - port: grpc
+          protocol: TCP
+        - port: ratelimit
+          protocol: TCP
+        - port: wasm
+          protocol: TCP
+        - port: metrics
+          protocol: TCP
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/name: gateway-helm
+      control-plane: envoy-gateway
+  policyTypes:
+    - Ingress
