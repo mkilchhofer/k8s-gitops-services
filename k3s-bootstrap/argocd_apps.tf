@@ -1,7 +1,7 @@
 resource "argocd_application" "app_of_apps" {
   metadata {
     name      = "k8s-gitops-services"
-    namespace = kubernetes_namespace.argocd.metadata.0.name
+    namespace = kubernetes_namespace_v1.argocd.metadata.0.name
   }
 
   spec {

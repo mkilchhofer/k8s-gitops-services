@@ -20,7 +20,7 @@ resource "tls_cert_request" "argocd_server" {
   }
   dns_names = [
     "argocd-server",
-    "argocd-server.${kubernetes_namespace.argocd.metadata.0.name}.svc"
+    "argocd-server.${local.argocd_namespace}.svc"
   ]
 }
 
@@ -60,7 +60,7 @@ resource "tls_cert_request" "argocd_repo_server" {
   }
   dns_names = [
     "argocd-repo-server",
-    "argocd-repo-server.${kubernetes_namespace.argocd.metadata.0.name}.svc"
+    "argocd-repo-server.${local.argocd_namespace}.svc"
   ]
 }
 
