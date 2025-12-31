@@ -73,13 +73,14 @@ spec:
       terminationGracePeriodSeconds: 10
       volumes:
         - name: cache
-          emptyDir: {}
+          emptyDir:
+            sizeLimit: 5Gi
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
         - name: tmp
-          emptyDir: {}
-
+          emptyDir:
+            sizeLimit: 5Gi
           # Existing Media folders on Synology NAS (via NFS)
         - name: syno1-movies1
           nfs:
