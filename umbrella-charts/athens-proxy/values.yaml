@@ -27,7 +27,8 @@ athens-proxy:
 
   extraVolumes:
   - name: tmp-dir
-    emptyDir: {}
+    emptyDir:
+      sizeLimit: 1Gi
 
   configEnvVars:
   - name: ATHENS_LOG_FORMAT

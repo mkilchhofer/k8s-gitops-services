@@ -62,7 +62,8 @@ coder:
 
     volumes:
       - name: "cache"
-        emptyDir: {}
+        emptyDir:
+          sizeLimit: 1Gi
     volumeMounts:
       - name: "cache"
         mountPath: "/tmp"

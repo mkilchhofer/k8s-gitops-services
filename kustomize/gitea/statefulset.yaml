@@ -68,7 +68,8 @@ spec:
           initialDelaySeconds: 5
       volumes:
         - name: config-volume
-          emptyDir: {}
+          emptyDir:
+            sizeLimit: 100Mi
         - name: config-template
           configMap:
             name: app-ini

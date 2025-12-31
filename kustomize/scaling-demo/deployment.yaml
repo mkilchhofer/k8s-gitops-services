@@ -72,7 +72,8 @@ spec:
             type: RuntimeDefault
       volumes:
       - name: tmp-dir
-        emptyDir: {}
+        emptyDir:
+          sizeLimit: 100Mi
       - name: config
         configMap:
           name: scaling-demo

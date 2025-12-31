@@ -25,7 +25,8 @@ unifi:
 
   extraVolumes:
     - name: tmp-dir
-      emptyDir: {}
+      emptyDir:
+        sizeLimit: 1Gi
 
   extraVolumeMounts:
     - mountPath: /tmp

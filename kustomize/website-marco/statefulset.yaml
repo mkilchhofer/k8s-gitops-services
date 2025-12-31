@@ -37,7 +37,8 @@ spec:
             memory: 256Mi
       volumes:
       - name: tmp-dir
-        emptyDir: {}
+        emptyDir:
+          sizeLimit: 100Mi
   volumeClaimTemplates:
   - metadata:
       name: website-marco-storage

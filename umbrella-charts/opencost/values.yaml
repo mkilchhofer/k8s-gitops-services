@@ -61,7 +61,8 @@ opencost:
 
   extraVolumes:
     - name: ui-tmp-dir
-      emptyDir: {}
+      emptyDir:
+        sizeLimit: 1Gi
 
 #######################################################
 oauth2-proxy:
