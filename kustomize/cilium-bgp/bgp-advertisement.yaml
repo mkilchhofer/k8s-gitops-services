@@ -7,6 +7,7 @@ metadata:
 spec:
   advertisements:
     - advertisementType: Service
+      selector: {}
       service:
         addresses:
           - LoadBalancerIP
