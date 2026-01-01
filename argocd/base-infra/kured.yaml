@@ -11,10 +11,11 @@ spec:
     namespace: base-infra
     server: https://kubernetes.default.svc
   project: apps-with-clusterroles
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  # TODO: Reenable after centralized apps directory migration
+  # syncPolicy:
+  #   automated:
+  #     prune: true
+  #     selfHeal: true
   source:
     path: umbrella-charts/kured
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

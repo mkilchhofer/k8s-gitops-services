@@ -10,10 +10,11 @@ spec:
     namespace: home-network
     server: 'https://kubernetes.default.svc'
   project: apps-restricted
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  # TODO: Reenable after centralized apps directory migration
+  # syncPolicy:
+  #   automated:
+  #     prune: true
+  #     selfHeal: true
   source:
     path: kustomize/opnsense-monitoring
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

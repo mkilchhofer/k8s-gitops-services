@@ -11,9 +11,10 @@ spec:
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    # TODO: Reenable after centralized apps directory migration
+    # automated:
+    #   prune: true
+    #   selfHeal: true
     syncOptions:
     - ServerSideApply=true
   source:
