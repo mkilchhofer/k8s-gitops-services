@@ -8,6 +8,7 @@ spec:
   replicas: 1
   updateStrategy:
     type: RollingUpdate
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: tfc-agent
