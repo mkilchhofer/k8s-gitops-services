@@ -41,34 +41,34 @@ unifi:
     externalTrafficPolicy: Local
     loadBalancerIP: "192.168.93.87"
     annotations:
-      metallb.universe.tf/allow-shared-ip: unifi
+      lbipam.cilium.io/sharing-key: unifi
   guiService:
     type: LoadBalancer
     externalTrafficPolicy: Local
     loadBalancerIP: "192.168.93.87"
     annotations:
-      metallb.universe.tf/allow-shared-ip: unifi
+      lbipam.cilium.io/sharing-key: unifi
   discoveryService:
     type: LoadBalancer
     externalTrafficPolicy: Local
     loadBalancerIP: "192.168.93.87"
     annotations:
-      metallb.universe.tf/allow-shared-ip: unifi
+      lbipam.cilium.io/sharing-key: unifi
   stunService:
     type: LoadBalancer
     externalTrafficPolicy: Local
     loadBalancerIP: "192.168.93.87"
     annotations:
-      metallb.universe.tf/allow-shared-ip: unifi
+      lbipam.cilium.io/sharing-key: unifi
   speedtestService:
     type: LoadBalancer
     externalTrafficPolicy: Local
     loadBalancerIP: "192.168.93.87"
     annotations:
-      metallb.universe.tf/allow-shared-ip: unifi
+      lbipam.cilium.io/sharing-key: unifi
   syslogService:
     type: LoadBalancer
     externalTrafficPolicy: Local
     loadBalancerIP: "192.168.93.87"
     annotations:
-      metallb.universe.tf/allow-shared-ip: unifi
+      lbipam.cilium.io/sharing-key: unifi
