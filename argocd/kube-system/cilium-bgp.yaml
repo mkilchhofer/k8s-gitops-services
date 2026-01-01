@@ -1,22 +1,18 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  name: metallb-extra
+  name: cilium-bgp
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
   destination:
-    namespace: ingress
+    namespace: kube-system
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
   syncPolicy:
     syncOptions:
-      - ServerSideApply=true
+    - ServerSideApply=true
   source:
-    path: kustomize/metallb-extra
+    path: kustomize/cilium-bgp
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
-    targetRevision: main

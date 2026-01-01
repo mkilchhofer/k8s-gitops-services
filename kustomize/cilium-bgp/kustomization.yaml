@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - bgp-advertisement.yaml
+  - bgp-cluster-config.yaml
+  - bgp-peer-config.yaml
+  - loadbalancer-ip-pool.yaml
