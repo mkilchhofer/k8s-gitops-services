@@ -1,0 +1,103 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tfc-agent
+spec:
+  serviceName: tfc-agent
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tfc-agent
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8090'
+      labels:
+        app.kubernetes.io/name: tfc-agent
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k3s-node1 # Always schedule to k3s-node1
+      securityContext:
+        fsGroup: 999
+        runAsUser: 999
+      tolerations:
+      - effect: "NoSchedule"
+        key: "node.kubernetes.io/unschedulable"
+        operator: "Exists"
+      containers:
+      - name: tfc-agent
+        image: hashicorp/tfc-agent:1.26.0
+        env:
+        - name: TFC_AGENT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: tfc-agent
+              key: TFC_AGENT_TOKEN
+        - name: TFC_AGENT_NAME
+          value: tfc-agent
+        - name: TFC_AGENT_AUTO_UPDATE
+          value: "disabled"
+        - name: TFC_AGENT_OTLP_ADDRESS
+          value: "localhost:4317"
+        # ports:
+        # - name: http
+        #   containerPort: 8080
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: http
+        #   periodSeconds: 60
+        #   timeoutSeconds: 30
+        #   initialDelaySeconds: 15
+        volumeMounts:
+        - name: tmp-dir
+          mountPath: /tmp
+        - name: data-dir
+          mountPath: /home/tfc-agent/.tfc-agent
+        resources:
+          limits:
+            # avoid setting CPU limits (https://home.robusta.dev/blog/stop-using-cpu-limits)
+            memory: 1Gi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+      - name: otelcol
+        image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.142.0
+        env:
+        - name: "GOMEMLIMIT"
+          value: "80MiB" # 80% of memory limit
+        resources:
+          limits:
+            # avoid setting CPU limits (https://home.robusta.dev/blog/stop-using-cpu-limits)
+            memory: 100Mi # Do not forget to adjust the GOMEMLIMIT env variable
+          requests:
+            cpu: 10m
+            memory: 50Mi
+        ports:
+        - name: metrics
+          containerPort: 8090
+        - name: health
+          containerPort: 13133
+        - name: zpages
+          containerPort: 55679
+        livenessProbe:
+          httpGet:
+            path: /
+            port: health
+        volumeMounts:
+        - name: otelcol-config
+          mountPath: /etc/otelcol
+      volumes:
+      - name: tmp-dir
+        emptyDir:
+          sizeLimit: 100Mi
+      - name: data-dir
+        emptyDir:
+          sizeLimit: 1Gi
+      - name: otelcol-config
+        configMap:
+          name: otelcol-config

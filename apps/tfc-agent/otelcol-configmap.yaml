@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otelcol-config
+data:
+  config.yaml: |
+    receivers:
+      otlp: # the OTLP receiver the app is sending metrics to
+        protocols:
+          grpc:
+            endpoint: 127.0.0.1:4317
+
+    processors:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 80
+        spike_limit_percentage: 15
+
+    exporters:
+      debug:
+      prometheus:
+        endpoint: "0.0.0.0:8090"
+
+    extensions:
+      health_check:
+        endpoint: 0.0.0.0:13133
+      zpages:
+        endpoint: 0.0.0.0:55679
+
+    service:
+      extensions: [health_check, zpages]
+      pipelines:
+        metrics:
+          receivers: [otlp]
+          exporters: [prometheus]
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter]
+          exporters: [debug]
+      telemetry:
+        logs:
+          level: ERROR

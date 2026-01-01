@@ -1,0 +1,13 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: tfc-agent
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: tfc-agent
+  egress:
+    - toPorts:
+        - ports:
+            - port: "443"
+            - port: "6443"
