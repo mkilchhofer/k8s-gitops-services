@@ -12,6 +12,7 @@ addressType: IPv4
 endpoints:
 - addresses:
   - 192.168.92.1
+  conditions: {}
 ports:
 - name: metrics
   port: 9100
