@@ -15,6 +15,6 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: umbrella-charts/opencost
+    path: apps/opencost
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
     targetRevision: main

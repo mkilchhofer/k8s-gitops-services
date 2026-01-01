@@ -15,7 +15,7 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: umbrella-charts/kyverno-policy-reporter
+    path: apps/kyverno-policy-reporter
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
     helm:
       releaseName: policy-reporter

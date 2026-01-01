@@ -6,7 +6,7 @@
   "helm-values": {
     "fileMatch": [
       "k3s-bootstrap/helm-values/.+\\.yaml$",
-      "umbrella-charts/.+\\.yaml$"
+      "apps\\/.*values\\.yaml$"
     ]
   },
   "kubernetes": {

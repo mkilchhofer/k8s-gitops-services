@@ -14,6 +14,6 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: kustomize/scaling-demo
+    path: apps/scaling-demo
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
     targetRevision: main

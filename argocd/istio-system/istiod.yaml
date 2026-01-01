@@ -14,7 +14,7 @@ spec:
     syncOptions:
     - ServerSideApply=true
   source:
-    path: umbrella-charts/istiod
+    path: apps/istiod
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
   ignoreDifferences:
     - group: admissionregistration.k8s.io

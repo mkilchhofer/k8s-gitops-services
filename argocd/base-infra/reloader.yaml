@@ -12,5 +12,5 @@ spec:
     server: https://kubernetes.default.svc
   project: apps-with-clusterroles
   source:
-    path: umbrella-charts/reloader
+    path: apps/reloader
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

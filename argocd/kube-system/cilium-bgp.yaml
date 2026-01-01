@@ -14,5 +14,5 @@ spec:
     syncOptions:
     - ServerSideApply=true
   source:
-    path: kustomize/cilium-bgp
+    path: apps/cilium-bgp
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

@@ -13,6 +13,6 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: core-services-unrestricted
   source:
-    path: kustomize/iscsi-synology-pvs
+    path: apps/iscsi-synology-pvs
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
     targetRevision: main

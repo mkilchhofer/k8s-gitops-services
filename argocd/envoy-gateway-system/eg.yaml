@@ -15,7 +15,7 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: umbrella-charts/envoy-gateway
+    path: apps/envoy-gateway
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
     helm:
       releaseName: eg

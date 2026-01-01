@@ -14,5 +14,5 @@ spec:
     syncOptions:
     - ServerSideApply=true
   source:
-    path: kustomize/istio-demo
+    path: apps/istio-demo
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

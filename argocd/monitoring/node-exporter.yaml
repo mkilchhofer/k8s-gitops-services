@@ -15,5 +15,5 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: umbrella-charts/prometheus-node-exporter
+    path: apps/prometheus-node-exporter
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

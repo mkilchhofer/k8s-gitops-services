@@ -11,6 +11,6 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: apps-restricted
   source:
-    path: kustomize/bitwarden
+    path: apps/bitwarden
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
     targetRevision: main

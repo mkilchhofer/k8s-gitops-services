@@ -16,5 +16,5 @@ spec:
   #     prune: true
   #     selfHeal: true
   source:
-    path: umbrella-charts/syslog-rfc3164
+    path: apps/syslog-rfc3164
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

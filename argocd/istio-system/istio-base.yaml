@@ -14,7 +14,7 @@ spec:
     syncOptions:
     - ServerSideApply=true
   source:
-    path: umbrella-charts/istio-base
+    path: apps/istio-base
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
   ignoreDifferences:
     - group: admissionregistration.k8s.io

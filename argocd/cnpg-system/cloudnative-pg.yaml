@@ -14,7 +14,7 @@ spec:
     syncOptions:
     - ServerSideApply=true
   source:
-    path: umbrella-charts/cloudnative-pg
+    path: apps/cloudnative-pg
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
     helm:
       releaseName: cnpg
