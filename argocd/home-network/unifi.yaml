@@ -11,5 +11,5 @@ spec:
     server: https://kubernetes.default.svc
   project: apps-restricted
   source:
-    path: umbrella-charts/unifi
+    path: apps/unifi
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

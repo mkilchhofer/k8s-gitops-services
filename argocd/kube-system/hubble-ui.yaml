@@ -14,5 +14,5 @@ spec:
     syncOptions:
     - ServerSideApply=true
   source:
-    path: umbrella-charts/cilium-hubble-ui
+    path: apps/cilium-hubble-ui
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

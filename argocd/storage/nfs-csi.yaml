@@ -12,5 +12,5 @@ spec:
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
   source:
-    path: umbrella-charts/csi-driver-nfs
+    path: apps/csi-driver-nfs
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

@@ -18,5 +18,5 @@ spec:
     syncOptions:
     - ServerSideApply=true
   source:
-    path: umbrella-charts/metrics-server
+    path: apps/metrics-server
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

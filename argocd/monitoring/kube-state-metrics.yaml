@@ -15,5 +15,5 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: umbrella-charts/kube-state-metrics
+    path: apps/kube-state-metrics
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

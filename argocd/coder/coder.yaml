@@ -17,5 +17,5 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: umbrella-charts/coder
+    path: apps/coder
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

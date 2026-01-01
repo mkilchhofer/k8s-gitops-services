@@ -15,5 +15,5 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: umbrella-charts/falco
+    path: apps/falco
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

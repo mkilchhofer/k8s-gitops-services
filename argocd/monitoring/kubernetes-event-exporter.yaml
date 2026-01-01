@@ -12,5 +12,5 @@ spec:
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
   source:
-    path: umbrella-charts/kubernetes-event-exporter
+    path: apps/kubernetes-event-exporter
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

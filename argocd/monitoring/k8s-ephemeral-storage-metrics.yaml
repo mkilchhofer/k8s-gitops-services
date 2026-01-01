@@ -15,7 +15,7 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: umbrella-charts/k8s-ephemeral-storage-metrics
+    path: apps/k8s-ephemeral-storage-metrics
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
     helm:
       releaseName: k8s-ephemeral-storage-metrics

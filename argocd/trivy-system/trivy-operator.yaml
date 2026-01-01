@@ -17,5 +17,5 @@ spec:
     syncOptions:
       - ServerSideApply=true
   source:
-    path: umbrella-charts/trivy-operator
+    path: apps/trivy-operator
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

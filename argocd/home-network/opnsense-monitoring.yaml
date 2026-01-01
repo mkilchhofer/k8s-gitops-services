@@ -16,6 +16,6 @@ spec:
   #     prune: true
   #     selfHeal: true
   source:
-    path: kustomize/opnsense-monitoring
+    path: apps/opnsense-monitoring
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
     targetRevision: main

@@ -17,5 +17,5 @@ spec:
   #     prune: true
   #     selfHeal: true
   source:
-    path: umbrella-charts/kured
+    path: apps/kured
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'

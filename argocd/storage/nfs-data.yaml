@@ -12,5 +12,5 @@ spec:
     server: https://kubernetes.default.svc
   project: core-services-unrestricted
   source:
-    path: umbrella-charts/nfs-subdir-external-provisioner
+    path: apps/nfs-subdir-external-provisioner
     repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
