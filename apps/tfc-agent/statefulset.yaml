@@ -63,8 +63,8 @@ spec:
             # avoid setting CPU limits (https://home.robusta.dev/blog/stop-using-cpu-limits)
             memory: 1Gi
           requests:
-            cpu: 50m
-            memory: 256Mi
+            cpu: 5m
+            memory: 64Mi
       - name: otelcol
         image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.142.0
         env:
@@ -75,8 +75,8 @@ spec:
             # avoid setting CPU limits (https://home.robusta.dev/blog/stop-using-cpu-limits)
             memory: 100Mi # Do not forget to adjust the GOMEMLIMIT env variable
           requests:
-            cpu: 10m
-            memory: 50Mi
+            cpu: 5m
+            memory: 32Mi
         ports:
         - name: metrics
           containerPort: 8090
