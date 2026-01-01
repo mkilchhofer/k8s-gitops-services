@@ -32,6 +32,9 @@ operator:
   prometheus:
     enabled: true
 
+bgpControlPlane:
+  enabled: true
+
 ipam:
   mode: kubernetes
 hubble:
