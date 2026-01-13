@@ -31,7 +31,7 @@
     },
     {
       "matchPackageNames": ["ghcr.io/grafana/helm-charts/grafana"],
-      "changelogUrl": "https://github.com/grafana/helm-charts"
+      "sourceUrl": "https://github.com/grafana/helm-charts"
     }
   ]
 }
