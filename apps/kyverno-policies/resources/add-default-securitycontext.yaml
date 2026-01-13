@@ -31,12 +31,6 @@ spec:
           - falco
       - resources:
           namespaces:
-          - ingress
-          selector:
-            matchLabels:
-              app.kubernetes.io/name: metallb
-      - resources:
-          namespaces:
           - storage
           selector:
             matchExpressions:
