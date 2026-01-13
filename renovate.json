@@ -32,6 +32,18 @@
     {
       "matchPackageNames": ["ghcr.io/grafana/helm-charts/grafana"],
       "sourceUrl": "https://github.com/grafana/helm-charts"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/prometheus-community/charts/*"],
+      "sourceUrl": "https://github.com/prometheus-community/helm-charts"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/oauth2-proxy/charts/oauth2-proxy"],
+      "sourceUrl": "https://github.com/oauth2-proxy/manifests"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/kubereboot/charts/kured"],
+      "sourceUrl": "https://github.com/kubereboot/charts"
     }
   ]
 }
