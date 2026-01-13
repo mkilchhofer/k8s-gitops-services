@@ -27,7 +27,7 @@
     },
     {
       "matchPackageNames": ["ghcr.io/falcosecurity/charts/falco"],
-      "changelogUrl": "https://github.com/falcosecurity/charts"
+      "sourceUrl": "https://github.com/falcosecurity/charts"
     },
     {
       "matchPackageNames": ["ghcr.io/grafana/helm-charts/grafana"],
