@@ -60,9 +60,7 @@ spec:
             secretKeyRef:
               name: pocket-id
               key: encryptionKey
-          # OAuth2 Proxy otherwise fails with:
-          # "[oauthproxy.go:898] Error redeeming code during OAuth2 callback: email in id_token (marco.kilchhofer@gmail.com) isn't verified"
-        - name: EMAILS_VERIFIED
+        - name: EMAIL_VERIFICATION_ENABLED
           value: "true"
           # Disable account editing to avoid users changing their usernames (only admins can do this)
         - name: ALLOW_OWN_ACCOUNT_EDIT
