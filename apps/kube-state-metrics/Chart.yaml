@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: kube-state-metrics
-  version: 7.0.0
+  version: 7.0.1
   repository: oci://ghcr.io/prometheus-community/charts
