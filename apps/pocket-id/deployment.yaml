@@ -77,6 +77,17 @@ spec:
           runAsNonRoot: true
           seccompProfile:
             type: RuntimeDefault
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: web
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: web
+          periodSeconds: 30
+          initialDelaySeconds: 5
         volumeMounts:
         - name: data
           mountPath: /app/data
