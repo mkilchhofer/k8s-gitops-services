@@ -7,7 +7,7 @@ version: 1.0.0
 
 dependencies:
 - name: victoria-metrics-single
-  version: "0.28.0"
+  version: "0.29.0"
   repository: oci://ghcr.io/victoriametrics/helm-charts
 - name: oauth2-proxy
   version: "10.0.3"
