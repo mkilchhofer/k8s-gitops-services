@@ -44,6 +44,11 @@
     {
       "matchPackageNames": ["ghcr.io/kubereboot/charts/kured"],
       "sourceUrl": "https://github.com/kubereboot/charts"
+    },
+    {
+      "description": "Jellyfin container image is built from a packaging repo, override the source to the main repo.",
+      "matchPackageNames": ["ghcr.io/jellyfin/jellyfin"],
+      "sourceUrl": "https://github.com/jellyfin/jellyfin"
     }
   ]
 }
