@@ -1,0 +1,44 @@
+# My use case is to preserve the clients IP address, so I have to set 'externalTrafficPolicy: Local'.
+# Sadly the helm chart does not support to set this and using different ExternalTrafficPolicy for both services is not
+# supported by Cilium's BGP loadbalancer:
+# > message: >-
+# >   The IP '192.168.93.85' is already allocated to an incompatible service.
+# >   Reason: different ExternalTrafficPolicy
+# > reason: already_allocated_incompatible_service
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    lbipam.cilium.io/sharing-key: syslog-rfc3164
+    lbipam.cilium.io/ips: 192.168.93.85
+  name: {{ .Release.Name }}-fluent-bit-udp-lb
+spec:
+  externalTrafficPolicy: Local
+  ports:
+  - name: syslog
+    port: 5140
+    protocol: UDP
+    targetPort: 5140
+  selector:
+    app.kubernetes.io/instance: syslog-rfc3164
+    app.kubernetes.io/name: fluent-bit
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    lbipam.cilium.io/sharing-key: syslog-rfc3164
+    lbipam.cilium.io/ips: 192.168.93.85
+  name: {{ .Release.Name }}-fluent-bit-tcp-lb
+spec:
+  externalTrafficPolicy: Local
+  ports:
+  - name: syslog
+    port: 5140
+    protocol: UDP
+    targetPort: 5140
+  selector:
+    app.kubernetes.io/instance: syslog-rfc3164
+    app.kubernetes.io/name: fluent-bit
+  type: LoadBalancer

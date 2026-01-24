@@ -81,10 +81,7 @@ fluent-bit:
               remove_keys: time,pid
 
   service:
-    type: LoadBalancer
-    loadBalancerIP: 192.168.93.85
-    annotations:
-      lbipam.cilium.io/sharing-key: syslog-rfc3164
+    type: ClusterIP # Handle the LoadBalancer services via separate yaml file in /templates
 
   securityContext:
     runAsUser: 1001
