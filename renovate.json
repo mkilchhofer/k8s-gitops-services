@@ -49,6 +49,10 @@
       "description": "Jellyfin container image is built from a packaging repo, override the source to the main repo.",
       "matchPackageNames": ["ghcr.io/jellyfin/jellyfin"],
       "sourceUrl": "https://github.com/jellyfin/jellyfin"
+    },
+    {
+      "matchPackageNames": ["hashicorp/tfc-agent"],
+      "changelogUrl": "https://developer.hashicorp.com/terraform/cloud-docs/agents/changelog"
     }
   ]
 }
