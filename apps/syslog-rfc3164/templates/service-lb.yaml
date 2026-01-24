@@ -36,7 +36,7 @@ spec:
   ports:
   - name: syslog
     port: 5140
-    protocol: UDP
+    protocol: TCP
     targetPort: 5140
   selector:
     app.kubernetes.io/instance: syslog-rfc3164
