@@ -14,7 +14,7 @@ trivy-operator:
     builtInTrivyServer: true
   trivy:
     storageClassEnabled: true
-    storageClassName: nfs-data
+    storageClassName: nfs-csi
     server:
       resources:
         limits:
