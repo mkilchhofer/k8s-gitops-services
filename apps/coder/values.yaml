@@ -86,3 +86,12 @@ coder-logstream-kube:
       requests:
         cpu: 5m
         memory: 64Mi
+  securityContext:
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    seccompProfile:
+      type: RuntimeDefault
