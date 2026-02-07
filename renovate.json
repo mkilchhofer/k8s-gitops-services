@@ -30,10 +30,6 @@
       "sourceUrl": "https://github.com/falcosecurity/charts"
     },
     {
-      "matchPackageNames": ["ghcr.io/grafana/helm-charts/grafana"],
-      "sourceUrl": "https://github.com/grafana/helm-charts"
-    },
-    {
       "matchPackageNames": ["ghcr.io/prometheus-community/charts/*"],
       "sourceUrl": "https://github.com/prometheus-community/helm-charts"
     },
