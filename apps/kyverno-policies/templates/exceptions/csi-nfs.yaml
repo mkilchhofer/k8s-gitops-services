@@ -17,29 +17,31 @@ spec:
         - storage
         names:
         - csi-nfs*
-  podSecurity:
-    - controlName: "Capabilities"
-      images:
-        - "*/sig-storage/nfsplugin*"
-    - controlName: "Host Namespaces"
-    - controlName: "HostPath Volumes"
-    - controlName: "Privilege Escalation"
-      images:
-        - "*/sig-storage/csi-node-driver-registrar*"
-        - "*/sig-storage/csi-provisioner*"
-        - "*/sig-storage/csi-resizer*"
-        - "*/sig-storage/csi-snapshotter*"
-        - "*/sig-storage/livenessprobe*"
-        - "*/sig-storage/nfsplugin*"
-    - controlName: "Privileged Containers"
-      images:
-        - "*/sig-storage/nfsplugin*"
-    - controlName: "Running as Non-root"
-      images:
-        - "*/sig-storage/csi-node-driver-registrar*"
-        - "*/sig-storage/csi-provisioner*"
-        - "*/sig-storage/csi-resizer*"
-        - "*/sig-storage/csi-snapshotter*"
-        - "*/sig-storage/livenessprobe*"
-        - "*/sig-storage/nfsplugin*"
-    - controlName: "Volume Types"
+
+  ## TODO: Re-enable once Kyverno issue https://github.com/kyverno/kyverno/issues/15111 is resolved
+  # podSecurity:
+  #   - controlName: "Capabilities"
+  #     images:
+  #       - "*/sig-storage/nfsplugin*"
+  #   - controlName: "Host Namespaces"
+  #   - controlName: "HostPath Volumes"
+  #   - controlName: "Privilege Escalation"
+  #     images:
+  #       - "*/sig-storage/csi-node-driver-registrar*"
+  #       - "*/sig-storage/csi-provisioner*"
+  #       - "*/sig-storage/csi-resizer*"
+  #       - "*/sig-storage/csi-snapshotter*"
+  #       - "*/sig-storage/livenessprobe*"
+  #       - "*/sig-storage/nfsplugin*"
+  #   - controlName: "Privileged Containers"
+  #     images:
+  #       - "*/sig-storage/nfsplugin*"
+  #   - controlName: "Running as Non-root"
+  #     images:
+  #       - "*/sig-storage/csi-node-driver-registrar*"
+  #       - "*/sig-storage/csi-provisioner*"
+  #       - "*/sig-storage/csi-resizer*"
+  #       - "*/sig-storage/csi-snapshotter*"
+  #       - "*/sig-storage/livenessprobe*"
+  #       - "*/sig-storage/nfsplugin*"
+  #   - controlName: "Volume Types"
