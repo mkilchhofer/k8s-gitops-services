@@ -499,6 +499,63 @@ victoria-metrics-agent:
           action: replace
           target_label: node
 
+    - job_name: "kubernetes-service-endpoints-slow-honor-labels"
+      sample_limit: 20000
+      scrape_interval: 5m
+      scrape_timeout: 30s
+      kubernetes_sd_configs:
+        - role: endpointslices
+      relabel_configs:
+          # Start customized
+        - action: keep
+          source_labels: [__meta_kubernetes_service_annotation_prometheus_io_honor_labels]
+          regex: true
+          # End customized
+        - action: drop
+          source_labels: [__meta_kubernetes_pod_container_init]
+          regex: true
+        - action: keep_if_equal
+          source_labels: [__meta_kubernetes_service_annotation_prometheus_io_port, __meta_kubernetes_pod_container_port_number]
+        - source_labels:
+            [__meta_kubernetes_service_annotation_prometheus_io_scrape_slow]
+          action: keep
+          regex: true
+        - source_labels:
+            [__meta_kubernetes_service_annotation_prometheus_io_scheme]
+          action: replace
+          target_label: __scheme__
+          regex: (https?)
+        - source_labels:
+            [__meta_kubernetes_service_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)
+        - source_labels:
+            [
+              __address__,
+              __meta_kubernetes_service_annotation_prometheus_io_port,
+            ]
+          action: replace
+          target_label: __address__
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - source_labels: [__meta_kubernetes_pod_name]
+          target_label: pod
+        - source_labels: [__meta_kubernetes_pod_container_name]
+          target_label: container
+        - source_labels: [__meta_kubernetes_namespace]
+          target_label: namespace
+        - source_labels: [__meta_kubernetes_service_name]
+          target_label: service
+        - source_labels: [__meta_kubernetes_service_name]
+          target_label: job
+          replacement: ${1}
+        - source_labels: [__meta_kubernetes_pod_node_name]
+          action: replace
+          target_label: node
+
       # Monitor Kubernetes-external endpoints like OPNsense
     - job_name: external-endpoints
       sample_limit: 20000
