@@ -19,6 +19,8 @@ spec:
         - matchName: release-assets.githubusercontent.com
           # Self
         - matchName: coder.tools.kilchhofer.info
+          # SSO with Pocket ID
+        - matchName: auth.kilchhofer.info
       toPorts:
         - ports:
             - port: "443"
