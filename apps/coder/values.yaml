@@ -47,7 +47,7 @@ coder:
         value: disable
 
       - name: CODER_OIDC_ISSUER_URL
-        value: https://auth.kilchhofer.info/
+        value: https://auth.kilchhofer.info
       - name: CODER_OIDC_SCOPES
         value: openid,profile,email,offline_access
       - name: CODER_OIDC_CLIENT_ID
