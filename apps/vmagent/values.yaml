@@ -112,6 +112,7 @@ victoria-metrics-agent:
         bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
         kubernetes_sd_configs:
           - role: node
+        # metrics_path: /metrics # this is default, but be explicit to avoid confusion with the /metrics/cadvisor
         relabel_configs:
             # Don't scrape CP nodes twice (k3s exposes same metrics twice)
           - action: drop
@@ -120,12 +121,6 @@ victoria-metrics-agent:
             - __meta_kubernetes_node_label_node_role_kubernetes_io_control_plane
           - action: labelmap
             regex: __meta_kubernetes_node_label_(.+)
-          - target_label: __address__
-            replacement: kubernetes.default.svc:443
-          - source_labels: [__meta_kubernetes_node_name]
-            regex: (.+)
-            target_label: __metrics_path__
-            replacement: /api/v1/nodes/$1/proxy/metrics
 
       - job_name: "kubernetes-nodes-cadvisor"
         sample_limit: 20000
@@ -150,20 +145,10 @@ victoria-metrics-agent:
         bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
         kubernetes_sd_configs:
           - role: node
-        # This configuration will work only on kubelet 1.7.3+
-        # As the scrape endpoints for cAdvisor have changed
-        # if you are using older version you need to change the replacement to
-        # replacement: /api/v1/nodes/$1:4194/proxy/metrics
-        # more info here https://github.com/coreos/prometheus-operator/issues/633
+        metrics_path: /metrics/cadvisor
         relabel_configs:
           - action: labelmap
             regex: __meta_kubernetes_node_label_(.+)
-          - target_label: __address__
-            replacement: kubernetes.default.svc:443
-          - source_labels: [__meta_kubernetes_node_name]
-            regex: (.+)
-            target_label: __metrics_path__
-            replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
 
       # Scrape config for service endpoints.
       #
@@ -392,15 +377,10 @@ victoria-metrics-agent:
       tls_config:
         ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
       bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      metrics_path: /metrics/probes
       relabel_configs:
         - action: labeldrop
           regex: __meta_kubernetes_node_label_(.+)
-        - target_label: __address__
-          replacement: kubernetes.default.svc:443
-        - source_labels: [__meta_kubernetes_node_name]
-          regex: (.+)
-          target_label: __metrics_path__
-          replacement: /api/v1/nodes/${1}/proxy/metrics/probes
 
       # Implement annotation "prometheus.io/honor_labels: true"
     - job_name: "kubernetes-service-endpoints-honor-labels"
