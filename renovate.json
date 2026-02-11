@@ -53,6 +53,10 @@
     {
       "matchPackageNames": ["hashicorp/tfc-agent"],
       "changelogUrl": "https://developer.hashicorp.com/terraform/cloud-docs/agents/changelog"
+    },
+    {
+      "matchPackageNames": ["csi-driver-nfs"],
+      "changelogUrl": "https://github.com/kubernetes-csi/csi-driver-nfs"
     }
   ]
 }
