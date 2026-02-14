@@ -10,5 +10,5 @@ dependencies:
   version: 16.7.27
   repository: oci://registry-1.docker.io/bitnamicharts
 - name: grafana
-  version: 11.1.1
+  version: 11.1.5
   repository: oci://ghcr.io/grafana-community/helm-charts
