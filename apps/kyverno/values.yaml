@@ -1,4 +1,12 @@
 kyverno:
+  # Add some custom annotations/labels to the new CRDs (provided by the subchart 'kyverno-api') to workaround continous drift in Argo CD.
+  # https://github.com/kyverno/kyverno/issues/15116
+  kyverno-api:
+    annotations:
+      k8s.kilchhofer.info/dummy-annotation: "workaround-issue-15116"
+    labels:
+      app.kubernetes.io/managed-by: Helm
+
   config:
     webhooks:
       namespaceSelector:
