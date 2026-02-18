@@ -5,3 +5,4 @@ resources:
   - externalsecret.yaml
   - networkpolicy-egress.yaml
   - metrics-service.yaml
+  - configmap.yaml

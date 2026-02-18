@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-local-config
+data:
+  config.yml: |
+    ingress:
+        # Valetudo (Dreame vacuum cleaner)
+      - hostname: valetudo.kilchhofer.info
+        service: http://robi.ma.kilchhofer.info
+
+        # Let's Encrypt HTTP-01 challenges - outside Kubernetes
+      - hostname: nas.ma.kilchhofer.info
+        path: .well-known/acme-challenge/
+        service: http://192.168.91.10
+
+      - hostname: minio.ma.kilchhofer.info
+        path: .well-known/acme-challenge/
+        service: http://192.168.91.10
+
+      - hostname: s3.ma.kilchhofer.info
+        path: .well-known/acme-challenge/
+        service: http://192.168.91.10
+
+      - hostname: nas2.ma.kilchhofer.info
+        path: .well-known/acme-challenge/
+        service: http://192.168.201.11
+
+      - hostname: kilchhofer.info
+        service: https://eg-external-envoy.envoy-gateway-system.svc.cluster.local:443
+        originRequest:
+          http2Origin: true
+          matchSNItoHost: true
+          originServerName: kilchhofer.info
+
+      - hostname: '*.kilchhofer.info'
+        service: https://eg-external-envoy.envoy-gateway-system.svc.cluster.local:443
+        originRequest:
+          http2Origin: true
+          matchSNItoHost: true
+          originServerName: kilchhofer.info
+
+        # Catch-all rule for unmatched requests - return 404
+      - service: http_status:404
+
+    warp-routing:
+      enabled: true
