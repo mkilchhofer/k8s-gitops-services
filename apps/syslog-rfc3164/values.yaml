@@ -41,7 +41,17 @@ alloy:
             labels   = { component = "loki.source.syslog", protocol = "udp" }
           }
 
-          forward_to = [loki.write.default.receiver]
+          relabel_rules = loki.relabel.syslog.rules
+          forward_to    = [loki.write.default.receiver]
+        }
+
+        loki.relabel "syslog" {
+          // no forward_to is used, the defined rules are used above by the loki.source.syslog component
+          forward_to = []
+          rule {
+            action = "labelmap"
+            regex = "__syslog_(.+)"
+          }
         }
     securityContext:
       allowPrivilegeEscalation: false
