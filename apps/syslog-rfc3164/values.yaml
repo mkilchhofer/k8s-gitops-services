@@ -4,6 +4,10 @@ alloy:
   configReloader:
     enabled: false
   alloy:
+    mounts:
+      extra:
+      - mountPath: /tmp
+        name: tmp-dir
     resources:
       limits:
         cpu: 200m
@@ -75,3 +79,8 @@ alloy:
     enabled: false
   controller:
     type: 'deployment'
+    volumes:
+      extra:
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: tmp-dir
