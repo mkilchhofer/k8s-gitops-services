@@ -45,6 +45,10 @@ alloy:
         drop:
           - ALL
       readOnlyRootFilesystem: true
+      # Run it as non-root user
+      # https://grafana.com/docs/alloy/latest/configure/nonroot/
+      runAsUser: 473
+      runAsGroup: 473
     extraEnv:
       - name: LOKI_USER
         valueFrom:
