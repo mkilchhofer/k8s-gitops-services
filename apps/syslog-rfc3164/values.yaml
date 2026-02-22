@@ -41,7 +41,7 @@ alloy:
             labels   = { component = "loki.source.syslog", protocol = "udp" }
           }
 
-          forward_to = [loki.write.local.receiver]
+          forward_to = [loki.write.default.receiver]
         }
     securityContext:
       allowPrivilegeEscalation: false
