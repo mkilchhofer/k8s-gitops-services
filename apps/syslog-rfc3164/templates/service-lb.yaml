@@ -11,7 +11,7 @@ metadata:
   annotations:
     lbipam.cilium.io/sharing-key: syslog-rfc3164
     lbipam.cilium.io/ips: 192.168.93.85
-  name: {{ .Release.Name }}-fluent-bit-udp-lb
+  name: {{ .Release.Name }}-udp-lb
 spec:
   externalTrafficPolicy: Local
   ports:
@@ -21,7 +21,7 @@ spec:
     targetPort: 5140
   selector:
     app.kubernetes.io/instance: syslog-rfc3164
-    app.kubernetes.io/name: fluent-bit
+    app.kubernetes.io/name: alloy
   type: LoadBalancer
 ---
 apiVersion: v1
@@ -30,7 +30,7 @@ metadata:
   annotations:
     lbipam.cilium.io/sharing-key: syslog-rfc3164
     lbipam.cilium.io/ips: 192.168.93.85
-  name: {{ .Release.Name }}-fluent-bit-tcp-lb
+  name: {{ .Release.Name }}-tcp-lb
 spec:
   externalTrafficPolicy: Local
   ports:
@@ -40,5 +40,5 @@ spec:
     targetPort: 5140
   selector:
     app.kubernetes.io/instance: syslog-rfc3164
-    app.kubernetes.io/name: fluent-bit
+    app.kubernetes.io/name: alloy
   type: LoadBalancer
