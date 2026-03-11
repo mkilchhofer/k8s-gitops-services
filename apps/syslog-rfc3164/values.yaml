@@ -1,88 +1,96 @@
-fluent-bit:
-  serviceAccount:
+alloy:
+  crds:
     create: false
+  configReloader:
+    enabled: false
+  alloy:
+    mounts:
+      extra:
+      - mountPath: /tmp
+        name: tmp-dir
+    resources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 5m
+        memory: 32Mi
+    configMap:
+      content: |
+        loki.write "default" {
+          endpoint {
+            url = "https://logs-prod-eu-west-0.grafana.net/loki/api/v1/push"
+
+            // Get basic authentication based on environment variables.
+            basic_auth {
+              username = sys.env("LOKI_USER")
+              password = sys.env("LOKI_PASSWORD")
+            }
+          }
+        }
+
+        loki.source.syslog "local" {
+          listener {
+            address  = "0.0.0.0:5140"
+            labels   = { component = "loki.source.syslog", protocol = "tcp" }
+          }
+
+          listener {
+            address  = "0.0.0.0:5140"
+            protocol = "udp"
+            labels   = { component = "loki.source.syslog", protocol = "udp" }
+          }
+
+          relabel_rules = loki.relabel.syslog.rules
+          forward_to    = [loki.write.default.receiver]
+        }
+
+        loki.relabel "syslog" {
+          // no forward_to is used, the defined rules are used above by the loki.source.syslog component
+          forward_to = []
+          rule {
+            action = "labelmap"
+            regex = "__syslog_(.+)"
+          }
+        }
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      # Run it as non-root user
+      # https://grafana.com/docs/alloy/latest/configure/nonroot/
+      runAsUser: 473
+      runAsGroup: 473
+    extraEnv:
+      - name: LOKI_USER
+        valueFrom:
+          secretKeyRef:
+            name: grafana-cloud-creds
+            key: user
+      - name: LOKI_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: grafana-cloud-creds
+            key: password
+    extraPorts:
+      - name: syslog-tcp
+        targetPort: 5140
+        protocol: TCP
+      - name: syslog-udp
+        targetPort: 5140
+        protocol: UDP
+
   rbac:
     create: false
-
-  kind: Deployment
-
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 5m
-      memory: 32Mi
-
-  extraPorts:
-    - name: syslog
-      containerPort: 5140
-      protocol: TCP
-      port: 5140
-
-  args:
-    - --workdir=/fluent-bit/etc
-    - --config=/fluent-bit/etc/conf/fluent-bit.yaml
-
-  env:
-    - name: LOKI_HOST
-      valueFrom:
-        secretKeyRef:
-          name: grafana-cloud-creds
-          key: host
-    - name: LOKI_USER
-      valueFrom:
-        secretKeyRef:
-          name: grafana-cloud-creds
-          key: user
-    - name: LOKI_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: grafana-cloud-creds
-          key: password
-
-  config:
-    inputs: ""
-    outputs: ""
-    filters: ""
-    extraFiles:
-      fluent-bit.yaml: |
-        service:
-          daemon: Off
-          flush: 1
-          log_level: info
-          parsers_file: /fluent-bit/etc/parsers.conf
-          http_server: on
-
-        pipeline:
-          inputs:
-            - name: syslog
-              parser: syslog-rfc3164
-              mode: tcp
-              port: 5140
-            - name: syslog
-              parser: syslog-rfc3164
-              mode: udp
-              port: 5140
-
-          outputs:
-            - name: loki
-              match: '*'
-              host: ${LOKI_HOST}
-              http_user: ${LOKI_USER}
-              http_passwd: ${LOKI_PASSWORD}
-              port: 443
-              tls: on
-              tls.verify: on
-              tenant_id: syslog-rfc3164
-              line_format: json
-              labels: job=fluent-bit-syslog-rfc3164
-              label_keys: $pri,$host,$ident
-              remove_keys: time,pid
-
   service:
-    type: ClusterIP # Handle the LoadBalancer services via separate yaml file in /templates
-
-  securityContext:
-    runAsUser: 1001
-
+    # Use custom Service (resp. 2 Services) to expose the Syslog server on UDP and TCP
+    enabled: false
+  controller:
+    type: 'deployment'
+    volumes:
+      extra:
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: tmp-dir
