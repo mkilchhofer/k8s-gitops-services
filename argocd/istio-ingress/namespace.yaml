@@ -1,4 +1,4 @@
-# > As a security best practice, it is recommended to deploy the gateway in a different namespace from the control plane.
+# > As a security best practice, it is recommended to deploy the gateway in a different namespace from the control plane.
 # Source: https://istio.io/latest/docs/setup/additional-setup/gateway/
 apiVersion: v1
 kind: Namespace
