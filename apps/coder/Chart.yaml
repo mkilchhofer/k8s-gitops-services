@@ -14,4 +14,4 @@ dependencies:
   repository: oci://ghcr.io/coder/chart
 - name: coder-logstream-kube
   version: v0.0.15
-  repository: https://helm.coder.com/logstream-kube
+  repository: oci://ghcr.io/coder/chart
