@@ -13,6 +13,7 @@ resource "argocd_application" "app_of_apps" {
       path            = "argocd"
       target_revision = "main"
       directory {
+        include = "{*.yml,*.yaml}"
         recurse = true
       }
     }
