@@ -1,4 +1,9 @@
 github-exporter:
+  service:
+    annotations:
+      prometheus.io/port: "9504"
+      prometheus.io/scrape: "true"
+
   resources:
     limits:
       memory: 128Mi
