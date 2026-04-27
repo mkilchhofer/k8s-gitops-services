@@ -1,0 +1,21 @@
+github-exporter:
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
+
+
+  webhook:
+    enabled: true
+    existingSecret: github-webhook
+
+  collector:
+    admin: false
+    orgs: false
+    repos: false
+    billing: false
+    runners: false
+    workflow_runs: true
+    workflow_jobs: true
