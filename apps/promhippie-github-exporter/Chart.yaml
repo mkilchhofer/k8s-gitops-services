@@ -1,0 +1,11 @@
+apiVersion: v2
+name: github-exporter
+description: github-exporter for kilchhofer-home
+type: application
+
+version: 1.0.0
+
+dependencies:
+- name: github-exporter
+  version: 12.6.0
+  repository: oci://ghcr.io/promhippie/charts

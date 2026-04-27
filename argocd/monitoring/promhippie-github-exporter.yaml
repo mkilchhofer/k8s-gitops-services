@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: promhippie-github-exporter
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: apps-restricted
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    path: apps/promhippie-github-exporter
+    repoURL: 'git@github.com:mkilchhofer/k8s-gitops-services.git'
+    helm:
+      releaseName: github-exporter
