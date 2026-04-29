@@ -192,4 +192,5 @@ oauth2-proxy:
         data:
           - secretKey: users.txt
             remoteRef:
+              # Use `htpasswd -B -n -C 5 myUserName` to generate the content for this secret
               key: /k3s/victoria-metrics-vmsingle/oauth2-proxy-htpasswd

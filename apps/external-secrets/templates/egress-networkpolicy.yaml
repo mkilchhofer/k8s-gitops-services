@@ -2,6 +2,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: external-secrets-egress
+  namespace: {{ .Release.Namespace }}
 spec:
   endpointSelector:
     matchLabels:
