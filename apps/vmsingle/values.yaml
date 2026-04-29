@@ -105,6 +105,7 @@ oauth2-proxy:
     existingSecret: vm-oauth2-proxy-custom
     configFile: |-
       reverse_proxy = true
+      trusted_proxy_ips = [ "10.42.0.0/24" ]
       real_client_ip_header = "X-Forwarded-For"
       provider = "oidc"
       provider_display_name = "Pocket ID"
@@ -117,6 +118,7 @@ oauth2-proxy:
       pass_access_token = true
       pass_authorization_header = true
       footer = "Secured with <a href=\"https://github.com/oauth2-proxy/oauth2-proxy#oauth2_proxy\" class=\"has-text-grey\">OAuth2 Proxy</a>"
+      display_htpasswd_form = false
       allowed_groups = [
           "infrastructure_admins"
       ]

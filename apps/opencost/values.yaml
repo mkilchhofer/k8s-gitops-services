@@ -78,6 +78,7 @@ oauth2-proxy:
     existingSecret: opencost-oauth2-proxy-custom
     configFile: |-
       reverse_proxy = true
+      trusted_proxy_ips = [ "10.42.0.0/24" ]
       real_client_ip_header = "X-Forwarded-For"
       provider = "oidc"
       provider_display_name = "Pocket ID"
