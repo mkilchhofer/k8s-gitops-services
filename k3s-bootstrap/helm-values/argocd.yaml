@@ -304,8 +304,8 @@ configs:
         clusters:
           - '*'
 
-  # params:
-  #   server.insecure: "true"
+  params:
+    controller.diff.server.side: "true"
 
   rbac:
     policy.csv: |
