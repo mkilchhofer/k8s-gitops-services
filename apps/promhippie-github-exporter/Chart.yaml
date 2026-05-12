@@ -7,5 +7,5 @@ version: 1.0.0
 
 dependencies:
 - name: github-exporter
-  version: 13.0.0
+  version: 13.1.1
   repository: oci://ghcr.io/promhippie/charts
