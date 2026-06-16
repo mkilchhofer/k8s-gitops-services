@@ -6,7 +6,7 @@ terraform {
     }
     grafana = {
       source  = "grafana/grafana"
-      version = "4.35.0"
+      version = "4.38.0"
     }
   }
   required_version = ">= 1.10"
