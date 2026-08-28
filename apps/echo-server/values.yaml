@@ -126,6 +126,7 @@ oauth2-proxy:
       metadata:
         name: echo-server-oauth2-proxy-custom
       spec:
+        refreshInterval: 6h0m0s
         secretStoreRef:
           kind: ClusterSecretStore
           name: akeyless-k3s-secrets
@@ -142,6 +143,7 @@ oauth2-proxy:
       metadata:
         name: echo-server-oauth2-proxy-htpasswd-file-custom
       spec:
+        refreshInterval: 6h0m0s
         secretStoreRef:
           kind: ClusterSecretStore
           name: akeyless-k3s-secrets
