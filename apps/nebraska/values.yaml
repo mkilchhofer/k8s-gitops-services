@@ -90,6 +90,7 @@ nebraska:
       metadata:
         name: nebraska-custom
       spec:
+        refreshInterval: 6h0m0s
         secretStoreRef:
           kind: ClusterSecretStore
           name: akeyless-k3s-secrets

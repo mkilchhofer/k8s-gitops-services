@@ -168,6 +168,7 @@ oauth2-proxy:
       metadata:
         name: vm-oauth2-proxy-custom
       spec:
+        refreshInterval: 6h0m0s
         secretStoreRef:
           kind: ClusterSecretStore
           name: akeyless-k3s-secrets
@@ -184,6 +185,7 @@ oauth2-proxy:
       metadata:
         name: vm-oauth2-proxy-custom-htpasswd-file
       spec:
+        refreshInterval: 6h0m0s
         secretStoreRef:
           kind: ClusterSecretStore
           name: akeyless-k3s-secrets

@@ -3,6 +3,7 @@ kind: ExternalSecret
 metadata:
   name: keda-prom-secret
 spec:
+  refreshInterval: 6h0m0s
   secretStoreRef:
     kind: ClusterSecretStore
     name: akeyless-k3s-secrets

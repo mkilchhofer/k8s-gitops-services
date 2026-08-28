@@ -164,6 +164,7 @@ grafana:
     metadata:
       name: grafana-oidc-secret
     spec:
+      refreshInterval: 6h0m0s
       secretStoreRef:
         kind: ClusterSecretStore
         name: akeyless-k3s-secrets
@@ -181,6 +182,7 @@ grafana:
     metadata:
       name: grafana-admin-creds
     spec:
+      refreshInterval: 6h0m0s
       secretStoreRef:
         kind: ClusterSecretStore
         name: akeyless-k3s-secrets
