@@ -1,5 +1,3 @@
-{{- $Values := index .Values "fluent-bit" -}}
-{{- if not $Values.networkPolicy.enabled }}
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
@@ -9,7 +7,7 @@ spec:
   endpointSelector:
     matchLabels:
       app.kubernetes.io/instance: syslog-rfc3164
-      app.kubernetes.io/name: fluent-bit
+      app.kubernetes.io/name: alloy
   egress:
     - toFQDNs:
           # Loki logs at Grafana Cloud
@@ -24,4 +22,3 @@ spec:
         - ports:
             - port: "5140"
               protocol: TCP
-{{- end }}
