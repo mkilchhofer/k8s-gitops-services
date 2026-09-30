@@ -17,13 +17,19 @@
   },
   "packageRules": [
     {
+      "matchDatasources": ["terraform-provider"],
+      "addLabels": ["terraform-providers"]
+    },
+    {
       "matchFileNames": ["**/Chart.yaml"],
-      "commitMessageTopic": "{{depName}}"
+      "commitMessageTopic": "{{depName}}",
+      "addLabels": ["charts"]
     },
     {
       "matchDepTypes": ["helm_release"],
       "matchFileNames": ["**/*.tf"],
-      "commitMessageTopic": "{{depName}}"
+      "commitMessageTopic": "{{depName}}",
+      "addLabels": ["charts"]
     },
     {
       "matchPackageNames": ["ghcr.io/falcosecurity/charts/falco"],
