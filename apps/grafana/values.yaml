@@ -28,10 +28,9 @@ postgresql:
         memory: 128Mi
 
 grafana:
-  image:
-    tag: "13.2.0-ubuntu"
-
   revisionHistoryLimit: 1
+
+  shadowBundledPlugins: true
 
   podLabels:
     grafana-postgresql-client: "true"
