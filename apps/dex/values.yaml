@@ -1,6 +1,6 @@
 dex:
   image:
-    tag: v2.44.0-distroless
+    tag: v2.45.1-distroless
 
   revisionHistoryLimit: 1
 
