@@ -8,4 +8,4 @@ version: 1.0.0
 dependencies:
 - name: dex
   version: 0.25.2
-  repository: https://charts.dexidp.io
+  repository: oci://ghcr.io/dexidp/helm-charts
