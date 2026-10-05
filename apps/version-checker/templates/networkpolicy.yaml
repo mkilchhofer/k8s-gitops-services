@@ -12,6 +12,7 @@ spec:
     - toFQDNs:
         - matchName: quay.io
         - matchName: public.ecr.aws
+        - matchName: ecr-public.aws.com
         - matchName: registry.hub.docker.com
         - matchName: api.github.com
         - matchName: registry.k8s.io
@@ -19,6 +20,7 @@ spec:
         - matchName: gcr.io
         - matchName: cr.fluentbit.io
         - matchName: europe-west8-docker.pkg.dev
+        - matchName: reg.kyverno.io
       toPorts:
         - ports:
             - port: "443"
