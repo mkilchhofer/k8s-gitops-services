@@ -9,6 +9,9 @@ policy-reporter:
       prometheus.io/scrape: 'true'
       prometheus.io/honor_labels: "true"
 
+  podAnnotations:
+    match-regex.version-checker.io/policy-reporter: '(\d+)\.(\d+)\.(\d+)'
+
   resources:
     limits:
       memory: 100Mi
@@ -40,6 +43,8 @@ policy-reporter:
   ui:
     enabled: true
     revisionHistoryLimit: 1
+    podAnnotations:
+      match-regex.version-checker.io/policy-reporter-ui: '(\d+)\.(\d+)\.(\d+)'
     resources:
       limits:
         memory: 100Mi
