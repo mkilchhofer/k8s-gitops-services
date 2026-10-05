@@ -29,6 +29,8 @@ postgresql:
 
 grafana:
   revisionHistoryLimit: 1
+  podAnnotations:
+    match-regex.version-checker.io/grafana: '(\d+)\.(\d+)\.(\d+)-distroless'
 
   shadowBundledPlugins: true
 
