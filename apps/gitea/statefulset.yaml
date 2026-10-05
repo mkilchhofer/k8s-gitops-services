@@ -6,9 +6,15 @@ spec:
   serviceName: gitea
   replicas: 1
   revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gitea
   updateStrategy:
     type: RollingUpdate
   template:
+    metadata:
+      annotations:
+        match-regex.version-checker.io/gitea: '(\d+)\.(\d+)\.(\d+)'
     spec:
       securityContext:
         runAsUser: 1000
