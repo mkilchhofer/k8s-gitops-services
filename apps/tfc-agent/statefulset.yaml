@@ -17,6 +17,8 @@ spec:
       annotations:
         prometheus.io/scrape: 'true'
         prometheus.io/port: '8090'
+        match-regex.version-checker.io/tfc-agent: '(\d+)\.(\d+)\.(\d+)'
+        match-regex.version-checker.io/otelcol: '(\d+)\.(\d+)\.(\d+)'
       labels:
         app.kubernetes.io/name: tfc-agent
     spec:
