@@ -15,6 +15,7 @@ spec:
         - matchName: registry.hub.docker.com
         - matchName: api.github.com
         - matchName: registry.k8s.io
+        - matchName: dl.k8s.io
         - matchName: gcr.io
         - matchName: cr.fluentbit.io
         - matchName: europe-west8-docker.pkg.dev
