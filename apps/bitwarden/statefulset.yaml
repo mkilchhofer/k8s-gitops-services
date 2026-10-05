@@ -8,7 +8,13 @@ spec:
   revisionHistoryLimit: 2
   updateStrategy:
     type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: bitwarden
   template:
+    metadata:
+      annotations:
+        match-regex.version-checker.io/bitwarden: 'v(\d+)\.(\d+)\.(\d+)-alpine'
     spec:
       securityContext:
         fsGroup: 65534
