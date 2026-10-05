@@ -63,6 +63,10 @@
     {
       "matchPackageNames": ["csi-driver-nfs"],
       "changelogUrl": "https://github.com/kubernetes-csi/csi-driver-nfs"
+    },
+    {
+      "matchPackageNames": ["cloudflare/cloudflared"],
+      "changelogUrl": "https://github.com/cloudflare/cloudflared/blob/master/RELEASE_NOTES"
     }
   ]
 }
