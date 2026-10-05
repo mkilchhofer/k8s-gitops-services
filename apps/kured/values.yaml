@@ -5,6 +5,7 @@ kured:
     prometheus.io/path: /metrics
     prometheus.io/port: '8080'
     prometheus.io/scrape: 'true'
+    match-regex.version-checker.io/kured: '(\d+)\.(\d+)\.(\d+)'
   resources:
     limits:
       cpu: 50m
