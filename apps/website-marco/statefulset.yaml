@@ -6,13 +6,19 @@ metadata:
 spec:
   serviceName: website-marco
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: website-marco
   updateStrategy:
     type: RollingUpdate
   template:
+    metadata:
+      annotations:
+        match-regex.version-checker.io/website: '(\d+)\.(\d+)\.(\d+)-alpine-slim'
     spec:
       containers:
       - name: website
-        image: nginxinc/nginx-unprivileged:1.31-alpine-slim
+        image: nginxinc/nginx-unprivileged:1.31.6-alpine-slim
         ports:
         - name: http
           containerPort: 8080
