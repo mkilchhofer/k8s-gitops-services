@@ -19,6 +19,7 @@ cert-manager:
   podAnnotations:
     # All other Prometheus annotations are added via `prometheus.enabled`
     prometheus.io/honor_labels: "true"
+    match-regex.version-checker.io/cert-manager-controller: 'v(\d+)\.(\d+)\.(\d+)'
 
   containerSecurityContext:
     allowPrivilegeEscalation: false
@@ -45,6 +46,8 @@ cert-manager:
         drop: ["ALL"]
       readOnlyRootFilesystem: true
       runAsNonRoot: true
+    podAnnotations:
+      match-regex.version-checker.io/cert-manager-cainjector: 'v(\d+)\.(\d+)\.(\d+)'
     resources:
       limits:
         cpu: 100m
@@ -64,6 +67,8 @@ cert-manager:
         drop: ["ALL"]
       readOnlyRootFilesystem: true
       runAsNonRoot: true
+    podAnnotations:
+      match-regex.version-checker.io/cert-manager-webhook: 'v(\d+)\.(\d+)\.(\d+)'
     resources:
       limits:
         cpu: 100m
