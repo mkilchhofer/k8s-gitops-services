@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       annotations:
-        match-regex.version-checker.io/cert-manager-controller: '(\d+)\.(\d+)'
+        match-regex.version-checker.io/jellyfin: '(\d+)\.(\d+)'
       labels:
         app.kubernetes.io/name: jellyfin
     spec:
