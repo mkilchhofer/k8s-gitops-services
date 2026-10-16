@@ -33,7 +33,7 @@ spec:
         operator: "Exists"
       containers:
       - name: tfc-agent
-        image: hashicorp/tfc-agent:1.33.0
+        image: hashicorp/tfc-agent:1.33.1
         env:
         - name: TFC_AGENT_TOKEN
           valueFrom:
