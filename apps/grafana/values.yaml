@@ -75,6 +75,9 @@ grafana:
     server:
       root_url: https://grafana.kilchhofer.info
       domain: grafana.kilchhofer.info
+      # Workaround for https://github.com/grafana/grafana/issues/123017#issuecomment-5191787074
+      # TODO: Re-enable after a fix has been released
+      enable_gzip: false
     auth.generic_oauth:
       allow_sign_up: true
       api_url: https://auth.kilchhofer.info/api/oidc/userinfo
