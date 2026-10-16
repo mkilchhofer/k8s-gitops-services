@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: httpbin
       containers:
-      - image: ghcr.io/mccutchen/go-httpbin:2.25.0
+      - image: ghcr.io/mccutchen/go-httpbin:2.26.0
         imagePullPolicy: IfNotPresent
         name: httpbin
         ports:
