@@ -43,7 +43,10 @@ grafana:
       memory: 640Mi
     requests:
       cpu: 80m
-      memory: 450Mi
+      memory: 640Mi
+  goMemLimit:
+    # -- Fraction of resources.limits.memory to use as GOMEMLIMIT (e.g. 0.9 = 90 %).
+    factor: 0.8
 
   containerSecurityContext:
     allowPrivilegeEscalation: false
