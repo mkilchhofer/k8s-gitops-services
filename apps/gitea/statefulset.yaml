@@ -19,9 +19,10 @@ spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
+        fsGroup: 1000
       containers:
       - name: gitea
-        image: gitea/gitea:1.27.3
+        image: docker.gitea.com/gitea:1.27.3-rootless
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -29,14 +30,6 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
-        command:
-        - /bin/sh
-        args:
-        - "-c"
-        - >
-          envsubst < /configmap/app.ini > /etc/gitea/app.ini;
-          echo "Config generation done, now starting gitea";
-          exec gitea web --config /etc/gitea/app.ini
         ports:
         - name: http-gui
           containerPort: 3000
