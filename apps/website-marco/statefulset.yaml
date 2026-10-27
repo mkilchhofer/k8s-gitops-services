@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: website
-        image: ghcr.io/nginx/nginx-unprivileged:1.31.7-alpine-slim
+        image: ghcr.io/nginx/nginx-unprivileged:1.31.8-alpine-slim
         ports:
         - name: http
           containerPort: 8080
